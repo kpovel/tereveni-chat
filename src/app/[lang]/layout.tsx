@@ -5,6 +5,8 @@ export function generateStaticParams() {
   return [{ lang: "en" }, { lang: "uk" }];
 }
 
+export const dynamicParams = false;
+
 export default function Layout({
   children,
   params,
