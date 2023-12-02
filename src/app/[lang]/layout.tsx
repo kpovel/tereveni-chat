@@ -1,5 +1,8 @@
 import { ReactNode } from "react";
+import { Poppins } from "next/font/google";
 import { SetPreferredLanguage } from "./setPreferredLang";
+
+const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 
 export function generateStaticParams() {
   return [{ lang: "en" }, { lang: "uk" }];
@@ -12,12 +15,14 @@ export default function Layout({
   params,
 }: {
   children: ReactNode;
-  params: { lang: string };
+  params: { lang: "uk" | "en" };
 }) {
   return (
-    <>
-      <SetPreferredLanguage lang={params.lang} />
-      {children}
-    </>
+    <html lang={params.lang}>
+      <body className={poppins.className}>
+        <SetPreferredLanguage lang={params.lang} />
+        {children}
+      </body>
+    </html>
   );
 }
