@@ -9,7 +9,7 @@ export default async function Home({
   params: { lang: "uk" | "en" };
 }) {
   const dict = await getDictionary(`/${params.lang}`);
-  
+
   return (
     <div className="container mx-auto px-6">
       <div className="fixed top-1/2 left-1/2 bg-purple-900 w-[308px] h-[504px] rounded-[300px] opacity-10 blur-2xl transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-b from-purple-600 via-purple-600 to-transparent"></div>
