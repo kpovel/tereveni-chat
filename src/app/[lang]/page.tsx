@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getDictionary } from "./dictionaries";
-import LangChecker from "./langChecker";
+import { ToggleLang } from "./ToggleLang";
 
 export default async function Home({
   params,
@@ -12,7 +12,7 @@ export default async function Home({
 
   return (
     <div className="container mx-auto px-6">
-      <LangChecker />
+      <ToggleLang />
       <div className="my-10 inline-flex w-full items-center justify-center px-4 py-10">
         <Image src="logo.svg" alt="logo" width={200} height={207} />
       </div>
