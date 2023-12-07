@@ -21,10 +21,10 @@ export default async function Home({
       </h1>
       <div className="mt-10 flex flex-col items-center">
         <button className="main__btn mb-5">
-          <Link href="/loginPage">Log in</Link>
+          <Link className="main__link" href={`/${params.lang}/login`}>Log in</Link>
         </button>
         <button className="main__btn">
-          <Link href="/signUp">signUp</Link>
+          <Link className="main__link" href={`/${params.lang}/sign-up`}>signUp</Link>
         </button>
       </div>
     </div>

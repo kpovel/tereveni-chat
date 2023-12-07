@@ -14,7 +14,7 @@ export default function LoginForm() {
     }
 
     return (
-        <form action="">
+        <form className="flex flex-col items-cinter" action="">
             <div className="relative mb-5">
                 <div className="absolute top-1/2 left-5 transform -translate-y-1/2">
                     <Image 
@@ -50,7 +50,9 @@ export default function LoginForm() {
             </div>
             <Link href="" className="inline-block w-full text-center text-violet-400 text-xs font-normal font-main underline">Forgot your password?</Link>
 
-            <button type="submit" className="main__btn mt-32">Log in</button>
+            <button type="submit" className="main__btn mt-32">
+                <Link className="main__link" href=''>Login</Link>
+            </button>
         </form>
     )
 }

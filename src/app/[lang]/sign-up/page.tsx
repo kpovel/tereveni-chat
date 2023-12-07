@@ -6,7 +6,7 @@ export default function SignUp() {
       <h2 className="mt-20 text-center text-lg font-medium text-neutral-50">
         Hi there! Let&apos;s create your account
       </h2>
-      <div className="mt-10">
+      <div className="mx-auto mt-10 max-w-md">
         <SignUpForm />
       </div>
     </div>
