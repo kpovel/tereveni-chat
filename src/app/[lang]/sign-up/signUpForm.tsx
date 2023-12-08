@@ -4,11 +4,10 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import PasswordInput from "./passwordInput";
-import { validateInput } from '../../../util/input-validation';
+import { validateInput } from "../../../util/input-validation";
 
 export default function SignUpForm() {
-
-    const isFirstRender = useRef(true);
+  const isFirstRender = useRef(true);
 
   const [isTermsChecked, setIsTermsChecked] = useState(false);
   const [login, setLogin] = useState("");
@@ -25,21 +24,21 @@ export default function SignUpForm() {
   };
 
   const setLoginHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-      e.preventDefault();
-      const isValidLogin = validateInput(e.currentTarget.value, 'login');
-      setIsValidateLogin(isValidLogin);
-      setLogin(e.currentTarget.value)
-  }
+    e.preventDefault();
+    const isValidLogin = validateInput(e.currentTarget.value, "login");
+    setIsValidateLogin(isValidLogin);
+    setLogin(e.currentTarget.value);
+  };
 
   const setEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    const isValidEmail = validateInput(e.currentTarget.value, 'email');
+    const isValidEmail = validateInput(e.currentTarget.value, "email");
     setIsValidateEmail(isValidEmail);
-    setEmail(e.currentTarget.value)
-}
+    setEmail(e.currentTarget.value);
+  };
 
   const setPassHandler = (pass: string) => {
-    const isValidPass = validateInput(pass, 'password')
+    const isValidPass = validateInput(pass, "password");
     setIsValidatePassword(isValidPass);
     setPassword(pass);
   };
@@ -49,16 +48,16 @@ export default function SignUpForm() {
   };
 
   const checkPassMatching = () => {
-    if (password !== '' && password) {
+    if (password !== "" && password) {
       setIsPassMatching(password === confirmPassword);
     }
   };
 
   useEffect(() => {
     if (isFirstRender.current) {
-        isFirstRender.current = false;
-        return;
-      }
+      isFirstRender.current = false;
+      return;
+    }
     checkPassMatching();
   }, [password, confirmPassword]);
 
@@ -68,7 +67,15 @@ export default function SignUpForm() {
         <div className="absolute left-5 top-1/2 -translate-y-1/2 transform">
           <Image src="/user.svg" alt="mail" width={20} height={20} />
         </div>
-        <input value={login} onChange={setLoginHandler} className={`main__input ${!isValidateLogin ? 'border-red-500' : null}`} type="text" placeholder="Login" />
+        <input
+          value={login}
+          onChange={setLoginHandler}
+          className={`main__input ${
+            !isValidateLogin ? "border-red-500" : null
+          }`}
+          type="text"
+          placeholder="Login"
+        />
       </div>
       {!isValidateLogin ? (
         <div className="px-2 pt-1">
@@ -84,7 +91,9 @@ export default function SignUpForm() {
         <input
           onChange={setEmailHandler}
           value={email}
-          className={`main__input ${!isValidateEmail ? 'border-red-500' : null}`}
+          className={`main__input ${
+            !isValidateEmail ? "border-red-500" : null
+          }`}
           type="text"
           placeholder="Email address"
         />

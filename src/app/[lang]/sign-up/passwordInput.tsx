@@ -8,7 +8,7 @@ interface PasswordInputProps {
   hint: boolean;
   setPassHandler: (pass: string) => void;
   pass: string;
-  isValid?: boolean 
+  isValid?: boolean;
 }
 
 export default function PasswordInput({
@@ -55,7 +55,7 @@ export default function PasswordInput({
           onChange={setPass}
           onFocus={hintHandler}
           onBlur={hiddenHint}
-          className={`main__input ${!isValid ? 'border-red-500' : null}`}
+          className={`main__input ${!isValid ? "border-red-500" : null}`}
           type={`${isHidden ? "password" : "text"}`}
           placeholder={placeholder}
           value={pass}
