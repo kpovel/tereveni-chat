@@ -1,25 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer utilities {
-    .font-main {
-      font-family: 'Montserrat', sans-serif;
-    }
+  .font-main {
+    font-family: "Montserrat", sans-serif;
   }
+}
 @layer components {
-    .main__btn {
-      @apply max-w-md w-full bg-violet-700 rounded-full text-neutral-50 text-sm font-normal font-main leading-tight;
-    }
-    .main__input {
-        @apply outline-none transition ease-in text-neutral-50 text-sm font-normal font-main leading-tight w-full pr-5 pl-14 py-3 bg-stone-900 rounded-3xl border border-neutral-700 focus:border-violet-700 justify-center items-center gap-3 inline-flex;
-    }
-    .main__link {
-      @apply py-3 px-6 w-full inline-block
-    }
+  .main__btn {
+    @apply w-full max-w-md rounded-full bg-violet-700 font-main text-sm font-normal leading-tight text-neutral-50;
   }
+  .main__input {
+    @apply inline-flex w-full items-center justify-center gap-3 rounded-3xl border border-neutral-700 bg-stone-900 py-3 pl-14 pr-5 font-main text-sm font-normal leading-tight text-neutral-50 outline-none transition ease-in focus:border-violet-700;
+  }
+  .main__link {
+    @apply inline-block w-full px-6 py-3;
+  }
+}
 body {
-    @apply bg-neutral-900
-};
-
+  @apply bg-neutral-900;
+}

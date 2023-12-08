@@ -12,4 +12,3 @@ export function SetPreferredLanguage({ lang }: { lang: string }) {
 
   return <></>;
 }
-

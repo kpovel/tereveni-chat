@@ -6,5 +6,5 @@ export const env = createEnv({
     SERVER_URL: z.string().url(),
   },
   client: {},
-  runtimeEnv: process.env
+  runtimeEnv: process.env,
 });
