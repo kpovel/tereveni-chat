@@ -7,11 +7,15 @@ interface PasswordInputProps {
   placeholder: string;
   hint: boolean;
   setPassHandler: (pass: string) => void;
+  pass: string;
+  isValid?: boolean 
 }
 
 export default function PasswordInput({
   placeholder,
   hint,
+  pass,
+  isValid,
   setPassHandler,
 }: PasswordInputProps) {
   const [isHidden, setIsHidden] = useState(true);
@@ -51,9 +55,10 @@ export default function PasswordInput({
           onChange={setPass}
           onFocus={hintHandler}
           onBlur={hiddenHint}
-          className="main__input"
+          className={`main__input ${!isValid ? 'border-red-500' : null}`}
           type={`${isHidden ? "password" : "text"}`}
           placeholder={placeholder}
+          value={pass}
         />
         <button
           className="absolute right-5 top-1/2 -translate-y-1/2 transform"
