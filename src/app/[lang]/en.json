@@ -1,3 +1,6 @@
 {
-  "title": "Welcome to Tereveni"
+  "mainPage": {
+    "title": "Welcome to Tereveni",
+    "btn": "Login"
+  }
 }

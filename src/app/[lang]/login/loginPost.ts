@@ -11,7 +11,9 @@ export type SuccessLoginResponse = {
   jwtRefreshToken: string;
 };
 
-export async function loginPostData(data: loginDataInterface): Promise<string> {
+export async function loginPostData(
+  data: loginDataInterface,
+): Promise<string | void> {
   const response = await fetch(`${process.env.SERVER_HOST}/api/login`, {
     method: "POST",
     headers: {

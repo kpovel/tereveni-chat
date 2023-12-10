@@ -17,7 +17,7 @@ export default async function Home({
         <Image src="logo.svg" alt="logo" width={200} height={207} />
       </div>
       <h1 className="text-center font-main text-3xl font-medium text-neutral-50">
-        {dict.title}
+        {dict.mainPage.title}
       </h1>
       <div className="mt-10 flex flex-col items-center">
         <button className="main__btn mb-5">

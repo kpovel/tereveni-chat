@@ -1,3 +1,6 @@
 {
-  "title": "Вітаємо у Tereveni"
+  "mainPage": {
+    "title": "Вітаємо у Tereveni",
+    "btn": "Увійти"
+  }
 }
