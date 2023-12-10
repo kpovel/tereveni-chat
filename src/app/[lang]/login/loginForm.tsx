@@ -3,9 +3,18 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { loginPostData } from "./loginPost";
+
+export interface loginDataInterface {
+  login: string;
+  password: string;
+}
 
 export default function LoginForm() {
   const [isHidden, setIsHidden] = useState(true);
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const hiddelPassword = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -14,8 +23,19 @@ export default function LoginForm() {
     setIsHidden(!isHidden);
   };
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const submitError = await loginPostData({ login, password });
+    setError(submitError);
+  };
+
   return (
-    <form className="items-cinter flex flex-col" action="">
+    <form
+      onSubmit={handleSubmit}
+      className="items-cinter flex flex-col"
+      action=""
+    >
       <div className="relative mb-5">
         <div className="absolute left-5 top-1/2 -translate-y-1/2 transform">
           <Image src="/mail.svg" alt="mail" width={20} height={20} />
@@ -24,6 +44,8 @@ export default function LoginForm() {
           className="main__input"
           type="text"
           placeholder="Email address"
+          value={login}
+          onChange={(e) => setLogin(e.target.value)}
         />
       </div>
       <div className="relative mb-5">
@@ -34,6 +56,8 @@ export default function LoginForm() {
           className="main__input"
           type={`${isHidden ? "password" : "text"}`}
           placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <button
           className="absolute right-5 top-1/2 -translate-y-1/2 transform"
@@ -49,10 +73,8 @@ export default function LoginForm() {
         Forgot your password?
       </Link>
 
-      <button type="submit" className="main__btn mt-32">
-        <Link className="main__link" href="">
-          Login
-        </Link>
+      <button type="submit" className="main__btn mt-32 px-6 py-3">
+        Login
       </button>
     </form>
   );

@@ -4,7 +4,14 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import PasswordInput from "./passwordInput";
+import { signUpPostData } from "./signUpPOST";
 import { validateInput } from "../../../util/input-validation";
+
+export interface signUpDataInterface {
+  login: string;
+  email: string;
+  password: string;
+}
 
 export default function SignUpForm() {
   const isFirstRender = useRef(true);
@@ -18,6 +25,7 @@ export default function SignUpForm() {
   const [isValidateLogin, setIsValidateLogin] = useState(true);
   const [isValidatePassword, setIsValidatePassword] = useState(true);
   const [isPassMatching, setIsPassMatching] = useState(true);
+  const [singupError, setSignupError] = useState("");
 
   const termsChekedHandler = () => {
     setIsTermsChecked(!isTermsChecked);
@@ -61,8 +69,23 @@ export default function SignUpForm() {
     checkPassMatching();
   }, [password, confirmPassword]);
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formDataSubmit = {
+      login,
+      email,
+      password,
+    };
+
+    const error = await signUpPostData(formDataSubmit, window.origin);
+    setSignupError(error);
+
+    console.log(error);
+  };
+
   return (
-    <form action="">
+    <form onSubmit={handleSubmit}>
       <div className="relative">
         <div className="absolute left-5 top-1/2 -translate-y-1/2 transform">
           <Image src="/user.svg" alt="mail" width={20} height={20} />
@@ -146,10 +169,8 @@ export default function SignUpForm() {
         </span>
       </div>
 
-      <button type="submit" className="main__btn mt-32">
-        <Link className="main__link" href="">
-          Next step
-        </Link>
+      <button type="submit" className="main__btn mt-32 px-6 py-3">
+        Next step
       </button>
     </form>
   );
