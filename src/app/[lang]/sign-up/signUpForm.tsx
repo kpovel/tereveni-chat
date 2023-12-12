@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import PasswordInput from "./passwordInput";
-import { signUpPostData } from "./signUpPOST";
+import { signUpPostData } from "./signUpPost";
 import { validateInput } from "../../../util/input-validation";
 
 export interface signUpDataInterface {
@@ -13,7 +13,19 @@ export interface signUpDataInterface {
   password: string;
 }
 
-export default function SignUpForm() {
+interface SignUpFormProps {
+  params: {
+    lang: string;
+  };
+}
+
+
+export type LanguageObject = {
+  lang: string;
+};
+
+export default function SignUpForm({params}: SignUpFormProps) {
+
   const isFirstRender = useRef(true);
 
   const [isTermsChecked, setIsTermsChecked] = useState(false);
@@ -55,11 +67,11 @@ export default function SignUpForm() {
     setConfirmPassword(pass);
   };
 
-  const checkPassMatching = () => {
+  const checkPassMatching = useCallback(() => {
     if (password !== "" && password) {
       setIsPassMatching(password === confirmPassword);
     }
-  };
+  }, [password, confirmPassword]);
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -67,7 +79,7 @@ export default function SignUpForm() {
       return;
     }
     checkPassMatching();
-  }, [password, confirmPassword]);
+  }, [password, confirmPassword, checkPassMatching]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -78,7 +90,11 @@ export default function SignUpForm() {
       password,
     };
 
-    const error = await signUpPostData(formDataSubmit, window.origin);
+    const langObject: LanguageObject = { lang: params.lang };
+
+    console.log(langObject)
+
+    const error = await signUpPostData(formDataSubmit, window.origin, langObject);
     setSignupError(error);
 
     console.log(error);

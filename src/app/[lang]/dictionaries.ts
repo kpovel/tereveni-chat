@@ -3,6 +3,8 @@ import "server-only";
 const dictionaries = {
   "/en": () => import("./en.json").then((module) => module.default),
   "/uk": () => import("./uk.json").then((module) => module.default),
+  "/en/login": () => import("./login/en.json").then((module) => module.default),
+  "/uk/login": () => import("./login/uk.json").then((module) => module.default),
 };
 
 type DictionaryReturnTypes = {

@@ -7,9 +7,9 @@ import AvatarEditor from "react-avatar-editor";
 
 export default function AvatarPicker() {
   const [selectedAvatar, setSelectedAvatar] = useState(null);
-  const [customAvatar, setCustomAvatar] = useState(null);
+  const [customAvatar, setCustomAvatar] = useState<string | null>(null);
   const [scale, setScale] = useState(1);
-  const editorRef = useRef(null);
+  const editorRef = useRef<AvatarEditor | null>(null)
 
   const predefinedAvatars = [
     "avatar-1.svg",
@@ -36,11 +36,12 @@ export default function AvatarPicker() {
   };
 
   const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files[0];
-    if (file) {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      const file = files[0];
       const reader = new FileReader();
       reader.onloadend = () => {
-        setCustomAvatar(reader.result);
+        setCustomAvatar(reader.result as string);
         setSelectedAvatar(null);
       };
       reader.readAsDataURL(file);

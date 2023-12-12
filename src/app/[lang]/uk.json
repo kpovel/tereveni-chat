@@ -1,6 +1,7 @@
 {
   "mainPage": {
     "title": "Вітаємо у Tereveni",
-    "btn": "Увійти"
+    "btnLogin": "Увійти",
+    "btnSignUp": "Зареєструватись" 
   }
 }

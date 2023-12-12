@@ -3,17 +3,16 @@
 import { redirect } from "next/navigation";
 import { signUpDataInterface } from "./signUpForm";
 import { getDictionary } from "../dictionaries";
+import { LanguageObject } from "./signUpForm";
+
+
 
 export async function signUpPostData(
   data: signUpDataInterface,
-  {
-    params,
-  }: {
-    params: { lang: "uk" | "en" };
-  },
   origin: string,
+  params: LanguageObject
 ): Promise<string> {
-  const dict = await getDictionary(`/${params.lang}`);
+console.log(params)
   const response = await fetch(`${process.env.SERVER_URL}/api/signup`, {
     body: JSON.stringify(data),
     method: "POST",
