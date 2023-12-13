@@ -9,6 +9,10 @@ const dictionaries = {
     import("./onboarding/categories/en.json").then((module) => module.default),
   "/uk/onboarding/categories": () =>
     import("./onboarding/categories/uk.json").then((module) => module.default),
+  "/en/onboarding/final": () =>
+    import("./onboarding/final/en.json").then((module) => module.default),
+  "/uk/onboarding/final": () =>
+    import("./onboarding/final/uk.json").then((module) => module.default),
 };
 
 type DictionaryReturnTypes = {
