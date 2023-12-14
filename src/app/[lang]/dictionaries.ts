@@ -15,7 +15,7 @@ const dictionaries = {
     import("./onboarding/final/uk.json").then((module) => module.default),
 };
 
-type DictionaryReturnTypes = {
+export type DictionaryReturnTypes = {
   [K in keyof typeof dictionaries]: ReturnType<(typeof dictionaries)[K]>;
 };
 

@@ -1,13 +1,20 @@
+import { getDictionary } from "../dictionaries";
 import LoginForm from "./loginForm";
 
-export default function LoginPage() {
+export default async function LoginPage({
+  params,
+}: {
+  params: { lang: "en" | "uk" };
+}) {
+  const dict = await getDictionary(`/${params.lang}/login`);
+
   return (
     <div className="container mx-auto px-6">
-      <h2 className="mt-20 text-center text-lg font-medium text-neutral-50 ">
-        Welcome back!
+      <h2 className="mt-20 text-center text-lg font-medium text-neutral-50">
+        {dict.welcomeBack}
       </h2>
       <div className="mx-auto mt-10 max-w-md">
-        <LoginForm />
+        <LoginForm lang={params.lang} dict={dict} />
       </div>
     </div>
   );

@@ -1,1 +1,7 @@
-{}
+{
+  "welcomeBack": "З поверненням!",
+  "emailPlaceholder": "Електронна пошта",
+  "passwordPlaceholder": "Пароль",
+  "forgotPassword": "Забув/ла свій пароль?",
+  "logIn": "Увійти"
+}

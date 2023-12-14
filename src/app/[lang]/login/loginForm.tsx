@@ -3,19 +3,25 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {loginPostData} from './loginPost';
+import { loginPostData } from "./loginPost";
+import { DictionaryReturnTypes } from "../dictionaries";
 
 export interface loginDataInterface {
   login: string;
   password: string;
 }
 
-export default function LoginForm() {
+export default function LoginForm({
+  lang,
+  dict,
+}: {
+  lang: "en" | "uk";
+  dict: Awaited<DictionaryReturnTypes["/en/login"]>;
+}) {
   const [isHidden, setIsHidden] = useState(true);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
 
   const hiddelPassword = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -32,7 +38,7 @@ export default function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="items-cinter flex flex-col" action="">
+    <form onSubmit={handleSubmit} className="items-cinter flex flex-col">
       <div className="relative mb-5">
         <div className="absolute left-5 top-1/2 -translate-y-1/2 transform">
           <Image src="/mail.svg" alt="mail" width={20} height={20} />
@@ -40,7 +46,7 @@ export default function LoginForm() {
         <input
           className="main__input"
           type="text"
-          placeholder="Email address"
+          placeholder={dict.emailPlaceholder}
           value={login}
           onChange={(e) => setLogin(e.target.value)}
         />
@@ -52,7 +58,7 @@ export default function LoginForm() {
         <input
           className="main__input"
           type={`${isHidden ? "password" : "text"}`}
-          placeholder="Password"
+          placeholder={dict.passwordPlaceholder}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -64,14 +70,14 @@ export default function LoginForm() {
         </button>
       </div>
       <Link
-        href=""
+        href={`/${lang}/forgot-password`}
         className="inline-block w-full text-center font-main text-xs font-normal text-violet-400 underline"
       >
-        Forgot your password?
+        {dict.forgotPassword}
       </Link>
 
       <button type="submit" className="main__btn mt-32 px-6 py-3">
-          Login
+        {dict.logIn}
       </button>
     </form>
   );
