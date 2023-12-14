@@ -4,12 +4,17 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import AvatarEditor from "react-avatar-editor";
+import { DictionaryReturnTypes } from "../../dictionaries";
 
-export default function AvatarPicker() {
+export default function AvatarPicker({
+  dict,
+}: {
+  dict: Awaited<DictionaryReturnTypes["/en/onboarding/pick-avatar"]>;
+}) {
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [customAvatar, setCustomAvatar] = useState<string | null>(null);
   const [scale, setScale] = useState(1);
-  const editorRef = useRef<AvatarEditor | null>(null)
+  const editorRef = useRef<AvatarEditor | null>(null);
 
   const predefinedAvatars = [
     "avatar-1.svg",
@@ -107,7 +112,7 @@ export default function AvatarPicker() {
       </div>
       <div className="mt-10 flex flex-col items-center">
         <h3 className="text-center font-main text-sm font-normal leading-tight text-neutral-50">
-          Or pick an avatar from here
+          {dict.pickAvatar}
         </h3>
         <div className="mt-10 grid grid-cols-4 justify-center gap-4 md:max-w-md md:grid-cols-6">
           {predefinedAvatars.map((avatar, id) => (
@@ -136,7 +141,7 @@ export default function AvatarPicker() {
         />
         <button className="main__btn mt-24" onClick={handleSaveAvatar}>
           <Link className="main__link" href="">
-            Next step
+            {dict.next}
           </Link>
         </button>
         <button className="mt-5 w-full border-none bg-transparent outline-none">
@@ -144,7 +149,7 @@ export default function AvatarPicker() {
             className="text-center font-main text-sm font-normal leading-tight text-stone-300"
             href=""
           >
-            Skip
+            {dict.skip}
           </Link>
         </button>
       </div>
