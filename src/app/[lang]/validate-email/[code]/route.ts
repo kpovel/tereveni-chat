@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
+import { env } from "@/env.mjs";
 
 type ValidateResponse = {
   type: string;
@@ -13,7 +14,7 @@ export async function GET(
   context: { params: { code: string } },
 ) {
   const response = await fetch(
-    `${process.env.SERVER_URL}/api/validate-email/${context.params.code}`,
+    `${env.SERVER_URL}/api/validate-email/${context.params.code}`,
     {
       method: "PUT",
       cache: "no-store",

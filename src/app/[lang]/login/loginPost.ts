@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { loginDataInterface } from "./loginForm";
 import { JWT_ACCESS_TOKEN, JWT_REFRESH_TOKEN } from "../../../util/cookiesName";
 import { redirect } from "next/navigation";
+import { env } from "@/env.mjs";
 
 export type SuccessLoginResponse = {
   type: "Bearer";
@@ -14,7 +15,7 @@ export type SuccessLoginResponse = {
 export async function loginPostData(
   data: loginDataInterface,
 ): Promise<string | void> {
-  const response = await fetch(`${process.env.SERVER_HOST}/api/login`, {
+  const response = await fetch(`${env.SERVER_URL}/api/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

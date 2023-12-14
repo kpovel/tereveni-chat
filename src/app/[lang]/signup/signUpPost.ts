@@ -2,13 +2,14 @@
 
 import { redirect } from "next/navigation";
 import { signUpDataInterface } from "./signUpForm";
+import { env } from "@/env.mjs";
 
 export async function signUpPostData(
   data: signUpDataInterface,
   origin: string,
-  lang: "en" | "uk"
+  lang: "en" | "uk",
 ): Promise<string> {
-  const response = await fetch(`${process.env.SERVER_URL}/api/signup`, {
+  const response = await fetch(`${env.SERVER_URL}/api/signup`, {
     body: JSON.stringify(data),
     method: "POST",
     headers: {
