@@ -5,6 +5,8 @@ const dictionaries = {
   "/uk": () => import("./uk.json").then((module) => module.default),
   "/en/login": () => import("./login/en.json").then((module) => module.default),
   "/uk/login": () => import("./login/uk.json").then((module) => module.default),
+  "/en/signup": () => import("./signup/en.json").then((module) => module.default),
+  "/uk/signup": () => import("./signup/uk.json").then((module) => module.default),
   "/en/onboarding/categories": () =>
     import("./onboarding/categories/en.json").then((module) => module.default),
   "/uk/onboarding/categories": () =>

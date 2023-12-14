@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { DictionaryReturnTypes } from "../dictionaries";
 
 interface PasswordInputProps {
   placeholder: string;
@@ -9,6 +10,7 @@ interface PasswordInputProps {
   setPassHandler: (pass: string) => void;
   pass: string;
   isValid?: boolean;
+  dict: Awaited<DictionaryReturnTypes["/en/signup"]>;
 }
 
 export default function PasswordInput({
@@ -16,6 +18,7 @@ export default function PasswordInput({
   hint,
   pass,
   isValid,
+  dict,
   setPassHandler,
 }: PasswordInputProps) {
   const [isHidden, setIsHidden] = useState(true);
@@ -67,14 +70,13 @@ export default function PasswordInput({
           <Image src="/eye-open.svg" alt="lock" width={20} height={20} />
         </button>
       </div>
-      {isVisibleHint ? (
+      {isVisibleHint && (
         <div className="mt-1 px-2 transition">
           <p className="text-xs font-normal leading-5 text-neutral-50">
-            Password must be 6 to 72 characters and contain at least 1 capital
-            letter, 1 number and 1 special character
+            {dict.errorStatus.passwordConstraint}
           </p>
         </div>
-      ) : null}
+      )}
     </div>
   );
 }

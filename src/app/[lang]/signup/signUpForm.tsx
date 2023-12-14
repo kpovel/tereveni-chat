@@ -1,11 +1,19 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  ChangeEvent,
+  FormEvent,
+} from "react";
 import Link from "next/link";
 import Image from "next/image";
 import PasswordInput from "./passwordInput";
 import { signUpPostData } from "./signUpPost";
 import { validateInput } from "../../../util/input-validation";
+import { DictionaryReturnTypes } from "../dictionaries";
 
 export interface signUpDataInterface {
   login: string;
@@ -13,19 +21,13 @@ export interface signUpDataInterface {
   password: string;
 }
 
-interface SignUpFormProps {
-  params: {
-    lang: string;
-  };
-}
-
-
-export type LanguageObject = {
-  lang: string;
-};
-
-export default function SignUpForm({params}: SignUpFormProps) {
-
+export default function SignUpForm({
+  lang,
+  dict,
+}: {
+  lang: "en" | "uk";
+  dict: Awaited<DictionaryReturnTypes["/en/signup"]>;
+}) {
   const isFirstRender = useRef(true);
 
   const [isTermsChecked, setIsTermsChecked] = useState(false);
@@ -43,14 +45,14 @@ export default function SignUpForm({params}: SignUpFormProps) {
     setIsTermsChecked(!isTermsChecked);
   };
 
-  const setLoginHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const setLoginHandler = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const isValidLogin = validateInput(e.currentTarget.value, "login");
     setIsValidateLogin(isValidLogin);
     setLogin(e.currentTarget.value);
   };
 
-  const setEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const setEmailHandler = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const isValidEmail = validateInput(e.currentTarget.value, "email");
     setIsValidateEmail(isValidEmail);
@@ -81,7 +83,7 @@ export default function SignUpForm({params}: SignUpFormProps) {
     checkPassMatching();
   }, [password, confirmPassword, checkPassMatching]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formDataSubmit = {
@@ -90,11 +92,7 @@ export default function SignUpForm({params}: SignUpFormProps) {
       password,
     };
 
-    const langObject: LanguageObject = { lang: params.lang };
-
-    console.log(langObject)
-
-    const error = await signUpPostData(formDataSubmit, window.origin, langObject);
+    const error = await signUpPostData(formDataSubmit, window.origin, lang);
     setSignupError(error);
 
     console.log(error);
@@ -113,13 +111,13 @@ export default function SignUpForm({params}: SignUpFormProps) {
             !isValidateLogin ? "border-red-500" : null
           }`}
           type="text"
-          placeholder="Login"
+          placeholder={dict.placeholder.login}
         />
       </div>
       {!isValidateLogin ? (
         <div className="px-2 pt-1">
           <p className="font-main text-xs font-normal leading-none text-red-500">
-            Login must be 3 to 50 characters and contain only ABC and numbers
+            {dict.errorStatus.loginCharacters}
           </p>
         </div>
       ) : null}
@@ -134,34 +132,36 @@ export default function SignUpForm({params}: SignUpFormProps) {
             !isValidateEmail ? "border-red-500" : null
           }`}
           type="text"
-          placeholder="Email address"
+          placeholder={dict.placeholder.email}
         />
       </div>
       {!isValidateEmail ? (
         <div className="px-2 pt-1">
           <p className="font-main text-xs font-normal leading-none text-red-500">
-            Please enter a valid email address
+            {dict.errorStatus.invalidEmail}
           </p>
         </div>
       ) : null}
       <PasswordInput
         setPassHandler={setPassHandler}
         hint={true}
-        placeholder={"Password"}
+        placeholder={dict.placeholder.password}
         pass={password}
         isValid={isValidatePassword}
+        dict={dict}
       />
       <PasswordInput
         setPassHandler={setConfirmPassHandler}
         hint={false}
-        placeholder={"Confirm Password"}
+        placeholder={dict.placeholder.confirmPassword}
         pass={confirmPassword}
         isValid={isValidatePassword}
+        dict={dict}
       />
       {!isPassMatching ? (
         <div className="px-2 pt-1">
           <p className="font-main text-xs font-normal leading-none text-red-500">
-            Password are not matching
+            {dict.errorStatus.passwordNotMatch}
           </p>
         </div>
       ) : null}
@@ -174,19 +174,19 @@ export default function SignUpForm({params}: SignUpFormProps) {
             <Image src="/checked.svg" alt="mail" width={12} height={12} />
           ) : null}
         </div>
-        <span className="ml-2 text-left font-['Poppins'] font-main text-xs font-normal leading-none text-neutral-50">
-          I have read and agree to the
+        <span className="ml-2 text-left font-main text-xs font-normal leading-none text-neutral-50">
+          {dict.terms.read}
           <Link
             href=""
             className="ml-1 inline-block break-words text-center font-main text-xs font-normal text-violet-400 underline"
           >
-            Terms and Conditions
+            {dict.terms.termsConditions}
           </Link>
         </span>
       </div>
 
       <button type="submit" className="main__btn mt-32 px-6 py-3">
-        Next step
+        {dict.nextStep}
       </button>
     </form>
   );

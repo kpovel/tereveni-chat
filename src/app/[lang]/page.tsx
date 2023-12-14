@@ -26,7 +26,7 @@ export default async function Home({
           </Link>
         </button>
         <button className="main__btn">
-          <Link className="main__link" href={`/${params.lang}/sign-up`}>
+          <Link className="main__link" href={`/${params.lang}/signup`}>
           {dict.mainPage.btnSignUp}
           </Link>
         </button>

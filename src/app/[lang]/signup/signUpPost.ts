@@ -2,17 +2,12 @@
 
 import { redirect } from "next/navigation";
 import { signUpDataInterface } from "./signUpForm";
-import { getDictionary } from "../dictionaries";
-import { LanguageObject } from "./signUpForm";
-
-
 
 export async function signUpPostData(
   data: signUpDataInterface,
   origin: string,
-  params: LanguageObject
+  lang: "en" | "uk"
 ): Promise<string> {
-console.log(params)
   const response = await fetch(`${process.env.SERVER_URL}/api/signup`, {
     body: JSON.stringify(data),
     method: "POST",
@@ -23,7 +18,7 @@ console.log(params)
   });
 
   if (response.ok) {
-    redirect(`/${params.lang}/validate-email`);
+    redirect(`/${lang}/validate-email`);
   }
 
   return await response.text();
