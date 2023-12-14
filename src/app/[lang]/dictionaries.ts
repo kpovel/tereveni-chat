@@ -21,6 +21,10 @@ const dictionaries = {
     import("./onboarding/final/en.json").then((module) => module.default),
   "/uk/onboarding/final": () =>
     import("./onboarding/final/uk.json").then((module) => module.default),
+  "/en/onboarding/introduce-yourself": () =>
+    import("./onboarding/introduce-yourself/en.json").then((module) => module.default),
+  "/uk/onboarding/introduce-yourself": () =>
+    import("./onboarding/introduce-yourself/uk.json").then((module) => module.default),
 };
 
 export type DictionaryReturnTypes = {
