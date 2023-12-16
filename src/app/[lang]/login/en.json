@@ -3,5 +3,8 @@
   "emailPlaceholder": "Email address",
   "passwordPlaceholder": "Password",
   "forgotPassword": "Forgot your password?",
-  "logIn": "Log in"
+  "logIn": "Log in",
+  "errorStatus": {
+    "invalidEmail": "Please enter a valid email address"
+  }
 }

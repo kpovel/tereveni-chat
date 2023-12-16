@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { loginPostData } from "./loginPost";
+import { validateInput } from "../../../util/input-validation";
 import { DictionaryReturnTypes } from "../dictionaries";
 
 export interface loginDataInterface {
@@ -21,6 +22,8 @@ export default function LoginForm({
   const [isHidden, setIsHidden] = useState(true);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [isValidateLogin, setIsValidateLogin] = useState(true);
+  const [isDisabledSubmit, setIsDisabledSubmit] = useState(true)
   const [error, setError] = useState("");
 
   const hiddelPassword = (
@@ -29,6 +32,31 @@ export default function LoginForm({
     e.preventDefault();
     setIsHidden(!isHidden);
   };
+
+  const setLoginHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const isValidLogin = validateInput(e.currentTarget.value, "email")
+    setIsValidateLogin(isValidLogin);
+    setLogin(e.currentTarget.value);
+  }
+
+  const setPassHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setPassword(e.currentTarget.value)
+  }
+
+  const checkSubmitEnable = () => {
+    setIsDisabledSubmit(true)
+    if(login.trim() !== "" &&
+    password.trim() !== "" &&
+    isValidateLogin) {
+      setIsDisabledSubmit(false)
+    }
+  }
+
+  useEffect(() => {
+    checkSubmitEnable()
+  }, [login, password])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,11 +72,13 @@ export default function LoginForm({
           <Image src="/mail.svg" alt="mail" width={20} height={20} />
         </div>
         <input
-          className="main__input"
+          className={`main__input ${
+            !isValidateLogin ? "border-red-500" : null
+          }`}
           type="text"
           placeholder={dict.emailPlaceholder}
           value={login}
-          onChange={(e) => setLogin(e.target.value)}
+          onChange={setLoginHandler}
         />
       </div>
       <div className="relative mb-5">
@@ -60,7 +90,7 @@ export default function LoginForm({
           type={`${isHidden ? "password" : "text"}`}
           placeholder={dict.passwordPlaceholder}
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={setPassHandler}
         />
         <button
           className="absolute right-5 top-1/2 -translate-y-1/2 transform"
@@ -76,7 +106,7 @@ export default function LoginForm({
         {dict.forgotPassword}
       </Link>
 
-      <button type="submit" className="main__btn mt-32 px-6 py-3">
+      <button type="submit" disabled={isDisabledSubmit} className={`main__btn ${isDisabledSubmit ? 'bg-opacity-10 text-zinc-500' : null} mt-32 px-6 py-3`}>
         {dict.logIn}
       </button>
     </form>
