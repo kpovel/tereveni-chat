@@ -10,19 +10,15 @@ type ValidateResponse = {
   jwtRefreshToken: string;
 };
 
-
 export async function GET(
   _request: NextRequest,
   context: { params: { lang: string; code: string } },
 ) {
-  const { lang, code } = context.params; 
-  const response = await fetch(
-    `${env.SERVER_URL}/api/validate-email/${code}`,
-    {
-      method: "PUT",
-      cache: "no-store",
-    },
-  );
+  const { lang, code } = context.params;
+  const response = await fetch(`${env.SERVER_URL}/api/validate-email/${code}`, {
+    method: "PUT",
+    cache: "no-store",
+  });
 
   if (response.ok) {
     const json = (await response.json()) as ValidateResponse;

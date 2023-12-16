@@ -22,12 +22,12 @@ export default async function Home({
       <div className="mt-10 flex flex-col items-center">
         <button className="main__btn mb-5">
           <Link className="main__link" href={`/${params.lang}/login`}>
-          {dict.mainPage.btnLogin}
+            {dict.mainPage.btnLogin}
           </Link>
         </button>
         <button className="main__btn">
           <Link className="main__link" href={`/${params.lang}/signup`}>
-          {dict.mainPage.btnSignUp}
+            {dict.mainPage.btnSignUp}
           </Link>
         </button>
       </div>

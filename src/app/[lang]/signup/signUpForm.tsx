@@ -40,7 +40,7 @@ export default function SignUpForm({
   const [isValidatePassword, setIsValidatePassword] = useState(true);
   const [isPassMatching, setIsPassMatching] = useState(true);
   const [singupError, setSignupError] = useState("");
-  const [isDisabledSubmit, setIsDisabledSubmit] = useState(true)
+  const [isDisabledSubmit, setIsDisabledSubmit] = useState(true);
 
   const termsChekedHandler = () => {
     setIsTermsChecked(!isTermsChecked);
@@ -73,24 +73,26 @@ export default function SignUpForm({
   const checkPassMatching = () => {
     if (password !== "" && password) {
       setIsPassMatching(password === confirmPassword);
-    };
-  }
+    }
+  };
 
   const checkSubmitEnable = () => {
-    setIsDisabledSubmit(true)
+    setIsDisabledSubmit(true);
     checkPassMatching();
-    if(login.trim() !== "" &&
-    email.trim() !== "" &&
-    password.trim() !== "" &&
-    confirmPassword.trim() !== "" &&
-    isValidateLogin &&
-    isValidateEmail &&
-    isValidatePassword &&
-    isTermsChecked &&
-    isPassMatching) {
-      setIsDisabledSubmit(false)
+    if (
+      login.trim() !== "" &&
+      email.trim() !== "" &&
+      password.trim() !== "" &&
+      confirmPassword.trim() !== "" &&
+      isValidateLogin &&
+      isValidateEmail &&
+      isValidatePassword &&
+      isTermsChecked &&
+      isPassMatching
+    ) {
+      setIsDisabledSubmit(false);
     }
-  }
+  };
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -98,7 +100,14 @@ export default function SignUpForm({
       return;
     }
     checkSubmitEnable();
-  }, [password, confirmPassword, email, login, isTermsChecked, checkPassMatching]);
+  }, [
+    password,
+    confirmPassword,
+    email,
+    login,
+    isTermsChecked,
+    checkPassMatching,
+  ]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -202,10 +211,15 @@ export default function SignUpForm({
         </span>
       </div>
 
-      <button type="submit" disabled={isDisabledSubmit} className={`main__btn ${isDisabledSubmit ? 'bg-opacity-10 text-zinc-500' : null} mt-32 px-6 py-3`}>
+      <button
+        type="submit"
+        disabled={isDisabledSubmit}
+        className={`main__btn ${
+          isDisabledSubmit ? "bg-opacity-10 text-zinc-500" : null
+        } mt-32 px-6 py-3`}
+      >
         {dict.nextStep}
       </button>
     </form>
   );
 }
-

@@ -23,7 +23,7 @@ export default function LoginForm({
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [isValidateLogin, setIsValidateLogin] = useState(true);
-  const [isDisabledSubmit, setIsDisabledSubmit] = useState(true)
+  const [isDisabledSubmit, setIsDisabledSubmit] = useState(true);
   const [error, setError] = useState("");
 
   const hiddelPassword = (
@@ -35,28 +35,26 @@ export default function LoginForm({
 
   const setLoginHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    const isValidLogin = validateInput(e.currentTarget.value, "email")
+    const isValidLogin = validateInput(e.currentTarget.value, "email");
     setIsValidateLogin(isValidLogin);
     setLogin(e.currentTarget.value);
-  }
+  };
 
   const setPassHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setPassword(e.currentTarget.value)
-  }
+    setPassword(e.currentTarget.value);
+  };
 
   const checkSubmitEnable = () => {
-    setIsDisabledSubmit(true)
-    if(login.trim() !== "" &&
-    password.trim() !== "" &&
-    isValidateLogin) {
-      setIsDisabledSubmit(false)
+    setIsDisabledSubmit(true);
+    if (login.trim() !== "" && password.trim() !== "" && isValidateLogin) {
+      setIsDisabledSubmit(false);
     }
-  }
+  };
 
   useEffect(() => {
-    checkSubmitEnable()
-  }, [login, password])
+    checkSubmitEnable();
+  }, [login, password]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -106,7 +104,13 @@ export default function LoginForm({
         {dict.forgotPassword}
       </Link>
 
-      <button type="submit" disabled={isDisabledSubmit} className={`main__btn ${isDisabledSubmit ? 'bg-opacity-10 text-zinc-500' : null} mt-32 px-6 py-3`}>
+      <button
+        type="submit"
+        disabled={isDisabledSubmit}
+        className={`main__btn ${
+          isDisabledSubmit ? "bg-opacity-10 text-zinc-500" : null
+        } mt-32 px-6 py-3`}
+      >
         {dict.logIn}
       </button>
     </form>
