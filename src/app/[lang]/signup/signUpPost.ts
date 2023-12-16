@@ -19,7 +19,7 @@ export async function signUpPostData(
   });
 
   if (response.ok) {
-    redirect(`/${lang}/validate-email`);
+    redirect(`/${lang}/send-mail`);
   }
 
   return await response.text();

@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { getDictionary } from "../../dictionaries";
 import { NextRequest, NextResponse } from "next/server";
 import { env } from "@/env.mjs";
 
@@ -9,12 +10,14 @@ type ValidateResponse = {
   jwtRefreshToken: string;
 };
 
+
 export async function GET(
   _request: NextRequest,
-  context: { params: { code: string } },
+  context: { params: { lang: string; code: string } },
 ) {
+  const { lang, code } = context.params; 
   const response = await fetch(
-    `${env.SERVER_URL}/api/validate-email/${context.params.code}`,
+    `${env.SERVER_URL}/api/validate-email/${code}`,
     {
       method: "PUT",
       cache: "no-store",
@@ -31,7 +34,7 @@ export async function GET(
       path: "/",
       maxAge: 60 * 15, // 15m
     });
-    redirect("/pick-avatar");
+    redirect(`/${lang}/onboarding/pick-avatar`);
   }
 
   const error = await response.text();
