@@ -1,6 +1,6 @@
 export const validateInput = (
   inputText: string,
-  type: "password" | "login" | "email",
+  type: "password" | "login" | "email" 
 ) => {
   const patterns = {
     password: /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,72}$/,
