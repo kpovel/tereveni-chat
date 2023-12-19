@@ -1,16 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { loginPostData } from "./loginPost";
 import { validateInput } from "../../../util/input-validation";
 import { DictionaryReturnTypes } from "../dictionaries";
-
-export interface loginDataInterface {
-  login: string;
-  password: string;
-}
 
 export default function LoginForm({
   lang,
@@ -19,48 +14,39 @@ export default function LoginForm({
   lang: "en" | "uk";
   dict: Awaited<DictionaryReturnTypes["/en/login"]>;
 }) {
-  const [isHidden, setIsHidden] = useState(true);
+  const [isHiddenPassword, setIsHiddenPassword] = useState(true);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [isValidateLogin, setIsValidateLogin] = useState(true);
   const [isDisabledSubmit, setIsDisabledSubmit] = useState(true);
-  const [error, setError] = useState("");
 
-  const hiddelPassword = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
-    e.preventDefault();
-    setIsHidden(!isHidden);
-  };
+  // todo: display error message
+  const [loginError, setLoginError] = useState("");
 
-  const setLoginHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  function setLoginHandler(e: ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
     const isValidLogin = validateInput(e.currentTarget.value, "email");
     setIsValidateLogin(isValidLogin);
     setLogin(e.currentTarget.value);
-  };
+  }
 
-  const setPassHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  function setPassHandler(e: ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
     setPassword(e.currentTarget.value);
-  };
+  }
 
-  const checkSubmitEnable = () => {
+  useEffect(() => {
     setIsDisabledSubmit(true);
     if (login.trim() !== "" && password.trim() !== "" && isValidateLogin) {
       setIsDisabledSubmit(false);
     }
-  };
+  }, [login, password, isValidateLogin]);
 
-  useEffect(() => {
-    checkSubmitEnable();
-  }, [login, password]);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const submitError = await loginPostData({ login, password });
-    // setError(submitError);
+    const submitError = (await loginPostData({ login, password })) as string;
+    setLoginError(submitError);
   };
 
   return (
@@ -85,14 +71,14 @@ export default function LoginForm({
         </div>
         <input
           className="main__input"
-          type={`${isHidden ? "password" : "text"}`}
+          type={`${isHiddenPassword ? "password" : "text"}`}
           placeholder={dict.passwordPlaceholder}
           value={password}
           onChange={setPassHandler}
         />
         <button
           className="absolute right-5 top-1/2 -translate-y-1/2 transform"
-          onClick={hiddelPassword}
+          onClick={() => setIsHiddenPassword(!isHiddenPassword)}
         >
           <Image src="/eye-open.svg" alt="lock" width={20} height={20} />
         </button>

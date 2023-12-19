@@ -1,20 +1,25 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { loginDataInterface } from "./loginForm";
 import { JWT_ACCESS_TOKEN, JWT_REFRESH_TOKEN } from "../../../util/cookiesName";
 import { redirect } from "next/navigation";
 import { env } from "@/env.mjs";
 
-export type SuccessLoginResponse = {
+type SuccessLoginResponse = {
   type: "Bearer";
   jwtAccessToken: string;
   jwtRefreshToken: string;
 };
 
-export async function loginPostData(
-  data: loginDataInterface,
-): Promise<string | void> {
+type UnauthorizedLoginResponse = {
+  fieldName: string;
+  fieldMessage: string;
+};
+
+export async function loginPostData(data: {
+  login: string;
+  password: string;
+}): Promise<string | void> {
   const response = await fetch(`${env.SERVER_URL}/api/login`, {
     method: "POST",
     headers: {
@@ -23,8 +28,9 @@ export async function loginPostData(
     body: JSON.stringify(data),
   });
 
-  if (!response.ok) {
-    return "Login error";
+  if (response.status == 401) {
+    const loginError = (await response.json()) as UnauthorizedLoginResponse;
+    return loginError.fieldMessage;
   }
 
   const tokens = (await response.json()) as SuccessLoginResponse;
