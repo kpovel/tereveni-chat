@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -10,5 +11,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <>
+      {children}
+      <Analytics />
+    </>
+  );
 }
