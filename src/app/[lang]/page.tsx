@@ -1,4 +1,7 @@
+import Image from "next/image";
+import Link from "next/link";
 import { getDictionary } from "./dictionaries";
+import { ToggleLang } from "./ToggleLang";
 
 export default async function Home({
   params,
@@ -7,5 +10,27 @@ export default async function Home({
 }) {
   const dict = await getDictionary(`/${params.lang}`);
 
-  return <h1>{dict.title}</h1>;
+  return (
+    <div className="container mx-auto px-6">
+      <ToggleLang />
+      <div className="my-10 inline-flex w-full items-center justify-center px-4 py-10">
+        <Image src="logo.svg" alt="logo" width={200} height={207} />
+      </div>
+      <h1 className="text-center font-main text-3xl font-medium text-neutral-50">
+        {dict.mainPage.title}
+      </h1>
+      <div className="mt-10 flex flex-col items-center">
+        <button className="main__btn mb-5">
+          <Link className="main__link" href={`/${params.lang}/login`}>
+            {dict.mainPage.btnLogin}
+          </Link>
+        </button>
+        <button className="main__btn">
+          <Link className="main__link" href={`/${params.lang}/signup`}>
+            {dict.mainPage.btnSignUp}
+          </Link>
+        </button>
+      </div>
+    </div>
+  );
 }

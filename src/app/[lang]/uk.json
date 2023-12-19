@@ -1,4 +1,7 @@
 {
-  "title": "Вітаємо у Tereveni"
+  "mainPage": {
+    "title": "Вітаємо у Tereveni",
+    "btnLogin": "Увійти",
+    "btnSignUp": "Зареєструватись"
+  }
 }
-

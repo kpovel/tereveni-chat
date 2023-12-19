@@ -1,0 +1,20 @@
+{
+  "hiThere": "Hi there! Let's create your account",
+  "placeholder": {
+    "login": "Login",
+    "email": "Email address",
+    "password": "Password",
+    "confirmPassword": "Confirm password"
+  },
+  "errorStatus": {
+    "passwordNotMatch": "Password are not matching",
+    "passwordConstraint": "Password must be 6 to 72 characters and contain at least 1 capital letter, 1 number and 1 special character",
+    "invalidEmail": "Please enter a valid email address",
+    "loginCharacters": "Login must be 3 to 50 characters and contain only ABC and numbers"
+  },
+  "terms": {
+    "read": "I have read and agree to the",
+    "termsConditions": "Terms and Conditions"
+  },
+  "nextStep": "Next step"
+}

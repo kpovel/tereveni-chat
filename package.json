@@ -12,12 +12,14 @@
     "@t3-oss/env-nextjs": "^0.7.1",
     "next": "14.0.3",
     "react": "^18",
+    "react-avatar-editor": "^13.0.1",
     "react-dom": "^18",
     "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
+    "@types/react-avatar-editor": "^13.0.2",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",

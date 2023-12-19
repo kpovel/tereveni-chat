@@ -1,0 +1,10 @@
+{
+  "welcomeBack": "З поверненням!",
+  "emailPlaceholder": "Електронна пошта",
+  "passwordPlaceholder": "Пароль",
+  "forgotPassword": "Забув/ла свій пароль?",
+  "logIn": "Увійти",
+  "errorStatus": {
+    "invalidEmail": "Будь ласка, введіть дійсну адресу електронної пошти"
+  }
+}

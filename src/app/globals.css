@@ -1,3 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .font-main {
+    font-family: "Montserrat", sans-serif;
+  }
+}
+@layer components {
+  .main__btn {
+    @apply w-full max-w-md rounded-full bg-violet-700 font-main text-sm font-normal leading-tight text-neutral-50;
+  }
+  .main__input {
+    @apply inline-flex w-full items-center justify-center gap-3 rounded-3xl border border-neutral-700 bg-stone-900 py-3 pl-14 pr-5 font-main text-sm font-normal leading-tight text-neutral-50 outline-none transition ease-in focus:border-violet-700;
+  }
+  .main__link {
+    @apply inline-block w-full px-6 py-3;
+  }
+}
+body {
+  @apply bg-neutral-900;
+}
