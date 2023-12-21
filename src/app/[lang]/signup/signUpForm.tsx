@@ -103,7 +103,7 @@ export default function SignUpForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex grow flex-col items-center justify-between"
+      className="flex w-full grow flex-col justify-between"
     >
       <div>
         <div className="relative">
@@ -118,13 +118,13 @@ export default function SignUpForm({
             placeholder={dict.placeholder.login}
           />
         </div>
-        {!isValidLogin ? (
+        {!isValidLogin && (
           <div className="px-2 pt-1">
             <p className="font-main text-xs font-normal leading-none text-red-500">
               {dict.errorStatus.loginCharacters}
             </p>
           </div>
-        ) : null}
+        )}
         <div className="relative mt-5">
           <div className="absolute left-5 top-1/2 -translate-y-1/2 transform">
             <Image src="/mail.svg" alt="mail" width={20} height={20} />
@@ -188,7 +188,7 @@ export default function SignUpForm({
         </div>
       </div>
 
-      <div className="w-full">
+      <div>
         <div className="my-5 text-xs text-red-500">{singupError}</div>
         <button
           type="submit"

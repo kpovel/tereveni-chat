@@ -60,7 +60,7 @@ export default function LoginForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="items-cinter flex flex-col">
+    <form onSubmit={handleSubmit} className="flex flex-col">
       <div className="relative mb-5">
         <div className="absolute left-5 top-1/2 -translate-y-1/2 transform">
           <Image src="/mail.svg" alt="mail" width={20} height={20} />
