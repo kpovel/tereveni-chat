@@ -1,11 +1,21 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { signUpDataInterface } from "./signUpForm";
 import { env } from "@/env.mjs";
 
+interface SignUpDataInterface {
+  login: string;
+  email: string;
+  password: string;
+}
+
+type SignUpResponseError = {
+  fieldName: string
+  fieldMessage: string
+};
+
 export async function signUpPostData(
-  data: signUpDataInterface,
+  data: SignUpDataInterface,
   origin: string,
   lang: "en" | "uk",
 ): Promise<string> {
@@ -22,5 +32,7 @@ export async function signUpPostData(
     redirect(`/${lang}/send-mail`);
   }
 
-  return await response.text();
+  const body = await response.json() as SignUpResponseError;
+
+  return body.fieldMessage;
 }
