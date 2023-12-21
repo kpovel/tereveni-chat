@@ -16,10 +16,14 @@ type UnauthorizedLoginResponse = {
   fieldMessage: string;
 };
 
-export async function loginPostData(data: {
-  login: string;
-  password: string;
-}): Promise<string | void> {
+export async function loginPostData(
+  data: {
+    login: string;
+    password: string;
+  },
+  lang: "en" | "uk",
+): Promise<string | void> {
+  console.log("wait what");
   const response = await fetch(`${env.SERVER_URL}/api/login`, {
     method: "POST",
     headers: {
@@ -50,5 +54,5 @@ export async function loginPostData(data: {
     path: "/",
   });
 
-  redirect("/chat");
+  redirect(`/${lang}/chat`);
 }
