@@ -22,8 +22,7 @@ export async function loginPostData(
     password: string;
   },
   lang: "en" | "uk",
-): Promise<string | void> {
-  console.log("wait what");
+): Promise<string> {
   const response = await fetch(`${env.SERVER_URL}/api/login`, {
     method: "POST",
     headers: {
@@ -33,27 +32,34 @@ export async function loginPostData(
     cache: "no-store",
   });
 
-  if (response.status == 401) {
+  if (response.status == 200) {
+    const tokens = (await response.json()) as SuccessLoginResponse;
+
+    cookies().set({
+      name: JWT_ACCESS_TOKEN,
+      value: tokens.jwtAccessToken,
+      maxAge: 60 * 15, // 15m
+      httpOnly: true,
+      path: "/",
+    });
+    cookies().set({
+      name: JWT_REFRESH_TOKEN,
+      value: tokens.jwtRefreshToken,
+      maxAge: 60 * 60 * 24 * 150, // 150d
+      httpOnly: true,
+      path: "/",
+    });
+
+    redirect(`/${lang}/chat`);
+  }
+
+  if (response.status === 401) {
+    const loginError = (await response.json()) as UnauthorizedLoginResponse;
+    return loginError.fieldMessage;
+  } else if (response.status === 403) {
     const loginError = (await response.json()) as UnauthorizedLoginResponse;
     return loginError.fieldMessage;
   }
 
-  const tokens = (await response.json()) as SuccessLoginResponse;
-
-  cookies().set({
-    name: JWT_ACCESS_TOKEN,
-    value: tokens.jwtAccessToken,
-    maxAge: 60 * 15, // 15m
-    httpOnly: true,
-    path: "/",
-  });
-  cookies().set({
-    name: JWT_REFRESH_TOKEN,
-    value: tokens.jwtRefreshToken,
-    maxAge: 60 * 60 * 24 * 150, // 150d
-    httpOnly: true,
-    path: "/",
-  });
-
-  redirect(`/${lang}/chat`);
+  return "Server error";
 }
