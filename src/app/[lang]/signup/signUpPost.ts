@@ -26,6 +26,7 @@ export async function signUpPostData(
       "Content-Type": "application/json",
       "X-Originating-Host": origin,
     },
+    cache: "no-store",
   });
 
   if (response.ok) {

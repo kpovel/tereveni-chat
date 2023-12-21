@@ -30,6 +30,7 @@ export async function loginPostData(
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
+    cache: "no-store",
   });
 
   if (response.status == 401) {
