@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { loginPostData } from "./loginPost";
-import { validateInput } from "../../../util/input-validation";
+import { isValidEmail, isValidPassword } from "@/util/input-validation";
 import { DictionaryReturnTypes } from "../dictionaries";
 
 export default function LoginForm({
@@ -15,18 +15,14 @@ export default function LoginForm({
   dict: Awaited<DictionaryReturnTypes["/en/login"]>;
 }) {
   const [isHiddenPassword, setIsHiddenPassword] = useState(true);
-  const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isValidLogin, setIsValidateLogin] = useState(true);
-  const [isValidPassword, setIsValidPassword] = useState(true);
-  const [isDisabledSubmit, setIsDisabledSubmit] = useState(true);
   const [loginError, setLoginError] = useState("");
+  const isDisabledSubmit = !isValidEmail(email) || !isValidPassword(password);
 
-  function setLoginHandler(e: ChangeEvent<HTMLInputElement>) {
+  function setEmailHandler(e: ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
-    const isValidLogin = validateInput(e.currentTarget.value, "email");
-    setIsValidateLogin(isValidLogin);
-    setLogin(e.currentTarget.value);
+    setEmail(e.currentTarget.value);
   }
 
   function setPassHandler(e: ChangeEvent<HTMLInputElement>) {
@@ -34,28 +30,15 @@ export default function LoginForm({
     setPassword(e.currentTarget.value);
   }
 
-  useEffect(() => {
-    setIsDisabledSubmit(true);
-
-    if (login.trim() !== "" && password.trim() !== "" && isValidLogin) {
-      setIsDisabledSubmit(false);
-    }
-  }, [login, password, isValidLogin]);
-
-  useEffect(() => {
-    setIsValidPassword(true);
-  }, [password]);
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const submitError = (await loginPostData(
-      { login, password },
+      // our backend teammate's bad decision
+      { login: email, password },
       lang,
     )) as string;
 
-    setIsValidateLogin(false);
-    setIsValidPassword(false);
     setLoginError(submitError);
   };
 
@@ -66,11 +49,13 @@ export default function LoginForm({
           <Image src="/mail.svg" alt="mail" width={20} height={20} />
         </div>
         <input
-          className={`main__input ${!isValidLogin ? "border-red-500" : null}`}
-          type="text"
+          className={`main__input ${
+            email.trim() && !isValidEmail(email) ? "border-red-500" : ""
+          }`}
+          type="email"
           placeholder={dict.emailPlaceholder}
-          value={login}
-          onChange={setLoginHandler}
+          value={email}
+          onChange={setEmailHandler}
         />
       </div>
       <div className="relative mb-1">
@@ -79,7 +64,9 @@ export default function LoginForm({
         </div>
         <input
           className={`main__input ${
-            !isValidPassword ? "border-red-500" : null
+            password.trim() && !isValidPassword(password)
+              ? "border-red-500"
+              : ""
           }`}
           type={`${isHiddenPassword ? "password" : "text"}`}
           placeholder={dict.passwordPlaceholder}
@@ -108,7 +95,7 @@ export default function LoginForm({
         type="submit"
         disabled={isDisabledSubmit}
         className={`main__btn ${
-          isDisabledSubmit ? "bg-opacity-10 text-zinc-500" : null
+          isDisabledSubmit ? "bg-opacity-10 text-zinc-500" : ""
         } mt-32 px-6 py-3`}
       >
         {dict.logIn}
