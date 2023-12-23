@@ -120,7 +120,6 @@ export default function SignUpForm({
           hint={true}
           placeholder={dict.placeholder.password}
           pass={password}
-          isValid={!password.trim() || isValidPassword(password)}
           dict={dict}
         />
         <PasswordInput
@@ -128,7 +127,6 @@ export default function SignUpForm({
           hint={false}
           placeholder={dict.placeholder.confirmPassword}
           pass={confirmPassword}
-          isValid={!confirmPassword.trim() || isValidPassword(confirmPassword)}
           dict={dict}
         />
         {password !== confirmPassword && (
