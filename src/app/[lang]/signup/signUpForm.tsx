@@ -1,11 +1,15 @@
 "use client";
 
-import { useState, useEffect, useRef, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import PasswordInput from "./passwordInput";
 import { signUpPostData } from "./signUpPost";
-import { validateInput } from "@/util/input-validation";
+import {
+  isValidEmail,
+  isValidLogin,
+  isValidPassword,
+} from "@/util/input-validation";
 import { DictionaryReturnTypes } from "../dictionaries";
 
 export default function SignUpForm({
@@ -15,77 +19,40 @@ export default function SignUpForm({
   lang: "en" | "uk";
   dict: Awaited<DictionaryReturnTypes["/en/signup"]>;
 }) {
-  const isFirstRender = useRef(true);
-
   const [isTermsChecked, setIsTermsChecked] = useState(false);
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isValidEmail, setIsValidEmail] = useState(true);
-  const [isValidLogin, setIsValidLogin] = useState(true);
-  const [isValidPassword, setIsValidPassword] = useState(true);
   const [singupError, setSignupError] = useState("");
-  const [isDisabledSubmit, setIsDisabledSubmit] = useState(true);
+  const isEnabledSubmit =
+    isValidLogin(login) &&
+    isValidEmail(email) &&
+    isValidPassword(password) &&
+    password === confirmPassword &&
+    isTermsChecked;
 
-  const termsCheckedHandler = () => {
+  function toggleTerms() {
     setIsTermsChecked(!isTermsChecked);
-  };
+  }
 
-  const setLoginHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  function setLoginHandler(e: ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
-    const isValidLogin = validateInput(e.currentTarget.value, "login");
-    setIsValidLogin(isValidLogin);
     setLogin(e.currentTarget.value);
-  };
+  }
 
-  const setEmailHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  function setEmailHandler(e: ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
-    const isValidEmail = validateInput(e.currentTarget.value, "email");
-    setIsValidEmail(isValidEmail);
     setEmail(e.currentTarget.value);
-  };
+  }
 
-  const setPassHandler = (pass: string) => {
-    const isValidPass = validateInput(pass, "password");
-    setIsValidPassword(isValidPass);
+  function setPassHandler(pass: string) {
     setPassword(pass);
-  };
+  }
 
-  const setConfirmPassHandler = (pass: string) => {
+  function setConfirmPassHandler(pass: string) {
     setConfirmPassword(pass);
-  };
-
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-
-    setIsDisabledSubmit(true);
-    if (
-      login.trim() !== "" &&
-      email.trim() !== "" &&
-      password.trim() !== "" &&
-      confirmPassword.trim() !== "" &&
-      isValidLogin &&
-      isValidEmail &&
-      isValidPassword &&
-      isTermsChecked &&
-      password === confirmPassword
-    ) {
-      setIsDisabledSubmit(false);
-    }
-  }, [
-    password,
-    confirmPassword,
-    email,
-    login,
-    isTermsChecked,
-    isValidLogin,
-    isValidEmail,
-    isValidPassword,
-  ]);
+  }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -113,7 +80,9 @@ export default function SignUpForm({
           <input
             value={login}
             onChange={setLoginHandler}
-            className={`main__input ${!isValidLogin ? "border-red-500" : null}`}
+            className={`main__input ${
+              login.trim() && !isValidLogin(login) ? "border-red-500" : ""
+            }`}
             type="text"
             placeholder={dict.placeholder.login}
           />
@@ -132,8 +101,10 @@ export default function SignUpForm({
           <input
             onChange={setEmailHandler}
             value={email}
-            className={`main__input ${!isValidEmail ? "border-red-500" : null}`}
-            type="text"
+            className={`main__input ${
+              email.trim() && !isValidEmail(email) ? "border-red-500" : ""
+            }`}
+            type="email"
             placeholder={dict.placeholder.email}
           />
         </div>
@@ -149,7 +120,7 @@ export default function SignUpForm({
           hint={true}
           placeholder={dict.placeholder.password}
           pass={password}
-          isValid={isValidPassword}
+          isValid={!password.trim() || isValidPassword(password)}
           dict={dict}
         />
         <PasswordInput
@@ -157,7 +128,7 @@ export default function SignUpForm({
           hint={false}
           placeholder={dict.placeholder.confirmPassword}
           pass={confirmPassword}
-          isValid={isValidPassword}
+          isValid={!confirmPassword.trim() || isValidPassword(confirmPassword)}
           dict={dict}
         />
         {password !== confirmPassword && (
@@ -170,7 +141,7 @@ export default function SignUpForm({
         <div className="mt-10 flex items-center text-center">
           <div
             className="flex h-[19px] w-[19px] items-center justify-center rounded border-2 border-solid border-white"
-            onClick={termsCheckedHandler}
+            onClick={toggleTerms}
           >
             {isTermsChecked && (
               <Image src="/checked.svg" alt="mail" width={12} height={12} />
@@ -192,9 +163,9 @@ export default function SignUpForm({
         <div className="my-5 text-xs text-red-500">{singupError}</div>
         <button
           type="submit"
-          disabled={isDisabledSubmit}
+          disabled={!isEnabledSubmit}
           className={`main__btn ${
-            isDisabledSubmit && "here bg-opacity-10 text-zinc-500"
+            !isEnabledSubmit && "bg-opacity-10 text-zinc-500"
           } px-6 py-3`}
         >
           {dict.nextStep}
