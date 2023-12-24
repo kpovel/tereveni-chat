@@ -9,13 +9,11 @@ export default async function SignUp({
   const dict = await getDictionary(`/${params.lang}/signup`);
 
   return (
-    <div className="container mx-auto px-6">
-      <h2 className="mt-20 text-center text-lg font-medium text-neutral-50">
+    <div className="container mx-auto flex min-h-screen max-w-md flex-col items-center gap-10 px-6 py-10">
+      <h2 className="text-center text-lg font-medium text-neutral-50">
         {dict.hiThere}
       </h2>
-      <div className="mx-auto mt-10 max-w-md">
-        <SignUpForm lang={params.lang} dict={dict} />
-      </div>
+      <SignUpForm lang={params.lang} dict={dict} />
     </div>
   );
 }

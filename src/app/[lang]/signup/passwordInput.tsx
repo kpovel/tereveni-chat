@@ -1,15 +1,13 @@
-"use client";
-
-import { useState } from "react";
+import { useState, MouseEvent, ChangeEvent } from "react";
 import Image from "next/image";
 import { DictionaryReturnTypes } from "../dictionaries";
+import { isValidPassword } from "@/util/input-validation";
 
 interface PasswordInputProps {
   placeholder: string;
   hint: boolean;
   setPassHandler: (pass: string) => void;
   pass: string;
-  isValid?: boolean;
   dict: Awaited<DictionaryReturnTypes["/en/signup"]>;
 }
 
@@ -17,36 +15,33 @@ export default function PasswordInput({
   placeholder,
   hint,
   pass,
-  isValid,
   dict,
   setPassHandler,
 }: PasswordInputProps) {
   const [isHidden, setIsHidden] = useState(true);
   const [isVisibleHint, setIsVisibleHint] = useState(false);
 
-  const hiddenPassword = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
+  function hiddenPassword(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     setIsHidden(!isHidden);
-  };
+  }
 
-  const hintHandler = () => {
+  function hintHandler() {
     if (hint) {
       setIsVisibleHint(true);
     }
-  };
+  }
 
-  const hiddenHint = () => {
+  function hiddenHint() {
     if (hint) {
       setIsVisibleHint(false);
     }
-  };
+  }
 
-  const setPass = (e: React.ChangeEvent<HTMLInputElement>) => {
+  function setPass(e: ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
     setPassHandler(e.currentTarget.value);
-  };
+  }
 
   return (
     <div>
@@ -58,7 +53,9 @@ export default function PasswordInput({
           onChange={setPass}
           onFocus={hintHandler}
           onBlur={hiddenHint}
-          className={`main__input ${!isValid ? "border-red-500" : null}`}
+          className={`main__input ${
+            !pass.trim() && isValidPassword(pass) ? "border-red-500" : ""
+          }`}
           type={`${isHidden ? "password" : "text"}`}
           placeholder={placeholder}
           value={pass}
