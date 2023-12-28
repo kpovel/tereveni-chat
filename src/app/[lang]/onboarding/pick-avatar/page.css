@@ -1,0 +1,21 @@
+/* Styling for the track */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 134px;
+    height: 4px;
+    background-color: #9D83F9;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  /* Styling for the thumb */
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background-color: #7C01F6;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  

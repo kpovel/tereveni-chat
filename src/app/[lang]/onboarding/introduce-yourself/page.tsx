@@ -12,7 +12,10 @@ export default async function IntroduceYourself({
 
   return (
     <div className="container mx-auto max-w-md px-6">
-      <h2 className="mt-20 text-center text-lg font-medium text-neutral-50 ">
+      <div className="text-right text-stone-300 text-sm font-normal mt-5">
+        <p>Step 3/4</p>
+      </div>
+      <h2 className="mt-10 text-center text-lg font-medium text-neutral-50 ">
         {dict.title}
       </h2>
       <p className="mt-5 text-center font-main text-sm font-normal leading-tight text-neutral-50">

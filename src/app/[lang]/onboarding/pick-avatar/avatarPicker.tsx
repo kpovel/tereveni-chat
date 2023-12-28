@@ -5,15 +5,20 @@ import Image from "next/image";
 import Link from "next/link";
 import AvatarEditor from "react-avatar-editor";
 import { DictionaryReturnTypes } from "../../dictionaries";
+import { avatarPost } from "./avatarPost";
+import './page.css';
 
 export default function AvatarPicker({
-  dict,
+  lang,
+  dict
 }: {
+  lang: "en" | "uk";
   dict: Awaited<DictionaryReturnTypes["/en/onboarding/pick-avatar"]>;
 }) {
   const [selectedAvatar, setSelectedAvatar] = useState(null);
-  const [customAvatar, setCustomAvatar] = useState<string | null>(null);
+  const [customAvatar, setCustomAvatar] = useState<File | null>(null);
   const [scale, setScale] = useState(1);
+  const [avatarPostError, setAvatarPostError] = useState("");
   const editorRef = useRef<AvatarEditor | null>(null);
 
   const predefinedAvatars = [
@@ -44,12 +49,7 @@ export default function AvatarPicker({
     const files = event.target.files;
     if (files && files.length > 0) {
       const file = files[0];
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setCustomAvatar(reader.result as string);
-        setSelectedAvatar(null);
-      };
-      reader.readAsDataURL(file);
+      setCustomAvatar(file)
     }
   };
 
@@ -57,10 +57,18 @@ export default function AvatarPicker({
     setScale(parseFloat(e.target.value));
   };
 
-  const handleSaveAvatar = () => {
-    if (editorRef.current) {
-      const canvas = editorRef.current.getImage();
-      console.log(canvas.toDataURL());
+  const handleSaveAvatar = async () => {
+    if (editorRef.current && customAvatar) {
+      // const canvas = editorRef.current.getImage();
+      // const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve));
+      console.log(customAvatar);
+      if (customAvatar) {
+        const formData = new FormData();
+        formData.append('image', customAvatar);
+        const error = await avatarPost(formData, lang)
+        setAvatarPostError(error);
+
+      }
     }
   };
 
@@ -73,7 +81,6 @@ export default function AvatarPicker({
         accept="image/*"
         onChange={handleAvatarChange}
       />
-
       <div className="flex justify-center">
         <div className="relative h-[200px] w-[200px]">
           <button className="absolute right-0 top-0 z-10 rounded-full">
@@ -81,6 +88,7 @@ export default function AvatarPicker({
               <Image src="/plus-1.png" width={45} height={45} alt="plus" />
             </label>
           </button>
+          
           <div className="h-[200px] w-[200px] overflow-hidden rounded-full">
             {customAvatar ? (
               <AvatarEditor
@@ -110,6 +118,17 @@ export default function AvatarPicker({
           </div>
         </div>
       </div>
+      <div className="flex justify-center mt-4 bb-4">
+      <input
+          className="avatar__scale"
+          type="range"
+          value={scale}
+          min="1"
+          max="2"
+          step="0.01"
+          onChange={handleScaleChange}
+        />
+      </div>
       <div className="mt-10 flex flex-col items-center">
         <h3 className="text-center font-main text-sm font-normal leading-tight text-neutral-50">
           {dict.pickAvatar}
@@ -131,14 +150,7 @@ export default function AvatarPicker({
       </div>
 
       <div className="mt-10 flex flex-col items-center">
-        <input
-          type="range"
-          value={scale}
-          min="1"
-          max="2"
-          step="0.01"
-          onChange={handleScaleChange}
-        />
+        
         <button className="main__btn mt-24" onClick={handleSaveAvatar}>
           <Link className="main__link" href="">
             {dict.next}
