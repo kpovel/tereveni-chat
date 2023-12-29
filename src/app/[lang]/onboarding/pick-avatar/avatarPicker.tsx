@@ -65,8 +65,22 @@ export default function AvatarPicker({
       if (customAvatar) {
         const formData = new FormData();
         formData.append('image', customAvatar);
+
+        // const res = await fetch(`http://138.68.69.149:8080/api/user/avatar/upload`, {
+        //   method: "POST",
+        //   body: formData,
+        //   headers: {
+        //       "Authorization": `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MjAsInN1YiI6ImpheG9iMjE3MzlAdWJpbmVydC5jb20iLCJpYXQiOjE3MDM4NzAwNTYsImV4cCI6MTcwMzg3OTk1Nn0.APjHcLrrb-poMXufqa6oq75ZCwmFdyZECkS9oDwqF9g`,
+        //     },
+        // });
+  
+        // if (res.ok) {
+        //   console.log(res)
+        // }
+
         const error = await avatarPost(formData, lang)
         setAvatarPostError(error);
+        console.log(error)
 
       }
     }

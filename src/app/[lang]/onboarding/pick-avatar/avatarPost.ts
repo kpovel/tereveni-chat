@@ -14,19 +14,22 @@ export async function avatarPost(
     lang: "en" | "uk",) {
 
     const accessToken = cookies().get("jwtAccessToken").value;
-    console.log(accessToken)
+
+    if(!accessToken) {
+        console.log('no access token') 
+    }
 
     const res = await fetch(`${env.SERVER_URL}/api/user/avatar/upload`, {
         method: "POST",
         body: formData,
         headers: {
-            "Authorization": `Bareer ${accessToken}`,
+            "Authorization": `Bearer ${accessToken}`,
           },
         //   cache: "no-store",
       });
 
       if (res.ok) {
-        console.log(res.body)
+        console.log(res)
         redirect(`/${lang}/onboarding/introduce-yourself`);
       }
     
