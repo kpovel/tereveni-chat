@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { DictionaryReturnTypes } from "../../dictionaries";
+import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 
 export default function Introduce({
   dict,

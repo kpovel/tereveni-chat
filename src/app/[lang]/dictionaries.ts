@@ -14,25 +14,25 @@ const dictionaries = {
   "/uk/validate-email": () =>
     import("./send-mail/uk.json").then((module) => module.default),
   "/en/onboarding/categories": () =>
-    import("./onboarding/categories/en.json").then((module) => module.default),
+    import("./(protected)/onboarding/categories/en.json").then((module) => module.default),
   "/uk/onboarding/categories": () =>
-    import("./onboarding/categories/uk.json").then((module) => module.default),
+    import("./(protected)/onboarding/categories/uk.json").then((module) => module.default),
   "/en/onboarding/final": () =>
-    import("./onboarding/final/en.json").then((module) => module.default),
+    import("./(protected)/onboarding/final/en.json").then((module) => module.default),
   "/uk/onboarding/final": () =>
-    import("./onboarding/final/uk.json").then((module) => module.default),
+    import("./(protected)/onboarding/final/uk.json").then((module) => module.default),
   "/en/onboarding/introduce-yourself": () =>
-    import("./onboarding/introduce-yourself/en.json").then(
+    import("./(protected)/onboarding/introduce-yourself/en.json").then(
       (module) => module.default,
     ),
   "/uk/onboarding/introduce-yourself": () =>
-    import("./onboarding/introduce-yourself/uk.json").then(
+    import("./(protected)/onboarding/introduce-yourself/uk.json").then(
       (module) => module.default,
     ),
   "/en/onboarding/pick-avatar": () =>
-    import("./onboarding/pick-avatar/en.json").then((module) => module.default),
+    import("./(protected)/onboarding/pick-avatar/en.json").then((module) => module.default),
   "/uk/onboarding/pick-avatar": () =>
-    import("./onboarding/pick-avatar/uk.json").then((module) => module.default),
+    import("./(protected)/onboarding/pick-avatar/uk.json").then((module) => module.default),
 };
 
 export type DictionaryReturnTypes = {

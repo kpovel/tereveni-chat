@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getDictionary } from "../../dictionaries";
+import { getDictionary } from "@/app/[lang]/dictionaries";
 import { ChooseCategories } from "./categories";
 
 export default async function OnboardingCategories({
