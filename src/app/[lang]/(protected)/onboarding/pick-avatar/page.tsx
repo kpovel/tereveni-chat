@@ -1,4 +1,4 @@
-import { getDictionary } from "../../dictionaries";
+import { getDictionary } from "@/app/[lang]/dictionaries";
 import AvatarPicker from "./avatarPicker";
 
 export default async function PickAvatar({
