@@ -6,39 +6,22 @@ import Link from "next/link";
 import AvatarEditor from "react-avatar-editor";
 import { DictionaryReturnTypes } from "../../dictionaries";
 import { avatarPost } from "./avatarPost";
-import './page.css';
+import "./page.css";
 
 export default function AvatarPicker({
   lang,
-  dict
+  dict,
+  defaultImages,
 }: {
   lang: "en" | "uk";
   dict: Awaited<DictionaryReturnTypes["/en/onboarding/pick-avatar"]>;
+  defaultImages: string[];
 }) {
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [customAvatar, setCustomAvatar] = useState<File | null>(null);
   const [scale, setScale] = useState(1);
   const [avatarPostError, setAvatarPostError] = useState("");
   const editorRef = useRef<AvatarEditor | null>(null);
-
-  const predefinedAvatars = [
-    "avatar-1.svg",
-    "avatar-2.svg",
-    "avatar-3.svg",
-    "avatar-4.svg",
-    "avatar-5.svg",
-    "avatar-6.svg",
-    "avatar-7.svg",
-    "avatar-8.svg",
-    "avatar-9.svg",
-    "avatar-10.svg",
-    "avatar-11.svg",
-    "avatar-12.svg",
-    "avatar-13.svg",
-    "avatar-14.svg",
-    "avatar-15.svg",
-    "avatar-16.svg",
-  ];
 
   const handlePredefinedAvatarClick = (avatar: any) => {
     setCustomAvatar(null);
@@ -49,7 +32,7 @@ export default function AvatarPicker({
     const files = event.target.files;
     if (files && files.length > 0) {
       const file = files[0];
-      setCustomAvatar(file)
+      setCustomAvatar(file);
     }
   };
 
@@ -59,30 +42,12 @@ export default function AvatarPicker({
 
   const handleSaveAvatar = async () => {
     if (editorRef.current && customAvatar) {
-      // const canvas = editorRef.current.getImage();
-      // const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve));
-      console.log(customAvatar);
-      if (customAvatar) {
-        const formData = new FormData();
-        formData.append('image', customAvatar);
+      const formData = new FormData();
+      formData.append("image", customAvatar);
 
-        // const res = await fetch(`http://138.68.69.149:8080/api/user/avatar/upload`, {
-        //   method: "POST",
-        //   body: formData,
-        //   headers: {
-        //       "Authorization": `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MjAsInN1YiI6ImpheG9iMjE3MzlAdWJpbmVydC5jb20iLCJpYXQiOjE3MDM4NzAwNTYsImV4cCI6MTcwMzg3OTk1Nn0.APjHcLrrb-poMXufqa6oq75ZCwmFdyZECkS9oDwqF9g`,
-        //     },
-        // });
-  
-        // if (res.ok) {
-        //   console.log(res)
-        // }
-
-        const error = await avatarPost(formData, lang)
-        setAvatarPostError(error);
-        console.log(error)
-
-      }
+      const error = await avatarPost(formData, lang);
+      setAvatarPostError(error);
+      console.log(error);
     }
   };
 
@@ -102,7 +67,7 @@ export default function AvatarPicker({
               <Image src="/plus-1.png" width={45} height={45} alt="plus" />
             </label>
           </button>
-          
+
           <div className="h-[200px] w-[200px] overflow-hidden rounded-full">
             {customAvatar ? (
               <AvatarEditor
@@ -132,8 +97,8 @@ export default function AvatarPicker({
           </div>
         </div>
       </div>
-      <div className="flex justify-center mt-4 bb-4">
-      <input
+      <div className="bb-4 mt-4 flex justify-center">
+        <input
           className="avatar__scale"
           type="range"
           value={scale}
@@ -148,11 +113,10 @@ export default function AvatarPicker({
           {dict.pickAvatar}
         </h3>
         <div className="mt-10 grid grid-cols-4 justify-center gap-4 md:max-w-md md:grid-cols-6">
-          {predefinedAvatars.map((avatar, id) => (
-            <div key={id} className={``}>
+          {defaultImages.map((avatar) => (
+            <div key={avatar}>
               <Image
-                key={avatar}
-                src={`/${avatar}`}
+                src={avatar}
                 alt={`Avatar ${avatar}`}
                 width={60}
                 height={60}
@@ -164,7 +128,6 @@ export default function AvatarPicker({
       </div>
 
       <div className="mt-10 flex flex-col items-center">
-        
         <button className="main__btn mt-24" onClick={handleSaveAvatar}>
           <Link className="main__link" href="">
             {dict.next}
