@@ -22,6 +22,7 @@ export default function AvatarPicker({
   const [scale, setScale] = useState(1);
   const [avatarPostError, setAvatarPostError] = useState("");
   const editorRef = useRef<AvatarEditor | null>(null);
+  const [uploadError, setUploadError] = useState(false);
 
   const handlePredefinedAvatarClick = (avatar: any) => {
     setCustomAvatar(null);
@@ -29,10 +30,17 @@ export default function AvatarPicker({
   };
 
   const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files && files.length > 0) {
-      const file = files[0];
+    const fileInput = event.target;
+    const file = fileInput.files?.[0];
+
+    const maxSizeInBytes = 3 * 1024 * 1024;
+
+    if (file && file.size < maxSizeInBytes) {
       setCustomAvatar(file);
+      setUploadError(false);
+    } else {
+      fileInput.value = "";
+      setUploadError(true);
     }
   };
 
@@ -97,6 +105,11 @@ export default function AvatarPicker({
           </div>
         </div>
       </div>
+      {uploadError && (
+        <div className="mt-4 text-center text-xs font-normal text-red-500">
+          <span>File size must be less than 3mb</span>
+        </div>
+      )}
       <div className="bb-4 mt-4 flex justify-center">
         <input
           className="avatar__scale"

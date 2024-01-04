@@ -24,7 +24,11 @@ export default async function PickAvatar({
       <p className="mt-5 text-center font-main text-sm font-normal leading-tight text-neutral-50">
         {dict.subtitle}
       </p>
-      <AvatarPicker lang={params.lang} dict={dict} defaultImages={defaultImages} />
+      <AvatarPicker
+        lang={params.lang}
+        dict={dict}
+        defaultImages={defaultImages}
+      />
     </div>
   );
 }
@@ -41,7 +45,7 @@ async function fetchDefaultImages() {
     },
   });
 
-  const json = await res.json() as string[];
+  const json = (await res.json()) as string[];
 
   return json.map((img) => `/api/user-image/${img}`);
 }

@@ -7,7 +7,7 @@ import { IntroducePost } from "./introducePost";
 
 export default function Introduce({
   lang,
-  dict
+  dict,
 }: {
   lang: "en" | "uk";
   dict: Awaited<DictionaryReturnTypes["/en/onboarding/introduce-yourself"]>;
@@ -29,8 +29,8 @@ export default function Introduce({
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    await IntroducePost(introduce, lang)
-  }
+    await IntroducePost(introduce, lang);
+  };
 
   return (
     <div className="mt-10">

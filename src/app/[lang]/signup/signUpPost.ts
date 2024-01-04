@@ -10,8 +10,8 @@ interface SignUpDataInterface {
 }
 
 type SignUpResponseError = {
-  fieldName: string
-  fieldMessage: string
+  fieldName: string;
+  fieldMessage: string;
 };
 
 export async function signUpPostData(
@@ -33,7 +33,7 @@ export async function signUpPostData(
     redirect(`/${lang}/send-mail`);
   }
 
-  const body = await response.json() as SignUpResponseError;
+  const body = (await response.json()) as SignUpResponseError;
 
   return body.fieldMessage;
 }

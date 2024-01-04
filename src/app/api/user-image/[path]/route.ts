@@ -13,11 +13,11 @@ export async function GET(
     redirect("/en");
   }
 
-   const res = await fetch(`${env.SERVER_URL}/api/user-image/${params.path}`, {
-     headers: {
-       Authorization: `Bearer ${jwtAccess.value}`
-     }
-   });
+  const res = await fetch(`${env.SERVER_URL}/api/user-image/${params.path}`, {
+    headers: {
+      Authorization: `Bearer ${jwtAccess.value}`,
+    },
+  });
 
-   return new Response(res.body);
+  return new Response(res.body);
 }

@@ -1,40 +1,40 @@
-'use server';
+"use server";
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { env } from "@/env.mjs";
 
 type SignUpResponseError = {
-    fieldName: string
-    fieldMessage: string
-  };
+  fieldName: string;
+  fieldMessage: string;
+};
 
-export async function IntroducePost(
-    introduce: string,
-    lang: "en" | "uk"
-) {
-    const accessToken = cookies().get("jwtAccessToken").value;
+export async function IntroducePost(introduce: string, lang: "en" | "uk") {
+  const accessToken = cookies().get("jwtAccessToken").value;
 
-    if(!accessToken) {
-        console.log('no access token') 
-    }
+  if (!accessToken) {
+    console.log("no access token");
+  }
 
-    const res = await fetch(`${env.SERVER_URL}/api/user/user-about-with-onboarding/save`, {
-        method: "PUT",
-        body: JSON.stringify({'onboardingFieldStr':introduce}),
-        headers: {
-            "Authorization": `Bearer ${accessToken}`,
-            "Content-Type": "application/json"
-          }
-      });   
+  const res = await fetch(
+    `${env.SERVER_URL}/api/user/user-about-with-onboarding/save`,
+    {
+      method: "PUT",
+      body: JSON.stringify({ onboardingFieldStr: introduce }),
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    },
+  );
 
-      console.log(res)
+  console.log(res);
 
-      if (res.ok) {
-        redirect("/en");
-      }
-    
-      const body = await res.json() as SignUpResponseError;
-    
-      return body.fieldMessage;
+  if (res.ok) {
+    redirect("/en");
+  }
+
+  const body = (await res.json()) as SignUpResponseError;
+
+  return body.fieldMessage;
 }

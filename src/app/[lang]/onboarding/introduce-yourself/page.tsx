@@ -12,7 +12,7 @@ export default async function IntroduceYourself({
 
   return (
     <div className="container mx-auto max-w-md px-6">
-      <div className="text-right text-stone-300 text-sm font-normal mt-5">
+      <div className="mt-5 text-right text-sm font-normal text-stone-300">
         <p>Step 3/4</p>
       </div>
       <h2 className="mt-10 text-center text-lg font-medium text-neutral-50 ">
