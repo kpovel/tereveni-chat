@@ -29,19 +29,7 @@ export default function Introduce({
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const data = {
-      'onboardingFieldStr': introduce
-    }
-    await IntroducePost(data, lang)
-    // const res = await fetch(`http://138.68.69.149:8080/api/user/user-about-with-onboarding/save`, {
-    //   method: "POST",
-    //   body: introduce,
-    //   headers: {
-    //       "Authorization": `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MzcsInN1YiI6InJhaGFkaTQwNzRAdWJpbmVydC5jb20iLCJpYXQiOjE3MDQyOTUzMjAsImV4cCI6MTcwNDMwNTIyMH0.qRlazO-_cne7INpr9x4o2KL0ktt_uVcU8V8MN4oy_4w`,
-    //     }
-    // });
-
-    // console.log(res)
+    await IntroducePost(introduce, lang)
   }
 
   return (

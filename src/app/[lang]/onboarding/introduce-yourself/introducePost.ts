@@ -10,7 +10,7 @@ type SignUpResponseError = {
   };
 
 export async function IntroducePost(
-    introduce: any,
+    introduce: string,
     lang: "en" | "uk"
 ) {
     const accessToken = cookies().get("jwtAccessToken").value;
@@ -21,17 +21,17 @@ export async function IntroducePost(
 
     const res = await fetch(`${env.SERVER_URL}/api/user/user-about-with-onboarding/save`, {
         method: "PUT",
-        body: JSON.stringify(introduce),
+        body: JSON.stringify({'onboardingFieldStr':introduce}),
         headers: {
-            "Authorization": `Bearer ${accessToken}`
+            "Authorization": `Bearer ${accessToken}`,
+            "Content-Type": "application/json"
           }
       });   
 
       console.log(res)
 
       if (res.ok) {
-        console.log(res)
-        alert(res)
+        redirect("/en");
       }
     
       const body = await res.json() as SignUpResponseError;
