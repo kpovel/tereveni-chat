@@ -1,4 +1,4 @@
-"use server"
+'use server';
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -9,32 +9,32 @@ type SignUpResponseError = {
     fieldMessage: string
   };
 
-export async function avatarPost(
-    formData: FormData,
-    lang: "en" | "uk",) {
-
+export async function IntroducePost(
+    introduce: any,
+    lang: "en" | "uk"
+) {
     const accessToken = cookies().get("jwtAccessToken").value;
 
     if(!accessToken) {
         console.log('no access token') 
     }
 
-    const res = await fetch(`${env.SERVER_URL}/api/user/avatar/upload`, {
-        method: "POST",
-        body: formData,
+    const res = await fetch(`${env.SERVER_URL}/api/user/user-about-with-onboarding/save`, {
+        method: "PUT",
+        body: JSON.stringify(introduce),
         headers: {
-            "Authorization": `Bearer ${accessToken}`,
-          },
-      });
+            "Authorization": `Bearer ${accessToken}`
+          }
+      });   
+
+      console.log(res)
 
       if (res.ok) {
         console.log(res)
-        redirect(`/${lang}/onboarding/introduce-yourself`);
+        alert(res)
       }
     
-      const body = await res.text() as SignUpResponseError;
-
-      console.log(body)
+      const body = await res.json() as SignUpResponseError;
     
       return body.fieldMessage;
 }

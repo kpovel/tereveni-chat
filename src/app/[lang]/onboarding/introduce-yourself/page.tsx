@@ -21,7 +21,7 @@ export default async function IntroduceYourself({
       <p className="mt-5 text-center font-main text-sm font-normal leading-tight text-neutral-50">
         {dict.subtitle}
       </p>
-      <Introduce dict={dict} />
+      <Introduce lang={params.lang} dict={dict} />
     </div>
   );
 }
