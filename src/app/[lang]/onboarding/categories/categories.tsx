@@ -2,40 +2,10 @@
 
 import { useState } from "react";
 import { Category } from "./category";
+import { Hashtag } from "./onboardingHashtags";
 
-// todo: fetch categories from out main backend
-const initialCategories = [
-  {
-    categoryName: "Entertainment",
-    hashtags: [
-      { name: "anime", id: 1 },
-      { name: "comics", id: 2 },
-      { name: "languages", id: 3 },
-      { name: "influensers", id: 4 },
-      { name: "memes", id: 5 },
-      { name: "movies", id: 6 },
-      { name: "music", id: 7 },
-      { name: "videogames", id: 8 },
-    ],
-  },
-  {
-    categoryName: "Lifestyle & hobbies",
-    hashtags: [
-      { name: "animals", id: 9 },
-      { name: "beauty", id: 10 },
-      { name: "fashion", id: 11 },
-      { name: "hobbies", id: 12 },
-      { name: "lifestyle", id: 13 },
-      { name: "nature", id: 14 },
-      { name: "plants", id: 15 },
-      { name: "sport", id: 16 },
-      { name: "subcultures", id: 17 },
-    ],
-  },
-];
-
-export function ChooseCategories() {
-  const mappedCategories = initialCategories.map((c) => ({
+export function ChooseCategories({ hashtags }: { hashtags: Hashtag[] }) {
+  const mappedCategories = hashtags.map((c) => ({
     ...c,
     hashtags: c.hashtags.map((h) => ({ ...h, checked: false })),
   }));
@@ -65,8 +35,8 @@ export function ChooseCategories() {
       {categories.map((category) => {
         return (
           <Category
-            key={category.categoryName}
-            categoryName="Entertainment"
+            key={category.name}
+            categoryName={category.name}
             hashtags={category.hashtags}
             toggleHashtag={toggleHashtag}
           />
