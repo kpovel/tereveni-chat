@@ -9,21 +9,37 @@ type SignUpResponseError = {
   fieldMessage: string;
 };
 
-export async function avatarPost(formData: FormData, lang: "en" | "uk") {
+export async function avatarPost(
+  url: string,
+  formData: FormData | Record<string, unknown>,
+  lang: "en" | "uk",
+  method: string,
+) {
   const accessToken = cookies().get("jwtAccessToken");
 
   if (!accessToken) {
-    redirect("/en");
+    redirect(`/en`);
   }
 
-  const res = await fetch(`${env.SERVER_URL}/api/user/avatar/upload`, {
-    method: "POST",
-    body: formData,
+  const requestOptions: RequestInit = {
+    method,
     headers: {
       Authorization: `Bearer ${accessToken.value}`,
     },
     cache: "no-store",
-  });
+  };
+
+  if (method === "POST" || method === "PUT") {
+    if (formData instanceof FormData) {
+      requestOptions.body = formData;
+    } else {
+      requestOptions.body = JSON.stringify(formData);
+      (requestOptions.headers as Record<string, string>)["Content-Type"] =
+        "application/json";
+    }
+  }
+
+  const res = await fetch(`${env.SERVER_URL}${url}`, requestOptions);
 
   if (res.ok) {
     console.log(res);

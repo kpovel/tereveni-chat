@@ -6,6 +6,8 @@ import Link from "next/link";
 import AvatarEditor from "react-avatar-editor";
 import { DictionaryReturnTypes } from "../../dictionaries";
 import { avatarPost } from "./avatarPost";
+import { customAvatarPost } from "./customAvatarPost";
+import { env } from "@/env.mjs";
 import "./page.css";
 
 export default function AvatarPicker({
@@ -17,15 +19,23 @@ export default function AvatarPicker({
   dict: Awaited<DictionaryReturnTypes["/en/onboarding/pick-avatar"]>;
   defaultImages: string[];
 }) {
+  const AVATAR_POST_ROUTE = "/api/user/avatar/upload";
+  const DEFAULT_AVATAR_POST_ROUTE =
+    "/api/user/default-avatar-with-onboarding/save";
+
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [customAvatar, setCustomAvatar] = useState<File | null>(null);
   const [scale, setScale] = useState(1);
   const [avatarPostError, setAvatarPostError] = useState("");
   const editorRef = useRef<AvatarEditor | null>(null);
   const [uploadError, setUploadError] = useState(false);
+  const [customAvatarData, setCustomAvatarData] = useState("");
 
   const handlePredefinedAvatarClick = (avatar: any) => {
+    const selectedCustomAvatar = avatar.replace("api/user-image/", "");
     setCustomAvatar(null);
+    setCustomAvatarData(selectedCustomAvatar);
+    console.log(customAvatarData);
     setSelectedAvatar(avatar);
   };
 
@@ -36,6 +46,7 @@ export default function AvatarPicker({
     const maxSizeInBytes = 3 * 1024 * 1024;
 
     if (file && file.size < maxSizeInBytes) {
+      setCustomAvatarData("");
       setCustomAvatar(file);
       setUploadError(false);
     } else {
@@ -49,13 +60,22 @@ export default function AvatarPicker({
   };
 
   const handleSaveAvatar = async () => {
-    if (editorRef.current && customAvatar) {
+    if (customAvatar) {
       const formData = new FormData();
       formData.append("image", customAvatar);
 
-      const error = await avatarPost(formData, lang);
+      const error = await avatarPost(AVATAR_POST_ROUTE, formData, lang, "POST");
       setAvatarPostError(error);
       console.log(error);
+    } else if (customAvatarData && customAvatarData != "") {
+      const customError = await avatarPost(
+        DEFAULT_AVATAR_POST_ROUTE,
+        { onboardingFieldStr: customAvatarData, onboardingEnd: true },
+        lang,
+        "PUT",
+      );
+      setAvatarPostError(customError);
+      console.log(`CustomError - ${customError}`);
     }
   };
 
@@ -126,7 +146,7 @@ export default function AvatarPicker({
           {dict.pickAvatar}
         </h3>
         <div className="mt-10 grid grid-cols-4 justify-center gap-4 md:max-w-md md:grid-cols-6">
-          {defaultImages.map((avatar) => (
+          {/* {defaultImages.map((avatar) => (
             <div key={avatar}>
               <Image
                 src={avatar}
@@ -136,7 +156,22 @@ export default function AvatarPicker({
                 onClick={() => handlePredefinedAvatarClick(avatar)}
               />
             </div>
-          ))}
+          ))} */}
+          {defaultImages.map((avatar) => {
+            const avatarSrc = avatar.substring(1);
+
+            return (
+              <div key={avatar}>
+                <Image
+                  src={avatar}
+                  alt={`Avatar ${avatar}`}
+                  width={60}
+                  height={60}
+                  onClick={() => handlePredefinedAvatarClick(avatarSrc)}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
 
