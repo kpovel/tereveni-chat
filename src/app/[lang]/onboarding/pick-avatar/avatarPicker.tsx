@@ -6,7 +6,6 @@ import Link from "next/link";
 import AvatarEditor from "react-avatar-editor";
 import { DictionaryReturnTypes } from "../../dictionaries";
 import { avatarPost } from "./avatarPost";
-import { customAvatarPost } from "./customAvatarPost";
 import { env } from "@/env.mjs";
 import "./page.css";
 

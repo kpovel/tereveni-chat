@@ -10,11 +10,13 @@ type SignUpResponseError = {
 };
 
 export async function IntroducePost(introduce: string, lang: "en" | "uk") {
-  const accessToken = cookies().get("jwtAccessToken").value;
+  const jwtAccessTokenCookie = cookies().get("jwtAccessToken");
 
-  if (!accessToken) {
+  if (!jwtAccessTokenCookie) {
     console.log("no access token");
   }
+
+  const accessToken = jwtAccessTokenCookie!.value;
 
   const res = await fetch(
     `${env.SERVER_URL}/api/user/user-about-with-onboarding/save`,
