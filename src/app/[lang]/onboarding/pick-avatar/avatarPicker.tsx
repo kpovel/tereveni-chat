@@ -6,7 +6,6 @@ import Link from "next/link";
 import AvatarEditor from "react-avatar-editor";
 import { DictionaryReturnTypes } from "../../dictionaries";
 import { avatarPost } from "./avatarPost";
-import { env } from "@/env.mjs";
 import "./page.css";
 
 export default function AvatarPicker({
@@ -145,17 +144,6 @@ export default function AvatarPicker({
           {dict.pickAvatar}
         </h3>
         <div className="mt-10 grid grid-cols-4 justify-center gap-4 md:max-w-md md:grid-cols-6">
-          {/* {defaultImages.map((avatar) => (
-            <div key={avatar}>
-              <Image
-                src={avatar}
-                alt={`Avatar ${avatar}`}
-                width={60}
-                height={60}
-                onClick={() => handlePredefinedAvatarClick(avatar)}
-              />
-            </div>
-          ))} */}
           {defaultImages.map((avatar) => {
             const avatarSrc = avatar.substring(1);
 
@@ -175,15 +163,16 @@ export default function AvatarPicker({
       </div>
 
       <div className="mt-10 flex flex-col items-center">
-        <button className="main__btn mt-24" onClick={handleSaveAvatar}>
-          <Link className="main__link" href="">
-            {dict.next}
-          </Link>
+        <button
+          className="main__btn main__link mt-24"
+          onClick={handleSaveAvatar}
+        >
+          {dict.next}
         </button>
         <button className="mt-5 w-full border-none bg-transparent outline-none">
           <Link
             className="text-center font-main text-sm font-normal leading-tight text-stone-300"
-            href=""
+            href={`/${lang}/onboarding/introduce-yourself`}
           >
             {dict.skip}
           </Link>
