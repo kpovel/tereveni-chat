@@ -124,7 +124,7 @@ export default function AvatarPicker({
         </div>
       </div>
       {uploadError && (
-        <div className="mt-4 text-center text-xs font-normal text-red-500">
+        <div className="mt-4 text-center text-sm font-normal text-red-500">
           <span>File size must be less than 3mb</span>
         </div>
       )}
