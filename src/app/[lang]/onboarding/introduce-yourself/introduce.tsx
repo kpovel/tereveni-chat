@@ -13,18 +13,18 @@ export default function Introduce({
   dict: Awaited<DictionaryReturnTypes["/en/onboarding/introduce-yourself"]>;
 }) {
   const [introduce, setIntroduce] = useState("");
-  const [isEnabledNext, setIsEnabledNext] = useState(false)
+  const [isEnabledNext, setIsEnabledNext] = useState(false);
   const [textLength, setTextLength] = useState(0);
 
   const maxCharacters = 300;
 
   const handleText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if(introduce === ""){
-      setIsEnabledNext(false)
+    if (introduce === "") {
+      setIsEnabledNext(false);
     }
-    const textValue = e.currentTarget.value.slice(0, maxCharacters - 1)
+    const textValue = e.currentTarget.value.slice(0, maxCharacters - 1);
     setTextLength(e.currentTarget.value.length);
-    setIsEnabledNext(true)
+    setIsEnabledNext(true);
     setIntroduce(textValue);
   };
 
@@ -50,11 +50,14 @@ export default function Introduce({
             {textLength} / {maxCharacters}
           </span>
         </div>
-        <button 
-          disabled={introduce.trim() === ''}
-          onClick={handleSubmit} 
-          className={`main__btn main__link mt-24 ${introduce.trim() === '' && "bg-opacity-10 text-zinc-500"}`}>
-            {dict.nextStep}
+        <button
+          disabled={introduce.trim() === ""}
+          onClick={handleSubmit}
+          className={`main__btn main__link mt-24 ${
+            introduce.trim() === "" && "bg-opacity-10 text-zinc-500"
+          }`}
+        >
+          {dict.nextStep}
         </button>
       </form>
 

@@ -25,18 +25,18 @@ export default function AvatarPicker({
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [customAvatar, setCustomAvatar] = useState<File | null>(null);
   const [scale, setScale] = useState(1);
-  const [isEnabledNext, setIsEnabledNext] = useState(false)
+  const [isEnabledNext, setIsEnabledNext] = useState(false);
   const [avatarPostError, setAvatarPostError] = useState("");
   const editorRef = useRef<AvatarEditor | null>(null);
   const [uploadError, setUploadError] = useState(false);
   const [customAvatarData, setCustomAvatarData] = useState("");
 
   const handlePredefinedAvatarClick = (avatar: any) => {
-    setIsEnabledNext(false)
+    setIsEnabledNext(false);
     const selectedCustomAvatar = avatar.replace("api/user-image/", "");
     setCustomAvatar(null);
     setCustomAvatarData(selectedCustomAvatar);
-    setIsEnabledNext(true)
+    setIsEnabledNext(true);
     console.log(customAvatarData);
     setSelectedAvatar(avatar);
   };
@@ -50,7 +50,7 @@ export default function AvatarPicker({
     if (file && file.size < maxSizeInBytes) {
       setCustomAvatarData("");
       setCustomAvatar(file);
-      setIsEnabledNext(true)
+      setIsEnabledNext(true);
       setUploadError(false);
     } else {
       fileInput.value = "";
@@ -99,7 +99,11 @@ export default function AvatarPicker({
             </label>
           </button>
 
-          <div className={`h-[200px] w-[200px] overflow-hidden rounded-full ${uploadError && 'border border-red-500'}`}>
+          <div
+            className={`h-[200px] w-[200px] overflow-hidden rounded-full ${
+              uploadError && "border border-red-500"
+            }`}
+          >
             {customAvatar ? (
               <AvatarEditor
                 className="-translate-x-7 -translate-y-7"
@@ -129,26 +133,30 @@ export default function AvatarPicker({
         </div>
       </div>
       {uploadError && (
-        <div className="mt-4 text-center text-red-500 text-sm font-normal">
-          <span>Image size exceeds limit <br/> Please upload a photo under 3 MB</span>
+        <div className="mt-4 text-center text-sm font-normal text-red-500">
+          <span>
+            Image size exceeds limit <br /> Please upload a photo under 3 MB
+          </span>
         </div>
       )}
-      {avatarPostError && <div className="mt-4 text-center text-red-500 text-sm font-normal">
+      {avatarPostError && (
+        <div className="mt-4 text-center text-sm font-normal text-red-500">
           <span>{avatarPostError}</span>
-        </div>}
-      {
-        customAvatar && <div className="mb-4 mt-4 flex justify-center">
-        <input
-          className="avatar__scale"
-          type="range"
-          value={scale}
-          min="1"
-          max="2"
-          step="0.01"
-          onChange={handleScaleChange}
-        />
-      </div>
-      }
+        </div>
+      )}
+      {customAvatar && (
+        <div className="mb-4 mt-4 flex justify-center">
+          <input
+            className="avatar__scale"
+            type="range"
+            value={scale}
+            min="1"
+            max="2"
+            step="0.01"
+            onChange={handleScaleChange}
+          />
+        </div>
+      )}
       <div className="mt-10 flex flex-col items-center">
         <h3 className="text-center font-main text-sm font-normal leading-tight text-neutral-50">
           {dict.pickAvatar}
@@ -184,14 +192,16 @@ export default function AvatarPicker({
       </div>
 
       <div className="mt-10 flex flex-col items-center">
-        <button 
-          className={`main__btn main__link mt-24 cursor-pointer ${!isEnabledNext && "bg-opacity-10 text-zinc-500"}`} 
+        <button
+          className={`main__btn main__link mt-24 cursor-pointer ${
+            !isEnabledNext && "bg-opacity-10 text-zinc-500"
+          }`}
           onClick={handleSaveAvatar}
           disabled={!isEnabledNext}
-          >
-            {dict.next}
+        >
+          {dict.next}
         </button>
-        <button className="mt-5 w-full border-none bg-transparent outline-none text-center font-main text-sm font-normal leading-tight text-stone-300">
+        <button className="mt-5 w-full border-none bg-transparent text-center font-main text-sm font-normal leading-tight text-stone-300 outline-none">
           <Link href={`/${lang}/onboarding/introduce-yourself`}>
             {dict.skip}
           </Link>
