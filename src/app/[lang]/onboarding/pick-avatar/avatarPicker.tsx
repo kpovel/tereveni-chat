@@ -6,7 +6,6 @@ import Link from "next/link";
 import AvatarEditor from "react-avatar-editor";
 import { DictionaryReturnTypes } from "../../dictionaries";
 import { avatarPost } from "./avatarPost";
-import { env } from "@/env.mjs";
 import "./page.css";
 
 export default function AvatarPicker({
@@ -134,6 +133,7 @@ export default function AvatarPicker({
       </div>
       {uploadError && (
         <div className="mt-4 text-center text-sm font-normal text-red-500">
+<<<<<<< HEAD
           <span>
             Image size exceeds limit <br /> Please upload a photo under 3 MB
           </span>
@@ -155,6 +155,9 @@ export default function AvatarPicker({
             step="0.01"
             onChange={handleScaleChange}
           />
+=======
+          <span>File size must be less than 3mb</span>
+>>>>>>> 4b1ad2b08cc4fb547da432ed518afbeafba826df
         </div>
       )}
       <div className="mt-10 flex flex-col items-center">
@@ -162,17 +165,6 @@ export default function AvatarPicker({
           {dict.pickAvatar}
         </h3>
         <div className="mt-10 grid grid-cols-4 justify-center gap-4 md:max-w-md md:grid-cols-6">
-          {/* {defaultImages.map((avatar) => (
-            <div key={avatar}>
-              <Image
-                src={avatar}
-                alt={`Avatar ${avatar}`}
-                width={60}
-                height={60}
-                onClick={() => handlePredefinedAvatarClick(avatar)}
-              />
-            </div>
-          ))} */}
           {defaultImages.map((avatar) => {
             const avatarSrc = avatar.substring(1);
 
@@ -193,6 +185,7 @@ export default function AvatarPicker({
 
       <div className="mt-10 flex flex-col items-center">
         <button
+<<<<<<< HEAD
           className={`main__btn main__link mt-24 cursor-pointer ${
             !isEnabledNext && "bg-opacity-10 text-zinc-500"
           }`}
@@ -203,6 +196,18 @@ export default function AvatarPicker({
         </button>
         <button className="mt-5 w-full border-none bg-transparent text-center font-main text-sm font-normal leading-tight text-stone-300 outline-none">
           <Link href={`/${lang}/onboarding/introduce-yourself`}>
+=======
+          className="main__btn main__link mt-24"
+          onClick={handleSaveAvatar}
+        >
+          {dict.next}
+        </button>
+        <button className="mt-5 w-full border-none bg-transparent outline-none">
+          <Link
+            className="text-center font-main text-sm font-normal leading-tight text-stone-300"
+            href={`/${lang}/onboarding/introduce-yourself`}
+          >
+>>>>>>> 4b1ad2b08cc4fb547da432ed518afbeafba826df
             {dict.skip}
           </Link>
         </button>
