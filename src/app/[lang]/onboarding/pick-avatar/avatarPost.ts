@@ -42,7 +42,6 @@ export async function avatarPost(
   const res = await fetch(`${env.SERVER_URL}${url}`, requestOptions);
 
   if (res.ok) {
-    console.log(res);
     redirect(`/${lang}/onboarding/introduce-yourself`);
   }
 

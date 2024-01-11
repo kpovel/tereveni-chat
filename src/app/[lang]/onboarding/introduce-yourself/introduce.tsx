@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, FormEvent } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { DictionaryReturnTypes } from "../../dictionaries";
 import { IntroducePost } from "./introducePost";
@@ -13,18 +13,19 @@ export default function Introduce({
   dict: Awaited<DictionaryReturnTypes["/en/onboarding/introduce-yourself"]>;
 }) {
   const [introduce, setIntroduce] = useState("");
+  const [isEnabledNext, setIsEnabledNext] = useState(false)
   const [textLength, setTextLength] = useState(0);
 
   const maxCharacters = 300;
 
-  useEffect(() => {
-    setTextLength(introduce.length);
-  }, [introduce]);
-
   const handleText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (e.currentTarget.value.length <= maxCharacters) {
-      setIntroduce(e.currentTarget.value);
+    if(introduce === ""){
+      setIsEnabledNext(false)
     }
+    const textValue = e.currentTarget.value.slice(0, maxCharacters - 1)
+    setTextLength(e.currentTarget.value.length);
+    setIsEnabledNext(true)
+    setIntroduce(textValue);
   };
 
   const handleSubmit = async (e: any) => {
@@ -37,7 +38,7 @@ export default function Introduce({
       <form>
         <textarea
           value={introduce}
-          max-length="300"
+          max-length={maxCharacters}
           onChange={handleText}
           className="inline-flex h-[192px] w-full items-center justify-center rounded-3xl border border-neutral-700 bg-stone-900 px-5 py-3 font-main text-sm font-normal leading-tight text-neutral-50 outline-none focus:border-violet-700"
           name="introduce"
@@ -46,13 +47,14 @@ export default function Introduce({
         ></textarea>
         <div className="-mt-2 px-2 text-right">
           <span className="font-main text-xs font-normal leading-none text-stone-300">
-            {textLength} / 300
+            {textLength} / {maxCharacters}
           </span>
         </div>
-        <button onClick={handleSubmit} className="main__btn mt-24">
-          <Link className="main__link" href="">
+        <button 
+          disabled={introduce.trim() === ''}
+          onClick={handleSubmit} 
+          className={`main__btn main__link mt-24 ${introduce.trim() === '' && "bg-opacity-10 text-zinc-500"}`}>
             {dict.nextStep}
-          </Link>
         </button>
       </form>
 

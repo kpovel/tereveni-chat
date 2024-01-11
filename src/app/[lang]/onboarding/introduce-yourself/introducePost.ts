@@ -13,7 +13,7 @@ export async function IntroducePost(introduce: string, lang: "en" | "uk") {
   const jwtAccessTokenCookie = cookies().get("jwtAccessToken");
 
   if (!jwtAccessTokenCookie) {
-    console.log("no access token");
+    redirect("/en");
   }
 
   const accessToken = jwtAccessTokenCookie!.value;
@@ -30,10 +30,8 @@ export async function IntroducePost(introduce: string, lang: "en" | "uk") {
     },
   );
 
-  console.log(res);
-
   if (res.ok) {
-    redirect("/en");
+    redirect(`/${lang}/onboarding/categories`);
   }
 
   const body = (await res.json()) as SignUpResponseError;
