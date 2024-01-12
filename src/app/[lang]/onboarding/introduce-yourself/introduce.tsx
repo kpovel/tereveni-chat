@@ -13,18 +13,11 @@ export default function Introduce({
   dict: Awaited<DictionaryReturnTypes["/en/onboarding/introduce-yourself"]>;
 }) {
   const [introduce, setIntroduce] = useState("");
-  const [isEnabledNext, setIsEnabledNext] = useState(false);
-  const [textLength, setTextLength] = useState(0);
 
   const maxCharacters = 300;
 
   const handleText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (introduce === "") {
-      setIsEnabledNext(false);
-    }
     const textValue = e.currentTarget.value.slice(0, maxCharacters - 1);
-    setTextLength(e.currentTarget.value.length);
-    setIsEnabledNext(true);
     setIntroduce(textValue);
   };
 
@@ -47,7 +40,7 @@ export default function Introduce({
         ></textarea>
         <div className="-mt-2 px-2 text-right">
           <span className="font-main text-xs font-normal leading-none text-stone-300">
-            {textLength} / {maxCharacters}
+            {introduce.length} / {maxCharacters}
           </span>
         </div>
         <button
