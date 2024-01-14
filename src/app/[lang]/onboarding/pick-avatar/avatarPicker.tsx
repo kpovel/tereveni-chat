@@ -6,6 +6,7 @@ import Link from "next/link";
 import AvatarEditor from "react-avatar-editor";
 import { DictionaryReturnTypes } from "../../dictionaries";
 import { avatarPost } from "./avatarPost";
+import { defaultAvatarPut } from "./defaultAvataPut";
 import "./page.css";
 
 export default function AvatarPicker({
@@ -17,10 +18,6 @@ export default function AvatarPicker({
   dict: Awaited<DictionaryReturnTypes["/en/onboarding/pick-avatar"]>;
   defaultImages: string[];
 }) {
-  const AVATAR_POST_ROUTE = "/api/user/avatar/upload";
-  const DEFAULT_AVATAR_POST_ROUTE =
-    "/api/user/default-avatar-with-onboarding/save";
-
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [customAvatar, setCustomAvatar] = useState<File | null>(null);
   const [scale, setScale] = useState(1);
@@ -65,17 +62,10 @@ export default function AvatarPicker({
     if (customAvatar) {
       const formData = new FormData();
       formData.append("image", customAvatar);
-
-      const error = await avatarPost(AVATAR_POST_ROUTE, formData, lang, "POST");
+      const error = await avatarPost(formData, lang);
       setAvatarPostError(error);
-      console.log(error);
     } else if (customAvatarData && customAvatarData != "") {
-      const customError = await avatarPost(
-        DEFAULT_AVATAR_POST_ROUTE,
-        { onboardingFieldStr: customAvatarData, onboardingEnd: true },
-        lang,
-        "PUT",
-      );
+      const customError = await defaultAvatarPut(customAvatarData, lang);
       setAvatarPostError(customError);
       console.log(`CustomError - ${customError}`);
     }

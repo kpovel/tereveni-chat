@@ -10,7 +10,7 @@
 }
 @layer components {
   .gradient__bg {
-    @apply absolute w-96 h-96 -z-10  -rotate-180 opacity-20 bg-gradient-to-b from-violet-700 to-violet-700 rounded-full blur-3xl;
+    @apply absolute -z-10 h-96 w-96  -rotate-180 rounded-full bg-gradient-to-b from-violet-700 to-violet-700 opacity-20 blur-3xl;
   }
   .main__btn {
     @apply w-full max-w-md rounded-full bg-violet-700 font-main text-sm font-normal leading-tight text-neutral-50;
