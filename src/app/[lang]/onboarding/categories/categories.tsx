@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, MouseEvent } from "react";
 import { Category } from "./category";
 import { Hashtag } from "./onboardingHashtags";
 import Link from "next/link";
@@ -41,6 +41,19 @@ export function ChooseCategories({
     );
   }
 
+  function handleSubmitCategories(e: MouseEvent) {
+    e.preventDefault();
+    const checkedCategories = categories.flatMap((c) => {
+      return c.hashtags
+        .filter((h) => h.checked)
+        .map((h) => ({
+          id: h.id,
+        }));
+    });
+
+    submitCategories(lang, checkedCategories);
+  }
+
   return (
     <>
       <div className="flex flex-col gap-10">
@@ -57,18 +70,7 @@ export function ChooseCategories({
         <div className="flex flex-col gap-5">
           <button
             className="main__link main__btn text-center"
-            onClick={(e) => {
-              e.preventDefault();
-              const checkedCategories = categories.flatMap((c) => {
-                return c.hashtags
-                  .filter((h) => h.checked)
-                  .map((h) => ({
-                    id: h.id,
-                  }));
-              });
-
-              submitCategories(lang, checkedCategories);
-            }}
+            onClick={handleSubmitCategories}
           >
             {dict.nextStep}
           </button>
