@@ -1,14 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer utilities {
   .font-main {
-    font-family: "Montserrat", sans-serif;
+    font-family: "Mulish", sans-serif;
   }
 }
 @layer components {
+  .gradient__bg {
+    @apply absolute -z-10 h-96 w-96  -rotate-180 rounded-full bg-gradient-to-b from-violet-700 to-violet-700 opacity-20 blur-3xl;
+  }
   .main__btn {
     @apply w-full max-w-md rounded-full bg-violet-700 font-main text-sm font-normal leading-tight text-neutral-50;
   }
