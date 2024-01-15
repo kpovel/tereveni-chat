@@ -9,20 +9,28 @@ type SignUpResponseError = {
   fieldMessage: string;
 };
 
-export async function avatarPost(formData: FormData, lang: "en" | "uk") {
+export async function defaultAvatarPut(formData: string, lang: "en" | "uk") {
   const accessToken = cookies().get("jwtAccessToken");
 
   if (!accessToken) {
     redirect(`/en`);
   }
 
-  const res = await fetch(`${env.SERVER_URL}/api/user/avatar/upload`, {
-    method: "POST",
-    body: formData,
-    headers: {
-      Authorization: `Bearer ${accessToken.value}`,
+  const res = await fetch(
+    `${env.SERVER_URL}/api/user/default-avatar-with-onboarding/save`,
+    {
+      method: "PUT",
+      body: JSON.stringify({
+        onboardingFieldStr: formData,
+        onboardingEnd: true,
+      }),
+      headers: {
+        Authorization: `Bearer ${accessToken.value}`,
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
     },
-  });
+  );
 
   if (res.ok) {
     redirect(`/${lang}/onboarding/introduce-yourself`);

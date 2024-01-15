@@ -21,6 +21,7 @@ export default function Layout({
     <html lang={params.lang}>
       <body className={poppins.className}>
         <SetPreferredLanguage lang={params.lang} />
+        <div className="left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4"></div>
         {children}
       </body>
     </html>

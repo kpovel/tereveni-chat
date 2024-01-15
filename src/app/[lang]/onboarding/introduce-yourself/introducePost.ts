@@ -9,12 +9,14 @@ type SignUpResponseError = {
   fieldMessage: string;
 };
 
-export async function IntroducePost(introduce: string, lang: "en" | "uk") {
-  const accessToken = cookies().get("jwtAccessToken").value;
+export async function introducePost(introduce: string, lang: "en" | "uk") {
+  const jwtAccessTokenCookie = cookies().get("jwtAccessToken");
 
-  if (!accessToken) {
-    console.log("no access token");
+  if (!jwtAccessTokenCookie) {
+    redirect("/en");
   }
+
+  const accessToken = jwtAccessTokenCookie!.value;
 
   const res = await fetch(
     `${env.SERVER_URL}/api/user/user-about-with-onboarding/save`,
@@ -28,10 +30,8 @@ export async function IntroducePost(introduce: string, lang: "en" | "uk") {
     },
   );
 
-  console.log(res);
-
   if (res.ok) {
-    redirect("/en");
+    redirect(`/${lang}/onboarding/categories`);
   }
 
   const body = (await res.json()) as SignUpResponseError;
