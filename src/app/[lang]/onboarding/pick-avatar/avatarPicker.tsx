@@ -33,7 +33,6 @@ export default function AvatarPicker({
     setCustomAvatar(null);
     setCustomAvatarData(selectedCustomAvatar);
     setIsEnabledNext(true);
-    console.log(customAvatarData);
     setSelectedAvatar(avatar);
   };
 
@@ -64,10 +63,9 @@ export default function AvatarPicker({
       formData.append("image", customAvatar);
       const error = await avatarPost(formData, lang);
       setAvatarPostError(error);
-    } else if (customAvatarData && customAvatarData != "") {
+    } else if (customAvatarData) {
       const customError = await defaultAvatarPut(customAvatarData, lang);
-      setAvatarPostError(customError);
-      console.log(`CustomError - ${customError}`);
+      setAvatarPostError(customError);;
     }
   };
 

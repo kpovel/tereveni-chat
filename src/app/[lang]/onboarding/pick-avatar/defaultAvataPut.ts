@@ -32,8 +32,6 @@ export async function defaultAvatarPut(formData: string, lang: "en" | "uk") {
     },
   );
 
-  console.log(res);
-
   if (res.ok) {
     redirect(`/${lang}/onboarding/introduce-yourself`);
   }

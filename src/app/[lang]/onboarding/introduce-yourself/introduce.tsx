@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { DictionaryReturnTypes } from "../../dictionaries";
-import { IntroducePost } from "./introducePost";
+import { introducePost } from "./introducePost";
 
 export default function Introduce({
   lang,
@@ -17,13 +17,13 @@ export default function Introduce({
   const maxCharacters = 300;
 
   const handleText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const textValue = e.currentTarget.value.slice(0, maxCharacters - 1);
+    const textValue = e.currentTarget.value.slice(0, maxCharacters);
     setIntroduce(textValue);
   };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    await IntroducePost(introduce, lang);
+    await introducePost(introduce, lang);
   };
 
   return (
@@ -53,15 +53,14 @@ export default function Introduce({
           {dict.nextStep}
         </button>
       </form>
-
-      <button className="mt-5 w-full border-none bg-transparent outline-none">
-        <Link
-          className="text-center font-main text-sm font-normal leading-tight text-stone-300"
-          href=""
+      <div className="mt-5 w-full flex justify-center">
+      <Link
+          className="text-center font-main text-sm font-normal leading-tight text-stone-300 border-none bg-transparent outline-none"
+          href={`/${lang}/onboarding/categories`}
         >
           {dict.skip}
         </Link>
-      </button>
+      </div>
     </div>
   );
 }

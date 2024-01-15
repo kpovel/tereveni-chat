@@ -9,7 +9,7 @@ type SignUpResponseError = {
   fieldMessage: string;
 };
 
-export async function IntroducePost(introduce: string, lang: "en" | "uk") {
+export async function introducePost(introduce: string, lang: "en" | "uk") {
   const jwtAccessTokenCookie = cookies().get("jwtAccessToken");
 
   if (!jwtAccessTokenCookie) {
