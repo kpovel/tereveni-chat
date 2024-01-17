@@ -12,6 +12,7 @@ type SuccessAccessTokenRegeneration = {
 
 export async function regenerateAccessToken() {
   const refreshToken = cookies().get(JWT_REFRESH_TOKEN);
+  console.log("refresh token:", refreshToken);
 
   if (!refreshToken) {
     return redirectUnauthorized();

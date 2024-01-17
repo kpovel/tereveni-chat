@@ -5,51 +5,51 @@ import Image from "next/image";
 import Link from "next/link";
 import AvatarEditor from "react-avatar-editor";
 import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
+import { avatarPost } from "./avatarPost";
+import { defaultAvatarPut } from "./defaultAvataPut";
+import "./page.css";
 
 export default function AvatarPicker({
+  lang,
   dict,
+  defaultImages,
 }: {
+  lang: "en" | "uk";
   dict: Awaited<DictionaryReturnTypes["/en/onboarding/pick-avatar"]>;
+  defaultImages: string[];
 }) {
   const [selectedAvatar, setSelectedAvatar] = useState(null);
-  const [customAvatar, setCustomAvatar] = useState<string | null>(null);
+  const [customAvatar, setCustomAvatar] = useState<File | null>(null);
   const [scale, setScale] = useState(1);
+  const [isEnabledNext, setIsEnabledNext] = useState(false);
+  const [avatarPostError, setAvatarPostError] = useState("");
   const editorRef = useRef<AvatarEditor | null>(null);
-
-  const predefinedAvatars = [
-    "avatar-1.svg",
-    "avatar-2.svg",
-    "avatar-3.svg",
-    "avatar-4.svg",
-    "avatar-5.svg",
-    "avatar-6.svg",
-    "avatar-7.svg",
-    "avatar-8.svg",
-    "avatar-9.svg",
-    "avatar-10.svg",
-    "avatar-11.svg",
-    "avatar-12.svg",
-    "avatar-13.svg",
-    "avatar-14.svg",
-    "avatar-15.svg",
-    "avatar-16.svg",
-  ];
+  const [uploadError, setUploadError] = useState(false);
+  const [customAvatarData, setCustomAvatarData] = useState("");
 
   const handlePredefinedAvatarClick = (avatar: any) => {
+    setIsEnabledNext(false);
+    const selectedCustomAvatar = avatar.replace("api/user-image/", "");
     setCustomAvatar(null);
+    setCustomAvatarData(selectedCustomAvatar);
+    setIsEnabledNext(true);
     setSelectedAvatar(avatar);
   };
 
   const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files && files.length > 0) {
-      const file = files[0];
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setCustomAvatar(reader.result as string);
-        setSelectedAvatar(null);
-      };
-      reader.readAsDataURL(file);
+    const fileInput = event.target;
+    const file = fileInput.files?.[0];
+
+    const maxSizeInBytes = 3 * 1024 * 1024;
+
+    if (file && file.size < maxSizeInBytes) {
+      setCustomAvatarData("");
+      setCustomAvatar(file);
+      setIsEnabledNext(true);
+      setUploadError(false);
+    } else {
+      fileInput.value = "";
+      setUploadError(true);
     }
   };
 
@@ -57,10 +57,15 @@ export default function AvatarPicker({
     setScale(parseFloat(e.target.value));
   };
 
-  const handleSaveAvatar = () => {
-    if (editorRef.current) {
-      const canvas = editorRef.current.getImage();
-      console.log(canvas.toDataURL());
+  const handleSaveAvatar = async () => {
+    if (customAvatar) {
+      const formData = new FormData();
+      formData.append("image", customAvatar);
+      const error = await avatarPost(formData, lang);
+      setAvatarPostError(error);
+    } else if (customAvatarData) {
+      const customError = await defaultAvatarPut(customAvatarData, lang);
+      setAvatarPostError(customError);;
     }
   };
 
@@ -73,7 +78,6 @@ export default function AvatarPicker({
         accept="image/*"
         onChange={handleAvatarChange}
       />
-
       <div className="flex justify-center">
         <div className="relative h-[200px] w-[200px]">
           <button className="absolute right-0 top-0 z-10 rounded-full">
@@ -81,7 +85,12 @@ export default function AvatarPicker({
               <Image src="/plus-1.png" width={45} height={45} alt="plus" />
             </label>
           </button>
-          <div className="h-[200px] w-[200px] overflow-hidden rounded-full">
+
+          <div
+            className={`h-[200px] w-[200px] overflow-hidden rounded-full ${
+              uploadError && "border border-red-500"
+            }`}
+          >
             {customAvatar ? (
               <AvatarEditor
                 className="-translate-x-7 -translate-y-7"
@@ -110,45 +119,66 @@ export default function AvatarPicker({
           </div>
         </div>
       </div>
+      {uploadError && (
+        <div className="mt-4 text-center text-sm font-normal text-red-500">
+          <span>
+            Image size exceeds limit <br /> Please upload a photo under 3 MB
+          </span>
+        </div>
+      )}
+      {avatarPostError && (
+        <div className="mt-4 text-center text-sm font-normal text-red-500">
+          <span>{avatarPostError}</span>
+        </div>
+      )}
+      {customAvatar && (
+        <div className="mb-4 mt-4 flex justify-center">
+          <input
+            className="avatar__scale"
+            type="range"
+            value={scale}
+            min="1"
+            max="2"
+            step="0.01"
+            onChange={handleScaleChange}
+          />
+        </div>
+      )}
       <div className="mt-10 flex flex-col items-center">
         <h3 className="text-center font-main text-sm font-normal leading-tight text-neutral-50">
           {dict.pickAvatar}
         </h3>
         <div className="mt-10 grid grid-cols-4 justify-center gap-4 md:max-w-md md:grid-cols-6">
-          {predefinedAvatars.map((avatar, id) => (
-            <div key={id} className={``}>
-              <Image
-                key={avatar}
-                src={`/${avatar}`}
-                alt={`Avatar ${avatar}`}
-                width={60}
-                height={60}
-                onClick={() => handlePredefinedAvatarClick(avatar)}
-              />
-            </div>
-          ))}
+          {defaultImages.map((avatar) => {
+            const avatarSrc = avatar.substring(1);
+
+            return (
+              <div key={avatar}>
+                <Image
+                  src={avatar}
+                  alt={`Avatar ${avatar}`}
+                  width={60}
+                  height={60}
+                  onClick={() => handlePredefinedAvatarClick(avatarSrc)}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
 
       <div className="mt-10 flex flex-col items-center">
-        <input
-          type="range"
-          value={scale}
-          min="1"
-          max="2"
-          step="0.01"
-          onChange={handleScaleChange}
-        />
-        <button className="main__btn mt-24" onClick={handleSaveAvatar}>
-          <Link className="main__link" href="">
-            {dict.next}
-          </Link>
+        <button
+          className={`main__btn main__link mt-24 cursor-pointer ${
+            !isEnabledNext && "bg-opacity-10 text-zinc-500"
+          }`}
+          onClick={handleSaveAvatar}
+          disabled={!isEnabledNext}
+        >
+          {dict.next}
         </button>
-        <button className="mt-5 w-full border-none bg-transparent outline-none">
-          <Link
-            className="text-center font-main text-sm font-normal leading-tight text-stone-300"
-            href=""
-          >
+        <button className="mt-5 w-full border-none bg-transparent text-center font-main text-sm font-normal leading-tight text-stone-300 outline-none">
+          <Link href={`/${lang}/onboarding/introduce-yourself`}>
             {dict.skip}
           </Link>
         </button>

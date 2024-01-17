@@ -15,8 +15,10 @@ export function Category({
           return (
             <button
               key={hashtag.id}
-              className={`rounded-3xl border border-neutral-50 px-4 py-2 text-center text-xs text-neutral-50 ${
-                hashtag.checked ? "border-[#7C01F6] bg-[#7C01F6]" : ""
+              className={`rounded-3xl border px-4 py-2 text-center text-xs text-neutral-50 ${
+                hashtag.checked
+                  ? "border-[#7C01F6] bg-[#7C01F6]"
+                  : "border-neutral-50"
               }`}
               onClick={() => toggleHashtag(hashtag.id)}
             >
