@@ -3,6 +3,7 @@ import { env } from "@/env.mjs";
 import { JWT_ACCESS_TOKEN, JWT_REFRESH_TOKEN } from "@/util/cookiesName";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { setJwtAccessToken } from "./setTokens";
 
 type SuccessAccessTokenRegeneration = {
   type: "Bearer";
@@ -12,7 +13,6 @@ type SuccessAccessTokenRegeneration = {
 
 export async function regenerateAccessToken() {
   const refreshToken = cookies().get(JWT_REFRESH_TOKEN);
-  console.log("refresh token:", refreshToken);
 
   if (!refreshToken) {
     return redirectUnauthorized();
@@ -31,12 +31,7 @@ export async function regenerateAccessToken() {
   }
 
   const json = (await response.json()) as SuccessAccessTokenRegeneration;
-  cookies().set({
-    name: JWT_ACCESS_TOKEN,
-    value: json.jwtAccessToken,
-    maxAge: 60 * 15, // 15m
-    httpOnly: true,
-  });
+  setJwtAccessToken(json.jwtAccessToken);
 }
 
 function redirectUnauthorized() {
