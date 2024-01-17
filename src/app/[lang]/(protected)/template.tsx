@@ -15,7 +15,7 @@ export default async function Template({ children }: { children: ReactNode }) {
   );
 }
 
-function redirectUnauthorizedUser() {
+export function redirectUnauthorizedUser() {
   const refreshToken = cookies().get(JWT_REFRESH_TOKEN);
   if (!refreshToken) {
     const lang = cookies().get("lang");

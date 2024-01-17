@@ -36,7 +36,8 @@ export default async function PickAvatar({
 async function fetchDefaultImages() {
   const jwtaccess = cookies().get(JWT_ACCESS_TOKEN);
   if (!jwtaccess) {
-    redirect("/en");
+    const lang = cookies().get("lang")?.value ?? "en";
+    redirect(`/${lang}`);
   }
 
   const res = await fetch(`${env.SERVER_URL}/api/default-avatars`, {

@@ -11,7 +11,15 @@ type SuccessAccessTokenRegeneration = {
   jwtRefreshToken: null;
 };
 
-export async function regenerateAccessToken() {
+/**
+ * regenerateAccessToken - Regenerates a new access token and sets it in cookies
+ *
+ * This function generates a new access token, sets it in cookies,
+ * and returns the new access token to the consumer.
+ *
+ * @returns {Promise<string | void>} The new access token
+ */
+export async function regenerateAccessToken(): Promise<string | void> {
   const lang = (cookies().get("lang")?.value ?? "en") as "en" | "uk";
 
   const refreshToken = cookies().get(JWT_REFRESH_TOKEN);
@@ -34,6 +42,8 @@ export async function regenerateAccessToken() {
 
   const json = (await response.json()) as SuccessAccessTokenRegeneration;
   setJwtAccessToken(json.jwtAccessToken);
+
+  return json.jwtAccessToken;
 }
 
 function redirectUnauthorized(homePage: "en" | "uk") {
