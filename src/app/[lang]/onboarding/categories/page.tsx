@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { getDictionary } from "../../dictionaries";
 import { ChooseCategories } from "./categories";
+import { onboardingHashtags } from "./onboardingHashtags";
 
 export default async function OnboardingCategories({
   params,
@@ -8,6 +8,7 @@ export default async function OnboardingCategories({
   params: { lang: "uk" | "en" };
 }) {
   const dict = await getDictionary(`/${params.lang}/onboarding/categories`);
+  const hashtags = await onboardingHashtags();
 
   return (
     <main className="container mx-auto flex max-w-md flex-col gap-10 px-6 py-10">
@@ -19,21 +20,7 @@ export default async function OnboardingCategories({
           {dict.subtitle}
         </h3>
       </div>
-      <ChooseCategories />
-      <div className="flex flex-col gap-5">
-        <Link
-          className="main__link main__btn text-center"
-          href={`/${params.lang}/onboarding/final`}
-        >
-          {dict.nextStep}
-        </Link>
-        <Link
-          className="mx-auto px-5 text-center text-sm text-[#C2C2C2]"
-          href={`/${params.lang}/onboarding/final`}
-        >
-          {dict.skip}
-        </Link>
-      </div>
+      <ChooseCategories hashtags={hashtags} lang={params.lang} dict={dict} />
     </main>
   );
 }

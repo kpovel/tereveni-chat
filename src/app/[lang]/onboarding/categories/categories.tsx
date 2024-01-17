@@ -1,41 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useState, MouseEvent } from "react";
 import { Category } from "./category";
+import { Hashtag } from "./onboardingHashtags";
+import Link from "next/link";
+import { DictionaryReturnTypes } from "../../dictionaries";
+import { submitCategories } from "./submitCategories";
 
-// todo: fetch categories from out main backend
-const initialCategories = [
-  {
-    categoryName: "Entertainment",
-    hashtags: [
-      { name: "anime", id: 1 },
-      { name: "comics", id: 2 },
-      { name: "languages", id: 3 },
-      { name: "influensers", id: 4 },
-      { name: "memes", id: 5 },
-      { name: "movies", id: 6 },
-      { name: "music", id: 7 },
-      { name: "videogames", id: 8 },
-    ],
-  },
-  {
-    categoryName: "Lifestyle & hobbies",
-    hashtags: [
-      { name: "animals", id: 9 },
-      { name: "beauty", id: 10 },
-      { name: "fashion", id: 11 },
-      { name: "hobbies", id: 12 },
-      { name: "lifestyle", id: 13 },
-      { name: "nature", id: 14 },
-      { name: "plants", id: 15 },
-      { name: "sport", id: 16 },
-      { name: "subcultures", id: 17 },
-    ],
-  },
-];
-
-export function ChooseCategories() {
-  const mappedCategories = initialCategories.map((c) => ({
+export function ChooseCategories({
+  hashtags,
+  lang,
+  dict,
+}: {
+  hashtags: Hashtag[];
+  lang: "en" | "uk";
+  dict: Awaited<DictionaryReturnTypes["/en/onboarding/categories"]>;
+}) {
+  const mappedCategories = hashtags.map((c) => ({
     ...c,
     hashtags: c.hashtags.map((h) => ({ ...h, checked: false })),
   }));
@@ -60,18 +41,47 @@ export function ChooseCategories() {
     );
   }
 
+  function handleSubmitCategories(e: MouseEvent) {
+    e.preventDefault();
+    const checkedCategories = categories.flatMap((c) => {
+      return c.hashtags
+        .filter((h) => h.checked)
+        .map((h) => ({
+          id: h.id,
+        }));
+    });
+
+    submitCategories(lang, checkedCategories);
+  }
+
   return (
-    <div className="flex flex-col gap-10">
-      {categories.map((category) => {
-        return (
-          <Category
-            key={category.categoryName}
-            categoryName="Entertainment"
-            hashtags={category.hashtags}
-            toggleHashtag={toggleHashtag}
-          />
-        );
-      })}
-    </div>
+    <>
+      <div className="flex flex-col gap-10">
+        {categories.map((category) => {
+          return (
+            <Category
+              key={category.name}
+              categoryName={category.name}
+              hashtags={category.hashtags}
+              toggleHashtag={toggleHashtag}
+            />
+          );
+        })}
+        <div className="flex flex-col gap-5">
+          <button
+            className="main__link main__btn text-center"
+            onClick={handleSubmitCategories}
+          >
+            {dict.nextStep}
+          </button>
+          <Link
+            className="mx-auto px-5 text-center text-sm text-[#C2C2C2]"
+            href={`/${lang}/onboarding/final`}
+          >
+            {dict.skip}
+          </Link>
+        </div>
+      </div>
+    </>
   );
 }
