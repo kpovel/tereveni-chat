@@ -12,10 +12,12 @@ type SuccessAccessTokenRegeneration = {
 };
 
 export async function regenerateAccessToken() {
+  const lang = (cookies().get("lang")?.value ?? "en") as "en" | "uk";
+
   const refreshToken = cookies().get(JWT_REFRESH_TOKEN);
 
   if (!refreshToken) {
-    return redirectUnauthorized();
+    return redirectUnauthorized(lang);
   }
 
   const response = await fetch(`${env.SERVER_URL}/api/refresh/access-token`, {
@@ -27,15 +29,15 @@ export async function regenerateAccessToken() {
   });
 
   if (!response.ok) {
-    return redirectUnauthorized();
+    return redirectUnauthorized(lang);
   }
 
   const json = (await response.json()) as SuccessAccessTokenRegeneration;
   setJwtAccessToken(json.jwtAccessToken);
 }
 
-function redirectUnauthorized() {
+function redirectUnauthorized(homePage: "en" | "uk") {
   cookies().delete(JWT_REFRESH_TOKEN);
   cookies().delete(JWT_ACCESS_TOKEN);
-  redirect("/en");
+  redirect(`/${homePage}`);
 }
