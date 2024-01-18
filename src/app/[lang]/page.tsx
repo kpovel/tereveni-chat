@@ -15,7 +15,7 @@ export default async function Home({
       <div className="container mx-auto px-6">
         <ToggleLang />
         <div className="my-10 inline-flex w-full items-center justify-center px-4 py-10">
-          <Image src="logo.svg" alt="logo" width={200} height={207} />
+          <Image src="logo.svg" alt="logo" width={200} height={208} />
         </div>
         <h1 className="text-center font-main text-3xl font-medium text-neutral-50">
           {dict.mainPage.title}
