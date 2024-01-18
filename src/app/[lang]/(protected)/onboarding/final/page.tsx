@@ -1,7 +1,7 @@
-import Link from "next/link";
 import Image from "next/image";
 import { getDictionary } from "@/app/[lang]/dictionaries";
 import { onboardingUserData } from "./onboardingUserData";
+import { FinishOnboarding } from "./FinishOnboarding";
 
 export default async function OnboardingFinal({
   params,
@@ -23,14 +23,10 @@ export default async function OnboardingFinal({
           width={200}
           height={200}
           alt="User avatar"
+          priority={true}
         />
       </div>
-      <Link
-        className="main__link main__btn text-center"
-        href={`/${params.lang}/chat`}
-      >
-        {dict.start}
-      </Link>
+      <FinishOnboarding dict={dict} lang={params.lang} />
     </main>
   );
 }
