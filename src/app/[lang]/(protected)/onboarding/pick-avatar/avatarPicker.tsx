@@ -108,6 +108,7 @@ export default function AvatarPicker({
                 alt={`Selected Avatar ${selectedAvatar}`}
                 width={200}
                 height={200}
+                unoptimized
               />
             ) : (
               <Image
