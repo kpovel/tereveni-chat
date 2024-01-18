@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getDictionary } from "../../dictionaries";
+import { getDictionary } from "@/app/[lang]/dictionaries";
 
 export default async function OnboardingFinal({
   params,

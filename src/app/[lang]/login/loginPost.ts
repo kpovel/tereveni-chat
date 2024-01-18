@@ -1,9 +1,8 @@
 "use server";
 
-import { cookies } from "next/headers";
-import { JWT_ACCESS_TOKEN, JWT_REFRESH_TOKEN } from "../../../util/cookiesName";
 import { redirect } from "next/navigation";
 import { env } from "@/env.mjs";
+import { setJwtAccessToken, setJwtRefreshToken } from "../(protected)/setTokens";
 
 type SuccessLoginResponse = {
   type: "Bearer";
@@ -35,20 +34,8 @@ export async function loginPostData(
   if (response.status == 200) {
     const tokens = (await response.json()) as SuccessLoginResponse;
 
-    cookies().set({
-      name: JWT_ACCESS_TOKEN,
-      value: tokens.jwtAccessToken,
-      maxAge: 60 * 15, // 15m
-      httpOnly: true,
-      path: "/",
-    });
-    cookies().set({
-      name: JWT_REFRESH_TOKEN,
-      value: tokens.jwtRefreshToken,
-      maxAge: 60 * 60 * 24 * 150, // 150d
-      httpOnly: true,
-      path: "/",
-    });
+    setJwtAccessToken(tokens.jwtAccessToken);
+    setJwtRefreshToken(tokens.jwtRefreshToken);
 
     redirect(`/${lang}/chat`);
   }

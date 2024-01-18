@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import AvatarEditor from "react-avatar-editor";
-import { DictionaryReturnTypes } from "../../dictionaries";
+import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 import { avatarPost } from "./avatarPost";
 import { defaultAvatarPut } from "./defaultAvataPut";
 import "./page.css";

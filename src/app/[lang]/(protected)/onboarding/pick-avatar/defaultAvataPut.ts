@@ -13,7 +13,8 @@ export async function defaultAvatarPut(formData: string, lang: "en" | "uk") {
   const accessToken = cookies().get("jwtAccessToken");
 
   if (!accessToken) {
-    redirect(`/en`);
+    const lang = cookies().get("lang")?.value ?? "en";
+    redirect(`/${lang}`);
   }
 
   const res = await fetch(

@@ -1,5 +1,5 @@
+import { getDictionary } from "@/app/[lang]/dictionaries";
 import { env } from "@/env.mjs";
-import { getDictionary } from "../../dictionaries";
 import AvatarPicker from "./avatarPicker";
 import { cookies } from "next/headers";
 import { JWT_ACCESS_TOKEN } from "@/util/cookiesName";
@@ -36,7 +36,8 @@ export default async function PickAvatar({
 async function fetchDefaultImages() {
   const jwtaccess = cookies().get(JWT_ACCESS_TOKEN);
   if (!jwtaccess) {
-    redirect("/en");
+    const lang = cookies().get("lang")?.value ?? "en";
+    redirect(`/${lang}`);
   }
 
   const res = await fetch(`${env.SERVER_URL}/api/default-avatars`, {

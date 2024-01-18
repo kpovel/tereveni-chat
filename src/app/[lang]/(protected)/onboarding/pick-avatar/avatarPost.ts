@@ -13,7 +13,8 @@ export async function avatarPost(formData: FormData, lang: "en" | "uk") {
   const accessToken = cookies().get("jwtAccessToken");
 
   if (!accessToken) {
-    redirect(`/en`);
+    const lang = cookies().get("lang")?.value ?? "en";
+    redirect(`/${lang}`);
   }
 
   const res = await fetch(`${env.SERVER_URL}/api/user/avatar/upload`, {

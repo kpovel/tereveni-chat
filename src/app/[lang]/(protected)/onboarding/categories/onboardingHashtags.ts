@@ -10,8 +10,10 @@ export type Hashtag = {
 
 export async function onboardingHashtags() {
   const jwtAccessToken = cookies().get(JWT_ACCESS_TOKEN);
+  const lang = cookies().get("lang")?.value ?? "en";
+
   if (!jwtAccessToken) {
-    redirect("/en");
+    redirect(`/${lang}`);
   }
 
   const res = await fetch(
@@ -24,7 +26,7 @@ export async function onboardingHashtags() {
   );
 
   if (!res.ok) {
-    redirect("/en");
+    redirect(`/${lang}`);
   }
 
   return (await res.json()) as Hashtag[];

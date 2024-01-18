@@ -1,4 +1,4 @@
-import { getDictionary } from "../../dictionaries";
+import { getDictionary } from "@/app/[lang]/dictionaries";
 import { ChooseCategories } from "./categories";
 import { onboardingHashtags } from "./onboardingHashtags";
 

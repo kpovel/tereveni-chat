@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { DictionaryReturnTypes } from "../../dictionaries";
+import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 import { introducePost } from "./introducePost";
 
 export default function Introduce({

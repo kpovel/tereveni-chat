@@ -4,7 +4,7 @@ import { useState, MouseEvent } from "react";
 import { Category } from "./category";
 import { Hashtag } from "./onboardingHashtags";
 import Link from "next/link";
-import { DictionaryReturnTypes } from "../../dictionaries";
+import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 import { submitCategories } from "./submitCategories";
 
 export function ChooseCategories({

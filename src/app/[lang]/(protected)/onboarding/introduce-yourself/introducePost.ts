@@ -10,13 +10,11 @@ type SignUpResponseError = {
 };
 
 export async function introducePost(introduce: string, lang: "en" | "uk") {
-  const jwtAccessTokenCookie = cookies().get("jwtAccessToken");
+  const jwtAccessToken = cookies().get("jwtAccessToken");
 
-  if (!jwtAccessTokenCookie) {
-    redirect("/en");
+  if (!jwtAccessToken) {
+    redirect(`/${lang}`);
   }
-
-  const accessToken = jwtAccessTokenCookie!.value;
 
   const res = await fetch(
     `${env.SERVER_URL}/api/user/user-about-with-onboarding/save`,
@@ -24,7 +22,7 @@ export async function introducePost(introduce: string, lang: "en" | "uk") {
       method: "PUT",
       body: JSON.stringify({ onboardingFieldStr: introduce }),
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${jwtAccessToken.value}`,
         "Content-Type": "application/json",
       },
     },

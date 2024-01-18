@@ -1,4 +1,4 @@
-import { getDictionary } from "../../dictionaries";
+import { getDictionary } from "@/app/[lang]/dictionaries";
 import Introduce from "./introduce";
 
 export default async function IntroduceYourself({
