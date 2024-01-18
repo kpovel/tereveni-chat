@@ -104,7 +104,7 @@ export default function AvatarPicker({
               />
             ) : selectedAvatar ? (
               <Image
-                src={`/${selectedAvatar}`}
+                src={`${selectedAvatar}`}
                 alt={`Selected Avatar ${selectedAvatar}`}
                 width={200}
                 height={200}
