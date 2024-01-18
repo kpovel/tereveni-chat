@@ -8,6 +8,7 @@ import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 import { avatarPost } from "./avatarPost";
 import { defaultAvatarPut } from "./defaultAvataPut";
 import "./page.css";
+import { DefaultImages } from "./DefaultImages";
 
 export default function AvatarPicker({
   lang,
@@ -18,7 +19,7 @@ export default function AvatarPicker({
   dict: Awaited<DictionaryReturnTypes["/en/onboarding/pick-avatar"]>;
   defaultImages: string[];
 }) {
-  const [selectedAvatar, setSelectedAvatar] = useState(null);
+  const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
   const [customAvatar, setCustomAvatar] = useState<File | null>(null);
   const [scale, setScale] = useState(1);
   const [isEnabledNext, setIsEnabledNext] = useState(false);
@@ -27,9 +28,9 @@ export default function AvatarPicker({
   const [uploadError, setUploadError] = useState(false);
   const [customAvatarData, setCustomAvatarData] = useState("");
 
-  const handlePredefinedAvatarClick = (avatar: any) => {
+  const handlePredefinedAvatarClick = (avatar: string) => {
     setIsEnabledNext(false);
-    const selectedCustomAvatar = avatar.replace("api/user-image/", "");
+    const selectedCustomAvatar = avatar.replace("/api/user-image/", "");
     setCustomAvatar(null);
     setCustomAvatarData(selectedCustomAvatar);
     setIsEnabledNext(true);
@@ -65,7 +66,7 @@ export default function AvatarPicker({
       setAvatarPostError(error);
     } else if (customAvatarData) {
       const customError = await defaultAvatarPut(customAvatarData, lang);
-      setAvatarPostError(customError);;
+      setAvatarPostError(customError);
     }
   };
 
@@ -148,23 +149,10 @@ export default function AvatarPicker({
         <h3 className="text-center font-main text-sm font-normal leading-tight text-neutral-50">
           {dict.pickAvatar}
         </h3>
-        <div className="mt-10 grid grid-cols-4 justify-center gap-4 md:max-w-md md:grid-cols-6">
-          {defaultImages.map((avatar) => {
-            const avatarSrc = avatar.substring(1);
-
-            return (
-              <div key={avatar}>
-                <Image
-                  src={avatar}
-                  alt={`Avatar ${avatar}`}
-                  width={60}
-                  height={60}
-                  onClick={() => handlePredefinedAvatarClick(avatarSrc)}
-                />
-              </div>
-            );
-          })}
-        </div>
+        <DefaultImages
+          imagePaths={defaultImages}
+          predefinedAvatarClick={handlePredefinedAvatarClick}
+        />
       </div>
 
       <div className="mt-10 flex flex-col items-center">
