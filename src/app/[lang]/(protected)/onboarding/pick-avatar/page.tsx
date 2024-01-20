@@ -1,9 +1,7 @@
 import { getDictionary } from "@/app/[lang]/dictionaries";
 import { env } from "@/env.mjs";
 import AvatarPicker from "./avatarPicker";
-import { cookies } from "next/headers";
-import { JWT_ACCESS_TOKEN } from "@/util/cookiesName";
-import { redirect } from "next/navigation";
+import { getJwtAccessToken } from "../../regenerateAccessToken";
 
 export default async function PickAvatar({
   params,
@@ -34,15 +32,11 @@ export default async function PickAvatar({
 }
 
 async function fetchDefaultImages() {
-  const jwtaccess = cookies().get(JWT_ACCESS_TOKEN);
-  if (!jwtaccess) {
-    const lang = cookies().get("lang")?.value ?? "en";
-    redirect(`/${lang}`);
-  }
+  const accessToken = await getJwtAccessToken();
 
   const res = await fetch(`${env.SERVER_URL}/api/default-avatars`, {
     headers: {
-      Authorization: `Bearer ${jwtaccess.value}`,
+      Authorization: `Bearer ${accessToken}`,
     },
   });
 

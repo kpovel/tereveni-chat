@@ -51,5 +51,11 @@ function redirectToMainPage(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/:lang/chat/", "/:lang/onboarding/"],
+  matcher: [
+    "/:lang/chat/",
+    "/:lang/onboarding/pick-avatar",
+    "/:lang/onboarding/categories",
+    "/:lang/onboarding/final",
+    "/:lang/onboarding/introduce-yourself",
+  ],
 };

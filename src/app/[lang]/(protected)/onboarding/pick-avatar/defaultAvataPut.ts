@@ -1,8 +1,8 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { env } from "@/env.mjs";
+import { getJwtAccessToken } from "../../regenerateAccessToken";
 
 type SignUpResponseError = {
   fieldName: string;
@@ -10,12 +10,7 @@ type SignUpResponseError = {
 };
 
 export async function defaultAvatarPut(formData: string, lang: "en" | "uk") {
-  const accessToken = cookies().get("jwtAccessToken");
-
-  if (!accessToken) {
-    const lang = cookies().get("lang")?.value ?? "en";
-    redirect(`/${lang}`);
-  }
+  const accessToken = await getJwtAccessToken();
 
   const res = await fetch(
     `${env.SERVER_URL}/api/user/default-avatar-with-onboarding/save`,
@@ -26,7 +21,7 @@ export async function defaultAvatarPut(formData: string, lang: "en" | "uk") {
         onboardingEnd: true,
       }),
       headers: {
-        Authorization: `Bearer ${accessToken.value}`,
+        Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
       cache: "no-store",
