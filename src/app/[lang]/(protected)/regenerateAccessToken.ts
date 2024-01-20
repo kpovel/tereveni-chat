@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { setJwtAccessToken } from "./setTokens";
 
-type SuccessAccessTokenRegeneration = {
+export type SuccessAccessTokenRegeneration = {
   type: "Bearer";
   jwtAccessToken: string;
   jwtRefreshToken: null;
