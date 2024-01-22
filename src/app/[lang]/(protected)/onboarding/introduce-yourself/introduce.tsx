@@ -53,9 +53,9 @@ export default function Introduce({
           {dict.nextStep}
         </button>
       </form>
-      <div className="mt-5 w-full flex justify-center">
-      <Link
-          className="text-center font-main text-sm font-normal leading-tight text-stone-300 border-none bg-transparent outline-none"
+      <div className="mt-5 flex w-full justify-center">
+        <Link
+          className="border-none bg-transparent text-center font-main text-sm font-normal leading-tight text-stone-300 outline-none"
           href={`/${lang}/onboarding/categories`}
         >
           {dict.skip}

@@ -2,7 +2,10 @@
 
 import { redirect } from "next/navigation";
 import { env } from "@/env.mjs";
-import { setJwtAccessToken, setJwtRefreshToken } from "../(protected)/setTokens";
+import {
+  setJwtAccessToken,
+  setJwtRefreshToken,
+} from "../(protected)/setTokens";
 
 type SuccessLoginResponse = {
   type: "Bearer";

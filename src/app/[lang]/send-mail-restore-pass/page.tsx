@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { getDictionary } from "../dictionaries";
 
-export default async function ValidateEmail({
+export default async function RestorePassword({
   params,
 }: {
   params: { lang: "uk" | "en" };
 }) {
-  const dict = await getDictionary(`/${params.lang}/validate-email`);
+  const dict = await getDictionary(`/${params.lang}/send-mail-restore-pass`);
 
   return (
     <div className="container mx-auto px-6">

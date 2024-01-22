@@ -1,0 +1,9 @@
+{
+  "restoreYourPass": "Restore your password!",
+  "description": "Type your email for sending mail with link",
+  "emailPlaceholder": "Email address",
+  "sendToMail": "Send to your mail",
+  "errorStatus": {
+    "invalidEmail": "Please enter a valid email address"
+  }
+}
