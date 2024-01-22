@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { getDictionary } from "@/app/[lang]/dictionaries";
 import { onboardingUserData } from "./onboardingUserData";
 import { FinishOnboarding } from "./FinishOnboarding";
+import { UserImage } from "./FinalUserImage";
 
 export default async function OnboardingFinal({
   params,
@@ -17,14 +17,7 @@ export default async function OnboardingFinal({
         <h2 className="text-center text-[1.75rem] font-medium text-neutral-50">
           {dict.welcome}, {userData.name}!
         </h2>
-        <Image
-          src={`/api/user-image/${userData.image.name}`}
-          className="h-[200px] w-[200px] overflow-hidden rounded-full"
-          width={200}
-          height={200}
-          alt="User avatar"
-          priority={true}
-        />
+        <UserImage imageName={userData.image.name} />
       </div>
       <FinishOnboarding dict={dict} lang={params.lang} />
     </main>
