@@ -54,7 +54,7 @@ export default function PasswordInput({
           onFocus={hintHandler}
           onBlur={hiddenHint}
           className={`main__input ${
-            !pass.trim() && isValidPassword(pass) ? "border-red-500" : ""
+            pass.trim() && !isValidPassword(pass) ? "border-red-500" : ""
           }`}
           type={`${isHidden ? "password" : "text"}`}
           placeholder={placeholder}
