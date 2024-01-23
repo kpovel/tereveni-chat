@@ -1,18 +1,14 @@
 "use server";
 
 import { env } from "@/env.mjs";
-import { JWT_ACCESS_TOKEN } from "@/util/cookiesName";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { getJwtAccessToken } from "../../regenerateAccessToken";
 
 export async function submitCategories(
   lang: "en" | "uk",
   categories: { id: number }[],
 ) {
-  const jwtAccessToken = cookies().get(JWT_ACCESS_TOKEN);
-  if (!jwtAccessToken) {
-    redirect(`/${lang}`);
-  }
+  const jwtAccessToken = await getJwtAccessToken();
 
   const res = await fetch(
     `${env.SERVER_URL}/api/user/hashtags-with-onboarding/save`,
@@ -21,7 +17,7 @@ export async function submitCategories(
       body: JSON.stringify(categories),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${jwtAccessToken.value}`,
+        Authorization: `Bearer ${jwtAccessToken}`,
       },
     },
   );

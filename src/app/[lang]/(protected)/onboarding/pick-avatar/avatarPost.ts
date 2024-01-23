@@ -1,8 +1,8 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { env } from "@/env.mjs";
+import { getJwtAccessToken } from "../../regenerateAccessToken";
 
 type SignUpResponseError = {
   fieldName: string;
@@ -10,18 +10,13 @@ type SignUpResponseError = {
 };
 
 export async function avatarPost(formData: FormData, lang: "en" | "uk") {
-  const accessToken = cookies().get("jwtAccessToken");
-
-  if (!accessToken) {
-    const lang = cookies().get("lang")?.value ?? "en";
-    redirect(`/${lang}`);
-  }
+  const accessToken = await getJwtAccessToken();
 
   const res = await fetch(`${env.SERVER_URL}/api/user/avatar/upload`, {
     method: "POST",
     body: formData,
     headers: {
-      Authorization: `Bearer ${accessToken.value}`,
+      Authorization: `Bearer ${accessToken}`,
     },
   });
 

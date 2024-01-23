@@ -1,8 +1,8 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { env } from "@/env.mjs";
+import { getJwtAccessToken } from "../../regenerateAccessToken";
 
 type SignUpResponseError = {
   fieldName: string;
@@ -10,11 +10,7 @@ type SignUpResponseError = {
 };
 
 export async function introducePost(introduce: string, lang: "en" | "uk") {
-  const jwtAccessToken = cookies().get("jwtAccessToken");
-
-  if (!jwtAccessToken) {
-    redirect(`/${lang}`);
-  }
+  const jwtAccessToken = await getJwtAccessToken();
 
   const res = await fetch(
     `${env.SERVER_URL}/api/user/user-about-with-onboarding/save`,
@@ -22,7 +18,7 @@ export async function introducePost(introduce: string, lang: "en" | "uk") {
       method: "PUT",
       body: JSON.stringify({ onboardingFieldStr: introduce }),
       headers: {
-        Authorization: `Bearer ${jwtAccessToken.value}`,
+        Authorization: `Bearer ${jwtAccessToken}`,
         "Content-Type": "application/json",
       },
     },
