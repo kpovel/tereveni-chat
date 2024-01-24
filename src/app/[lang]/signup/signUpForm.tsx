@@ -89,7 +89,7 @@ export default function SignUpForm({
         </div>
         {!isValidLogin && (
           <div className="px-2 pt-1">
-            <p className="font-main text-xs font-normal leading-none text-red-500">
+            <p className="text-xs font-normal leading-none text-red-500">
               {dict.errorStatus.loginCharacters}
             </p>
           </div>
@@ -110,7 +110,7 @@ export default function SignUpForm({
         </div>
         {!isValidEmail && (
           <div className="px-2 pt-1">
-            <p className="font-main text-xs font-normal leading-none text-red-500">
+            <p className="text-xs font-normal leading-none text-red-500">
               {dict.errorStatus.invalidEmail}
             </p>
           </div>
@@ -131,7 +131,7 @@ export default function SignUpForm({
         />
         {password !== confirmPassword && (
           <div className="px-2 pt-1">
-            <p className="font-main text-xs font-normal leading-none text-red-500">
+            <p className="text-xs font-normal leading-none text-red-500">
               {dict.errorStatus.passwordNotMatch}
             </p>
           </div>
@@ -145,11 +145,11 @@ export default function SignUpForm({
               <Image src="/checked.svg" alt="mail" width={12} height={12} />
             )}
           </div>
-          <span className="ml-2 text-left font-main text-xs font-normal leading-none text-neutral-50">
-            {dict.terms.read}
+          <span className="ml-2 text-left text-xs font-normal leading-none text-neutral-50">
+            {dict.terms.read}{" "}
             <Link
               href={`/${lang}/terms-and-conditions`}
-              className="ml-1 inline break-words text-center font-main text-xs font-normal text-violet-400 underline"
+              className="text-center text-xs font-normal text-[#9D83F9] underline"
             >
               {dict.terms.termsConditions}
             </Link>

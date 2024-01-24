@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getDictionary } from "./dictionaries";
 import { ToggleLang } from "./ToggleLang";
+import tereveniLogo from "public/logo.svg";
 
 export default async function Home({
   params,
@@ -11,13 +12,13 @@ export default async function Home({
   const dict = await getDictionary(`/${params.lang}`);
 
   return (
-    <div className="relative">
+    <div>
       <div className="container mx-auto px-6">
         <ToggleLang />
-        <div className="my-10 inline-flex w-full items-center justify-center px-4 py-10">
-          <Image src="logo.svg" alt="logo" width={200} height={208} />
+        <div className="inline-flex w-full items-center justify-center px-4 py-20">
+          <Image src={tereveniLogo} alt="Tereveni Logo" />
         </div>
-        <h1 className="text-center font-main text-3xl font-medium text-neutral-50">
+        <h1 className="text-center text-[28px] font-medium text-neutral-50">
           {dict.mainPage.title}
         </h1>
         <div className="mt-10 flex flex-col items-center">

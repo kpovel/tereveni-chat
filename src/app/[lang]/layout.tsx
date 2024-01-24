@@ -1,8 +1,11 @@
 import { ReactNode } from "react";
-import { Poppins } from "next/font/google";
+import { Mulish } from "next/font/google";
 import { SetPreferredLanguage } from "./setPreferredLang";
 
-const poppins = Poppins({ weight: "400", subsets: ["latin"] });
+const poppins = Mulish({
+  weight: ["200", "300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+});
 
 export function generateStaticParams() {
   return [{ lang: "en" }, { lang: "uk" }];
@@ -19,9 +22,8 @@ export default function Layout({
 }) {
   return (
     <html lang={params.lang}>
-      <body className={poppins.className}>
+      <body className={`${poppins.className} min-h-screen`}>
         <SetPreferredLanguage lang={params.lang} />
-        <div className="left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4"></div>
         {children}
       </body>
     </html>

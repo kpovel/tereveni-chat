@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getDictionary } from "../dictionaries";
+import mail from "public/send-email.svg"
 
 export default async function ValidateEmail({
   params,
@@ -13,11 +14,11 @@ export default async function ValidateEmail({
       <h2 className="mt-20 text-center text-lg font-medium text-neutral-50">
         {dict.checkEmail}
       </h2>
-      <p className="mt-5 text-center font-main text-sm font-normal leading-tight text-neutral-50">
+      <p className="mt-5 text-center text-sm font-normal leading-tight text-neutral-50">
         {dict.followLink}
       </p>
       <div className="mt-20 flex justify-center">
-        <Image src="/send-email.svg" alt="mail" width={226} height={180} />
+        <Image src={mail} alt="Mail" />
       </div>
     </div>
   );
