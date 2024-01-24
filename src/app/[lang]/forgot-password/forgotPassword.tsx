@@ -11,7 +11,7 @@ export default function ForgotPassword({
   dict,
 }: {
   lang: "en" | "uk";
-  dict: Awaited<DictionaryReturnTypes["/en/login"]>;
+  dict: Awaited<DictionaryReturnTypes["/en/forgot-password"]>;
 }) {
   const [email, setEmail] = useState("");
   const [sendEmailError, setSendEmailError] = useState("");
