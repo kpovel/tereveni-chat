@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getDictionary } from "./dictionaries";
 import { ToggleLang } from "./ToggleLang";
 import tereveniLogo from "public/logo.svg";
+import { CookiePopup } from "@/components/CookiePopup";
 
 export default async function Home({
   params,
@@ -34,6 +35,7 @@ export default async function Home({
           </button>
         </div>
       </div>
+      <CookiePopup />
     </div>
   );
 }
