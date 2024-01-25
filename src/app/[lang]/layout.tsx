@@ -1,6 +1,8 @@
 import { ReactNode } from "react";
 import { Poppins } from "next/font/google";
 import { SetPreferredLanguage } from "./setPreferredLang";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 
@@ -23,6 +25,8 @@ export default function Layout({
         <SetPreferredLanguage lang={params.lang} />
         <div className="left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4"></div>
         {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
