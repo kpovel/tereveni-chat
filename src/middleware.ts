@@ -11,6 +11,11 @@ export async function middleware(request: NextRequest) {
     return redirectToMainPage(request);
   }
 
+  const refererPath = new URL(request.headers.get("referer")!).pathname;
+  if (refererPath.startsWith("/") && refererPath.endsWith("/login")) {
+    return NextResponse.next();
+  }
+
   const accessTokenResponse = await fetch(
     `${env.SERVER_URL}/api/refresh/access-token`,
     {

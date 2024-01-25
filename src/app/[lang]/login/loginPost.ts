@@ -6,6 +6,7 @@ import {
   setJwtAccessToken,
   setJwtRefreshToken,
 } from "../(protected)/setTokens";
+import { cookies } from "next/headers";
 
 type SuccessLoginResponse = {
   type: "Bearer";
@@ -34,10 +35,8 @@ export async function loginPostData(
     cache: "no-store",
   });
 
-  console.log(response.status);
   if (response.status == 200) {
     const tokens = (await response.json()) as SuccessLoginResponse;
-    console.log("tokens:", tokens);
 
     setJwtAccessToken(tokens.jwtAccessToken);
     setJwtRefreshToken(tokens.jwtRefreshToken);
@@ -45,16 +44,10 @@ export async function loginPostData(
     redirect(`/${lang}/chat`);
   }
 
-  if (response.status === 401) {
+  if (response.status === 401 || response.status === 403) {
     const loginError = (await response.json()) as UnauthorizedLoginResponse;
-    console.log("Error:", loginError);
-    return loginError.fieldMessage;
-  } else if (response.status === 403) {
-    const loginError = (await response.json()) as UnauthorizedLoginResponse;
-    console.log("Error:", loginError);
     return loginError.fieldMessage;
   }
 
-  console.log("something really bad:", await response.text());
   return "Server error";
 }
