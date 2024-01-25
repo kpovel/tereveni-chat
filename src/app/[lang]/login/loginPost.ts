@@ -2,7 +2,10 @@
 
 import { redirect } from "next/navigation";
 import { env } from "@/env.mjs";
-import { setJwtAccessToken, setJwtRefreshToken } from "../(protected)/setTokens";
+import {
+  setJwtAccessToken,
+  setJwtRefreshToken,
+} from "../(protected)/setTokens";
 
 type SuccessLoginResponse = {
   type: "Bearer";
@@ -31,8 +34,10 @@ export async function loginPostData(
     cache: "no-store",
   });
 
+  console.log(response.status);
   if (response.status == 200) {
     const tokens = (await response.json()) as SuccessLoginResponse;
+    console.log("tokens:", tokens);
 
     setJwtAccessToken(tokens.jwtAccessToken);
     setJwtRefreshToken(tokens.jwtRefreshToken);
@@ -42,11 +47,14 @@ export async function loginPostData(
 
   if (response.status === 401) {
     const loginError = (await response.json()) as UnauthorizedLoginResponse;
+    console.log("Error:", loginError);
     return loginError.fieldMessage;
   } else if (response.status === 403) {
     const loginError = (await response.json()) as UnauthorizedLoginResponse;
+    console.log("Error:", loginError);
     return loginError.fieldMessage;
   }
 
+  console.log("something really bad:", await response.text());
   return "Server error";
 }
