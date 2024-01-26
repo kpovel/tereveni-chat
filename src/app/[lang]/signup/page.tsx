@@ -1,3 +1,4 @@
+import { CookiePopup } from "@/components/CookiePopup";
 import { getDictionary } from "../dictionaries";
 import SignUpForm from "./signUpForm";
 
@@ -14,6 +15,7 @@ export default async function SignUp({
         {dict.hiThere}
       </h2>
       <SignUpForm lang={params.lang} dict={dict} />
+      <CookiePopup lang={params.lang} />
     </div>
   );
 }
