@@ -18,10 +18,10 @@ export async function getJwtAccessToken(): Promise<string> {
 
   const refreshToken = cookies().get(JWT_REFRESH_TOKEN);
   if (!refreshToken) {
-    redirectUnauthorized();
+    throw await redirectUnauthorized();
   }
 
-  return await regenerateAccessToken(refreshToken!.value) as string;
+  return (await regenerateAccessToken(refreshToken.value)) as string;
 }
 
 export async function regenerateAccessToken(
@@ -36,7 +36,7 @@ export async function regenerateAccessToken(
   });
 
   if (!response.ok) {
-    throw redirectUnauthorized();
+    throw await redirectUnauthorized();
   }
 
   const json = (await response.json()) as SuccessAccessTokenRegeneration;

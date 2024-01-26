@@ -21,8 +21,8 @@ export default async function Template({ children }: { children: ReactNode }) {
 async function newAccessToken(): Promise<string> {
   const refreshToken = cookies().get(JWT_REFRESH_TOKEN);
   if (!refreshToken) {
-    throw redirectUnauthorized();
+    throw await redirectUnauthorized();
   }
 
-  return await regenerateAccessToken(refreshToken.value);
+  return await regenerateAccessToken(refreshToken!.value);
 }
