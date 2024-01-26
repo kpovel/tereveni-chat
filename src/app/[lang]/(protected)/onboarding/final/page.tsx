@@ -1,5 +1,5 @@
 import { getDictionary } from "@/app/[lang]/dictionaries";
-import { onboardingUserData } from "./onboardingUserData";
+import { onboardingUserData } from "../onboardingUserData";
 import { FinishOnboarding } from "./FinishOnboarding";
 import { UserImage } from "./FinalUserImage";
 

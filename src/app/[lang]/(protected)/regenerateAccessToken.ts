@@ -12,7 +12,6 @@ export type SuccessAccessTokenRegeneration = {
 
 export async function getJwtAccessToken(): Promise<string> {
   const accessToken = cookies().get(JWT_ACCESS_TOKEN);
-
   if (accessToken && accessToken.value) {
     return accessToken.value;
   }
@@ -44,7 +43,7 @@ async function regenerateAccessToken(
   return json.jwtAccessToken;
 }
 
-function redirectUnauthorized() {
+export async function redirectUnauthorized() {
   const lang = (cookies().get("lang")?.value ?? "en") as "en" | "uk";
   redirect(`/${lang}`);
 }
