@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export function PopupMenu() {
+export function PopupMenu({ closePopup }: { closePopup: () => void }) {
   return (
     <div className="absolute bottom-0 left-0 w-full rounded-t-[32px] bg-[#050404] px-10 py-6">
       <p className="text-center text-white">
@@ -13,8 +13,10 @@ export function PopupMenu() {
           Learn more
         </Link>
       </div>
-      {/* todo: close popup on click */}
-      <button className="mt-5 w-full rounded-full bg-[#7C01F6] px-6 py-3 text-white">
+      <button
+        className="mt-5 w-full rounded-full bg-[#7C01F6] px-6 py-3 text-white"
+        onClick={closePopup}
+      >
         Got it
       </button>
     </div>

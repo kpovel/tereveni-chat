@@ -1,17 +1,26 @@
-"use client";
+"use server";
 
-import { useState } from "react";
-import { PopupMenu } from "./PopupMenu";
+import { cookies } from "next/headers";
+import { CookiePopupDialog } from "./CookiePopupDialog";
 
-export function CookiePopup() {
-  const [open, setOpen] = useState(true);
+const ACCEPTED_COOKIE_POLICY = "accepted_cookie_policy";
 
-  return (
-    <dialog
-      open={open}
-      className="absolute bottom-0 left-0 h-screen w-screen bg-white bg-opacity-20"
-    >
-    <PopupMenu />
-    </dialog>
-  );
+async function isAcceptedCookiePolicy() {
+  const acceptedCookies = cookies().get(ACCEPTED_COOKIE_POLICY);
+
+  if (acceptedCookies?.value === "true") {
+    return true;
+  }
+
+  return false;
+}
+
+export async function acceptCookiePolicy() {
+  cookies().set(ACCEPTED_COOKIE_POLICY, "true");
+}
+
+export async function CookiePopup() {
+  const acceptedPolicy = await isAcceptedCookiePolicy();
+
+  return <CookiePopupDialog opennedDialog={acceptedPolicy} />;
 }
