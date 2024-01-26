@@ -3,11 +3,14 @@
 import { useState } from "react";
 import { PopupMenu } from "./PopupMenu";
 import { acceptCookiePolicy } from ".";
+import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 
 export function CookiePopupDialog({
   opennedDialog,
+  dict,
 }: {
   opennedDialog: boolean;
+  dict: Awaited<DictionaryReturnTypes["components/en/CookiePopup"]>;
 }) {
   const [open, setOpen] = useState(!opennedDialog);
 
@@ -21,7 +24,7 @@ export function CookiePopupDialog({
       open={open}
       className="absolute bottom-0 left-0 h-screen w-screen bg-white bg-opacity-20"
     >
-      <PopupMenu closePopup={closePopup} />
+      <PopupMenu closePopup={closePopup} dict={dict}/>
     </dialog>
   );
 }

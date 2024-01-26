@@ -33,6 +33,10 @@ const dictionaries = {
     import("./(protected)/onboarding/pick-avatar/en.json").then((module) => module.default),
   "/uk/onboarding/pick-avatar": () =>
     import("./(protected)/onboarding/pick-avatar/uk.json").then((module) => module.default),
+  "components/en/CookiePopup": () =>
+    import("../../components/CookiePopup/en.json").then((module) => module.default),
+  "components/uk/CookiePopup": () =>
+    import("../../components/CookiePopup/uk.json").then((module) => module.default),
 };
 
 export type DictionaryReturnTypes = {

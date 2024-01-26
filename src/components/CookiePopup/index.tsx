@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { CookiePopupDialog } from "./CookiePopupDialog";
+import { getDictionary } from "@/app/[lang]/dictionaries";
 
 const ACCEPTED_COOKIE_POLICY = "accepted_cookie_policy";
 
@@ -19,8 +20,9 @@ export async function acceptCookiePolicy() {
   cookies().set(ACCEPTED_COOKIE_POLICY, "true");
 }
 
-export async function CookiePopup() {
+export async function CookiePopup({ lang }: { lang: "en" | "uk" }) {
   const acceptedPolicy = await isAcceptedCookiePolicy();
+  const dict = await getDictionary(`components/${lang}/CookiePopup`);
 
-  return <CookiePopupDialog opennedDialog={acceptedPolicy} />;
+  return <CookiePopupDialog opennedDialog={acceptedPolicy} dict={dict} />;
 }
