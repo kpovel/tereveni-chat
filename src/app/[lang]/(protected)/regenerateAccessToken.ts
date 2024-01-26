@@ -24,9 +24,9 @@ export async function getJwtAccessToken(): Promise<string> {
   return await regenerateAccessToken(refreshToken!.value) as string;
 }
 
-async function regenerateAccessToken(
+export async function regenerateAccessToken(
   refreshToken: string,
-): Promise<string | void> {
+): Promise<string> {
   const response = await fetch(`${env.SERVER_URL}/api/refresh/access-token`, {
     method: "POST",
     headers: {
@@ -36,7 +36,7 @@ async function regenerateAccessToken(
   });
 
   if (!response.ok) {
-    return redirectUnauthorized();
+    throw redirectUnauthorized();
   }
 
   const json = (await response.json()) as SuccessAccessTokenRegeneration;
