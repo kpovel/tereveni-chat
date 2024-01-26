@@ -12,22 +12,21 @@ export type SuccessAccessTokenRegeneration = {
 
 export async function getJwtAccessToken(): Promise<string> {
   const accessToken = cookies().get(JWT_ACCESS_TOKEN);
-
   if (accessToken && accessToken.value) {
     return accessToken.value;
   }
 
   const refreshToken = cookies().get(JWT_REFRESH_TOKEN);
   if (!refreshToken) {
-    redirectUnauthorized();
+    throw await redirectUnauthorized();
   }
 
-  return await regenerateAccessToken(refreshToken!.value) as string;
+  return (await regenerateAccessToken(refreshToken.value)) as string;
 }
 
-async function regenerateAccessToken(
+export async function regenerateAccessToken(
   refreshToken: string,
-): Promise<string | void> {
+): Promise<string> {
   const response = await fetch(`${env.SERVER_URL}/api/refresh/access-token`, {
     method: "POST",
     headers: {
@@ -37,14 +36,14 @@ async function regenerateAccessToken(
   });
 
   if (!response.ok) {
-    return redirectUnauthorized();
+    throw await redirectUnauthorized();
   }
 
   const json = (await response.json()) as SuccessAccessTokenRegeneration;
   return json.jwtAccessToken;
 }
 
-function redirectUnauthorized() {
+export async function redirectUnauthorized() {
   const lang = (cookies().get("lang")?.value ?? "en") as "en" | "uk";
   redirect(`/${lang}`);
 }

@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { onboardingUserData } from "./final/onboardingUserData";
+import { onboardingUserData } from "./onboardingUserData";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 
