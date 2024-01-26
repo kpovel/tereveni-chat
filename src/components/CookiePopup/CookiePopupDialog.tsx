@@ -6,13 +6,13 @@ import { acceptCookiePolicy } from ".";
 import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 
 export function CookiePopupDialog({
-  opennedDialog,
+  openedDialog,
   dict,
 }: {
-  opennedDialog: boolean;
+  openedDialog: boolean;
   dict: Awaited<DictionaryReturnTypes["components/en/CookiePopup"]>;
 }) {
-  const [open, setOpen] = useState(!opennedDialog);
+  const [open, setOpen] = useState(!openedDialog);
 
   function closePopup() {
     setOpen(false);
