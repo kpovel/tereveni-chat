@@ -8,9 +8,11 @@ import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 export function CookiePopupDialog({
   openedDialog,
   dict,
+  lang,
 }: {
   openedDialog: boolean;
   dict: Awaited<DictionaryReturnTypes["components/en/CookiePopup"]>;
+  lang: "en" | "uk";
 }) {
   const [open, setOpen] = useState(!openedDialog);
 
@@ -24,7 +26,7 @@ export function CookiePopupDialog({
       open={open}
       className="absolute bottom-0 left-0 h-screen w-screen bg-white bg-opacity-20"
     >
-      <PopupMenu closePopup={closePopup} dict={dict}/>
+      <PopupMenu closePopup={closePopup} dict={dict} lang={lang} />
     </dialog>
   );
 }
