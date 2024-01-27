@@ -44,7 +44,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     },
     table: ({ children }) => {
       return (
-        <table className="border-collapse rounded-[24px] border-hidden leading-normal shadow-[0_0_0_1px_#444444]">
+        <table className="border-collapse rounded-[24px] border-hidden leading-normal shadow-[0_0_0_1px_#444444] ml-6 mt-3 mb-5 w-[calc(100%-20px)]">
           {children}
         </table>
       );
