@@ -25,7 +25,7 @@ export function PopupMenu({
         </Link>
       </div>
       <button
-        className="mt-5 w-full rounded-full bg-[#7C01F6] px-6 py-3 text-white"
+        className="mt-5 w-full rounded-full bg-[#7C01F6] px-6 py-4 text-white"
         onClick={closePopup}
       >
         {dict.gotIt}
