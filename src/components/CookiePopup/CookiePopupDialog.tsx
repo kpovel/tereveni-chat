@@ -24,7 +24,7 @@ export function CookiePopupDialog({
   return (
     <dialog
       open={open}
-      className="absolute bottom-0 left-0 h-screen w-screen bg-white bg-opacity-20"
+      className="absolute bottom-0 left-0 h-dvh w-screen bg-white bg-opacity-20"
     >
       <PopupMenu closePopup={closePopup} dict={dict} lang={lang} />
     </dialog>
