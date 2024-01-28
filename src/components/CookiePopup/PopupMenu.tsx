@@ -12,7 +12,7 @@ export function PopupMenu({
   lang: "en" | "uk";
 }) {
   return (
-    <div className="absolute bottom-0 left-0 w-full rounded-t-[32px] bg-[#050404] px-10 py-6">
+    <div className="absolute bottom-0 left-0 w-full rounded-t-[32px] bg-[#050404] px-6 py-10">
       <p className="text-center text-white">{dict.usesCookies}</p>
       <div className="w-full pt-2 text-center">
         <Link
