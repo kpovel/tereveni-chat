@@ -11,7 +11,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       );
     },
     h2: ({ children }) => {
-      return <h2 className="text-sm font-normal text-white mt-5 mb-3">{children}</h2>;
+      return (
+        <h2 className="mb-3 mt-5 text-sm font-normal text-white">{children}</h2>
+      );
     },
     a: ({ children, href }) => {
       if (href?.startsWith("mailto:")) {
@@ -34,19 +36,26 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       );
     },
     ul: ({ children }) => {
-      return <ul className="*:pl-0 my-3">{children}</ul>;
+      return <ul className="my-3 *:pl-0">{children}</ul>;
     },
     li: ({ children }) => {
-      return <li className="leading-normal m-0 text-sm *:my-3">{children}</li>;
+      return <li className="m-0 text-sm leading-normal *:my-3">{children}</li>;
     },
     p: ({ children }) => {
       return <p className="text-sm">{children}</p>;
     },
     table: ({ children }) => {
       return (
-        <table className="border-collapse rounded-[24px] border-hidden leading-normal shadow-[0_0_0_1px_#444444] ml-6 mt-3 mb-5 w-[calc(100%-20px)]">
+        <table className="mb-5 ml-6 mt-3 w-[calc(100%-20px)] border-collapse rounded-[24px] border-hidden leading-normal shadow-[0_0_0_1px_#444444]">
           {children}
         </table>
+      );
+    },
+    tr: ({ children }) => {
+      return (
+        <tr className="[&>th:first-child]:rounded-tl-3xl [&>th:first-child]:bg-[#050404] [&>th:nth-child(2)]:rounded-tr-3xl [&>th:nth-child(2)]:bg-[#050404]">
+          {children}
+        </tr>
       );
     },
     th: ({ children }) => {
