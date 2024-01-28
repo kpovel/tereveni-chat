@@ -5,7 +5,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     h1: ({ children }) => {
       return (
-        <h1 className="text-center text-lg font-medium text-neutral-50">
+        <h1 className="mb-10 text-center text-lg font-medium text-neutral-50">
           {children}
         </h1>
       );
@@ -42,7 +42,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       return <li className="m-0 text-sm leading-normal *:my-3">{children}</li>;
     },
     p: ({ children }) => {
-      return <p className="text-sm">{children}</p>;
+      return <p className="my-5 text-sm">{children}</p>;
     },
     table: ({ children }) => {
       return (
