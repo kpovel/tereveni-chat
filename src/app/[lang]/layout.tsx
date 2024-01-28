@@ -22,7 +22,7 @@ export default function Layout({
 }) {
   return (
     <html lang={params.lang}>
-      <body className={`${poppins.className} min-h-screen text-sm`}>
+      <body className={`${poppins.className} min-h-dvh text-sm`}>
         <SetPreferredLanguage lang={params.lang} />
         {children}
       </body>
