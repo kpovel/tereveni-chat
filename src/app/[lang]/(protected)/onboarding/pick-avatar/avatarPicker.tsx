@@ -147,7 +147,7 @@ export default function AvatarPicker({
         </div>
       )}
       <div className="mt-10 flex flex-col items-center">
-        <h3 className="text-center font-main text-sm font-normal leading-tight text-neutral-50">
+        <h3 className="text-center text-sm font-normal leading-tight text-neutral-50">
           {dict.pickAvatar}
         </h3>
         <DefaultImages
@@ -166,7 +166,7 @@ export default function AvatarPicker({
         >
           {dict.next}
         </button>
-        <button className="mt-5 w-full border-none bg-transparent text-center font-main text-sm font-normal leading-tight text-stone-300 outline-none">
+        <button className="mt-5 w-full border-none bg-transparent text-center text-sm font-normal leading-tight text-stone-300 outline-none">
           <Link href={`/${lang}/onboarding/introduce-yourself`}>
             {dict.skip}
           </Link>

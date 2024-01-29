@@ -19,7 +19,7 @@ export default async function PickAvatar({
       <h2 className="mt-10 text-center text-lg font-medium text-neutral-50 ">
         {dict.title}
       </h2>
-      <p className="mt-5 text-center font-main text-sm font-normal leading-tight text-neutral-50">
+      <p className="mt-5 text-center text-sm font-normal leading-tight text-neutral-50">
         {dict.subtitle}
       </p>
       <AvatarPicker

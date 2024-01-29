@@ -1,3 +1,4 @@
+import { CookiePopup } from "@/components/CookiePopup";
 import { getDictionary } from "../dictionaries";
 import LoginForm from "./loginForm";
 
@@ -16,6 +17,7 @@ export default async function LoginPage({
       <div className="mx-auto mt-10 max-w-md">
         <LoginForm lang={params.lang} dict={dict} />
       </div>
+      <CookiePopup lang={params.lang} />
     </div>
   );
 }

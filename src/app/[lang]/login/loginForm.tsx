@@ -86,7 +86,7 @@ export default function LoginForm({
       <div className="mb-5 ml-1 text-xs text-red-500">{loginError}</div>
       <Link
         href={`/${lang}/forgot-password`}
-        className="inline-block w-full text-center font-main text-xs font-normal text-violet-400 underline"
+        className="inline-block w-full text-center text-xs font-normal text-[#9D83F9] underline"
       >
         {dict.forgotPassword}
       </Link>

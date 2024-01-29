@@ -33,13 +33,13 @@ export default function Introduce({
           value={introduce}
           max-length={maxCharacters}
           onChange={handleText}
-          className="inline-flex h-[192px] w-full items-center justify-center rounded-3xl border border-neutral-700 bg-stone-900 px-5 py-3 font-main text-sm font-normal leading-tight text-neutral-50 outline-none focus:border-violet-700"
+          className="inline-flex h-[192px] w-full items-center justify-center rounded-3xl border border-neutral-700 bg-stone-900 px-5 py-3 text-sm font-normal leading-tight text-neutral-50 outline-none focus:border-violet-700"
           name="introduce"
           id="introduce"
           placeholder={dict.typeHere}
         ></textarea>
         <div className="-mt-2 px-2 text-right">
-          <span className="font-main text-xs font-normal leading-none text-stone-300">
+          <span className="text-xs font-normal leading-none text-stone-300">
             {introduce.length} / {maxCharacters}
           </span>
         </div>
@@ -55,7 +55,7 @@ export default function Introduce({
       </form>
       <div className="mt-5 w-full flex justify-center">
       <Link
-          className="text-center font-main text-sm font-normal leading-tight text-stone-300 border-none bg-transparent outline-none"
+          className="text-center text-sm font-normal leading-tight text-stone-300 border-none bg-transparent outline-none"
           href={`/${lang}/onboarding/categories`}
         >
           {dict.skip}
