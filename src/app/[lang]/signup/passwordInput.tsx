@@ -6,26 +6,25 @@ import {
   SetStateAction,
 } from "react";
 import Image from "next/image";
-import { DictionaryReturnTypes } from "../dictionaries";
 import { isValidPassword } from "@/util/input-validation";
 import lock from "public/lock.svg";
 import eyeOpen from "public/eye-open.svg";
 import eyeClosed from "public/eye-closed.svg";
 
 interface PasswordInputProps {
+  pass: string;
+  setPass: Dispatch<SetStateAction<string>>;
   placeholder: string;
   hint: boolean;
-  setPassHandler: (pass: string) => void;
-  pass: string;
-  dict: Awaited<DictionaryReturnTypes["/en/signup"]>;
+  passwordConstraint?: string;
 }
 
 export default function PasswordInput({
+  pass,
+  setPass,
   placeholder,
   hint,
-  pass,
-  dict,
-  setPassHandler,
+  passwordConstraint,
 }: PasswordInputProps) {
   const [isHidden, setIsHidden] = useState(true);
   const [isVisibleHint, setIsVisibleHint] = useState(false);
@@ -42,17 +41,17 @@ export default function PasswordInput({
     }
   }
 
-  function setPass(e: ChangeEvent<HTMLInputElement>) {
+  function handlePasswordChange(e: ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
-    setPassHandler(e.currentTarget.value);
+    setPass(e.target.value);
   }
 
   return (
-    <div>
-      <div className="mt-5 flex relative items-center">
-        <Image src={lock} alt="lock" className="absolute left-5 "/>
+    <>
+      <div className="relative mt-5 flex items-center">
+        <Image src={lock} alt="lock" className="absolute left-5 " />
         <input
-          onChange={setPass}
+          onChange={handlePasswordChange}
           onFocus={hintHandler}
           onBlur={hiddenHint}
           className={`main__input ${
@@ -67,11 +66,11 @@ export default function PasswordInput({
       {isVisibleHint && (
         <div className="mt-1 px-2 transition">
           <p className="text-xs font-normal leading-5 text-neutral-50">
-            {dict.errorStatus.passwordConstraint}
+            {passwordConstraint}
           </p>
         </div>
       )}
-    </div>
+    </>
   );
 }
 
@@ -88,14 +87,15 @@ function TogglePassword({
   }
 
   return (
-    <button
-      className="absolute right-5"
-      onClick={togglePasswordVisibility}
-    >
+    <button className="absolute right-5" onClick={togglePasswordVisibility}>
       {isHidden ? (
-        <Image src={eyeOpen} alt="show password" className="w-5 h-5" />
+        <Image src={eyeOpen} alt="show password" className="h-5 w-5" />
       ) : (
-        <Image src={eyeClosed} alt="hide password" className="w-5 h-5 rotate-180"/>
+        <Image
+          src={eyeClosed}
+          alt="hide password"
+          className="h-5 w-5 rotate-180"
+        />
       )}
     </button>
   );
