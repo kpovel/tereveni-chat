@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { loginPostData } from "./loginPost";
 import { isValidEmail, isValidPassword } from "@/util/input-validation";
 import { DictionaryReturnTypes } from "../dictionaries";
 import PasswordInput from "../signup/passwordInput";
+import { EmailInput } from "./emailInput";
 
 export default function LoginForm({
   lang,
@@ -20,11 +20,6 @@ export default function LoginForm({
   const [loginError, setLoginError] = useState("");
   const isDisabledSubmit = !isValidEmail(email) || !isValidPassword(password);
 
-  function setEmailHandler(e: ChangeEvent<HTMLInputElement>) {
-    e.preventDefault();
-    setEmail(e.currentTarget.value);
-  }
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -34,20 +29,11 @@ export default function LoginForm({
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col">
-      <div className="relative">
-        <div className="absolute left-5 top-1/2 -translate-y-1/2 transform">
-          <Image src="/mail.svg" alt="mail" width={20} height={20} />
-        </div>
-        <input
-          className={`main__input ${
-            email.trim() && !isValidEmail(email) ? "border-red-500" : ""
-          }`}
-          type="email"
-          placeholder={dict.emailPlaceholder}
-          value={email}
-          onChange={setEmailHandler}
-        />
-      </div>
+      <EmailInput
+        email={email}
+        setEmail={setEmail}
+        placeholder={dict.emailPlaceholder}
+      />
       <PasswordInput
         pass={password}
         setPass={setPassword}
