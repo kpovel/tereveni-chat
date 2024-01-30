@@ -11,6 +11,7 @@ import {
   isValidPassword,
 } from "@/util/input-validation";
 import { DictionaryReturnTypes } from "../dictionaries";
+import { LoginInput } from "./loginInput";
 
 export default function SignUpForm({
   lang,
@@ -36,11 +37,6 @@ export default function SignUpForm({
     setIsTermsChecked(!isTermsChecked);
   }
 
-  function setLoginHandler(e: ChangeEvent<HTMLInputElement>) {
-    e.preventDefault();
-    setLogin(e.currentTarget.value);
-  }
-
   function setEmailHandler(e: ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
     setEmail(e.currentTarget.value);
@@ -64,99 +60,95 @@ export default function SignUpForm({
       onSubmit={handleSubmit}
       className="flex w-full grow flex-col justify-between"
     >
-      <div className="relative">
-        <div className="absolute left-5 top-1/2 -translate-y-1/2 transform">
-          <Image src="/user.svg" alt="mail" width={20} height={20} />
-        </div>
-        <input
-          value={login}
-          onChange={setLoginHandler}
-          className={`main__input ${
-            login.trim() && !isValidLogin(login) ? "border-red-500" : ""
-          }`}
-          type="text"
+      <div>
+        <LoginInput
+          login={login}
+          setLogin={setLogin}
           placeholder={dict.placeholder.login}
         />
-      </div>
-      {!isValidLogin && (
-        <div className="px-2 pt-1">
-          <p className="text-xs font-normal leading-none text-red-500">
-            {dict.errorStatus.loginCharacters}
-          </p>
+        {login.trim() && !isValidLogin(login) && (
+          <div className="px-2 pt-1">
+            <p className="text-xs font-normal leading-none text-red-500">
+              {dict.errorStatus.loginCharacters}
+            </p>
+          </div>
+        )}
+        <div className="relative mt-5">
+          <div className="absolute left-5 top-1/2 -translate-y-1/2 transform">
+            <Image src="/mail.svg" alt="mail" width={20} height={20} />
+          </div>
+          <input
+            onChange={setEmailHandler}
+            value={email}
+            className={`main__input ${
+              email.trim() && !isValidEmail(email) ? "border-red-500" : ""
+            }`}
+            type="email"
+            placeholder={dict.placeholder.email}
+          />
         </div>
-      )}
-      <div className="relative mt-5">
-        <div className="absolute left-5 top-1/2 -translate-y-1/2 transform">
-          <Image src="/mail.svg" alt="mail" width={20} height={20} />
-        </div>
-        <input
-          onChange={setEmailHandler}
-          value={email}
-          className={`main__input ${
-            email.trim() && !isValidEmail(email) ? "border-red-500" : ""
-          }`}
-          type="email"
-          placeholder={dict.placeholder.email}
+        {!isValidEmail && (
+          <div className="px-2 pt-1">
+            <p className="text-xs font-normal leading-none text-red-500">
+              {dict.errorStatus.invalidEmail}
+            </p>
+          </div>
+        )}
+        <PasswordInput
+          pass={password}
+          setPass={setPassword}
+          placeholder={dict.placeholder.password}
+          hint={true}
+          passwordConstraint={dict.errorStatus.passwordConstraint}
         />
-      </div>
-      {!isValidEmail && (
-        <div className="px-2 pt-1">
-          <p className="text-xs font-normal leading-none text-red-500">
-            {dict.errorStatus.invalidEmail}
-          </p>
-        </div>
-      )}
-      <PasswordInput
-        pass={password}
-        setPass={setPassword}
-        placeholder={dict.placeholder.password}
-        hint={true}
-        passwordConstraint={dict.errorStatus.passwordConstraint}
-      />
-      <PasswordInput
-        setPass={setConfirmPassword}
-        hint={false}
-        placeholder={dict.placeholder.confirmPassword}
-        pass={confirmPassword}
-      />
-      {password !== confirmPassword && (
-        <div className="px-2 pt-1">
-          <p className="text-xs font-normal leading-none text-red-500">
-            {dict.errorStatus.passwordNotMatch}
-          </p>
-        </div>
-      )}
-      <div className="mt-10 flex items-center text-center">
-        <div
-          className="flex h-[19px] w-[19px] items-center justify-center rounded border-2 border-solid border-white"
-          onClick={toggleTerms}
-        >
-          {isTermsChecked && (
-            <Image src="/checked.svg" alt="mail" width={12} height={12} />
-          )}
-        </div>
-        <span className="ml-2 text-left text-xs font-normal leading-none text-neutral-50">
-          {dict.terms.read}{" "}
-          <Link
-            href={`/${lang}/terms-and-conditions`}
-            className="text-center text-xs font-normal text-[#9D83F9] underline"
-          >
-            {dict.terms.termsConditions}
-          </Link>
-        </span>
+        <PasswordInput
+          setPass={setConfirmPassword}
+          hint={false}
+          placeholder={dict.placeholder.confirmPassword}
+          pass={confirmPassword}
+        />
+        {password !== confirmPassword && (
+          <div className="px-2 pt-1">
+            <p className="text-xs font-normal leading-none text-red-500">
+              {dict.errorStatus.passwordNotMatch}
+            </p>
+          </div>
+        )}
       </div>
 
       <div>
-        <div className="my-5 text-xs text-red-500">{singupError}</div>
-        <button
-          type="submit"
-          disabled={!isEnabledSubmit}
-          className={`main__btn ${
-            !isEnabledSubmit && "bg-opacity-10 text-zinc-500"
-          } px-6 py-3`}
-        >
-          {dict.nextStep}
-        </button>
+        <div className="mt-10 flex items-center text-center">
+          <div
+            className="flex h-[19px] w-[19px] items-center justify-center rounded border-2 border-solid border-white"
+            onClick={toggleTerms}
+          >
+            {isTermsChecked && (
+              <Image src="/checked.svg" alt="mail" width={12} height={12} />
+            )}
+          </div>
+          <span className="ml-2 text-left text-xs font-normal leading-none text-neutral-50">
+            {dict.terms.read}{" "}
+            <Link
+              href={`/${lang}/terms-and-conditions`}
+              className="text-center text-xs font-normal text-[#9D83F9] underline"
+            >
+              {dict.terms.termsConditions}
+            </Link>
+          </span>
+        </div>
+
+        <div>
+          <div className="my-5 text-xs text-red-500">{singupError}</div>
+          <button
+            type="submit"
+            disabled={!isEnabledSubmit}
+            className={`main__btn ${
+              !isEnabledSubmit && "bg-opacity-10 text-zinc-500"
+            } px-6 py-3`}
+          >
+            {dict.nextStep}
+          </button>
+        </div>
       </div>
     </form>
   );

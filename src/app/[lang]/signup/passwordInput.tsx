@@ -49,7 +49,7 @@ export default function PasswordInput({
   return (
     <>
       <div className="relative mt-5 flex items-center">
-        <Image src={lock} alt="lock" className="absolute left-5 " />
+        <Image src={lock} alt="lock" className="absolute left-5" />
         <input
           onChange={handlePasswordChange}
           onFocus={hintHandler}
