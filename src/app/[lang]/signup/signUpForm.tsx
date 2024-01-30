@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import PasswordInput from "./passwordInput";
@@ -11,6 +11,8 @@ import {
   isValidPassword,
 } from "@/util/input-validation";
 import { DictionaryReturnTypes } from "../dictionaries";
+import { LoginInput } from "./loginInput";
+import { EmailInput } from "../login/emailInput";
 
 export default function SignUpForm({
   lang,
@@ -36,24 +38,6 @@ export default function SignUpForm({
     setIsTermsChecked(!isTermsChecked);
   }
 
-  function setLoginHandler(e: ChangeEvent<HTMLInputElement>) {
-    e.preventDefault();
-    setLogin(e.currentTarget.value);
-  }
-
-  function setEmailHandler(e: ChangeEvent<HTMLInputElement>) {
-    e.preventDefault();
-    setEmail(e.currentTarget.value);
-  }
-
-  function setPassHandler(pass: string) {
-    setPassword(pass);
-  }
-
-  function setConfirmPassHandler(pass: string) {
-    setConfirmPassword(pass);
-  }
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -73,41 +57,23 @@ export default function SignUpForm({
       className="flex w-full grow flex-col justify-between"
     >
       <div>
-        <div className="relative">
-          <div className="absolute left-5 top-1/2 -translate-y-1/2 transform">
-            <Image src="/user.svg" alt="mail" width={20} height={20} />
-          </div>
-          <input
-            value={login}
-            onChange={setLoginHandler}
-            className={`main__input ${
-              login.trim() && !isValidLogin(login) ? "border-red-500" : ""
-            }`}
-            type="text"
-            placeholder={dict.placeholder.login}
-          />
-        </div>
-        {!isValidLogin && (
+        <LoginInput
+          login={login}
+          setLogin={setLogin}
+          placeholder={dict.placeholder.login}
+        />
+        {login.trim() && !isValidLogin(login) && (
           <div className="px-2 pt-1">
             <p className="text-xs font-normal leading-none text-red-500">
               {dict.errorStatus.loginCharacters}
             </p>
           </div>
         )}
-        <div className="relative mt-5">
-          <div className="absolute left-5 top-1/2 -translate-y-1/2 transform">
-            <Image src="/mail.svg" alt="mail" width={20} height={20} />
-          </div>
-          <input
-            onChange={setEmailHandler}
-            value={email}
-            className={`main__input ${
-              email.trim() && !isValidEmail(email) ? "border-red-500" : ""
-            }`}
-            type="email"
-            placeholder={dict.placeholder.email}
-          />
-        </div>
+        <EmailInput
+          email={email}
+          setEmail={setEmail}
+          placeholder={dict.placeholder.email}
+        />
         {!isValidEmail && (
           <div className="px-2 pt-1">
             <p className="text-xs font-normal leading-none text-red-500">
@@ -116,18 +82,17 @@ export default function SignUpForm({
           </div>
         )}
         <PasswordInput
-          setPassHandler={setPassHandler}
-          hint={true}
-          placeholder={dict.placeholder.password}
           pass={password}
-          dict={dict}
+          setPass={setPassword}
+          placeholder={dict.placeholder.password}
+          hint={true}
+          passwordConstraint={dict.errorStatus.passwordConstraint}
         />
         <PasswordInput
-          setPassHandler={setConfirmPassHandler}
+          setPass={setConfirmPassword}
           hint={false}
           placeholder={dict.placeholder.confirmPassword}
           pass={confirmPassword}
-          dict={dict}
         />
         {password !== confirmPassword && (
           <div className="px-2 pt-1">
@@ -136,6 +101,9 @@ export default function SignUpForm({
             </p>
           </div>
         )}
+      </div>
+
+      <div>
         <div className="mt-10 flex items-center text-center">
           <div
             className="flex h-[19px] w-[19px] items-center justify-center rounded border-2 border-solid border-white"
@@ -155,19 +123,19 @@ export default function SignUpForm({
             </Link>
           </span>
         </div>
-      </div>
 
-      <div>
-        <div className="my-5 text-xs text-red-500">{singupError}</div>
-        <button
-          type="submit"
-          disabled={!isEnabledSubmit}
-          className={`main__btn ${
-            !isEnabledSubmit && "bg-opacity-10 text-zinc-500"
-          } px-6 py-3`}
-        >
-          {dict.nextStep}
-        </button>
+        <div>
+          <div className="my-5 text-xs text-red-500">{singupError}</div>
+          <button
+            type="submit"
+            disabled={!isEnabledSubmit}
+            className={`main__btn ${
+              !isEnabledSubmit && "bg-opacity-10 text-zinc-500"
+            } px-6 py-3`}
+          >
+            {dict.nextStep}
+          </button>
+        </div>
       </div>
     </form>
   );
