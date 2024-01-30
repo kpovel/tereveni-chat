@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import PasswordInput from "./passwordInput";
@@ -12,6 +12,7 @@ import {
 } from "@/util/input-validation";
 import { DictionaryReturnTypes } from "../dictionaries";
 import { LoginInput } from "./loginInput";
+import { EmailInput } from "../login/emailInput";
 
 export default function SignUpForm({
   lang,
@@ -35,11 +36,6 @@ export default function SignUpForm({
 
   function toggleTerms() {
     setIsTermsChecked(!isTermsChecked);
-  }
-
-  function setEmailHandler(e: ChangeEvent<HTMLInputElement>) {
-    e.preventDefault();
-    setEmail(e.currentTarget.value);
   }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -73,20 +69,11 @@ export default function SignUpForm({
             </p>
           </div>
         )}
-        <div className="relative mt-5">
-          <div className="absolute left-5 top-1/2 -translate-y-1/2 transform">
-            <Image src="/mail.svg" alt="mail" width={20} height={20} />
-          </div>
-          <input
-            onChange={setEmailHandler}
-            value={email}
-            className={`main__input ${
-              email.trim() && !isValidEmail(email) ? "border-red-500" : ""
-            }`}
-            type="email"
-            placeholder={dict.placeholder.email}
-          />
-        </div>
+        <EmailInput
+          email={email}
+          setEmail={setEmail}
+          placeholder={dict.placeholder.email}
+        />
         {!isValidEmail && (
           <div className="px-2 pt-1">
             <p className="text-xs font-normal leading-none text-red-500">
