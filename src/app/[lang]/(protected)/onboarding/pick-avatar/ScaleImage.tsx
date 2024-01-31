@@ -15,7 +15,7 @@ export function ScaleImage({
   return (
     <div className="my-4 flex justify-center">
       <Slider.Root
-        className="relative flex h-5 w-[200px] touch-none select-none items-center"
+        className="relative flex h-5 w-[200px] touch-none select-none items-center cursor-pointer"
         defaultValue={[0]}
         onValueChange={handleScaleChange}
         value={[scale]}
