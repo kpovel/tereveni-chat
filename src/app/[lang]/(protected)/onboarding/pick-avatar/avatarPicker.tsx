@@ -40,8 +40,7 @@ export default function AvatarPicker({
   const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileInput = event.target;
     const file = fileInput.files?.[0];
-
-    const maxSizeInBytes = 3 * 1024 * 1024;
+    const maxSizeInBytes = 3 * 1024 * 1024; // 3mb
 
     if (file && file.size < maxSizeInBytes) {
       setScale(1);
@@ -49,9 +48,13 @@ export default function AvatarPicker({
       setCustomAvatar(file);
       setIsEnabledNext(true);
       setUploadError(false);
-    } else {
+      return;
+    }
+
+    if (file && file.size > maxSizeInBytes) {
       fileInput.value = "";
       setUploadError(true);
+      return;
     }
   };
 
