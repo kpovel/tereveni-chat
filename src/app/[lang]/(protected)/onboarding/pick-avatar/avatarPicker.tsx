@@ -153,6 +153,7 @@ export default function AvatarPicker({
         <DefaultImages
           imagePaths={defaultImages}
           predefinedAvatarClick={handlePredefinedAvatarClick}
+          selectedDefaultAvatar={customAvatarData}
         />
       </div>
 
