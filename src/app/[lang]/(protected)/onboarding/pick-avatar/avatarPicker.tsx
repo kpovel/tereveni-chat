@@ -87,7 +87,13 @@ export default function AvatarPicker({
         <div className="relative h-[200px] w-[200px]">
           <button className="absolute right-0 top-0 z-10 rounded-full">
             <label htmlFor="your_avatar">
-              <Image src="/plus-1.png" width={45} height={45} alt="plus" />
+              <Image
+                src="/plus-1.png"
+                width={45}
+                height={45}
+                alt="plus"
+                className="cursor-pointer"
+              />
             </label>
           </button>
 
@@ -115,12 +121,17 @@ export default function AvatarPicker({
                 unoptimized
               />
             ) : (
-              <Image
-                src="/Preview.svg"
-                width={200}
-                height={200}
-                alt="preview"
-              />
+              <button>
+                <label htmlFor="your_avatar">
+                  <Image
+                    className="cursor-pointer"
+                    src="/Preview.svg"
+                    width={200}
+                    height={200}
+                    alt="preview"
+                  />
+                </label>
+              </button>
             )}
           </div>
         </div>
