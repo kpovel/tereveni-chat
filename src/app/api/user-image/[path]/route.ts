@@ -1,24 +1,32 @@
+import { getJwtAccessToken } from "@/app/[lang]/(protected)/regenerateAccessToken";
 import { env } from "@/env.mjs";
-import { JWT_ACCESS_TOKEN } from "@/util/cookiesName";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { NextRequest } from "next/server";
 
 export async function GET(
-  _request: Request,
+  request: NextRequest,
   { params }: { params: { path: string } },
 ) {
-  const jwtAccess = cookies().get(JWT_ACCESS_TOKEN);
+  const jwtAccess = await getJwtAccessToken();
 
   if (!jwtAccess) {
-    const lang = cookies().get("lang")?.value ?? "en";
+    const lang = request.cookies.get("lang")?.value ?? "en";
     redirect(`/${lang}`);
   }
 
   const res = await fetch(`${env.SERVER_URL}/api/user-image/${params.path}`, {
     headers: {
-      Authorization: `Bearer ${jwtAccess.value}`,
+      Authorization: `Bearer ${jwtAccess}`,
     },
   });
+
+  if (params.path.endsWith(".svg")) {
+    return new Response(await res.text(), {
+      headers: {
+        "Content-Type": "image/svg+xml"
+      }
+    });
+  }
 
   return new Response(res.body);
 }

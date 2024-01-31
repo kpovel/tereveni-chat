@@ -16,7 +16,7 @@ export default async function OnboardingCategories({
         <h2 className="text-center text-lg font-medium text-neutral-50">
           {dict.title}
         </h2>
-        <h3 className="mt-5 text-center font-main text-sm font-normal leading-tight text-neutral-50">
+        <h3 className="mt-5 text-center text-sm font-normal leading-tight text-neutral-50">
           {dict.subtitle}
         </h3>
       </div>

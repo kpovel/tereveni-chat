@@ -1,25 +1,28 @@
 import { ReactNode } from "react";
-import { RegenerateAccessToken } from "./updateAccessToken";
+import {
+  redirectUnauthorized,
+  regenerateAccessToken,
+} from "./regenerateAccessToken";
 import { cookies } from "next/headers";
 import { JWT_REFRESH_TOKEN } from "@/util/cookiesName";
-import { redirect } from "next/navigation";
+import { SetAccessToken } from "./SetAccessToken";
 
 export default async function Template({ children }: { children: ReactNode }) {
-  redirectUnauthorizedUser();
+  const accessToken = await newAccessToken();
 
   return (
     <>
-      <RegenerateAccessToken />
       {children}
+      <SetAccessToken accessToken={accessToken} />
     </>
   );
 }
 
-export function redirectUnauthorizedUser() {
+async function newAccessToken(): Promise<string> {
   const refreshToken = cookies().get(JWT_REFRESH_TOKEN);
   if (!refreshToken) {
-    const lang = cookies().get("lang");
-    const langValue = (lang?.value ?? "en") as "en" | "uk";
-    redirect(`/${langValue}`);
+    throw await redirectUnauthorized();
   }
+
+  return await regenerateAccessToken(refreshToken!.value);
 }

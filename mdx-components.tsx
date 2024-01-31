@@ -74,4 +74,3 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     },
     ...components,
   };
-}

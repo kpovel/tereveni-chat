@@ -1,7 +1,7 @@
 import { env } from "@/env.mjs";
-import { JWT_ACCESS_TOKEN } from "@/util/cookiesName";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { getJwtAccessToken } from "../../regenerateAccessToken";
 
 export type Hashtag = {
   name: string;
@@ -9,18 +9,14 @@ export type Hashtag = {
 };
 
 export async function onboardingHashtags() {
-  const jwtAccessToken = cookies().get(JWT_ACCESS_TOKEN);
+  const jwtAccessToken = await getJwtAccessToken();
   const lang = cookies().get("lang")?.value ?? "en";
-
-  if (!jwtAccessToken) {
-    redirect(`/${lang}`);
-  }
 
   const res = await fetch(
     `${env.SERVER_URL}/api/user-onboarding/hashtags-group`,
     {
       headers: {
-        Authorization: `Bearer ${jwtAccessToken.value}`,
+        Authorization: `Bearer ${jwtAccessToken}`,
       },
     },
   );

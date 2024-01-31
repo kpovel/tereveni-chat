@@ -20,7 +20,7 @@ export function isValidPassword(password: string) {
     .string()
     .min(6)
     .max(72)
-    .regex(/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/);
+    .regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@<>'$^#~!%*=?/;:_&|()])[A-Za-z\d@<>'$^#~!%*=?/;:_&|()]+$/);
 
   return passwordSchema.safeParse(password).success;
 }

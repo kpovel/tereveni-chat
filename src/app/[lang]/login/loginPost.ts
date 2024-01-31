@@ -6,6 +6,7 @@ import {
   setJwtAccessToken,
   setJwtRefreshToken,
 } from "../(protected)/setTokens";
+import { cookies } from "next/headers";
 
 type SuccessLoginResponse = {
   type: "Bearer";
@@ -43,10 +44,7 @@ export async function loginPostData(
     redirect(`/${lang}/chat`);
   }
 
-  if (response.status === 401) {
-    const loginError = (await response.json()) as UnauthorizedLoginResponse;
-    return loginError.fieldMessage;
-  } else if (response.status === 403) {
+  if (response.status === 401 || response.status === 403) {
     const loginError = (await response.json()) as UnauthorizedLoginResponse;
     return loginError.fieldMessage;
   }
