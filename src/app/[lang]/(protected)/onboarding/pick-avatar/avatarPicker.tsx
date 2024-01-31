@@ -98,7 +98,7 @@ export default function AvatarPicker({
           >
             {customAvatar ? (
               <AvatarEditor
-                className="-translate-x-7 -translate-y-7"
+                className="-translate-x-7 -translate-y-7 object-cover"
                 ref={editorRef}
                 image={customAvatar}
                 width={205}
