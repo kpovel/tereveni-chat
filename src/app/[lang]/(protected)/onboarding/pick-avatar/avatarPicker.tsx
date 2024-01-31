@@ -59,10 +59,6 @@ export default function AvatarPicker({
     }
   };
 
-  const handleScaleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setScale(parseFloat(e.target.value));
-  };
-
   const handleSaveAvatar = async () => {
     if (customAvatar) {
       const formData = new FormData();
