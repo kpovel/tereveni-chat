@@ -53,6 +53,10 @@ const dictionaries = {
     ),
   "/uk/onboarding/pick-avatar": () =>
     import("./(protected)/onboarding/pick-avatar/uk.json").then((module) => module.default),
+    "/en/create-new-password": () =>
+    import("./(protected)/create-new-password/en.json").then((module) => module.default),  
+    "/uk/create-new-password": () =>
+    import("./(protected)/create-new-password/uk.json").then((module) => module.default),  
   "components/en/CookiePopup": () =>
     import("../../components/CookiePopup/en.json").then((module) => module.default),
   "components/uk/CookiePopup": () =>
