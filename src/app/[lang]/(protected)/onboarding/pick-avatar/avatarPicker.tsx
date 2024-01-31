@@ -9,6 +9,7 @@ import { avatarPost } from "./avatarPost";
 import { defaultAvatarPut } from "./defaultAvataPut";
 import "./page.css";
 import { DefaultImages } from "./DefaultImages";
+import { ScaleImage } from "./ScaleImage";
 
 export default function AvatarPicker({
   lang,
@@ -148,19 +149,7 @@ export default function AvatarPicker({
           <span>{avatarPostError}</span>
         </div>
       )}
-      {customAvatar && (
-        <div className="mb-4 mt-4 flex justify-center">
-          <input
-            className="avatar__scale"
-            type="range"
-            value={scale}
-            min="1"
-            max="2"
-            step="0.01"
-            onChange={handleScaleChange}
-          />
-        </div>
-      )}
+      {customAvatar && <ScaleImage scale={scale} setScale={setScale} />}
       <div className="mt-10 flex flex-col items-center">
         <h3 className="text-center text-sm font-normal leading-tight text-neutral-50">
           {dict.pickAvatar}
