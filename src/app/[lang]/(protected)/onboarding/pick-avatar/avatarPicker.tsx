@@ -44,6 +44,7 @@ export default function AvatarPicker({
     const maxSizeInBytes = 3 * 1024 * 1024;
 
     if (file && file.size < maxSizeInBytes) {
+      setScale(1);
       setCustomAvatarData("");
       setCustomAvatar(file);
       setIsEnabledNext(true);
