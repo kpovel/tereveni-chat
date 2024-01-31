@@ -9,6 +9,7 @@ import { avatarPost } from "./avatarPost";
 import { defaultAvatarPut } from "./defaultAvataPut";
 import "./page.css";
 import { DefaultImages } from "./DefaultImages";
+import { ScaleImage } from "./ScaleImage";
 
 export default function AvatarPicker({
   lang,
@@ -40,22 +41,22 @@ export default function AvatarPicker({
   const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileInput = event.target;
     const file = fileInput.files?.[0];
-
-    const maxSizeInBytes = 3 * 1024 * 1024;
+    const maxSizeInBytes = 3 * 1024 * 1024; // 3mb
 
     if (file && file.size < maxSizeInBytes) {
+      setScale(1);
       setCustomAvatarData("");
       setCustomAvatar(file);
       setIsEnabledNext(true);
       setUploadError(false);
-    } else {
+      return;
+    }
+
+    if (file && file.size > maxSizeInBytes) {
       fileInput.value = "";
       setUploadError(true);
+      return;
     }
-  };
-
-  const handleScaleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setScale(parseFloat(e.target.value));
   };
 
   const handleSaveAvatar = async () => {
@@ -83,7 +84,13 @@ export default function AvatarPicker({
         <div className="relative h-[200px] w-[200px]">
           <button className="absolute right-0 top-0 z-10 rounded-full">
             <label htmlFor="your_avatar">
-              <Image src="/plus-1.png" width={45} height={45} alt="plus" />
+              <Image
+                src="/plus-1.png"
+                width={45}
+                height={45}
+                alt="plus"
+                className="cursor-pointer"
+              />
             </label>
           </button>
 
@@ -94,7 +101,7 @@ export default function AvatarPicker({
           >
             {customAvatar ? (
               <AvatarEditor
-                className="-translate-x-7 -translate-y-7"
+                className="-translate-x-7 -translate-y-7 object-cover"
                 ref={editorRef}
                 image={customAvatar}
                 width={205}
@@ -111,12 +118,17 @@ export default function AvatarPicker({
                 unoptimized
               />
             ) : (
-              <Image
-                src="/Preview.svg"
-                width={200}
-                height={200}
-                alt="preview"
-              />
+              <button>
+                <label htmlFor="your_avatar">
+                  <Image
+                    className="cursor-pointer"
+                    src="/Preview.svg"
+                    width={200}
+                    height={200}
+                    alt="preview"
+                  />
+                </label>
+              </button>
             )}
           </div>
         </div>
@@ -133,19 +145,7 @@ export default function AvatarPicker({
           <span>{avatarPostError}</span>
         </div>
       )}
-      {customAvatar && (
-        <div className="mb-4 mt-4 flex justify-center">
-          <input
-            className="avatar__scale"
-            type="range"
-            value={scale}
-            min="1"
-            max="2"
-            step="0.01"
-            onChange={handleScaleChange}
-          />
-        </div>
-      )}
+      {customAvatar && <ScaleImage scale={scale} setScale={setScale} />}
       <div className="mt-10 flex flex-col items-center">
         <h3 className="text-center text-sm font-normal leading-tight text-neutral-50">
           {dict.pickAvatar}
@@ -153,6 +153,7 @@ export default function AvatarPicker({
         <DefaultImages
           imagePaths={defaultImages}
           predefinedAvatarClick={handlePredefinedAvatarClick}
+          selectedDefaultAvatar={customAvatarData}
         />
       </div>
 
