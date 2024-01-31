@@ -6,7 +6,7 @@ export default async function RestorePassword({
 }: {
   params: { lang: "uk" | "en" };
 }) {
-  const dict = await getDictionary(`/${params.lang}/send-mail-restore-pass`);
+  const dict = await getDictionary(`/${params.lang}/restore-password-mail`);
 
   return (
     <div className="container mx-auto px-6">
@@ -17,7 +17,7 @@ export default async function RestorePassword({
         {dict.followLink}
       </p>
       <div className="mt-20 flex justify-center">
-        <Image src="/send-email.svg" alt="mail" width={226} height={180} />
+        <Image src="/send-email.svg" alt="mail"/>
       </div>
       <p className="mt-20 text-center font-main text-sm font-normal leading-tight text-neutral-50">
         {dict.warning}

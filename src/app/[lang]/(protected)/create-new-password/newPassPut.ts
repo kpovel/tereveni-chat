@@ -11,7 +11,6 @@ type SignUpResponseError = {
 
 export async function newPassPut(
   data: string,
-  origin: string,
   lang: "en" | "uk",
 ): Promise<string> {
   const jwtAccessToken = cookies().get("jwtAccessToken");

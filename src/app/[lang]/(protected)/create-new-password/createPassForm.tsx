@@ -1,12 +1,10 @@
 "use client";
 
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import { isValidPassword } from "@/util/input-validation";
 import { DictionaryReturnTypes } from "../../dictionaries";
 import PasswordsInput from "./passwordsInput";
 import { newPassPut } from "./newPassPut";
-import Link from "next/link";
-import Image from "next/image";
 
 export default function CreatePassForm({
   lang,
@@ -32,7 +30,7 @@ export default function CreatePassForm({
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const error = await newPassPut(password, window.origin, lang);
+    const error = await newPassPut(password, lang);
     setSignupError(error);
   };
 
@@ -74,7 +72,7 @@ export default function CreatePassForm({
             !isEnabledSubmit && "bg-opacity-10 text-zinc-500"
           } px-6 py-3`}
         >
-          {dict.nextStep}
+          {dict.continue}
         </button>
       </div>
     </form>

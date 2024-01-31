@@ -1,19 +1,33 @@
-import Image from "next/image";
-import { getDictionary } from "../dictionaries";
+import { ReactNode } from "react";
+import EnTermsConditions from './en.mdx';
+import UkTermsConditions from './uk.mdx';
 
 export default async function TermsConditions({
   params,
 }: {
   params: { lang: "uk" | "en" };
 }) {
-  const dict = await getDictionary(`/${params.lang}/terms-conditions`);
+
+  if(params.lang === "en") {
+    return (
+        <InfoLayout>
+            <EnTermsConditions />
+        </InfoLayout>
+    );
+}
 
   return (
-    <div className="container mx-auto px-6">
-      <h2 className="mt-20 text-center text-lg font-medium text-neutral-50">
-        {dict.title}
-      </h2>
-      <p className="mt-20 text-center font-main text-sm font-normal leading-tight text-neutral-50"></p>
-    </div>
+      <InfoLayout>
+        <UkTermsConditions />
+      </InfoLayout>
   );
 }
+
+function InfoLayout({ children }: { children: ReactNode }) {
+  return (
+    <main className="w-full px-6 pb-10 pt-[40px]">
+      <div className="prose max-w-md mx-auto items-stretch text-white font-main text-sm">{children}</div>
+    </main>
+  );
+}
+

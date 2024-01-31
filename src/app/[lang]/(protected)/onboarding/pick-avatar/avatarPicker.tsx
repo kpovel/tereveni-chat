@@ -56,6 +56,9 @@ export default function AvatarPicker({
 
   const handleScaleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setScale(parseFloat(e.target.value));
+
+    const newValue = (parseFloat(e.target.value) - parseFloat(e.target.min)) / (parseFloat(e.target.max) - parseFloat(e.target.min)) * 100;
+    e.target.style.background = `linear-gradient(to right, #7c01f6 0%, #7c01f6 ${newValue}%, #9D83F9 ${newValue}%, #9D83F9 100%)`;
   };
 
   const handleSaveAvatar = async () => {
@@ -82,7 +85,7 @@ export default function AvatarPicker({
       <div className="flex justify-center">
         <div className="relative h-[200px] w-[200px]">
           <button className="absolute right-0 top-0 z-10 rounded-full">
-            <label htmlFor="your_avatar">
+            <label className="cursor-pointer" htmlFor="your_avatar">
               <Image src="/plus-1.png" width={45} height={45} alt="plus" />
             </label>
           </button>
@@ -112,7 +115,7 @@ export default function AvatarPicker({
               />
             ) : (
               <Image
-                src="/Preview.svg"
+                src="/defaultPreview.svg"
                 width={200}
                 height={200}
                 alt="preview"
@@ -134,9 +137,9 @@ export default function AvatarPicker({
         </div>
       )}
       {customAvatar && (
-        <div className="mb-4 mt-4 flex justify-center">
+        <div className="mb-10 mt-10 flex justify-center">
           <input
-            className="avatar__scale"
+            className="avatar__scale accent-red-600"
             type="range"
             value={scale}
             min="1"

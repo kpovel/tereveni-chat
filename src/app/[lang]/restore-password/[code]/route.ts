@@ -6,7 +6,11 @@ import {
   setJwtRefreshToken,
 } from "../../(protected)/setTokens";
 
-type ResetPassResponse = {};
+type ResetPassResponse = {
+  type: string;
+  jwtAccessToken: string;
+  jwtRefreshToken: string;
+};
 
 export async function GET(
   _request: NextRequest,
@@ -22,7 +26,7 @@ export async function GET(
   );
 
   if (response.ok) {
-    const json = (await response.json()) as any;
+    const json = (await response.json()) as ResetPassResponse;
 
     setJwtAccessToken(json.jwtAccessToken);
     setJwtRefreshToken(json.jwtRefreshToken);

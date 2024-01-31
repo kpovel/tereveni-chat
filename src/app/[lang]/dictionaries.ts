@@ -9,10 +9,6 @@ const dictionaries = {
     import("./forgot-password/en.json").then((module) => module.default),
   "/uk/forgot-password": () =>
     import("./forgot-password/uk.json").then((module) => module.default),
-  "/en/terms-conditions": () =>
-    import("./terms-conditions/en.json").then((module) => module.default),
-  "/uk/terms-conditions": () =>
-    import("./terms-conditions/uk.json").then((module) => module.default),
 
   "/en/signup": () =>
     import("./signup/en.json").then((module) => module.default),
@@ -20,10 +16,10 @@ const dictionaries = {
     import("./signup/uk.json").then((module) => module.default),
   "/en/validate-email": () =>
     import("./send-mail/en.json").then((module) => module.default),
-  "/en/send-mail-restore-pass": () =>
-    import("./send-mail-restore-pass/en.json").then((module) => module.default),
-  "/uk/send-mail-restore-pass": () =>
-    import("./send-mail-restore-pass/uk.json").then((module) => module.default),
+  "/en/restore-password-mail": () =>
+    import("./restore-password-mail/en.json").then((module) => module.default),
+  "/uk/restore-password-mail": () =>
+    import("./restore-password-mail/uk.json").then((module) => module.default),
   "/uk/validate-email": () =>
     import("./send-mail/uk.json").then((module) => module.default),
 

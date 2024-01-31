@@ -8,7 +8,7 @@ interface PasswordInputProps {
   hint: boolean;
   setPassHandler: (pass: string) => void;
   pass: string;
-  dict: Awaited<DictionaryReturnTypes["/en/signup"]>;
+  dict: Awaited<DictionaryReturnTypes["/en/create-new-password"]>;
 }
 
 export default function PasswordsInput({

@@ -45,6 +45,7 @@ export default function ForgotPassword({
           onChange={setEmailHandler}
         />
       </div>
+      <div className="my-5 text-xs text-red-500">{sendEmailError}</div>
       <button
         type="submit"
         disabled={isDisabledSubmit}
