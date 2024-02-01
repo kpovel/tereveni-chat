@@ -6,7 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const poppins = Mulish({
   weight: ["200", "300", "400", "500", "600", "700"],
-  subsets: ["latin"],
+  subsets: ["latin", "cyrillic"],
 });
 
 export function generateStaticParams() {
