@@ -3,7 +3,7 @@
 import { useState, FormEvent } from "react";
 import { isValidPassword } from "@/util/input-validation";
 import { DictionaryReturnTypes } from "../../dictionaries";
-import PasswordsInput from "./passwordsInput";
+import PasswordInput from "../../signup/passwordInput";
 import { newPassPut } from "./newPassPut";
 
 export default function CreatePassForm({
@@ -37,22 +37,21 @@ export default function CreatePassForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex w-full grow flex-col justify-between"
+      className="flex w-full grow flex-col"
     >
       <div>
-        <PasswordsInput
-          setPassHandler={setPassHandler}
+        <PasswordInput
+          setPass={setPassHandler}
           hint={true}
           placeholder={dict.placeholder.password}
           pass={password}
-          dict={dict}
+          passwordConstraint={dict.errorStatus.passwordConstraint}
         />
-        <PasswordsInput
-          setPassHandler={setConfirmPassHandler}
+        <PasswordInput
+          setPass={setConfirmPassHandler}
           hint={false}
           placeholder={dict.placeholder.confirmPassword}
           pass={confirmPassword}
-          dict={dict}
         />
         {password !== confirmPassword && (
           <div className="px-2 pt-1">

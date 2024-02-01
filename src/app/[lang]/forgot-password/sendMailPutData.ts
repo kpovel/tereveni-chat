@@ -3,11 +3,6 @@
 import { redirect } from "next/navigation";
 import { env } from "@/env.mjs";
 
-type SignUpResponseError = {
-  fieldName: string;
-  fieldMessage: string;
-};
-
 export async function sendMailPutData(
   data: string,
   origin: string,
@@ -30,7 +25,7 @@ export async function sendMailPutData(
     redirect(`/${lang}/restore-password-mail`);
   }
 
-  const body = (await response.json()) as SignUpResponseError;
+  const body = await response.text() as string
 
-  return body.fieldMessage;
+  return body;
 }

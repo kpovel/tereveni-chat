@@ -3,17 +3,14 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { env } from "@/env.mjs";
-
-type SignUpResponseError = {
-  fieldName: string;
-  fieldMessage: string;
-};
+import { getJwtAccessToken } from "../regenerateAccessToken";
 
 export async function newPassPut(
   data: string,
   lang: "en" | "uk",
 ): Promise<string> {
-  const jwtAccessToken = cookies().get("jwtAccessToken");
+
+  const jwtAccessToken = await getJwtAccessToken();
 
   if (!jwtAccessToken) {
     redirect(`/${lang}`);
@@ -32,7 +29,7 @@ export async function newPassPut(
     redirect(`/${lang}/chat`);
   }
 
-  const body = (await response.json()) as SignUpResponseError;
+  const body = await response.text() as string;
 
-  return body.fieldMessage;
+  return body;
 }
