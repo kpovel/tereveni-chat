@@ -24,7 +24,7 @@ export default function Layout({
 }) {
   return (
     <html lang={params.lang}>
-      <body className={`${poppins.className} min-h-dvh text-sm`}>
+      <body className={`${poppins.className} min-h-dvh text-sm text-white`}>
         <SetPreferredLanguage lang={params.lang} />
         {children}
         <Analytics />

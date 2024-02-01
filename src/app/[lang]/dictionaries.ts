@@ -37,6 +37,10 @@ const dictionaries = {
     import("../../components/CookiePopup/en.json").then((module) => module.default),
   "components/uk/CookiePopup": () =>
     import("../../components/CookiePopup/uk.json").then((module) => module.default),
+  "components/en/ChatListHeader": () =>
+    import("../../components/ChatListHeader/en.json").then((module) => module.default),
+  "components/uk/ChatListHeader": () =>
+    import("../../components/ChatListHeader/uk.json").then((module) => module.default),
 };
 
 export type DictionaryReturnTypes = {
