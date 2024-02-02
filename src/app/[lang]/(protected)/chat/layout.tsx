@@ -1,4 +1,5 @@
 import { ChatListHeader } from "@/components/ChatListHeader";
+import { ChatNavigation } from "@/components/ChatNavigation";
 import { ReactNode } from "react";
 
 export default function Layout({
@@ -11,6 +12,7 @@ export default function Layout({
   return (
     <>
       <ChatListHeader lang={params.lang} />
+      <ChatNavigation lang={params.lang} />
       <main>{children}</main>
     </>
   );
