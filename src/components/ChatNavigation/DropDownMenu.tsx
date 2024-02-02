@@ -42,16 +42,15 @@ function DropdownContent({ lang }: { lang: "en" | "uk" }) {
     return routeSkipLang.startsWith(locationSkipLang);
   }
 
-  // todo: update w
   return (
-    <DropdownMenu.Content className="flex w-[calc(100%+20px)] flex-col gap-1 rounded-lg bg-[#1F1F1F] py-2 shadow-[0_8px_10px_1px_rgba(0,0,0,0.12)]">
+    <DropdownMenu.Content className="flex flex-col gap-1 rounded-lg bg-[#1F1F1F] py-2 shadow-[0_8px_10px_1px_rgba(0,0,0,0.12)]">
       {chatList.map((c) => {
         return (
           <DropdownMenu.Item
             key={c.href}
             className={`flex items-center leading-none outline-none data-[highlighted]:bg-[#252525] ${isActivePath(c.href) ? "bg-[#252525]" : ""}`}
           >
-            <Link href={c.href} className="px-4 py-[7px]">
+            <Link href={c.href} className="pl-4 pr-12 py-[7px] w-full">
               {c.title}
             </Link>
           </DropdownMenu.Item>
