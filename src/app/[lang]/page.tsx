@@ -35,7 +35,6 @@ export default async function Home({
           </button>
         </div>
       </div>
-      <CookiePopup lang={params.lang} />
     </div>
   );
 }
