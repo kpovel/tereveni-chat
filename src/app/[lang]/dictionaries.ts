@@ -41,6 +41,10 @@ const dictionaries = {
     import("../../components/ChatListHeader/en.json").then((module) => module.default),
   "components/uk/ChatListHeader": () =>
     import("../../components/ChatListHeader/uk.json").then((module) => module.default),
+  "components/en/ChatNavigation": () =>
+    import("../../components/ChatNavigation/en.json").then((module) => module.default),
+  "components/uk/ChatNavigation": () =>
+    import("../../components/ChatNavigation/uk.json").then((module) => module.default),
 };
 
 export type DictionaryReturnTypes = {
