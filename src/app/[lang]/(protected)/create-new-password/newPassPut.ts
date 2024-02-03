@@ -12,10 +12,6 @@ export async function newPassPut(
 
   const jwtAccessToken = await getJwtAccessToken();
 
-  if (!jwtAccessToken) {
-    redirect(`/${lang}`);
-  }
-
   const response = await fetch(`${env.SERVER_URL}/api/user/new-password/save`, {
     body: JSON.stringify({ userPassword: data }),
     method: "PUT",

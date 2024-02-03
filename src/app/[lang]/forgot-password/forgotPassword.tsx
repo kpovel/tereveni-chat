@@ -5,6 +5,7 @@ import Image from "next/image";
 import { isValidEmail } from "@/util/input-validation";
 import { DictionaryReturnTypes } from "../dictionaries";
 import { sendMailPutData } from "./sendMailPutData";
+import { EmailInput } from "../login/emailInput";
 
 export default function ForgotPassword({
   lang,
@@ -17,13 +18,9 @@ export default function ForgotPassword({
   const [sendEmailError, setSendEmailError] = useState("");
   const isDisabledSubmit = !isValidEmail(email);
 
-  const setEmailHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setSendEmailError('');
-    e.preventDefault();
-    setEmail(e.currentTarget.value);
-  };
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSendEmailError('');
 
     const error = await sendMailPutData(email, window.origin, lang);
 
@@ -36,14 +33,10 @@ export default function ForgotPassword({
         <div className="absolute left-5 top-1/2 -translate-y-1/2 transform">
           <Image src="/mail.svg" alt="mail" width={20} height={20} />
         </div>
-        <input
-          className={`main__input ${
-            email.trim() && !isValidEmail(email) ? "border-red-500" : ""
-          }`}
-          type="email"
+        <EmailInput
+          email={email}
+          setEmail={setEmail}
           placeholder={dict.emailPlaceholder}
-          value={email}
-          onChange={setEmailHandler}
         />
       </div>
       <div className="px-2 py-1 text-xs text-red-500">{sendEmailError}</div>
