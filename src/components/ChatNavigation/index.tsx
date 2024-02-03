@@ -51,7 +51,7 @@ export async function ChatNavigation({ lang }: { lang: Lang }) {
   )) satisfies Route[];
 
   return (
-    <nav className="flex items-center justify-between px-6 py-[30px]">
+    <nav className="mx-auto flex max-w-[390px] items-center justify-between px-6 py-[30px]">
       <Link
         href={`/${lang}/chat/search`}
         className="flex h-8 w-8 items-center justify-center rounded active:bg-[rgba(255,255,255,0.05)]"
