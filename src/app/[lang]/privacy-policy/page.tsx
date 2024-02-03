@@ -26,7 +26,7 @@ export default async function PrivacyPolicy({
   function InfoLayout({ children }: { children: ReactNode }) {
     return (
       <main className="w-full px-6 pb-10 pt-[40px]">
-        <div className="prose max-w-md mx-auto items-stretch text-white font-main text-sm">{children}</div>
+        <div className="prose mx-auto items-stretch text-white">{children}</div>
       </main>
     );
   }

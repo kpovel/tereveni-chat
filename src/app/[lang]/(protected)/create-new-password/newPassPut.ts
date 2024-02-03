@@ -20,7 +20,7 @@ export async function newPassPut(
     body: JSON.stringify({ userPassword: data }),
     method: "PUT",
     headers: {
-      Authorization: `Bearer ${jwtAccessToken.value}`,
+      Authorization: `Bearer ${jwtAccessToken}`,
       "Content-Type": "application/json",
     },
   });
