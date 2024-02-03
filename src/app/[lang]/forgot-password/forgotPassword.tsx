@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, ChangeEvent, FormEvent } from "react";
-import Image from "next/image";
+import { useState, FormEvent } from "react";
 import { isValidEmail } from "@/util/input-validation";
 import { DictionaryReturnTypes } from "../dictionaries";
 import { sendMailPutData } from "./sendMailPutData";
@@ -29,16 +28,11 @@ export default function ForgotPassword({
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col">
-      <div className="relative">
-        <div className="absolute left-5 top-1/2 -translate-y-1/2 transform">
-          <Image src="/mail.svg" alt="mail" width={20} height={20} />
-        </div>
         <EmailInput
           email={email}
           setEmail={setEmail}
           placeholder={dict.emailPlaceholder}
         />
-      </div>
       <div className="px-2 py-1 text-xs text-red-500">{sendEmailError}</div>
       <button
         type="submit"
