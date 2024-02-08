@@ -9,7 +9,7 @@ export function FinishOnboarding({
   lang,
 }: {
   dict: Awaited<DictionaryReturnTypes["/en/onboarding/final"]>;
-  lang: "en" | "uk";
+  lang: Lang;
 }) {
   return (
     <Link

@@ -5,13 +5,13 @@ import { redirect } from "next/navigation";
 import { getJwtAccessToken } from "../../regenerateAccessToken";
 
 export async function submitCategories(
-  lang: "en" | "uk",
+  lang: Lang,
   categories: { id: number }[],
 ) {
   const jwtAccessToken = await getJwtAccessToken();
 
   const res = await fetch(
-    `${env.SERVER_URL}/api/user/hashtags-with-onboarding/save`,
+    `${env.SERVER_URL}/api/user/hashtags-with-onboarding/save?lang=${lang}`,
     {
       method: "PUT",
       body: JSON.stringify(categories),

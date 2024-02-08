@@ -6,10 +6,10 @@ import { env } from "@/env.mjs";
 export async function sendMailPutData(
   data: string,
   origin: string,
-  lang: "en" | "uk",
+  lang: Lang,
 ): Promise<string> {
   const response = await fetch(
-    `${env.SERVER_URL}/api/${lang}/forgot-password`,
+    `${env.SERVER_URL}/api/forgot-password?lang=${lang}`,
     {
       body: JSON.stringify({ userEmail: data }),
       method: "PUT",
@@ -25,7 +25,7 @@ export async function sendMailPutData(
     redirect(`/${lang}/restore-password-mail`);
   }
 
-  const body = await response.text() as string
+  const body = (await response.text()) as string;
 
   return body;
 }

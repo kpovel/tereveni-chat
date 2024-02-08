@@ -24,5 +24,5 @@ async function newAccessToken(): Promise<string> {
     throw await redirectUnauthorized();
   }
 
-  return await regenerateAccessToken(refreshToken!.value);
+  return await regenerateAccessToken(refreshToken.value);
 }

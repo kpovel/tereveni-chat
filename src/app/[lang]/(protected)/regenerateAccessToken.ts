@@ -44,6 +44,6 @@ export async function regenerateAccessToken(
 }
 
 export async function redirectUnauthorized() {
-  const lang = (cookies().get("lang")?.value ?? "en") as "en" | "uk";
+  const lang = (cookies().get("lang")?.value ?? "en") as Lang;
   redirect(`/${lang}`);
 }

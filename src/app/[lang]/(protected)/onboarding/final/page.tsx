@@ -6,7 +6,7 @@ import { UserImage } from "./FinalUserImage";
 export default async function OnboardingFinal({
   params,
 }: {
-  params: { lang: "uk" | "en" };
+  params: { lang: Lang };
 }) {
   const dict = await getDictionary(`/${params.lang}/onboarding/final`);
   const userData = await onboardingUserData();

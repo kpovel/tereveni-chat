@@ -5,7 +5,7 @@ import { onboardingHashtags } from "./onboardingHashtags";
 export default async function OnboardingCategories({
   params,
 }: {
-  params: { lang: "uk" | "en" };
+  params: { lang: Lang };
 }) {
   const dict = await getDictionary(`/${params.lang}/onboarding/categories`);
   const hashtags = await onboardingHashtags();
