@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import EnCommunityRules from './en.mdx';
 import UkCommunityRules from './uk.mdx';
+import InfoLayout from "../../util/infoLayout";
 
 export default async function CommunityRules({
     params,
@@ -23,11 +24,3 @@ export default async function CommunityRules({
     );
 
 }
-
-function InfoLayout({ children }: { children: ReactNode }) {
-    return (
-      <main className="w-full px-6 pb-10 pt-[40px]">
-        <div className="prose mx-auto items-stretch text-white">{children}</div>
-      </main>
-    );
-  }

@@ -20,7 +20,7 @@ export default async function RestorePassword({
       </p>
       </div>
       <div className="mt-20 flex justify-center">
-        <Image src={SendEmail} width={233} height={170} alt="mail"/>
+        <Image src={SendEmail} width={233} height={170} alt="mail" className="h-[170px]" />
       </div>
       <div className="mx-auto my-0 max-w-xs md:max-w-md">
       <p className="mt-20 text-center font-main text-sm font-normal leading-tight text-neutral-50">
