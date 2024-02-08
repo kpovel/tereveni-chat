@@ -116,7 +116,7 @@ export default function SignUpForm({
           <span className="ml-2 text-left text-xs font-normal leading-none text-neutral-50">
             {dict.terms.read}{" "}
             <Link
-              href={`/${lang}/terms-and-conditions`}
+              href={`/${lang}/terms-conditions`}
               className="text-center text-xs font-normal text-[#9D83F9] underline"
             >
               {dict.terms.termsConditions}
