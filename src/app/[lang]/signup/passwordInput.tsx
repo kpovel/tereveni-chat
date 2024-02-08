@@ -13,7 +13,7 @@ import eyeClosed from "public/eye-closed.svg";
 
 interface PasswordInputProps {
   pass: string;
-  setPass: Dispatch<SetStateAction<string>>;
+  setPass: (pass: string) => void;
   placeholder: string;
   hint: boolean;
   passwordConstraint?: string;

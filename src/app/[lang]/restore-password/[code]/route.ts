@@ -6,7 +6,7 @@ import {
   setJwtRefreshToken,
 } from "../../(protected)/setTokens";
 
-type ValidateResponse = {
+type ResetPassResponse = {
   type: string;
   jwtAccessToken: string;
   jwtRefreshToken: string;
@@ -17,18 +17,21 @@ export async function GET(
   context: { params: { lang: string; code: string } },
 ) {
   const { lang, code } = context.params;
-  const response = await fetch(`${env.SERVER_URL}/api/validate-email/${code}`, {
-    method: "PUT",
-    cache: "no-store",
-  });
+  const response = await fetch(
+    `${env.SERVER_URL}/api/${lang}/forgot-password/${code}`,
+    {
+      method: "PUT",
+      cache: "no-store",
+    },
+  );
 
   if (response.ok) {
-    const json = (await response.json()) as ValidateResponse;
+    const json = (await response.json()) as ResetPassResponse;
 
     setJwtAccessToken(json.jwtAccessToken);
     setJwtRefreshToken(json.jwtRefreshToken);
 
-    redirect(`/${lang}/onboarding/pick-avatar`);
+    redirect(`/${lang}/create-new-password`);
   }
 
   const error = await response.text();
