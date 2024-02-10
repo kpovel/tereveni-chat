@@ -6,7 +6,7 @@ import { getJwtAccessToken } from "../../regenerateAccessToken";
 export default async function PickAvatar({
   params,
 }: {
-  params: { lang: "uk" | "en" };
+  params: { lang: Lang };
 }) {
   const dict = await getDictionary(`/${params.lang}/onboarding/pick-avatar`);
   const defaultImages = await fetchDefaultImages();

@@ -14,11 +14,11 @@ type ResetPassResponse = {
 
 export async function GET(
   _request: NextRequest,
-  context: { params: { lang: string; code: string } },
+  context: { params: { lang: Lang; code: string } },
 ) {
   const { lang, code } = context.params;
   const response = await fetch(
-    `${env.SERVER_URL}/api/${lang}/forgot-password/${code}`,
+    `${env.SERVER_URL}/api/forgot-password/${code}?lang=${lang}`,
     {
       method: "PUT",
       cache: "no-store",

@@ -6,7 +6,6 @@ import {
   setJwtAccessToken,
   setJwtRefreshToken,
 } from "../(protected)/setTokens";
-import { cookies } from "next/headers";
 
 type SuccessLoginResponse = {
   type: "Bearer";
@@ -24,9 +23,9 @@ export async function loginPostData(
     login: string;
     password: string;
   },
-  lang: "en" | "uk",
-): Promise<string> {
-  const response = await fetch(`${env.SERVER_URL}/api/login`, {
+  lang: Lang,
+) {
+  const response = await fetch(`${env.SERVER_URL}/api/login?lang=${lang}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

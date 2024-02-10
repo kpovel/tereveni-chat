@@ -5,10 +5,10 @@ import { onboardingHashtags } from "./onboardingHashtags";
 export default async function OnboardingCategories({
   params,
 }: {
-  params: { lang: "uk" | "en" };
+  params: { lang: Lang };
 }) {
   const dict = await getDictionary(`/${params.lang}/onboarding/categories`);
-  const hashtags = await onboardingHashtags();
+  const hashtags = await onboardingHashtags(params.lang);
 
   return (
     <main className="container mx-auto flex max-w-md flex-col gap-10 px-6 py-10">

@@ -16,7 +16,7 @@ export default function AvatarPicker({
   dict,
   defaultImages,
 }: {
-  lang: "en" | "uk";
+  lang: Lang;
   dict: Awaited<DictionaryReturnTypes["/en/onboarding/pick-avatar"]>;
   defaultImages: string[];
 }) {

@@ -9,16 +9,19 @@ type SignUpResponseError = {
   fieldMessage: string;
 };
 
-export async function avatarPost(formData: FormData, lang: "en" | "uk") {
+export async function avatarPost(formData: FormData, lang: Lang) {
   const accessToken = await getJwtAccessToken();
 
-  const res = await fetch(`${env.SERVER_URL}/api/user/avatar/upload`, {
-    method: "POST",
-    body: formData,
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
+  const res = await fetch(
+    `${env.SERVER_URL}/api/user/avatar/upload?lang=${lang}`,
+    {
+      method: "POST",
+      body: formData,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     },
-  });
+  );
 
   if (res.ok) {
     redirect(`/${lang}/onboarding/introduce-yourself`);

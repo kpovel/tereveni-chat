@@ -9,11 +9,11 @@ type SignUpResponseError = {
   fieldMessage: string;
 };
 
-export async function introducePost(introduce: string, lang: "en" | "uk") {
+export async function introducePost(introduce: string, lang: Lang) {
   const jwtAccessToken = await getJwtAccessToken();
 
   const res = await fetch(
-    `${env.SERVER_URL}/api/user/user-about-with-onboarding/save`,
+    `${env.SERVER_URL}/api/user/user-about-with-onboarding/save?lang=${lang}`,
     {
       method: "PUT",
       body: JSON.stringify({ onboardingFieldStr: introduce }),

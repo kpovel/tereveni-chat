@@ -17,9 +17,9 @@ type SignUpResponseError = {
 export async function signUpPostData(
   data: SignUpDataInterface,
   origin: string,
-  lang: "en" | "uk",
+  lang: Lang,
 ): Promise<string> {
-  const response = await fetch(`${env.SERVER_URL}/api/signup`, {
+  const response = await fetch(`${env.SERVER_URL}/api/signup?lang=${lang}`, {
     body: JSON.stringify(data),
     method: "POST",
     headers: {

@@ -9,7 +9,7 @@ export default function Introduce({
   lang,
   dict,
 }: {
-  lang: "en" | "uk";
+  lang: Lang;
   dict: Awaited<DictionaryReturnTypes["/en/onboarding/introduce-yourself"]>;
 }) {
   const [introduce, setIntroduce] = useState("");
