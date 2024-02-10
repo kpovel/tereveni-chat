@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-image: url('../../public/Background.svg'); 
+  background-size: cover;
+  background-position: center;
+}
+
 @layer components {
   .gradient__bg {
     @apply absolute -z-10 h-96 w-96  -rotate-180 rounded-full bg-gradient-to-b from-violet-700 to-violet-700 opacity-20 blur-3xl;
@@ -17,6 +23,3 @@
   }
 }
 
-body {
-  @apply bg-neutral-900;
-}
