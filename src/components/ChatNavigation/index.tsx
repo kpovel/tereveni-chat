@@ -3,7 +3,6 @@ import { SearchIcon } from "./searchIcon";
 import { PlusIcon } from "./plusIcon";
 import { DropDownMenu } from "./DropDownMenu";
 import { getDictionary } from "@/app/[lang]/dictionaries";
-import { Lang } from "@/util/allowedLang";
 
 const routes = [
   {
