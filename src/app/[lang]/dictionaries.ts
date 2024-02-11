@@ -5,22 +5,40 @@ const dictionaries = {
   "/uk": () => import("./uk.json").then((module) => module.default),
   "/en/login": () => import("./login/en.json").then((module) => module.default),
   "/uk/login": () => import("./login/uk.json").then((module) => module.default),
+  "/en/forgot-password": () =>
+    import("./forgot-password/en.json").then((module) => module.default),
+  "/uk/forgot-password": () =>
+    import("./forgot-password/uk.json").then((module) => module.default),
+
   "/en/signup": () =>
     import("./signup/en.json").then((module) => module.default),
   "/uk/signup": () =>
     import("./signup/uk.json").then((module) => module.default),
   "/en/validate-email": () =>
     import("./send-mail/en.json").then((module) => module.default),
+  "/en/restore-password-mail": () =>
+    import("./restore-password-mail/en.json").then((module) => module.default),
+  "/uk/restore-password-mail": () =>
+    import("./restore-password-mail/uk.json").then((module) => module.default),
   "/uk/validate-email": () =>
     import("./send-mail/uk.json").then((module) => module.default),
+
   "/en/onboarding/categories": () =>
-    import("./(protected)/onboarding/categories/en.json").then((module) => module.default),
+    import("./(protected)/onboarding/categories/en.json").then(
+      (module) => module.default,
+    ),
   "/uk/onboarding/categories": () =>
-    import("./(protected)/onboarding/categories/uk.json").then((module) => module.default),
+    import("./(protected)/onboarding/categories/uk.json").then(
+      (module) => module.default,
+    ),
   "/en/onboarding/final": () =>
-    import("./(protected)/onboarding/final/en.json").then((module) => module.default),
+    import("./(protected)/onboarding/final/en.json").then(
+      (module) => module.default,
+    ),
   "/uk/onboarding/final": () =>
-    import("./(protected)/onboarding/final/uk.json").then((module) => module.default),
+    import("./(protected)/onboarding/final/uk.json").then(
+      (module) => module.default,
+    ),
   "/en/onboarding/introduce-yourself": () =>
     import("./(protected)/onboarding/introduce-yourself/en.json").then(
       (module) => module.default,
@@ -30,9 +48,15 @@ const dictionaries = {
       (module) => module.default,
     ),
   "/en/onboarding/pick-avatar": () =>
-    import("./(protected)/onboarding/pick-avatar/en.json").then((module) => module.default),
+    import("./(protected)/onboarding/pick-avatar/en.json").then(
+      (module) => module.default,
+    ),
   "/uk/onboarding/pick-avatar": () =>
     import("./(protected)/onboarding/pick-avatar/uk.json").then((module) => module.default),
+    "/en/create-new-password": () =>
+    import("./(protected)/create-new-password/en.json").then((module) => module.default),  
+    "/uk/create-new-password": () =>
+    import("./(protected)/create-new-password/uk.json").then((module) => module.default),  
   "components/en/CookiePopup": () =>
     import("../../components/CookiePopup/en.json").then((module) => module.default),
   "components/uk/CookiePopup": () =>

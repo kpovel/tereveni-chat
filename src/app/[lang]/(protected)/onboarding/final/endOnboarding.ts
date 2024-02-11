@@ -1,17 +1,16 @@
 "use server";
 
 import { env } from "@/env.mjs";
-import { JWT_ACCESS_TOKEN } from "@/util/cookiesName";
-import { cookies } from "next/headers";
+import { getJwtAccessToken } from "../../regenerateAccessToken";
 
 export async function endOnboarding() {
-  const jwtAccessToken = cookies().get(JWT_ACCESS_TOKEN);
+  const jwtAccessToken = await getJwtAccessToken();
 
   await fetch(`${env.SERVER_URL}/api/user/onboarding/end`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${jwtAccessToken?.value}`,
+      Authorization: `Bearer ${jwtAccessToken}`,
     },
     body: JSON.stringify({
       onboardingEnd: true,

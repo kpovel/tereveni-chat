@@ -13,7 +13,7 @@ export function ChooseCategories({
   dict,
 }: {
   hashtags: Hashtag[];
-  lang: "en" | "uk";
+  lang: Lang;
   dict: Awaited<DictionaryReturnTypes["/en/onboarding/categories"]>;
 }) {
   const mappedCategories = hashtags.map((c) => ({

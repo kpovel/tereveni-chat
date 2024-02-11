@@ -9,11 +9,11 @@ type SignUpResponseError = {
   fieldMessage: string;
 };
 
-export async function defaultAvatarPut(formData: string, lang: "en" | "uk") {
+export async function defaultAvatarPut(formData: string, lang: Lang) {
   const accessToken = await getJwtAccessToken();
 
   const res = await fetch(
-    `${env.SERVER_URL}/api/user/default-avatar-with-onboarding/save`,
+    `${env.SERVER_URL}/api/user/default-avatar-with-onboarding/save?lang=${lang}`,
     {
       method: "PUT",
       body: JSON.stringify({

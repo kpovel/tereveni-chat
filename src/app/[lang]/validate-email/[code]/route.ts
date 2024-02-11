@@ -1,7 +1,10 @@
 import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 import { env } from "@/env.mjs";
-import { setJwtAccessToken, setJwtRefreshToken } from "../../(protected)/setTokens";
+import {
+  setJwtAccessToken,
+  setJwtRefreshToken,
+} from "../../(protected)/setTokens";
 
 type ValidateResponse = {
   type: string;
@@ -11,13 +14,16 @@ type ValidateResponse = {
 
 export async function GET(
   _request: NextRequest,
-  context: { params: { lang: string; code: string } },
+  context: { params: { lang: Lang; code: string } },
 ) {
   const { lang, code } = context.params;
-  const response = await fetch(`${env.SERVER_URL}/api/validate-email/${code}`, {
-    method: "PUT",
-    cache: "no-store",
-  });
+  const response = await fetch(
+    `${env.SERVER_URL}/api/validate-email/${code}?lang=${lang}`,
+    {
+      method: "PUT",
+      cache: "no-store",
+    },
+  );
 
   if (response.ok) {
     const json = (await response.json()) as ValidateResponse;

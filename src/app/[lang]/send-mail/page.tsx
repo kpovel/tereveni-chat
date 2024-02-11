@@ -14,11 +14,18 @@ export default async function ValidateEmail({
       <h2 className="mt-20 text-center text-lg font-medium text-neutral-50">
         {dict.checkEmail}
       </h2>
-      <p className="mt-5 text-center text-sm font-normal leading-tight text-neutral-50">
-        {dict.followLink}
-      </p>
+      <div className="mx-auto my-0 max-w-xs md:max-w-md">
+        <p className="mt-5 text-center text-sm font-normal leading-tight text-neutral-50">
+          {dict.followLink}
+        </p>
+      </div>
       <div className="mt-20 flex justify-center">
-        <Image src={mail} alt="Mail" />
+        <Image src={mail} width={233} height={170} alt="Mail" className="h-[170px]" />
+      </div>
+      <div className="mx-auto my-0 max-w-xs md:max-w-md">
+      <p className="mt-20 text-center font-main text-sm font-normal leading-tight text-neutral-50">
+        {dict.warning}
+      </p>
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ export default function Introduce({
   lang,
   dict,
 }: {
-  lang: "en" | "uk";
+  lang: Lang;
   dict: Awaited<DictionaryReturnTypes["/en/onboarding/introduce-yourself"]>;
 }) {
   const [introduce, setIntroduce] = useState("");
@@ -33,12 +33,12 @@ export default function Introduce({
           value={introduce}
           max-length={maxCharacters}
           onChange={handleText}
-          className="inline-flex h-[192px] w-full items-center justify-center rounded-3xl border border-neutral-700 bg-stone-900 px-5 py-3 text-sm font-normal leading-tight text-neutral-50 outline-none focus:border-violet-700"
+          className="inline-flex h-[192px] w-full items-center justify-center rounded-3xl border border-neutral-700 bg-stone-900 px-5 py-3 text-sm font-normal leading-tight text-neutral-50 outline-none focus:border-violet-700 resize-none"
           name="introduce"
           id="introduce"
           placeholder={dict.typeHere}
         ></textarea>
-        <div className="-mt-2 px-2 text-right">
+        <div className="px-2 text-right">
           <span className="text-xs font-normal leading-none text-stone-300">
             {introduce.length} / {maxCharacters}
           </span>

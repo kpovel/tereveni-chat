@@ -1,4 +1,5 @@
 {
   "checkEmail": "Check your email",
-  "followLink": "Please follow the link in the email to verify your email address and continue the sign up process"
+  "followLink": "Please follow the link in the email to verify your email address and continue the sign up process",
+  "warning": "The email will arrive within 5 minutes and may be marked as spam"
 }

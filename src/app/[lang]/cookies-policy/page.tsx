@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import EnCookiePolicy from "./en.mdx";
 import UkCookiePolicy from "./uk.mdx";
+import InfoLayout from "../../util/infoLayout";
 
 export default function CookiesPolicy({
   params,
@@ -19,13 +20,5 @@ export default function CookiesPolicy({
     <InfoLayout>
       <EnCookiePolicy />
     </InfoLayout>
-  );
-}
-
-function InfoLayout({ children }: { children: ReactNode }) {
-  return (
-    <main className="w-full px-6 pb-10 pt-[78px]">
-      <div className="prose mx-auto items-stretch text-white">{children}</div>
-    </main>
   );
 }
