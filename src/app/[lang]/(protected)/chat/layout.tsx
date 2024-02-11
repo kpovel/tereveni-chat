@@ -1,5 +1,5 @@
-import { ChatListHeader } from "@/components/ChatListHeader";
-import { ChatNavigation } from "@/components/ChatNavigation";
+import { ChatListHeader } from "@/components/chat/ChatListHeader";
+import { ChatNavigation } from "@/components/chat/ChatNavigation";
 import { ReactNode } from "react";
 
 export default function Layout({
@@ -13,7 +13,7 @@ export default function Layout({
     <>
       <ChatListHeader lang={params.lang} />
       <ChatNavigation lang={params.lang} />
-      <main>{children}</main>
+      <main className="pb-10">{children}</main>
     </>
   );
 }
