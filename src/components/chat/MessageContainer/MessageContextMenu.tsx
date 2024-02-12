@@ -39,11 +39,10 @@ export function MessageContextMenu({
       className="relative"
       id={chatId}
       onContextMenu={openContextMenu}
-      onClickCapture={openContextMenu}
       ref={ref}
     >
       {children}
-      <div
+      <button
         id={messageContextId}
         onClick={deleteChat}
         className="absolute right-0 bottom-[-54px] flex hidden w-[164px] cursor-pointer
@@ -52,7 +51,7 @@ export function MessageContextMenu({
       >
         <TrashIcon />
         Delete chat
-      </div>
+      </button>
     </div>
   );
 }
