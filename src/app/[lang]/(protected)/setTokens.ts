@@ -10,7 +10,7 @@ export function setJwtAccessToken(jwtAccessToken: string) {
     httpOnly: true,
     path: "/",
     secure: true,
-    sameSite: "strict",
+    sameSite: "lax",
     priority: "high",
   });
 }
@@ -23,7 +23,7 @@ export function setJwtRefreshToken(jwtRefreshToken: string) {
     httpOnly: true,
     path: "/",
     secure: true,
-    sameSite: "strict",
+    sameSite: "lax",
     priority: "high",
   });
 }
