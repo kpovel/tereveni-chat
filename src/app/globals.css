@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+/* body {
   background-image: url('../../public/Background.svg'); 
   background-size: cover;
   background-position: center;
-}
+} */
 
 @layer components {
   .gradient__bg {

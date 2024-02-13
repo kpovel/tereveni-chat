@@ -24,7 +24,7 @@ export default function Layout({
 }) {
   return (
     <html lang={params.lang}>
-      <body className={`${poppins.className} min-h-dvh text-sm`}>
+      <body className={`${poppins.className} bg-black min-h-dvh text-sm`} style={{ backgroundImage: 'linear-gradient(to top, rgba(124, 1, 246, 0.3), rgba(124, 1, 246, 0))'}}>
         <SetPreferredLanguage lang={params.lang} />
         {children}
         <Analytics />
