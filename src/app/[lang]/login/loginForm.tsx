@@ -28,7 +28,7 @@ export default function LoginForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col">
+    <form onSubmit={handleSubmit} className="flex flex-col w-full">
       <EmailInput
         email={email}
         setEmail={setEmail}
