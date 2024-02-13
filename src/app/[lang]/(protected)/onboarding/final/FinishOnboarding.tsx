@@ -14,7 +14,7 @@ export function FinishOnboarding({
   return (
     <Link
       className="main__link main__btn text-center"
-      href={`/${lang}/chat`}
+      href={`/${lang}/discovery`}
       onClick={() => endOnboarding()}
     >
       {dict.start}
