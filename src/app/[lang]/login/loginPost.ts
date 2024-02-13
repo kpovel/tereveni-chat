@@ -40,7 +40,7 @@ export async function loginPostData(
     setJwtAccessToken(tokens.jwtAccessToken);
     setJwtRefreshToken(tokens.jwtRefreshToken);
 
-    redirect(`/${lang}/chat`);
+    redirect(`/${lang}/chat/all`);
   }
 
   if (response.status === 401 || response.status === 403) {

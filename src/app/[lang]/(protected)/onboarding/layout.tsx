@@ -11,7 +11,7 @@ export default async function OnboardingLayout({
   const userData = await onboardingUserData();
   if (userData.onboardingEnd) {
     const lang = cookies().get("lang")?.value ?? "en";
-    redirect(`/${lang}/chat`);
+    redirect(`/${lang}/chat/all`);
   }
 
   return <>{children}</>;
