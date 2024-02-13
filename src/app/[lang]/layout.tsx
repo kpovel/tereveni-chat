@@ -6,7 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const poppins = Mulish({
   weight: ["200", "300", "400", "500", "600", "700"],
-  subsets: ["latin"],
+  subsets: ["latin", "cyrillic"],
 });
 
 export function generateStaticParams() {
@@ -24,7 +24,13 @@ export default function Layout({
 }) {
   return (
     <html lang={params.lang}>
-      <body className={`${poppins.className} bg-black min-h-dvh text-sm`} style={{ backgroundImage: 'linear-gradient(to top, rgba(124, 1, 246, 0.15), rgba(124, 1, 246, 0))'}}>
+      <body
+        className={`${poppins.className} min-h-dvh bg-black text-sm text-white`}
+        style={{
+          backgroundImage:
+            "linear-gradient(to top, rgba(124, 1, 246, 0.15), rgba(124, 1, 246, 0))",
+        }}
+      >
         <SetPreferredLanguage lang={params.lang} />
         {children}
         <Analytics />

@@ -20,7 +20,7 @@ export async function newPassPut(data: string, lang: Lang): Promise<string> {
   );
 
   if (response.ok) {
-    redirect(`/${lang}/chat`);
+    redirect(`/${lang}/chat/all`);
   }
 
   const body = (await response.text()) as string;
