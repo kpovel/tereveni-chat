@@ -2,7 +2,6 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import { ReactNode } from "react";
 
-// todo: create NotFound component
 export default async function Page() {
   const lang = cookies().get("lang")?.value ?? "en";
   const dict = await getDict(lang);
@@ -13,14 +12,14 @@ export default async function Page() {
       bg-cover bg-center bg-no-repeat object-cover px-6 pb-10 pt-[74px] text-white"
     >
       <h2 className="px-3 text-center text-[#FAFAFA]">
-        page not found
+        {dict.pageDoesntExist}
       </h2>
       <div className="flex flex-col gap-5">
         <Link href={`/${lang}`}>
-          {/* <Button>{dict.backHome}</Button>*/}
+          <Button>{dict.backHome}</Button>
         </Link>
         <Link href="mailto:chat.creators.01@gmail.com">
-          <Button>mail to</Button>
+          <Button>{dict.contactSupport}</Button>
         </Link>
       </div>
     </div>
@@ -43,4 +42,3 @@ async function getDict(lang: string) {
 
   return await import("./en.json");
 }
-

@@ -2,12 +2,15 @@ import { getDictionary } from "@/app/[lang]/dictionaries";
 import { env } from "@/env.mjs";
 import AvatarPicker from "./avatarPicker";
 import { getJwtAccessToken } from "../../regenerateAccessToken";
+import { handleUnsupportedLang } from "@/util/handleUnsupportedLang";
 
 export default async function PickAvatar({
   params,
 }: {
   params: { lang: Lang };
 }) {
+  handleUnsupportedLang(params.lang);
+
   const dict = await getDictionary(`/${params.lang}/onboarding/pick-avatar`);
   const defaultImages = await fetchDefaultImages();
 

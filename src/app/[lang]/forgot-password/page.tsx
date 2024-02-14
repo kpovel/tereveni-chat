@@ -1,3 +1,4 @@
+import { handleUnsupportedLang } from "@/util/handleUnsupportedLang";
 import { getDictionary } from "../dictionaries";
 import ForgotPassword from "./forgotPassword";
 
@@ -6,6 +7,8 @@ export default async function ForgotPassPage({
 }: {
   params: { lang: "en" | "uk" };
 }) {
+  handleUnsupportedLang(params.lang);
+
   const dict = await getDictionary(`/${params.lang}/forgot-password`);
 
   return (

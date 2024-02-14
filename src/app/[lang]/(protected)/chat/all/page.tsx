@@ -1,7 +1,10 @@
 import { MessageContainer } from "@/components/chat/MessageContainer";
 import { getChatRooms } from "./chatRooms";
+import { handleUnsupportedLang } from "@/util/handleUnsupportedLang";
 
 export default async function AllChats({ params }: { params: { lang: Lang } }) {
+  handleUnsupportedLang(params.lang);
+
   const chatRooms = await getChatRooms();
 
   if (chatRooms.err) {

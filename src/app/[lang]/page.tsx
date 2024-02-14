@@ -3,12 +3,15 @@ import Link from "next/link";
 import { getDictionary } from "./dictionaries";
 import { ToggleLang } from "./ToggleLang";
 import tereveniLogo from "public/logo.svg";
+import { handleUnsupportedLang } from "@/util/handleUnsupportedLang";
 
 export default async function Home({
   params,
 }: {
   params: { lang: "uk" | "en" };
 }) {
+  handleUnsupportedLang(params.lang);
+
   const dict = await getDictionary(`/${params.lang}`);
 
   return (

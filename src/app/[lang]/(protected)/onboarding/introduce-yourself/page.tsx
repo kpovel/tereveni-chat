@@ -1,11 +1,14 @@
 import { getDictionary } from "@/app/[lang]/dictionaries";
 import Introduce from "./introduce";
+import { handleUnsupportedLang } from "@/util/handleUnsupportedLang";
 
 export default async function IntroduceYourself({
   params,
 }: {
   params: { lang: "uk" | "en" };
 }) {
+  handleUnsupportedLang(params.lang);
+
   const dict = await getDictionary(
     `/${params.lang}/onboarding/introduce-yourself`,
   );

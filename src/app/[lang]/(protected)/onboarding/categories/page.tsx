@@ -1,12 +1,15 @@
 import { getDictionary } from "@/app/[lang]/dictionaries";
 import { ChooseCategories } from "./categories";
 import { onboardingHashtags } from "./onboardingHashtags";
+import { handleUnsupportedLang } from "@/util/handleUnsupportedLang";
 
 export default async function OnboardingCategories({
   params,
 }: {
   params: { lang: Lang };
 }) {
+  handleUnsupportedLang(params.lang);
+
   const dict = await getDictionary(`/${params.lang}/onboarding/categories`);
   const hashtags = await onboardingHashtags(params.lang);
 

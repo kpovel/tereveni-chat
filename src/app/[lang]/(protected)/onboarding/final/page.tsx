@@ -2,12 +2,15 @@ import { getDictionary } from "@/app/[lang]/dictionaries";
 import { onboardingUserData } from "../onboardingUserData";
 import { FinishOnboarding } from "./FinishOnboarding";
 import { UserImage } from "./FinalUserImage";
+import { handleUnsupportedLang } from "@/util/handleUnsupportedLang";
 
 export default async function OnboardingFinal({
   params,
 }: {
   params: { lang: Lang };
 }) {
+  handleUnsupportedLang(params.lang);
+
   const dict = await getDictionary(`/${params.lang}/onboarding/final`);
   const userData = await onboardingUserData();
 

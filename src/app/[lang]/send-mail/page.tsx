@@ -1,12 +1,15 @@
 import Image from "next/image";
 import { getDictionary } from "../dictionaries";
 import mail from "public/send-email.svg"
+import { handleUnsupportedLang } from "@/util/handleUnsupportedLang";
 
 export default async function ValidateEmail({
   params,
 }: {
   params: { lang: "uk" | "en" };
 }) {
+  handleUnsupportedLang(params.lang);
+
   const dict = await getDictionary(`/${params.lang}/validate-email`);
 
   return (

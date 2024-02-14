@@ -1,12 +1,15 @@
 import { CookiePopup } from "@/components/CookiePopup";
 import { getDictionary } from "../dictionaries";
 import LoginForm from "./loginForm";
+import { handleUnsupportedLang } from "@/util/handleUnsupportedLang";
 
 export default async function LoginPage({
   params,
 }: {
   params: { lang: "en" | "uk" };
 }) {
+  handleUnsupportedLang(params.lang);
+
   const dict = await getDictionary(`/${params.lang}/login`);
 
   return (

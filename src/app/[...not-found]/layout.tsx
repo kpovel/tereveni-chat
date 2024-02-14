@@ -1,7 +1,5 @@
 import "../globals.css";
 import { ReactNode } from "react";
-import { SetPreferredLanguage } from "./setPreferredLang";
-import { handleUnsupportedLang } from "@/util/handleUnsupportedLang";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Mulish } from "next/font/google";
@@ -13,23 +11,12 @@ const mulish = Mulish({
 });
 
 export const metadata: Metadata = {
-  title: "Tereveni",
+  title: "Tereveni – Not Found",
 };
 
-export const dynamicParams = false;
-export function generateStaticParams() {
-  return [{ lang: "en" }, { lang: "uk" }];
-}
-
-export default function Layout({
-  children,
-  params,
-}: {
-  children: ReactNode;
-  params: { lang: string };
-}) {
+export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <html lang={params.lang}>
+    <html>
       <body
         className={`${mulish.className} min-h-dvh bg-black text-sm text-white`}
         style={{
@@ -38,7 +25,6 @@ export default function Layout({
         }}
       >
         {children}
-        <SetPreferredLanguage lang={params.lang} />
         <Analytics />
         <SpeedInsights />
       </body>
