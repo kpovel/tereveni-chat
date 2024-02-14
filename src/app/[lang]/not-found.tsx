@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ReactNode } from "react";
 
-export default function NotFound({ params }: { params: { lang: Lang } }) {
+export default function NotFound({ params }: { params: { lang: string } }) {
   return (
     <div className="flex h-screen flex-col justify-between bg-[url(/404.gif)] bg-cover bg-center bg-no-repeat object-cover px-6 pb-10 pt-[74px]">
       <h2 className="px-3 text-center">

@@ -37,7 +37,7 @@ export default function Layout({
               "linear-gradient(to top, rgba(124, 1, 246, 0.15), rgba(124, 1, 246, 0))",
           }}
         >
-          <NotFound />
+          <NotFound params={params}/>
         </body>
       </html>
     );
