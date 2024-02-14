@@ -5,6 +5,7 @@ import { Mulish } from "next/font/google";
 import { SetPreferredLanguage } from "./setPreferredLang";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import NotFound from "./not-found";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,15 +20,29 @@ export function generateStaticParams() {
   return [{ lang: "en" }, { lang: "uk" }];
 }
 
-export const dynamicParams = false;
-
 export default function Layout({
   children,
   params,
 }: {
   children: ReactNode;
-  params: { lang: "uk" | "en" };
+  params: { lang: string };
 }) {
+  if (params.lang !== "en" && params.lang !== "uk") {
+    return (
+      <html>
+        <body
+          className={`${poppins.className} min-h-dvh bg-black text-sm text-white`}
+          style={{
+            backgroundImage:
+              "linear-gradient(to top, rgba(124, 1, 246, 0.15), rgba(124, 1, 246, 0))",
+          }}
+        >
+          <NotFound />
+        </body>
+      </html>
+    );
+  }
+
   return (
     <html lang={params.lang}>
       <body
