@@ -14,7 +14,7 @@ export default async function OnboardingFinal({
   return (
     <main className="container mx-auto flex h-screen max-w-md flex-col justify-between gap-10 px-6 py-10">
       <div className="flex flex-col items-center gap-[3.75rem]">
-        <h2 className="text-center text-[1.75rem] font-medium text-neutral-50">
+        <h2 className="text-center text-[1.75rem] font-medium leading-normal text-neutral-50">
           {dict.welcome}, {userData.name}!
         </h2>
         <UserImage imageName={userData.image.name} />
