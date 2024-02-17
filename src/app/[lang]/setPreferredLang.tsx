@@ -8,6 +8,7 @@ export function SetPreferredLanguage({ lang }: { lang: string }) {
     (async () => {
       if (lang !== "en" && lang !== "uk") {
         await setPreferredLang("en");
+        return;
       }
 
       await setPreferredLang(lang);
