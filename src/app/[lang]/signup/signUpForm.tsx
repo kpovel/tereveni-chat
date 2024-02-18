@@ -11,8 +11,8 @@ import {
   isValidPassword,
 } from "@/util/input-validation";
 import { DictionaryReturnTypes } from "../dictionaries";
-import { LoginInput } from "./loginInput";
 import { EmailInput } from "@/components/input/EmailInput";
+import { LoginInput } from "@/components/input/LoginInput";
 
 export default function SignUpForm({
   lang,
