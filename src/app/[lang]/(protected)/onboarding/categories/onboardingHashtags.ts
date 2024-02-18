@@ -11,7 +11,7 @@ export async function onboardingHashtags(lang: Lang) {
   const jwtAccessToken = await getJwtAccessToken();
 
   const res = await fetch(
-    `${env.SERVER_URL}/api/user-onboarding/hashtags-group?lang=${lang}`,
+    `${env.SERVER_URL}/api/hashtags-group/all-hashtags-locale?lang=${lang}`,
     {
       headers: {
         Authorization: `Bearer ${jwtAccessToken}`,
