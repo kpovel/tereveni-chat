@@ -4,7 +4,7 @@ import { useState, FormEvent } from "react";
 import { isValidEmail } from "@/util/input-validation";
 import { DictionaryReturnTypes } from "../dictionaries";
 import { sendMailPutData } from "./sendMailPutData";
-import { EmailInput } from "../login/emailInput";
+import { EmailInput } from "@/components/input/EmailInput";
 
 export default function ForgotPassword({
   lang,

@@ -6,13 +6,13 @@ import { loginPostData } from "./loginPost";
 import { isValidEmail, isValidPassword } from "@/util/input-validation";
 import { DictionaryReturnTypes } from "../dictionaries";
 import PasswordInput from "../signup/passwordInput";
-import { EmailInput } from "./emailInput";
+import { EmailInput } from "@/components/input/EmailInput";
 
 export default function LoginForm({
   lang,
   dict,
 }: {
-  lang: "en" | "uk";
+  lang: Lang;
   dict: Awaited<DictionaryReturnTypes["/en/login"]>;
 }) {
   const [email, setEmail] = useState("");
