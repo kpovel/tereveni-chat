@@ -19,7 +19,7 @@ interface PasswordInputProps {
   passwordConstraint?: string;
 }
 
-export default function PasswordInput({
+export function PasswordInput({
   pass,
   setPass,
   placeholder,

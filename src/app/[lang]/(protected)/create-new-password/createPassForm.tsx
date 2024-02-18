@@ -3,8 +3,8 @@
 import { useState, FormEvent } from "react";
 import { isValidPassword } from "@/util/input-validation";
 import { DictionaryReturnTypes } from "../../dictionaries";
-import PasswordInput from "../../signup/passwordInput";
 import { newPassPut } from "./newPassPut";
+import { PasswordInput } from "@/components/input/PasswordInput";
 
 export default function CreatePassForm({
   lang,

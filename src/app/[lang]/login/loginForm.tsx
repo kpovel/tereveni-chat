@@ -5,8 +5,8 @@ import Link from "next/link";
 import { loginPostData } from "./loginPost";
 import { isValidEmail, isValidPassword } from "@/util/input-validation";
 import { DictionaryReturnTypes } from "../dictionaries";
-import PasswordInput from "../signup/passwordInput";
 import { EmailInput } from "@/components/input/EmailInput";
+import { PasswordInput } from "@/components/input/PasswordInput";
 
 export default function LoginForm({
   lang,

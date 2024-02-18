@@ -3,7 +3,6 @@
 import { useState, FormEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import PasswordInput from "./passwordInput";
 import { signUpPostData } from "./signUpPost";
 import {
   isValidEmail,
@@ -13,6 +12,7 @@ import {
 import { DictionaryReturnTypes } from "../dictionaries";
 import { EmailInput } from "@/components/input/EmailInput";
 import { LoginInput } from "@/components/input/LoginInput";
+import { PasswordInput } from "@/components/input/PasswordInput";
 
 export default function SignUpForm({
   lang,
