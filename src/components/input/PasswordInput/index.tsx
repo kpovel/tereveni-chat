@@ -8,8 +8,8 @@ import {
 import Image from "next/image";
 import { isValidPassword } from "@/util/input-validation";
 import lock from "public/lock.svg";
-import eyeOpen from "public/eye-open.svg";
-import eyeClosed from "public/eye-closed.svg";
+import { EyeOpen } from "./EyeOpen";
+import { EyeClosed } from "./EyeClosed";
 
 interface PasswordInputProps {
   pass: string;
@@ -28,6 +28,7 @@ export function PasswordInput({
 }: PasswordInputProps) {
   const [isHidden, setIsHidden] = useState(true);
   const [isVisibleHint, setIsVisibleHint] = useState(false);
+  const displayError = pass.trim() && !isValidPassword(pass);
 
   function hintHandler() {
     if (hint) {
@@ -54,9 +55,7 @@ export function PasswordInput({
           onChange={handlePasswordChange}
           onFocus={hintHandler}
           onBlur={hiddenHint}
-          className={`main__input ${
-            pass.trim() && !isValidPassword(pass) ? "border-red-500" : ""
-          }`}
+          className={`main__input ${displayError ? "border-red-500" : ""}`}
           type={`${isHidden ? "password" : "text"}`}
           placeholder={placeholder}
           value={pass}
@@ -88,15 +87,7 @@ function TogglePassword({
 
   return (
     <button className="absolute right-5" onClick={togglePasswordVisibility}>
-      {isHidden ? (
-        <Image src={eyeOpen} alt="show password" className="h-5 w-5" />
-      ) : (
-        <Image
-          src={eyeClosed}
-          alt="hide password"
-          className="h-5 w-5 rotate-180"
-        />
-      )}
+      {isHidden ? <EyeOpen /> : <EyeClosed />}
     </button>
   );
 }
