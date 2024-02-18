@@ -14,8 +14,8 @@ export function EmailInput({
         <Image src={mailLogo} alt="Mail logo" className="absolute left-5" />
         <input
           className="w-full justify-center gap-3 rounded-3xl border
-          border-[#444] bg-[#1F1F1F] py-3 pl-14 pr-5 leading-normal outline-none
-          transition ease-in invalid:border-[#FF453A] focus:border-[#7C01F6] autofill:filter-none"
+          border-[#444] bg-[#1F1F1F] py-3.5 pl-14 pr-5 leading-normal outline-none
+          transition ease-in autofill:filter-none invalid:border-[#FF453A] focus:border-[#7C01F6]"
           type="email"
           name="email"
           placeholder={placeholder}
