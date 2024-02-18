@@ -1,5 +1,5 @@
 import { getDictionary } from "../dictionaries";
-import ForgotPassword from "./forgotPassword";
+import { ForgotPasswordForm } from "./forgotPasswordForm";
 
 export default async function ForgotPassPage({
   params,
@@ -17,7 +17,7 @@ export default async function ForgotPassPage({
         {dict.description}
       </p>
       <div className="mx-auto mt-10 max-w-md">
-        <ForgotPassword lang={params.lang} dict={dict} />
+        <ForgotPasswordForm dict={dict} />
       </div>
     </div>
   );

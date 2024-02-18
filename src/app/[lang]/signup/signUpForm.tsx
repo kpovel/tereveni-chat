@@ -86,7 +86,7 @@ export default function SignUpForm({
           setPass={setPassword}
           placeholder={dict.placeholder.password}
           hint={true}
-          passwordConstraint={dict.errorStatus.passwordConstraint}
+          errorMessage={dict.errorStatus.passwordConstraint}
         />
         <PasswordInput
           setPass={setConfirmPassword}
