@@ -8,9 +8,8 @@ export function SubmitButton({ buttonTitle }: { buttonTitle: string }) {
       type="submit"
       disabled={pending}
       aria-disabled={pending}
-      className={`main__btn ${
-        pending ? "bg-opacity-10 text-zinc-500" : ""
-      } mt-32 px-6 py-3`}
+      className="w-full rounded-full bg-[#7C01F6] py-[17px] text-sm
+      disabled:bg-[rgba(124,_1,_246,_0.12)] disabled:text-[#79767A]"
     >
       {buttonTitle}
     </button>
