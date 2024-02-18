@@ -18,7 +18,10 @@ export function ForgotPasswordForm({
   const [state, formAction] = useFormState(sendMailPutData, initialState);
 
   return (
-    <form action={formAction} className="flex flex-col">
+    <form
+      action={formAction}
+      className="flex w-full max-w-md grow flex-col justify-between"
+    >
       <EmailInput
         errorMessage={state.email}
         placeholder={dict.emailPlaceholder}

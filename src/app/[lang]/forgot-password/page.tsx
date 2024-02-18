@@ -9,16 +9,16 @@ export default async function ForgotPassPage({
   const dict = await getDictionary(`/${params.lang}/forgot-password`);
 
   return (
-    <div className="container mx-auto px-6">
-      <h2 className="mt-20 text-center text-lg font-medium text-neutral-50">
-        {dict.restoreYourPass}
-      </h2>
-      <p className="mt-10 text-center text-sm text-neutral-50">
-        {dict.description}
-      </p>
-      <div className="mx-auto mt-10 max-w-md">
-        <ForgotPasswordForm dict={dict} />
+    <div className="mx-auto flex min-h-dvh flex-col items-center gap-10 px-6 pb-10 pt-[78px]">
+      <div className="space-y-5">
+        <h2 className="text-center text-lg font-medium text-neutral-50">
+          {dict.restoreYourPass}
+        </h2>
+        <p className="mt-5 text-center text-sm text-neutral-50">
+          {dict.description}
+        </p>
       </div>
+      <ForgotPasswordForm dict={dict} />
     </div>
   );
 }
