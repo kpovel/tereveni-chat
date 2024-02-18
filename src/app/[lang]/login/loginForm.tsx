@@ -1,12 +1,23 @@
 "use client";
 
-import { useState, FormEvent } from "react";
 import Link from "next/link";
 import { loginPostData } from "./loginPost";
-import { isValidEmail, isValidPassword } from "@/util/input-validation";
 import { DictionaryReturnTypes } from "../dictionaries";
 import { EmailInput } from "@/components/input/EmailInput";
 import { PasswordInput } from "@/components/input/PasswordInput";
+import { useFormState, useFormStatus } from "react-dom";
+
+export type FormState = {
+  email: string;
+  password: string;
+  general: string;
+};
+
+const initialState = {
+  email: "",
+  password: "",
+  general: "",
+} satisfies FormState;
 
 export default function LoginForm({
   lang,
@@ -15,48 +26,47 @@ export default function LoginForm({
   lang: Lang;
   dict: Awaited<DictionaryReturnTypes["/en/login"]>;
 }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loginError, setLoginError] = useState("");
-  const isDisabledSubmit = !isValidEmail(email) || !isValidPassword(password);
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const submitError = await loginPostData({ login: email, password }, lang);
-    setLoginError(submitError);
-  };
+  const [state, formAction] = useFormState(loginPostData, initialState);
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col w-full">
+    <form action={formAction} className="flex w-full flex-col gap-5">
       <EmailInput
-        email={email}
-        setEmail={setEmail}
         placeholder={dict.emailPlaceholder}
+        errorMessage={state.email}
       />
       <PasswordInput
-        pass={password}
-        setPass={setPassword}
         placeholder={dict.passwordPlaceholder}
-        hint={false}
+        errorMessage={state.password || state.general}
       />
-      <div className="mb-5 ml-1 text-xs text-red-500">{loginError}</div>
+      <input name="lang" value={lang} className="hidden" readOnly />
       <Link
         href={`/${lang}/forgot-password`}
         className="inline-block w-full text-center text-xs font-normal text-[#9D83F9] underline"
       >
         {dict.forgotPassword}
       </Link>
-
-      <button
-        type="submit"
-        disabled={isDisabledSubmit}
-        className={`main__btn ${
-          isDisabledSubmit ? "bg-opacity-10 text-zinc-500" : ""
-        } mt-32 px-6 py-3`}
-      >
-        {dict.logIn}
-      </button>
+      <SubmitButton dict={dict} />
     </form>
+  );
+}
+
+function SubmitButton({
+  dict,
+}: {
+  dict: Awaited<DictionaryReturnTypes["/en/login"]>;
+}) {
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      aria-disabled={pending}
+      className={`main__btn mt-32 px-6 py-3 ${
+        pending ? "bg-opacity-10 text-zinc-500" : ""
+      }`}
+    >
+      {dict.logIn}
+    </button>
   );
 }
