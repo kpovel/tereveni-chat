@@ -9,6 +9,7 @@ import {
 import { FormState } from "./loginForm";
 import { z } from "zod";
 import { getDictionary } from "../dictionaries";
+import { langUnwrapOrDefault } from "@/util/lang";
 
 type SuccessLoginResponse = {
   type: "Bearer";
@@ -16,7 +17,7 @@ type SuccessLoginResponse = {
   jwtRefreshToken: string;
 };
 
-type UnauthorizedLoginResponse = {
+export type ErrorAuthResponse = {
   login?: string;
   password?: string;
   general?: string;
@@ -40,13 +41,16 @@ export async function loginPostData(
 
   if (!parse.success) {
     const fieldErrors = parse.error.formErrors.fieldErrors;
-    const lang = responseLang(formData);
+    const lang = await langUnwrapOrDefault(
+      formData.get("lang")?.toString() ?? "",
+    );
     const dict = await getDictionary(`/${lang}/login`);
-    console.log(dict);
 
     return {
       email: fieldErrors.email?.[0] ? dict.errorStatus.invalidEmail : "",
-      password: fieldErrors.password?.[0] ? dict.errorStatus.invalidPassword : "",
+      password: fieldErrors.password?.[0]
+        ? dict.errorStatus.invalidPassword
+        : "",
       general: "",
     };
   }
@@ -75,7 +79,7 @@ export async function loginPostData(
     response.status === 401 ||
     response.status === 403
   ) {
-    const loginError = (await response.json()) as UnauthorizedLoginResponse;
+    const loginError = (await response.json()) as ErrorAuthResponse;
     return {
       email: loginError.login ?? "",
       password: loginError.password ?? "",
@@ -84,12 +88,4 @@ export async function loginPostData(
   }
 
   return { email: "", password: "", general: "Server Error" };
-}
-
-function responseLang(formData: FormData) {
-  const lang = formData.get("lang")?.toString();
-  if (lang === "en" || lang === "uk") {
-    return lang;
-  }
-  return "en";
 }

@@ -1,34 +1,31 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 import user from "public/user.svg";
-import { isValidLogin } from "@/util/input-validation";
 
 export function LoginInput({
-  login,
-  setLogin,
   placeholder,
+  errorMessage,
 }: {
-  login: string;
-  setLogin: Dispatch<SetStateAction<string>>;
   placeholder: string;
+  errorMessage: string;
 }) {
-  function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
-    e.preventDefault();
-    setLogin(e.target.value);
-  }
-
   return (
-    <div className="relative mt-5 flex items-center">
-      <Image src={user} alt="Login icon" className="absolute left-5" />
-      <input
-        value={login}
-        onChange={handleInputChange}
-        className={`main__input ${
-          login.trim() && !isValidLogin(login) ? "border-red-500" : ""
-        }`}
-        type="text"
-        placeholder={placeholder}
-      />
+    <div>
+      <label className="relative flex items-center">
+        <Image src={user} alt="Login icon" className="absolute left-5" />
+        <input
+          className="w-full justify-center gap-3 rounded-3xl border
+          border-[#444] bg-[#1F1F1F] py-3.5 pl-14 pr-5 leading-normal outline-none
+          transition ease-in autofill:filter-none invalid:border-[#FF453A] focus:border-[#7C01F6]"
+          type="text"
+          name="login"
+          placeholder={placeholder}
+        />
+      </label>
+      {errorMessage && (
+        <div className="whitespace-pre-line px-2 pt-1 text-xs text-[#FF453A]">
+          {errorMessage}
+        </div>
+      )}
     </div>
   );
 }
