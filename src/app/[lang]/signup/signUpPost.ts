@@ -14,6 +14,8 @@ export async function signUpPostData(
   formData: FormData,
 ): Promise<FormState> {
   const lang = await langUnwrapOrDefault(cookies().get("lang")?.value ?? "");
+  const dict = await getDictionary(`/${lang}/signup`);
+
   const schema = z.object({
     login: z.string().min(1),
     email: z.string().email(),
@@ -32,7 +34,6 @@ export async function signUpPostData(
 
   if (!parse.success) {
     const fieldErrors = parse.error.formErrors.fieldErrors;
-    const dict = await getDictionary(`/${lang}/signup`);
 
     // error messages for unchecked terms and conditions
     return {
@@ -41,10 +42,22 @@ export async function signUpPostData(
       password: fieldErrors.password?.length
         ? dict.errorStatus.passwordConstraint
         : "",
-      confirmPassword: passwordMathingError(formData, dict),
+      confirmPassword: passwordMatchingError(formData, dict),
       termsConditions: fieldErrors.acceptTermsConditions?.length
         ? "you should accept terms & conditions"
         : "",
+      general: "",
+    };
+  }
+
+  const passMatchingError = passwordMatchingError(formData, dict);
+  if (passMatchingError) {
+    return {
+      email: "",
+      login: "",
+      password: "",
+      confirmPassword: passMatchingError,
+      termsConditions: "",
       general: "",
     };
   }
@@ -82,7 +95,7 @@ export async function signUpPostData(
   };
 }
 
-function passwordMathingError(
+function passwordMatchingError(
   formData: FormData,
   dict: Awaited<DictionaryReturnTypes["/en/signup"]>,
 ): string {
