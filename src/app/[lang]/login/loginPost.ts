@@ -8,6 +8,7 @@ import {
 } from "../(protected)/setTokens";
 import { FormState } from "./loginForm";
 import { z } from "zod";
+import { getDictionary } from "../dictionaries";
 
 type SuccessLoginResponse = {
   type: "Bearer";
@@ -16,9 +17,9 @@ type SuccessLoginResponse = {
 };
 
 type UnauthorizedLoginResponse = {
-  login: string
-  password: string,
-  general: string
+  login?: string;
+  password?: string;
+  general?: string;
 };
 
 export async function loginPostData(
@@ -39,10 +40,13 @@ export async function loginPostData(
 
   if (!parse.success) {
     const fieldErrors = parse.error.formErrors.fieldErrors;
+    const lang = responseLang(formData);
+    const dict = await getDictionary(`/${lang}/login`);
+
     return {
-      email: fieldErrors.email?.[0] ? "Invalid email" : "",
+      email: fieldErrors.email?.[0] ? dict.errorStatus.invalidEmail : "",
       password: "",
-      general: fieldErrors.lang?.[0] ? "Language isn't supported" : "",
+      general: "",
     };
   }
 
@@ -56,7 +60,7 @@ export async function loginPostData(
     cache: "no-store",
   });
 
-  if (response.status == 200) {
+  if (response.status === 200) {
     const tokens = (await response.json()) as SuccessLoginResponse;
 
     setJwtAccessToken(tokens.jwtAccessToken);
@@ -65,14 +69,26 @@ export async function loginPostData(
     redirect(`/${lang}/chat/all`);
   }
 
-  if (response.status === 401 || response.status === 403) {
+  if (
+    response.status === 400 ||
+    response.status === 401 ||
+    response.status === 403
+  ) {
     const loginError = (await response.json()) as UnauthorizedLoginResponse;
     return {
-      email: "",
-      password: "",
-      general: loginError.general,
+      email: loginError.login ?? "",
+      password: loginError.password ?? "",
+      general: loginError.general ?? "",
     };
   }
 
   return { email: "", password: "", general: "Server Error" };
+}
+
+function responseLang(formData: FormData) {
+  const lang = formData.get("lang")?.toString();
+  if (lang === "en" || lang === "uk") {
+    return lang;
+  }
+  return "en";
 }
