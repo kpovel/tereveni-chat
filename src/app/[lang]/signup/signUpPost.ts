@@ -5,7 +5,7 @@ import { env } from "@/env.mjs";
 import { cookies, headers } from "next/headers";
 import { FormState } from "./signUpForm";
 import { z } from "zod";
-import { getDictionary } from "../dictionaries";
+import { DictionaryReturnTypes, getDictionary } from "../dictionaries";
 import { langUnwrapOrDefault } from "@/util/lang";
 import { ErrorAuthResponse } from "../login/loginPost";
 
@@ -34,7 +34,6 @@ export async function signUpPostData(
     const fieldErrors = parse.error.formErrors.fieldErrors;
     const dict = await getDictionary(`/${lang}/signup`);
 
-    // todo: check password matching
     // error messages for unchecked terms and conditions
     return {
       email: fieldErrors.email?.length ? dict.errorStatus.invalidEmail : "",
@@ -42,7 +41,7 @@ export async function signUpPostData(
       password: fieldErrors.password?.length
         ? dict.errorStatus.passwordConstraint
         : "",
-      confirmPassword: "",
+      confirmPassword: passwordMathingError(formData, dict),
       termsConditions: fieldErrors.acceptTermsConditions?.length
         ? "you should accept terms & conditions"
         : "",
@@ -81,4 +80,22 @@ export async function signUpPostData(
     termsConditions: "",
     general: body.general ?? "",
   };
+}
+
+function passwordMathingError(
+  formData: FormData,
+  dict: Awaited<DictionaryReturnTypes["/en/signup"]>,
+): string {
+  const password = formData.get("password")?.toString();
+  const confirmPassword = formData.get("confirmPassword")?.toString();
+
+  if (password === undefined || confirmPassword === undefined) {
+    return "";
+  }
+
+  if (password === confirmPassword) {
+    return "";
+  }
+
+  return dict.errorStatus.passwordNotMatch;
 }
