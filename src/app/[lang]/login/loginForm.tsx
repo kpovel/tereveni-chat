@@ -5,7 +5,8 @@ import { loginPostData } from "./loginPost";
 import { DictionaryReturnTypes } from "../dictionaries";
 import { EmailInput } from "@/components/input/EmailInput";
 import { PasswordInput } from "@/components/input/PasswordInput";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
+import { SubmitButton } from "@/components/form/SubmitButton";
 
 export type FormState = {
   email: string;
@@ -45,28 +46,8 @@ export default function LoginForm({
       >
         {dict.forgotPassword}
       </Link>
-      <SubmitButton dict={dict} />
+      <SubmitButton buttonTitle={dict.logIn} />
     </form>
   );
 }
 
-function SubmitButton({
-  dict,
-}: {
-  dict: Awaited<DictionaryReturnTypes["/en/login"]>;
-}) {
-  const { pending } = useFormStatus();
-
-  return (
-    <button
-      type="submit"
-      disabled={pending}
-      aria-disabled={pending}
-      className={`main__btn mt-32 px-6 py-3 ${
-        pending ? "bg-opacity-10 text-zinc-500" : ""
-      }`}
-    >
-      {dict.logIn}
-    </button>
-  );
-}
