@@ -42,10 +42,11 @@ export async function loginPostData(
     const fieldErrors = parse.error.formErrors.fieldErrors;
     const lang = responseLang(formData);
     const dict = await getDictionary(`/${lang}/login`);
+    console.log(dict);
 
     return {
       email: fieldErrors.email?.[0] ? dict.errorStatus.invalidEmail : "",
-      password: "",
+      password: fieldErrors.password?.[0] ? dict.errorStatus.invalidPassword : "",
       general: "",
     };
   }
