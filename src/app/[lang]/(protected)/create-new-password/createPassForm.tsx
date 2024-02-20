@@ -1,7 +1,5 @@
 "use client";
 
-import { useState, FormEvent } from "react";
-import { isValidPassword } from "@/util/input-validation";
 import { DictionaryReturnTypes } from "../../dictionaries";
 import { newPassPut } from "./newPassPut";
 import { PasswordInput } from "@/components/input/PasswordInput";
