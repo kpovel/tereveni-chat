@@ -26,7 +26,7 @@ export function ToggleLang() {
       <Image src={lang} alt="lang logo" />
       <Link
         href={navigateTo("en")}
-        className={`ml-2 mr-1 ${
+        className={`ml-2 mr-1 font-medium ${
           isActive("en") ? "text-white" : "text-[#79767A]"
         }`}
       >
@@ -35,7 +35,7 @@ export function ToggleLang() {
       <div className="text-[#79767A]">|</div>
       <Link
         href={navigateTo("uk")}
-        className={`ml-1 ${
+        className={`ml-1 font-medium ${
           isActive("uk") ? "text-white" : "text-[#79767A]"
         }`}
       >
