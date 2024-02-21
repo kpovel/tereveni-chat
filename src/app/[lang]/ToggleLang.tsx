@@ -32,7 +32,7 @@ export function ToggleLang() {
       >
         en
       </Link>
-      <div className="h-3.5 w-px bg-[#79767A]"></div>
+      <div className="text-[#79767A]">|</div>
       <Link
         href={navigateTo("uk")}
         className={`ml-1 ${
