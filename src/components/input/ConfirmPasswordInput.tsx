@@ -17,9 +17,9 @@ export function ConfigmPasswordInput({
       <label className="relative flex items-center">
         <Image src={lock} alt="lock" className="absolute left-5" />
         <input
-          className="w-full justify-center gap-3 rounded-3xl border
-          border-[#444] bg-[#1F1F1F] py-3.5 pl-14 pr-5 leading-normal outline-none
-          transition ease-in autofill:filter-none invalid:border-[#FF453A] focus:border-[#7C01F6]"
+          className="w-full rounded-3xl border border-[#444] bg-[#1F1F1F] py-3.5
+          pl-14 pr-5 leading-normal outline-none transition ease-in
+          autofill:filter-none invalid:border-[#FF453A] focus:border-[#7C01F6]"
           type={`${isHidden ? "password" : "text"}`}
           name="confirmPassword"
           placeholder={placeholder}
