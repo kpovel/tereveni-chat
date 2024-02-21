@@ -30,24 +30,25 @@ export default function LoginForm({
   const [state, formAction] = useFormState(loginPostData, initialState);
 
   return (
-    <form action={formAction} className="flex w-full flex-col gap-5">
-      <EmailInput
-        placeholder={dict.emailPlaceholder}
-        errorMessage={state.email}
-      />
-      <PasswordInput
-        placeholder={dict.passwordPlaceholder}
-        errorMessage={state.password || state.general}
-      />
-      <input name="lang" value={lang} className="hidden" readOnly />
-      <Link
-        href={`/${lang}/forgot-password`}
-        className="inline-block w-full text-center text-xs font-normal text-[#9D83F9] underline"
-      >
-        {dict.forgotPassword}
-      </Link>
+    <form action={formAction} className="flex w-full flex-col gap-10">
+      <div className="grid gap-5">
+        <EmailInput
+          placeholder={dict.emailPlaceholder}
+          errorMessage={state.email}
+        />
+        <PasswordInput
+          placeholder={dict.passwordPlaceholder}
+          errorMessage={state.password || state.general}
+        />
+        <input name="lang" value={lang} className="hidden" readOnly />
+        <Link
+          href={`/${lang}/forgot-password`}
+          className="inline-block w-full text-center text-xs font-normal text-[#9D83F9] underline"
+        >
+          {dict.forgotPassword}
+        </Link>
+      </div>
       <SubmitButton buttonTitle={dict.logIn} />
     </form>
   );
 }
-

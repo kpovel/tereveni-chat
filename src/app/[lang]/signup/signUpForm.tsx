@@ -40,7 +40,7 @@ export default function SignUpForm({
   return (
     <form
       action={formAction}
-      className="flex w-full grow flex-col justify-between"
+      className="flex w-full grow flex-col justify-between gap-10"
     >
       <div className="grid gap-5">
         <LoginInput
