@@ -29,6 +29,7 @@ export default function Layout({
         style={{
           backgroundImage:
             "linear-gradient(to top, rgba(124, 1, 246, 0.15), rgba(124, 1, 246, 0))",
+          backgroundAttachment: "fixed",
         }}
       >
         <SetPreferredLanguage lang={params.lang} />
