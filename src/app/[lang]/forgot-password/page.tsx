@@ -13,7 +13,7 @@ export default async function ForgotPassPage({
       <h2 className="mt-20 text-center text-lg font-medium text-neutral-50">
         {dict.restoreYourPass}
       </h2>
-      <p className="mt-10 text-center text-sm text-neutral-50">
+      <p className="mt-10 text-center text-sm text-neutral-50 text-balance">
         {dict.description}
       </p>
       <div className="mx-auto mt-10 max-w-md">
