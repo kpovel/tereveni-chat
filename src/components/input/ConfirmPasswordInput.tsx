@@ -15,8 +15,11 @@ export function ConfigmPasswordInput({
   const redBorder = "border-[#FF453A]";
 
   useEffect(() => {
+    const passwordInput = document.getElementsByName("password")[0];
+
     if (errorMessage) {
       ref.current?.classList.add(redBorder);
+      passwordInput.classList.add(redBorder);
     }
   });
 
