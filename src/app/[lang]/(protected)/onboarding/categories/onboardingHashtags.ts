@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { getJwtAccessToken } from "../../regenerateAccessToken";
 
 export type Hashtag = {
-  name: string;
+  name: string | undefined;
   hashtags: { id: number; name: string }[];
 };
 
@@ -24,10 +24,14 @@ export async function onboardingHashtags(lang: Lang): Promise<Hashtag[]> {
   }
   const json = (await res.json()) as Hashtag[];
 
-  return json.map((category) => {
+  const sortedHashtags = json.map((h) => {
     return {
-      name: category.name,
-      hashtags: category.hashtags.sort((a, b) => a.name.localeCompare(b.name)),
+      name: h.name,
+      hashtags: h.hashtags.sort((a, b) => a.name.localeCompare(b.name)),
     };
   });
+
+  sortedHashtags[sortedHashtags.length - 1].name = undefined;
+
+  return sortedHashtags;
 }
