@@ -57,10 +57,10 @@ export function ChooseCategories({
   return (
     <>
       <div className="flex flex-col gap-10">
-        {categories.map((category) => {
+        {categories.map((category, i) => {
           return (
             <Category
-              key={category.name}
+              key={i}
               categoryName={category.name}
               hashtags={category.hashtags}
               toggleHashtag={toggleHashtag}
