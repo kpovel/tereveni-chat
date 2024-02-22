@@ -27,7 +27,9 @@ export function NavLinks({
           <Link
             href={r.path}
             key={r.path}
-            className={`min-w-[130px] px-6 py-3 text-center ${isActivePath(r.path) ? "border-b border-b-[#7C01F6]" : ""}`}
+            className={`min-w-[130px] px-6 py-3 text-center ${
+              isActivePath(r.path) ? "border-b border-b-[#7C01F6]" : ""
+            }`}
           >
             {r.title}
           </Link>

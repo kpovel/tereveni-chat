@@ -24,5 +24,7 @@ export async function CookiePopup({ lang }: { lang: "en" | "uk" }) {
   const acceptedPolicy = await isAcceptedCookiePolicy();
   const dict = await getDictionary(`components/${lang}/CookiePopup`);
 
-  return <CookiePopupDialog openedDialog={acceptedPolicy} dict={dict} lang={lang} />;
+  return (
+    <CookiePopupDialog openedDialog={acceptedPolicy} dict={dict} lang={lang} />
+  );
 }

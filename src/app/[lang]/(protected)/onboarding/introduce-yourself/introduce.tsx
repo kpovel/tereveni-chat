@@ -33,7 +33,7 @@ export default function Introduce({
           value={introduce}
           max-length={maxCharacters}
           onChange={handleText}
-          className="inline-flex h-[192px] w-full items-center justify-center rounded-3xl border border-neutral-700 bg-stone-900 px-5 py-3 text-sm font-normal leading-tight text-neutral-50 outline-none focus:border-violet-700 resize-none"
+          className="inline-flex h-[192px] w-full resize-none items-center justify-center rounded-3xl border border-neutral-700 bg-stone-900 px-5 py-3 text-sm font-normal leading-tight text-neutral-50 outline-none focus:border-violet-700"
           name="introduce"
           id="introduce"
           placeholder={dict.typeHere}
@@ -53,9 +53,9 @@ export default function Introduce({
           {dict.nextStep}
         </button>
       </form>
-      <div className="mt-5 w-full flex justify-center">
-      <Link
-          className="text-center text-sm font-normal leading-tight text-stone-300 border-none bg-transparent outline-none"
+      <div className="mt-5 flex w-full justify-center">
+        <Link
+          className="border-none bg-transparent text-center text-sm font-normal leading-tight text-stone-300 outline-none"
           href={`/${lang}/onboarding/categories`}
         >
           {dict.skip}

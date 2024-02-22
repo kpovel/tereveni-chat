@@ -59,7 +59,6 @@ export default function AvatarPicker({
     }
   };
 
-
   const handleSaveAvatar = async () => {
     if (customAvatar) {
       const formData = new FormData();

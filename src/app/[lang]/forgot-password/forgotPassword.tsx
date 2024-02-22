@@ -19,7 +19,7 @@ export default function ForgotPassword({
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSendEmailError('');
+    setSendEmailError("");
 
     const error = await sendMailPutData(email, window.origin, lang);
 
@@ -28,11 +28,11 @@ export default function ForgotPassword({
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col">
-        <EmailInput
-          email={email}
-          setEmail={setEmail}
-          placeholder={dict.emailPlaceholder}
-        />
+      <EmailInput
+        email={email}
+        setEmail={setEmail}
+        placeholder={dict.emailPlaceholder}
+      />
       <div className="px-2 py-1 text-xs text-red-500">{sendEmailError}</div>
       <button
         type="submit"

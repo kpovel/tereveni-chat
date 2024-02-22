@@ -15,5 +15,13 @@
   .main__link {
     @apply inline-block w-full px-6 py-3;
   }
+  /* .message__style {
+    @apply max-w-[225px] px-3 py-2 rounded-2xl
+  }
+  .my__message { 
+    @apply text-black text-sm font-normal
+  }
+  .income__message { 
+    @apply bg-white text-white text-sm font-normal
+  } */
 }
-

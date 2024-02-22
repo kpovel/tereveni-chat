@@ -21,7 +21,7 @@ export function ToggleLang() {
   }
 
   return (
-    <div className="pt-5 flex items-center justify-end">
+    <div className="flex items-center justify-end pt-5">
       <Image src="/lang.svg" alt="lang logo" width={18} height={18} />
       <Link
         href={navigateTo("en")}

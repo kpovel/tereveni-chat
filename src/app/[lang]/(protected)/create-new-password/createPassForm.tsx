@@ -35,10 +35,7 @@ export default function CreatePassForm({
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex w-full grow flex-col"
-    >
+    <form onSubmit={handleSubmit} className="flex w-full grow flex-col">
       <div>
         <PasswordInput
           setPass={setPassHandler}

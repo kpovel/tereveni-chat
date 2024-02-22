@@ -15,7 +15,7 @@ export function ScaleImage({
   return (
     <div className="my-4 flex justify-center">
       <Slider.Root
-        className="relative flex h-5 w-[200px] touch-none select-none items-center cursor-pointer"
+        className="relative flex h-5 w-[200px] cursor-pointer touch-none select-none items-center"
         defaultValue={[0]}
         onValueChange={handleScaleChange}
         value={[scale]}
@@ -29,7 +29,8 @@ export function ScaleImage({
         <Slider.Thumb
           className="block h-3 w-3 rounded-[10px] bg-[#7C01F6] focus:outline-none"
           style={{
-            filter: "drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.20)) drop-shadow(0px 2px 1px rgba(0, 0, 0, 0.12)) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.14))",
+            filter:
+              "drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.20)) drop-shadow(0px 2px 1px rgba(0, 0, 0, 0.12)) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.14))",
           }}
           aria-label="Volume"
         />
