@@ -7,7 +7,7 @@ export type Hashtag = {
   hashtags: { id: number; name: string }[];
 };
 
-export async function onboardingHashtags(lang: Lang) {
+export async function onboardingHashtags(lang: Lang): Promise<Hashtag[]> {
   const jwtAccessToken = await getJwtAccessToken();
 
   const res = await fetch(
@@ -22,6 +22,12 @@ export async function onboardingHashtags(lang: Lang) {
   if (!res.ok) {
     redirect(`/${lang}`);
   }
+  const json = (await res.json()) as Hashtag[];
 
-  return (await res.json()) as Hashtag[];
+  return json.map((category) => {
+    return {
+      name: category.name,
+      hashtags: category.hashtags.sort((a, b) => a.name.localeCompare(b.name)),
+    };
+  });
 }
