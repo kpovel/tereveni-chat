@@ -3,11 +3,11 @@ import { redirect } from "next/navigation";
 import { getJwtAccessToken } from "../../regenerateAccessToken";
 
 export type Hashtag = {
-  name: string;
+  name: string | undefined;
   hashtags: { id: number; name: string }[];
 };
 
-export async function onboardingHashtags(lang: Lang) {
+export async function onboardingHashtags(lang: Lang): Promise<Hashtag[]> {
   const jwtAccessToken = await getJwtAccessToken();
 
   const res = await fetch(
@@ -22,6 +22,16 @@ export async function onboardingHashtags(lang: Lang) {
   if (!res.ok) {
     redirect(`/${lang}`);
   }
+  const json = (await res.json()) as Hashtag[];
 
-  return (await res.json()) as Hashtag[];
+  const sortedHashtags = json.map((h) => {
+    return {
+      name: h.name,
+      hashtags: h.hashtags.sort((a, b) => a.name.localeCompare(b.name)),
+    };
+  });
+
+  sortedHashtags[sortedHashtags.length - 1].name = undefined;
+
+  return sortedHashtags;
 }
