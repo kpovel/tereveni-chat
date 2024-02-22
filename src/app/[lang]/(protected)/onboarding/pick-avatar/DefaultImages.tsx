@@ -7,7 +7,7 @@ export const imageLoader: ImageLoader = ({ src, width, quality }) => {
 export function DefaultImages({
   imagePaths,
   predefinedAvatarClick,
-  selectedDefaultAvatar,
+  selectedDefaultAvatar
 }: {
   imagePaths: string[];
   predefinedAvatarClick: (val: string) => void;

@@ -36,6 +36,7 @@ export default function AvatarPicker({
     setCustomAvatarData(selectedCustomAvatar);
     setIsEnabledNext(true);
     setSelectedAvatar(avatar);
+    setUploadError(false);
   };
 
   const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,7 +59,6 @@ export default function AvatarPicker({
       return;
     }
   };
-
 
   const handleSaveAvatar = async () => {
     if (customAvatar) {
