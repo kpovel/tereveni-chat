@@ -46,6 +46,7 @@ export default function SignUpForm({
         <LoginInput
           placeholder={dict.placeholder.login}
           errorMessage={state.login}
+          hint={dict.hint.login}
         />
         <EmailInput
           placeholder={dict.placeholder.email}
@@ -54,6 +55,7 @@ export default function SignUpForm({
         <PasswordInput
           placeholder={dict.placeholder.password}
           errorMessage={state.password}
+          hint={dict.hint.password}
         />
         <ConfigmPasswordInput
           placeholder={dict.placeholder.confirmPassword}

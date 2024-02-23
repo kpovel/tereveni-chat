@@ -1,26 +1,39 @@
 import Image from "next/image";
 import user from "public/user.svg";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { InputHint } from "./internal/hint";
+import { ErrorMessage } from "./internal/errorMessage";
 
 export function LoginInput({
   placeholder,
   errorMessage,
+  hint,
 }: {
   placeholder: string;
   errorMessage: string;
+  hint: string;
 }) {
+  const [showHint, setShowHint] = useState(false);
+  const [showError, setShowError] = useState(false);
+
   const ref = useRef<HTMLInputElement>(null);
   const redBorder = "border-[#FF453A]";
 
   useEffect(() => {
+    setShowError(true);
     if (errorMessage) {
-    console.log("fired", errorMessage);
       ref.current?.classList.add(redBorder);
     }
-  });
+  }, [errorMessage]);
 
-  function removeRedBorder() {
+  function handleOnBlur() {
     ref.current?.classList.remove(redBorder);
+    setShowHint(false);
+  }
+
+  function handleOnFocus() {
+    setShowError(false);
+    setShowHint(true);
   }
 
   return (
@@ -29,7 +42,8 @@ export function LoginInput({
         <Image src={user} alt="Login icon" className="absolute left-5" />
         <input
           ref={ref}
-          onBlur={removeRedBorder}
+          onBlur={handleOnBlur}
+          onFocus={handleOnFocus}
           className="w-full rounded-3xl border border-[#444] bg-[#1F1F1F] py-3.5
           pl-14 pr-5 leading-normal outline-none transition ease-in
           autofill:filter-none invalid:border-[#FF453A] focus:border-[#7C01F6]"
@@ -38,11 +52,10 @@ export function LoginInput({
           placeholder={placeholder}
         />
       </label>
-      {errorMessage && (
-        <div className="whitespace-pre-line px-2 pt-1 text-xs text-[#FF453A]">
-          {errorMessage}
-        </div>
-      )}
+      <div className="px-2 pt-1 text-xs text-balance whitespace-pre-line">
+        <InputHint showHint={showHint} hint={hint} />
+        <ErrorMessage showError={showError} errorMessage={errorMessage} />
+      </div>
     </div>
   );
 }

@@ -33,6 +33,7 @@ export default function CreatePassForm({
         <PasswordInput
           placeholder={dict.placeholder.password}
           errorMessage={state.password}
+          hint={dict.hint.password}
         />
         <ConfigmPasswordInput
           placeholder={dict.placeholder.confirmPassword}
