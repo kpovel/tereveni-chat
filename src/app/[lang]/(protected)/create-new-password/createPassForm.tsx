@@ -32,12 +32,12 @@ export default function CreatePassForm({
       <div className="grid gap-5">
         <PasswordInput
           placeholder={dict.placeholder.password}
-          errorMessage={state.password}
+          errorMessage={[state.password]}
           hint={dict.hint.password}
         />
         <ConfigmPasswordInput
           placeholder={dict.placeholder.confirmPassword}
-          errorMessage={state.confirmPassword || state.general}
+          errorMessage={[state.confirmPassword || state.general]}
         />
       </div>
 

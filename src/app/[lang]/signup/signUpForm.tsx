@@ -45,21 +45,21 @@ export default function SignUpForm({
       <div className="grid gap-5">
         <LoginInput
           placeholder={dict.placeholder.login}
-          errorMessage={state.login}
+          errorMessage={[state.login]}
           hint={dict.hint.login}
         />
         <EmailInput
           placeholder={dict.placeholder.email}
-          errorMessage={state.email}
+          errorMessage={[state.email]}
         />
         <PasswordInput
           placeholder={dict.placeholder.password}
-          errorMessage={state.password}
+          errorMessage={[state.password]}
           hint={dict.hint.password}
         />
         <ConfigmPasswordInput
           placeholder={dict.placeholder.confirmPassword}
-          errorMessage={state.confirmPassword || state.general}
+          errorMessage={[state.confirmPassword || state.general]}
         />
       </div>
 

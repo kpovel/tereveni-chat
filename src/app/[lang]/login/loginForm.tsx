@@ -34,11 +34,11 @@ export default function LoginForm({
       <div className="grid gap-5">
         <EmailInput
           placeholder={dict.emailPlaceholder}
-          errorMessage={state.email}
+          errorMessage={[state.email]}
         />
         <PasswordInput
           placeholder={dict.passwordPlaceholder}
-          errorMessage={state.password || state.general}
+          errorMessage={[state.password || state.general]}
           hint={dict.hint.password}
         />
         <input name="lang" value={lang} className="hidden" readOnly />

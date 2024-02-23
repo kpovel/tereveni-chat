@@ -8,7 +8,7 @@ export function EmailInput({
   errorMessage,
 }: {
   placeholder: string;
-  errorMessage: string;
+  errorMessage: string[];
 }) {
   const [showError, setShowError] = useState(false);
   const ref = useRef<HTMLInputElement>(null);
@@ -16,7 +16,7 @@ export function EmailInput({
 
   useEffect(() => {
     setShowError(true);
-    if (errorMessage) {
+    if (errorMessage[0]) {
       ref.current?.classList.add(redBorder);
     }
   }, [errorMessage]);
@@ -46,7 +46,7 @@ export function EmailInput({
         />
       </label>
       <div className="px-2 pt-1 text-xs text-balance whitespace-pre-line">
-        <ErrorMessage showError={showError} errorMessage={errorMessage} />
+        <ErrorMessage showError={showError} errorMessage={errorMessage[0]} />
       </div>
     </div>
   );

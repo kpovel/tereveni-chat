@@ -9,7 +9,7 @@ export function ConfigmPasswordInput({
   errorMessage,
 }: {
   placeholder: string;
-  errorMessage: string;
+  errorMessage: string[];
 }) {
   const [isHidden, setIsHidden] = useState(true);
   const [showError, setShowError] = useState(false);
@@ -20,7 +20,7 @@ export function ConfigmPasswordInput({
     setShowError(true);
     const passwordInput = document.getElementsByName("password")[0];
 
-    if (errorMessage) {
+    if (errorMessage[0]) {
       ref.current?.classList.add(redBorder);
       passwordInput.classList.add(redBorder);
     }
@@ -52,7 +52,7 @@ export function ConfigmPasswordInput({
         <TogglePassword isHidden={isHidden} setIsHidden={setIsHidden} />
       </label>
       <div className="whitespace-pre-line text-balance px-2 pt-1 text-xs">
-        <ErrorMessage showError={showError} errorMessage={errorMessage} />
+        <ErrorMessage showError={showError} errorMessage={errorMessage[0]} />
       </div>
     </div>
   );

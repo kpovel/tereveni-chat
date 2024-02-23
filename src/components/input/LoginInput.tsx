@@ -10,7 +10,7 @@ export function LoginInput({
   hint,
 }: {
   placeholder: string;
-  errorMessage: string;
+  errorMessage: string[];
   hint: string;
 }) {
   const [showHint, setShowHint] = useState(false);
@@ -21,7 +21,7 @@ export function LoginInput({
 
   useEffect(() => {
     setShowError(true);
-    if (errorMessage) {
+    if (errorMessage[0]) {
       ref.current?.classList.add(redBorder);
     }
   }, [errorMessage]);
@@ -54,7 +54,7 @@ export function LoginInput({
       </label>
       <div className="px-2 pt-1 text-xs text-balance whitespace-pre-line">
         <InputHint showHint={showHint} hint={hint} />
-        <ErrorMessage showError={showError} errorMessage={errorMessage} />
+        <ErrorMessage showError={showError} errorMessage={errorMessage[0]} />
       </div>
     </div>
   );

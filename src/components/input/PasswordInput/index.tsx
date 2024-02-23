@@ -19,7 +19,7 @@ export function PasswordInput({
   hint,
 }: {
   placeholder: string;
-  errorMessage: string;
+  errorMessage: string[];
   hint: string;
 }) {
   const ref = useRef<HTMLInputElement>(null);
@@ -30,7 +30,7 @@ export function PasswordInput({
 
   useEffect(() => {
     setShowError(true);
-    if (errorMessage) {
+    if (errorMessage[0]) {
       ref.current?.classList.add(redBorder);
     }
   }, [errorMessage]);
@@ -64,7 +64,7 @@ export function PasswordInput({
       </label>
       <div className="whitespace-pre-line text-balance px-2 pt-1 text-xs">
         <InputHint showHint={showHint} hint={hint} />
-        <ErrorMessage showError={showError} errorMessage={errorMessage} />
+        <ErrorMessage showError={showError} errorMessage={errorMessage[0]} />
       </div>
     </div>
   );

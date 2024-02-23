@@ -23,7 +23,7 @@ export function ForgotPasswordForm({
       className="flex w-full max-w-md grow flex-col justify-between"
     >
       <EmailInput
-        errorMessage={state.email}
+        errorMessage={[state.email]}
         placeholder={dict.emailPlaceholder}
       />
       <SubmitButton buttonTitle={dict.sendToMail} />
