@@ -8,6 +8,10 @@ export function MessageContextList({ openContext }: { openContext: boolean }) {
     refContextList.current?.classList.toggle("hidden");
   }, [openContext]);
 
+  useEffect(() => {
+    refContextList.current?.classList.add("hidden");
+  }, []);
+
   function deleteChat() {
     alert("Are you sure you want to delete this chat?");
   }
