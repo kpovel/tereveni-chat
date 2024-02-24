@@ -20,7 +20,7 @@ export function PasswordInput({
 }: {
   placeholder: string;
   errorMessage: string[];
-  hint: string;
+  hint?: string;
 }) {
   const ref = useRef<HTMLInputElement>(null);
   const [isHidden, setIsHidden] = useState(true);
@@ -63,7 +63,7 @@ export function PasswordInput({
         <TogglePassword isHidden={isHidden} setIsHidden={setIsHidden} />
       </label>
       <div className="whitespace-pre-line text-balance px-2 pt-1 text-xs">
-        <InputHint showHint={showHint} hint={hint} />
+        {hint && <InputHint showHint={showHint} hint={hint} />}
         <ErrorMessage showError={showError} errorMessage={errorMessage[0]} />
       </div>
     </div>
