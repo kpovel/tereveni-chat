@@ -11,7 +11,7 @@ export function ChatList({
   chatList: ChatRoom[];
   lang: Lang;
 }) {
-  const [selectedChat, setSelectedChat] = useState("");
+  const [selectedChat, setSelectedChat] = useState<string | null>(null);
 
   return (
     <>

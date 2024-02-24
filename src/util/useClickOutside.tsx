@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
-export function useClickOutside(callback: () => void) {
-  const ref = useRef(null);
+export function useClickOutside<T>(callback: () => void) {
+  const ref = useRef<T>(null);
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {
