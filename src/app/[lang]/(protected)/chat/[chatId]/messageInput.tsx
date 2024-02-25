@@ -23,7 +23,7 @@ export default function MessageInput() {
   return (
     <div className="flex inline-flex w-full items-center justify-start gap-2 bg-stone-900 py-2 pl-3 pr-5">
       <button className="h-[34px] w-[34px] bg-none">
-        <Image src={addToMessage} />
+        <Image src={addToMessage} alt="addToMessage" />
       </button>
       <form className="flex w-full items-center" action="">
         <input
@@ -37,7 +37,7 @@ export default function MessageInput() {
         />
         {isSendBtnActive && (
           <button type="submit" className="ml-2 h-[34px] w-[34px]">
-            <Image src={sendBtn} />
+            <Image src={sendBtn} alt="submit" />
           </button>
         )}
       </form>
