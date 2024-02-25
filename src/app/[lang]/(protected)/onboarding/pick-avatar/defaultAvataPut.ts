@@ -4,11 +4,6 @@ import { redirect } from "next/navigation";
 import { env } from "@/env.mjs";
 import { getJwtAccessToken } from "../../regenerateAccessToken";
 
-type SignUpResponseError = {
-  fieldName: string;
-  fieldMessage: string;
-};
-
 export async function defaultAvatarPut(formData: string, lang: Lang) {
   const accessToken = await getJwtAccessToken();
 
@@ -32,7 +27,5 @@ export async function defaultAvatarPut(formData: string, lang: Lang) {
     redirect(`/${lang}/onboarding/introduce-yourself`);
   }
 
-  const body = (await res.json()) as SignUpResponseError;
-
-  return body.fieldMessage;
+  return await res.text();
 }

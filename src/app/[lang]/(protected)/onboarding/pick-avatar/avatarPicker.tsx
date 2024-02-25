@@ -27,13 +27,13 @@ export default function AvatarPicker({
   const [avatarPostError, setAvatarPostError] = useState("");
   const editorRef = useRef<AvatarEditor | null>(null);
   const [uploadError, setUploadError] = useState(false);
-  const [customAvatarData, setCustomAvatarData] = useState("");
+  const [defaultAvatar, setDefaultAvatar] = useState("");
 
   const handlePredefinedAvatarClick = (avatar: string) => {
     setIsEnabledNext(false);
     const selectedCustomAvatar = avatar.replace("/api/user-image/", "");
     setCustomAvatar(null);
-    setCustomAvatarData(selectedCustomAvatar);
+    setDefaultAvatar(selectedCustomAvatar);
     setIsEnabledNext(true);
     setSelectedAvatar(avatar);
     setUploadError(false);
@@ -44,20 +44,21 @@ export default function AvatarPicker({
     const file = fileInput.files?.[0];
     const maxSizeInBytes = 3 * 1024 * 1024; // 3mb
 
-    if (file && file.size < maxSizeInBytes) {
-      setScale(1);
-      setCustomAvatarData("");
-      setCustomAvatar(file);
-      setIsEnabledNext(true);
-      setUploadError(false);
+    if (!file) {
       return;
     }
 
-    if (file && file.size > maxSizeInBytes) {
+    if (file.size > maxSizeInBytes) {
       fileInput.value = "";
       setUploadError(true);
       return;
     }
+
+    setScale(1);
+    setDefaultAvatar("");
+    setCustomAvatar(file);
+    setIsEnabledNext(true);
+    setUploadError(false);
   };
 
   const handleSaveAvatar = async () => {
@@ -66,8 +67,8 @@ export default function AvatarPicker({
       formData.append("image", customAvatar);
       const error = await avatarPost(formData, lang);
       setAvatarPostError(error);
-    } else if (customAvatarData) {
-      const customError = await defaultAvatarPut(customAvatarData, lang);
+    } else if (defaultAvatar) {
+      const customError = await defaultAvatarPut(defaultAvatar, lang);
       setAvatarPostError(customError);
     }
   };
@@ -78,7 +79,7 @@ export default function AvatarPicker({
         className="hidden"
         type="file"
         id="your_avatar"
-        accept="image/*"
+        accept="image/jpeg, image/png, image/webp, image/jpg"
         onChange={handleAvatarChange}
       />
       <div className="flex justify-center">
@@ -154,7 +155,7 @@ export default function AvatarPicker({
         <DefaultImages
           imagePaths={defaultImages}
           predefinedAvatarClick={handlePredefinedAvatarClick}
-          selectedDefaultAvatar={customAvatarData}
+          selectedDefaultAvatar={defaultAvatar}
         />
       </div>
 
