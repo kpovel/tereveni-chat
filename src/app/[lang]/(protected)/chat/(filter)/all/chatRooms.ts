@@ -1,5 +1,5 @@
 import { env } from "@/env.mjs";
-import { getJwtAccessToken } from "../../regenerateAccessToken";
+import { getJwtAccessToken } from "../../../regenerateAccessToken";
 
 export type ChatRoom = {
   chatName: string;
