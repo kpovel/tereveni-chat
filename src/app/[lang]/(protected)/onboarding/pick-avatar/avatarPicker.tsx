@@ -78,7 +78,7 @@ export default function AvatarPicker({
         className="hidden"
         type="file"
         id="your_avatar"
-        accept="image/*"
+        accept="image/jpeg, image/png, image/webp, image/jpg"
         onChange={handleAvatarChange}
       />
       <div className="flex justify-center">
