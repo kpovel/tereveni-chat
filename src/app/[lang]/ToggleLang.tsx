@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import lang from "public/lang.svg";
 
 export function ToggleLang() {
   const pathname = usePathname();
@@ -22,20 +23,20 @@ export function ToggleLang() {
 
   return (
     <div className="pt-5 flex items-center justify-end">
-      <Image src="/lang.svg" alt="lang logo" width={18} height={18} />
+      <Image src={lang} alt="lang logo" />
       <Link
         href={navigateTo("en")}
-        className={`ml-2 mr-1 text-sm ${
-          isActive("en") ? "text-white" : "text-zinc-500"
+        className={`ml-2 mr-1 font-medium ${
+          isActive("en") ? "text-white" : "text-[#79767A]"
         }`}
       >
         en
       </Link>
-      <div className="h-3.5 w-0.5 bg-zinc-500"></div>
+      <div className="text-[#79767A]">|</div>
       <Link
         href={navigateTo("uk")}
-        className={`ml-1 text-sm ${
-          isActive("uk") ? "text-white" : "text-zinc-500"
+        className={`ml-1 font-medium ${
+          isActive("uk") ? "text-white" : "text-[#79767A]"
         }`}
       >
         ua

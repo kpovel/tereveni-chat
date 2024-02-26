@@ -3,13 +3,15 @@ export function Category({
   hashtags,
   toggleHashtag,
 }: {
-  categoryName: string;
+  categoryName: string | undefined;
   hashtags: { name: string; id: number; checked: boolean }[];
   toggleHashtag: (hashtagId: number) => void;
 }) {
   return (
     <div className="flex flex-col gap-5">
-      <h4 className="text-sm text-neutral-50">{categoryName}</h4>
+      {categoryName && (
+        <h4 className="text-sm text-neutral-50">{categoryName}</h4>
+      )}
       <div className="flex flex-wrap gap-3">
         {hashtags.map((hashtag) => {
           return (
