@@ -72,7 +72,7 @@ function RemoveLinkOnBlur({
   return (
     <div
       className="flex gap-3 rounded-2xl bg-[rgba(255,_255,_255,_0.05)] p-3
-      shadow-[0px_8px_10px_1px_rgba(0,_0,_0,_0.12)]"
+      select-none shadow-[0px_8px_10px_1px_rgba(0,_0,_0,_0.12)]"
     >
       {children}
     </div>
