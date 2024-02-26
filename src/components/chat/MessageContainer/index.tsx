@@ -2,7 +2,7 @@ import { ChatRoom } from "@/app/[lang]/(protected)/chat/all/chatRooms";
 import Link from "next/link";
 import { ChatAvatar } from "./ChatAvatar";
 import { ChatInfo } from "./ChatInfo";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 import { MessageContextMenu } from "./MessageContextMenu";
 
 export function MessageContainer({
@@ -22,10 +22,10 @@ export function MessageContainer({
       selectedChat={selectedChat}
       chatRoom={chatRoom}
     >
-      <Link
-        href={`/${lang}/chat/${chatRoom.chatRoom.uuid}`}
-        className="flex gap-3 rounded-2xl bg-[rgba(255,_255,_255,_0.05)] p-3
-        shadow-[0px_8px_10px_1px_rgba(0,_0,_0,_0.12)]"
+      <RemoveLinkOnBlur
+        chatRoom={chatRoom}
+        lang={lang}
+        selectedChat={selectedChat}
       >
         <ChatAvatar
           imageName={chatRoom.chatRoom.image?.name}
@@ -41,7 +41,40 @@ export function MessageContainer({
           </h4>
         </div>
         <ChatInfo lastMessage={chatRoom.lastMessage} />
-      </Link>
+      </RemoveLinkOnBlur>
     </MessageContextMenu>
+  );
+}
+
+function RemoveLinkOnBlur({
+  children,
+  selectedChat,
+  chatRoom,
+  lang,
+}: {
+  children: ReactNode;
+  selectedChat: string | null;
+  lang: Lang;
+  chatRoom: ChatRoom;
+}) {
+  if (selectedChat === null) {
+    return (
+      <Link
+        href={`/${lang}/chat/${chatRoom.chatRoom.uuid}`}
+        className="flex gap-3 rounded-2xl bg-[rgba(255,_255,_255,_0.05)] p-3
+        shadow-[0px_8px_10px_1px_rgba(0,_0,_0,_0.12)]"
+      >
+        {children}
+      </Link>
+    );
+  }
+
+  return (
+    <div
+      className="flex gap-3 rounded-2xl bg-[rgba(255,_255,_255,_0.05)] p-3
+      shadow-[0px_8px_10px_1px_rgba(0,_0,_0,_0.12)]"
+    >
+      {children}
+    </div>
   );
 }
