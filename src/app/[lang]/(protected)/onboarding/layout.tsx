@@ -15,7 +15,7 @@ export default async function OnboardingLayout({
   }
 
   return (
-    <main className="mx-auto flex h-dvh max-w-md flex-col gap-10 px-6 pb-10 pt-5">
+    <main className="mx-auto flex min-h-dvh max-w-md flex-col gap-10 px-6 pb-10 pt-5">
       {children}
     </main>
   );

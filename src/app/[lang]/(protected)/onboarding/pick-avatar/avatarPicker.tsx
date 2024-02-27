@@ -74,81 +74,81 @@ export default function AvatarPicker({
   };
 
   return (
-    <div className="mt-10">
-      <input
-        className="hidden"
-        type="file"
-        id="your_avatar"
-        accept="image/jpeg, image/png, image/webp, image/jpg"
-        onChange={handleAvatarChange}
-      />
-      <div className="flex justify-center">
-        <div className="relative h-[200px] w-[200px]">
-          <button className="absolute right-0 top-0 z-10 rounded-full">
-            <label htmlFor="your_avatar">
-              <Image
-                src="/plus-1.png"
-                width={45}
-                height={45}
-                alt="plus"
-                className="cursor-pointer"
-              />
-            </label>
-          </button>
+    <>
+      <div className="flex flex-col gap-10">
+        <input
+          className="hidden"
+          type="file"
+          id="your_avatar"
+          accept="image/jpeg, image/png, image/webp, image/jpg"
+          onChange={handleAvatarChange}
+        />
+        <div className="flex justify-center">
+          <div className="relative h-[200px] w-[200px]">
+            <button className="absolute right-0 top-0 z-10 rounded-full">
+              <label htmlFor="your_avatar">
+                <Image
+                  src="/plus-1.png"
+                  width={45}
+                  height={45}
+                  alt="plus"
+                  className="cursor-pointer"
+                />
+              </label>
+            </button>
 
-          <div
-            className={`h-[200px] w-[200px] overflow-hidden rounded-full ${
-              uploadError && "border border-red-500"
-            }`}
-          >
-            {customAvatar ? (
-              <AvatarEditor
-                className="-translate-x-7 -translate-y-7 object-cover"
-                ref={editorRef}
-                image={customAvatar}
-                width={205}
-                height={205}
-                scale={scale}
-                borderRadius={100}
-              />
-            ) : selectedAvatar ? (
-              <Image
-                src={`${selectedAvatar}`}
-                alt={`Selected Avatar ${selectedAvatar}`}
-                width={200}
-                height={200}
-                unoptimized
-              />
-            ) : (
-              <button>
-                <label htmlFor="your_avatar">
-                  <Image
-                    className="cursor-pointer"
-                    src="/Preview.svg"
-                    width={200}
-                    height={200}
-                    alt="preview"
-                  />
-                </label>
-              </button>
-            )}
+            <div
+              className={`h-[200px] w-[200px] overflow-hidden rounded-full ${
+                uploadError && "border border-red-500"
+              }`}
+            >
+              {customAvatar ? (
+                <AvatarEditor
+                  className="-translate-x-7 -translate-y-7 object-cover"
+                  ref={editorRef}
+                  image={customAvatar}
+                  width={205}
+                  height={205}
+                  scale={scale}
+                  borderRadius={100}
+                />
+              ) : selectedAvatar ? (
+                <Image
+                  src={`${selectedAvatar}`}
+                  alt={`Selected Avatar ${selectedAvatar}`}
+                  width={200}
+                  height={200}
+                  unoptimized
+                />
+              ) : (
+                <button>
+                  <label htmlFor="your_avatar">
+                    <Image
+                      className="cursor-pointer"
+                      src="/Preview.svg"
+                      width={200}
+                      height={200}
+                      alt="preview"
+                    />
+                  </label>
+                </button>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-      {uploadError && (
-        <div className="mt-4 text-center text-sm font-normal text-red-500">
-          <span>
-            Image size exceeds limit <br /> Please upload a photo under 3 MB
-          </span>
-        </div>
-      )}
-      {avatarPostError && (
-        <div className="mt-4 text-center text-sm font-normal text-red-500">
-          <span>{avatarPostError}</span>
-        </div>
-      )}
-      {customAvatar && <ScaleImage scale={scale} setScale={setScale} />}
-      <div className="mt-10 flex flex-col items-center">
+        {uploadError && (
+          <div className="mt-4 text-center text-sm font-normal text-red-500">
+            <span>
+              Image size exceeds limit <br /> Please upload a photo under 3 MB
+            </span>
+          </div>
+        )}
+        {avatarPostError && (
+          <div className="mt-4 text-center text-sm font-normal text-red-500">
+            <span>{avatarPostError}</span>
+          </div>
+        )}
+        {customAvatar && <ScaleImage scale={scale} setScale={setScale} />}
         <h3 className="text-center text-sm font-normal leading-tight text-neutral-50">
           {dict.pickAvatar}
         </h3>
@@ -159,9 +159,9 @@ export default function AvatarPicker({
         />
       </div>
 
-      <div className="mt-10 flex flex-col items-center">
+      <div>
         <button
-          className={`main__btn main__link mt-24 cursor-pointer ${
+          className={`main__btn main__link cursor-pointer ${
             !isEnabledNext && "bg-opacity-10 text-zinc-500"
           }`}
           onClick={handleSaveAvatar}
@@ -175,6 +175,6 @@ export default function AvatarPicker({
           </Link>
         </button>
       </div>
-    </div>
+    </>
   );
 }
