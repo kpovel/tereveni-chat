@@ -1,7 +1,7 @@
-import { ChatRoom } from "@/app/[lang]/(protected)/chat/all/chatRooms";
 import Link from "next/link";
 import { ChatAvatar } from "./ChatAvatar";
 import { ChatInfo } from "./ChatInfo";
+import { ChatRoom } from "@/app/[lang]/(protected)/chat/(filter)/all/chatRooms";
 
 export function MessageContainer({
   chatRoom,
