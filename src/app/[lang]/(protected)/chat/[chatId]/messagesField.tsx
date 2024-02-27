@@ -139,13 +139,13 @@ export default function MessagesField() {
 
   return (
     <div className="relative h-full overflow-scroll px-6">
-      {!messages ? (
+      {!messages.length && (
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
           <p className="text-center text-sm font-normal text-white text-opacity-50">
             No messages here yet
           </p>
         </div>
-      ) : null}
+      )}
       <div className="flex flex-col space-y-5">{renderMessages()}</div>
     </div>
   );
