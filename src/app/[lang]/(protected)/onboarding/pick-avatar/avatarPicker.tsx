@@ -75,7 +75,7 @@ export default function AvatarPicker({
 
   return (
     <>
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-10 grow">
         <input
           className="hidden"
           type="file"
