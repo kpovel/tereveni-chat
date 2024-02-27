@@ -69,6 +69,10 @@ const dictionaries = {
     import("../../components/chat/ChatNavigation/en.json").then((module) => module.default),
   "components/uk/ChatNavigation": () =>
     import("../../components/chat/ChatNavigation/uk.json").then((module) => module.default),
+  "components/en/ProgressStep": () =>
+    import("../../components/progress/en.json").then((module) => module.default),
+  "components/uk/ProgressStep": () =>
+    import("../../components/progress/uk.json").then((module) => module.default),
 };
 
 export type DictionaryReturnTypes = {

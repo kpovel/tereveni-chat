@@ -1,4 +1,6 @@
-export function ProgressStep({
+import { getDictionary } from "@/app/[lang]/dictionaries";
+
+export async function ProgressStep({
   currentStep,
   totalSteps,
   lang,
@@ -7,10 +9,11 @@ export function ProgressStep({
   totalSteps: number;
   lang: Lang;
 }) {
-  // todo: update translation
+  const dict = await getDictionary(`components/${lang}/ProgressStep`);
+
   return (
-    <div className="text-[#C2C2C2] text-right">
-      Step {currentStep}/{totalSteps}
+    <div className="text-right text-[#C2C2C2]">
+      {dict.step} {currentStep}/{totalSteps}
     </div>
   );
 }
