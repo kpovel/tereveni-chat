@@ -27,13 +27,13 @@ export default function Introduce({
   };
 
   return (
-    <div className="mt-10">
-      <form>
+    <form className="grow flex flex-col justify-between">
+      <div>
         <textarea
           value={introduce}
           max-length={maxCharacters}
           onChange={handleText}
-          className="inline-flex h-[192px] w-full items-center justify-center rounded-3xl border border-neutral-700 bg-stone-900 px-5 py-3 text-sm font-normal leading-tight text-neutral-50 outline-none focus:border-violet-700 resize-none"
+          className="h-[192px] w-full resize-none rounded-3xl border border-neutral-700 bg-stone-900 px-5 py-3 text-sm font-normal leading-tight text-neutral-50 outline-none focus:border-violet-700"
           name="introduce"
           id="introduce"
           placeholder={dict.typeHere}
@@ -43,6 +43,8 @@ export default function Introduce({
             {introduce.length} / {maxCharacters}
           </span>
         </div>
+      </div>
+      <div className="grid gap-5">
         <button
           disabled={introduce.trim() === ""}
           onClick={handleSubmit}
@@ -52,15 +54,15 @@ export default function Introduce({
         >
           {dict.nextStep}
         </button>
-      </form>
-      <div className="mt-5 w-full flex justify-center">
-      <Link
-          className="text-center text-sm font-normal leading-tight text-stone-300 border-none bg-transparent outline-none"
-          href={`/${lang}/onboarding/categories`}
-        >
-          {dict.skip}
-        </Link>
+        <div className="flex w-full justify-center">
+          <Link
+            className="border-none bg-transparent text-center text-sm font-normal leading-tight text-stone-300 outline-none"
+            href={`/${lang}/onboarding/categories`}
+          >
+            {dict.skip}
+          </Link>
+        </div>
       </div>
-    </div>
+    </form>
   );
 }

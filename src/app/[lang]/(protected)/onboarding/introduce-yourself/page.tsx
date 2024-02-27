@@ -1,5 +1,6 @@
 import { getDictionary } from "@/app/[lang]/dictionaries";
 import Introduce from "./introduce";
+import { OnboardingProgress } from "../OnboardingProgress";
 
 export default async function IntroduceYourself({
   params,
@@ -11,17 +12,17 @@ export default async function IntroduceYourself({
   );
 
   return (
-    <div className="container mx-auto max-w-md px-6">
-      <div className="mt-5 text-right text-sm font-normal text-stone-300">
-        <p>Step 3/4</p>
+    <>
+      <div className="flex flex-col gap-10">
+        <OnboardingProgress totalSteps={4} currentStep={3} lang={params.lang} />
+        <div className="grid gap-5 text-pretty text-center text-[#FAFAFA]">
+          <h2 className="text-lg font-medium">{dict.title}</h2>
+          <p className="text-sm leading-tight text-neutral-50">
+            {dict.subtitle}
+          </p>
+        </div>
       </div>
-      <h2 className="mt-10 text-center text-lg font-medium text-neutral-50 ">
-        {dict.title}
-      </h2>
-      <p className="mt-5 text-center text-sm font-normal leading-tight text-neutral-50">
-        {dict.subtitle}
-      </p>
       <Introduce lang={params.lang} dict={dict} />
-    </div>
+    </>
   );
 }
