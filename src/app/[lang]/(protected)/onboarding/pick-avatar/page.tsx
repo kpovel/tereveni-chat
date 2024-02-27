@@ -2,7 +2,7 @@ import { getDictionary } from "@/app/[lang]/dictionaries";
 import { env } from "@/env.mjs";
 import AvatarPicker from "./avatarPicker";
 import { getJwtAccessToken } from "../../regenerateAccessToken";
-import { OnboardingProgress } from "../OnboardingProgress";
+import { ProgressStep } from "@/components/progress/ProgressStep";
 
 export default async function PickAvatar({
   params,
@@ -15,7 +15,7 @@ export default async function PickAvatar({
   return (
     <>
       <div className="flex flex-col gap-10">
-        <OnboardingProgress currentStep={2} totalSteps={4} lang={params.lang} />
+        <ProgressStep currentStep={2} totalSteps={4} lang={params.lang} />
         <div className="grid gap-5 text-pretty text-center text-[#FAFAFA]">
           <h2 className="text-lg font-medium">{dict.title}</h2>
           <p className="text-sm leading-tight">{dict.subtitle}</p>

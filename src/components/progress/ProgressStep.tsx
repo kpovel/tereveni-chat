@@ -1,4 +1,4 @@
-export function OnboardingProgress({
+export function ProgressStep({
   currentStep,
   totalSteps,
   lang,

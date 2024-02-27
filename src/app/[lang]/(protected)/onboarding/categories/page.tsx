@@ -1,7 +1,7 @@
 import { getDictionary } from "@/app/[lang]/dictionaries";
 import { ChooseCategories } from "./categories";
 import { onboardingHashtags } from "./onboardingHashtags";
-import { OnboardingProgress } from "../OnboardingProgress";
+import { ProgressStep } from "@/components/progress/ProgressStep";
 
 export default async function OnboardingCategories({
   params,
@@ -14,7 +14,7 @@ export default async function OnboardingCategories({
   return (
     <>
       <div className="flex flex-col gap-10">
-        <OnboardingProgress currentStep={4} totalSteps={4} lang={params.lang} />
+        <ProgressStep currentStep={4} totalSteps={4} lang={params.lang} />
         <div className="grid gap-5 text-pretty text-center text-[#FAFAFA]">
           <h2 className="text-lg font-medium">{dict.title}</h2>
           <p className="leading-tight">{dict.subtitle}</p>
