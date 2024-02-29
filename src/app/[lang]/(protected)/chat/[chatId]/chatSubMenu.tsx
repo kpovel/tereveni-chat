@@ -1,4 +1,4 @@
-import DotsMenu from "./DotsMenu";
+import DotsMenu from "./dotsMenu";
 
 export default function ChatSubMenu({
   isMenuActive,

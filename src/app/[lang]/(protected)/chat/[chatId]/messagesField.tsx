@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, ReactNode } from "react";
-import RenderMessages from "./RenderMessages";
+import RenderMessages from "./renderMessages";
 
 export default function MessagesField() {
   const [messages, setMessages] = useState([
