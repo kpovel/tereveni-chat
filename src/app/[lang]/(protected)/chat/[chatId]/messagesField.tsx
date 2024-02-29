@@ -1,141 +1,142 @@
 "use client";
 
 import { useState, ReactNode } from "react";
-
-export interface MessageInterface {
-  uiid: string;
-  content: string;
-  edited: boolean;
-  myMessage: boolean;
-  dateOfCreated: string;
-}
+import RenderMessages from "./RenderMessages";
 
 export default function MessagesField() {
   const [messages, setMessages] = useState([
     {
-      uiid: "1",
-      content: "dfgdfg dfgdfgdf g df gd fg df gdfgdfgdfgdfgdfg dfgdfg",
-      edited: false,
-      myMessage: false,
-      dateOfCreated: "12:02",
+      uuid: "fsdf4ds65f4d5f6sd454f6s",
+      content: "dsfbdf sd f s fsdfdsfs fsdfsdfewfsfdfsd f",
+      user: {
+        uiid: "fsdf4ds65f4s6d5f6sd454f6s",
+        name: "Steve",
+        image: {
+          name: "string",
+        },
+        dateOfCreated: "2024-02-23T14:51:11.1892951",
+      },
+      dateOfCreated: "2024-02-23T14:51:11.1892951",
     },
     {
-      uiid: "2",
-      content: "Hi, what`s up?",
-      edited: false,
-      myMessage: true,
-      dateOfCreated: new Date().toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      }),
+      uuid: "fsdf4ds65f4s6d5f6sd454f6s",
+      content: "dsfbds s fsdfdsfs fsdfsdfewfsfdfsd f",
+      user: {
+        uiid: "fsdf4ds65f4s6d5f6sd454f6s",
+        name: "Steve",
+        image: {
+          name: "string",
+        },
+        dateOfCreated: "2024-02-23T14:51:11.1892951",
+      },
+      dateOfCreated: "2024-02-23T14:51:11.1892951",
     },
     {
-      uiid: "3",
-      content: "dfgdfgdfg dfg d fg df g dfg dfgdfgdfgdfgdf g dfg",
-      edited: false,
-      myMessage: false,
-      dateOfCreated: "12:02",
+      uuid: "fsdf4ds65f4d5f6sd454f6s",
+      content: "dsfbd sd f s fsdfdsfs fsdfsdfewfsfdfsd f",
+      user: {
+        uiid: "fsdf4ds65f4s6d5f6sd454f6s",
+        name: "Steve",
+        image: {
+          name: "string",
+        },
+        dateOfCreated: "2024-02-23T14:51:11.1892951",
+      },
+      dateOfCreated: "2024-02-23T14:51:11.1892951",
     },
     {
-      uiid: "4",
-      content: "bdhjbgfdgjhbdfjgbdf dfgdfdfgg",
-      edited: false,
-      myMessage: true,
-      dateOfCreated: new Date().toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      }),
+      uuid: "fsdf4ds65f4s6d5f6sd454f6s",
+      content: "dsfbdsbfs s fsdfdsfs fsdfsdfewfsfdfsd f",
+      user: {
+        uiid: "fsdf4ds65f4s6d5f6sd454f6s",
+        name: "Steve",
+        image: {
+          name: "string",
+        },
+        dateOfCreated: "2024-02-23T14:51:11.1892951",
+      },
+      dateOfCreated: "2024-02-23T14:51:11.1892951",
     },
     {
-      uiid: "5",
-      content: "dfgdfgkjdfngdf gdfgdfgd fg",
-      edited: false,
-      myMessage: false,
-      dateOfCreated: "12:02",
+      uuid: "fsdf4ds65s6d5f6sd454f6s",
+      content: "dsfbdsbfsdf sfsfdfsd f",
+      user: {
+        uiid: "fsdf4ds65f4s6d5f6sd454f6s",
+        name: "Steve",
+        image: {
+          name: "string",
+        },
+        dateOfCreated: "2024-02-23T14:51:11.1892951",
+      },
+      dateOfCreated: "2024-02-23T14:51:11.1892951",
     },
     {
-      uiid: "6",
-      content: "dfngjdfjngkdnfkg dfgjdfngjkndfkjgnkdf   dfgdfg",
-      edited: false,
-      myMessage: true,
-      dateOfCreated: new Date().toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      }),
+      uuid: "fsdf4ds65f4s6d5f6sd454f6s",
+      content: "dsfbdsbfsdf sdf sd f s fsdfsdfdsfsdfdsfs fsdfsdfewfsfdfsd f",
+      user: {
+        uiid: "fsdf4ds65f4s6d5f6sd454f6s",
+        name: "Steve",
+        image: {
+          name: "string",
+        },
+        dateOfCreated: "2024-02-23T14:51:11.1892951",
+      },
+      dateOfCreated: "2024-02-23T14:51:11.1892951",
     },
     {
-      uiid: "7",
-      content: "Hi, what`s up?",
-      edited: false,
-      myMessage: true,
-      dateOfCreated: new Date().toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      }),
+      uuid: "fsdf4ds65f4s65f6sd454f6s",
+      content: "dsfbdsbffdsfs fsdfsdfewfsfdfsd f",
+      user: {
+        uiid: "fsdf4ds65f4s6d5f6sd454f6s",
+        name: "Steve",
+        image: {
+          name: "string",
+        },
+        dateOfCreated: "2024-02-23T14:51:11.1892951",
+      },
+      dateOfCreated: "2024-02-23T14:51:11.1892951",
     },
     {
-      uiid: "8",
-      content: "dfgdfgdfg dfg d fg df g dfg dfgdfgdfgdfgdf g dfg",
-      edited: false,
-      myMessage: false,
-      dateOfCreated: "12:02",
+      uuid: "fsdf4ds65f4s6d5f6sd454f6s",
+      content: "dsfbdsbfsdf sdf sd f s fsdfdsfswfsfdfsd f",
+      user: {
+        uiid: "fsdf4ds65f4s6d5f6sd454f6s",
+        name: "Steve",
+        image: {
+          name: "string",
+        },
+        dateOfCreated: "2024-02-23T14:51:11.1892951",
+      },
+      dateOfCreated: "2024-02-23T14:51:11.1892951",
     },
     {
-      uiid: "9",
-      content: "bdhjbgfdgjhbdfjgbdf dfgdfdfgg",
-      edited: false,
-      myMessage: true,
-      dateOfCreated: new Date().toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      }),
+      uuid: "fsdf4ds65f4s6d5f6sd454f6s",
+      content: "dsfbdsdsfswfsfdfsd f",
+      user: {
+        uiid: "fsdf4ds65f4s6d5f6sd454f6s",
+        name: "Steve",
+        image: {
+          name: "string",
+        },
+        dateOfCreated: "2024-02-23T14:51:11.1892951",
+      },
+      dateOfCreated: "2024-02-23T14:51:11.1892951",
     },
     {
-      uiid: "10",
-      content: "dfgdfgkjdfngdf gdfgdfgd fg",
-      edited: false,
-      myMessage: false,
-      dateOfCreated: "12:02",
-    },
-    {
-      uiid: "11",
-      content: "dfngjdfjngkdnfkg dfgjdfngjkndfkjgnkdf   dfgdfg",
-      edited: false,
-      myMessage: true,
-      dateOfCreated: new Date().toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      }),
+      uuid: "fsdf4ds65f4s6d5f6sd454f6s",
+      content:
+        "dsfbdsbfsdf sdsdfsdfsdfsdfsdfdsf sd fsdfsdfsdfsdf fdsfsf ssdfsdfsdfsdfsdd sdfsdfsdfsdsdf s fsdfdsfswfsfdfsd f",
+      user: {
+        uiid: "fsdf4ds65f4s6d5f6sd454f6s",
+        name: "Steve",
+        image: {
+          name: "string",
+        },
+        dateOfCreated: "2024-02-23T14:51:11.1892951",
+      },
+      dateOfCreated: "2024-02-23T14:51:11.1892951",
     },
   ]);
-
-  const renderMessages = (): ReactNode => {
-    return messages.map((message) => (
-      <div
-        key={message.uiid}
-        className={`relative max-w-[80%] rounded-2xl px-3 py-2 text-sm font-normal ${
-          message.myMessage
-            ? "self-end bg-violet-700 text-white"
-            : "self-start bg-white text-black"
-        }`}
-      >
-        <p>{message.content}</p>
-        <div
-          className={`absolute bottom-0 text-xs font-bold text-stone-300 ${
-            message.myMessage ? "right-full mr-1" : "left-full ml-1"
-          }`}
-        >
-          <span>{message.dateOfCreated}</span>
-        </div>
-      </div>
-    ));
-  };
 
   return (
     <div className="relative h-full overflow-scroll px-6">
@@ -146,7 +147,7 @@ export default function MessagesField() {
           </p>
         </div>
       )}
-      <div className="flex flex-col space-y-5">{renderMessages()}</div>
+      <RenderMessages messages={messages} />
     </div>
   );
 }
