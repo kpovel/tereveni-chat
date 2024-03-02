@@ -91,26 +91,26 @@ function AcceptTermsConditions({
         <input
           type="checkbox"
           className="before:content[''] peer relative h-5 w-5 cursor-pointer
-          appearance-none rounded-md border-2"
+          appearance-none rounded-md border-2 border-neutral-50"
           name="AcceptTermsConditions"
         />
         <span
-          className="pointer-events-none absolute left-2/4 top-2/4
-          -translate-x-2/4 -translate-y-2/4 text-white opacity-0
-          peer-checked:opacity-100"
+          className="pointer-events-none absolute rounded-md opacity-0
+          peer-checked:bg-neutral-50 peer-checked:opacity-100"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
             fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="4"
-            stroke="white"
-            className="h-3 w-3"
           >
             <path
+              d="M13.5 7.5L8.40732 12.5L6.5 10.3846"
+              stroke="#050404"
+              strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M4.5 12.75l6 6 9-13.5"
             />
           </svg>
         </span>
