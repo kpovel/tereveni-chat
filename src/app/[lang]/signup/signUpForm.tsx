@@ -67,7 +67,7 @@ export default function SignUpForm({
         <div>
           <AcceptTermsConditions dict={dict} lang={lang} />
           {state.termsConditions && (
-            <div className="text-xs text-[#FF453A]">
+            <div className="px-2 pt-1 text-xs text-[#FF453A]">
               {state.termsConditions}
             </div>
           )}
@@ -86,8 +86,8 @@ function AcceptTermsConditions({
   lang: Lang;
 }) {
   return (
-    <div className="inline-flex items-center">
-      <label className="relative flex cursor-pointer items-center rounded-full">
+    <div className="flex items-center">
+      <label className="relative flex h-6 cursor-pointer items-center rounded-full">
         <input
           type="checkbox"
           className="before:content[''] peer relative h-5 w-5 cursor-pointer

@@ -35,7 +35,6 @@ export async function signUpPostData(
   if (!parse.success) {
     const fieldErrors = parse.error.formErrors.fieldErrors;
 
-    // error messages for unchecked terms and conditions
     return {
       email: fieldErrors.email?.length ? dict.errorStatus.invalidEmail : "",
       login: fieldErrors.login?.length ? dict.errorStatus.loginCharacters : "",
@@ -44,7 +43,7 @@ export async function signUpPostData(
         : "",
       confirmPassword: passwordMatchingError(formData, dict),
       termsConditions: fieldErrors.acceptTermsConditions?.length
-        ? "you should accept terms & conditions"
+        ? dict.errorStatus.acceptTermsConditions
         : "",
       general: "",
     };
