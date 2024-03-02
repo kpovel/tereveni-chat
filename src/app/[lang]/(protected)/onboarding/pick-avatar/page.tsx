@@ -2,6 +2,7 @@ import { getDictionary } from "@/app/[lang]/dictionaries";
 import { env } from "@/env.mjs";
 import AvatarPicker from "./avatarPicker";
 import { getJwtAccessToken } from "../../regenerateAccessToken";
+import { ProgressStep } from "@/components/progress/ProgressStep";
 
 export default async function PickAvatar({
   params,
@@ -12,22 +13,20 @@ export default async function PickAvatar({
   const defaultImages = await fetchDefaultImages();
 
   return (
-    <div className="container mx-auto px-6">
-      <div className="mt-5 text-right text-sm font-normal text-stone-300">
-        <p>Step 2/4</p>
+    <>
+      <div className="flex flex-col gap-10">
+        <ProgressStep currentStep={2} totalSteps={4} lang={params.lang} />
+        <div className="grid gap-5 text-pretty text-center text-[#FAFAFA]">
+          <h2 className="text-lg font-medium">{dict.title}</h2>
+          <p className="text-sm leading-tight">{dict.subtitle}</p>
+        </div>
       </div>
-      <h2 className="mt-10 text-center text-lg font-medium text-neutral-50 ">
-        {dict.title}
-      </h2>
-      <p className="mt-5 text-center text-sm font-normal leading-tight text-neutral-50">
-        {dict.subtitle}
-      </p>
       <AvatarPicker
         lang={params.lang}
         dict={dict}
         defaultImages={defaultImages}
       />
-    </div>
+    </>
   );
 }
 

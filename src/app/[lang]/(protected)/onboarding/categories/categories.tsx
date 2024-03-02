@@ -56,7 +56,7 @@ export function ChooseCategories({
 
   return (
     <>
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-10 grow">
         {categories.map((category, i) => {
           return (
             <Category
@@ -67,7 +67,7 @@ export function ChooseCategories({
             />
           );
         })}
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 grow justify-end">
           <button
             className="main__link main__btn text-center"
             onClick={handleSubmitCategories}
