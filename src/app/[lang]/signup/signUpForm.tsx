@@ -117,6 +117,8 @@ export default function SignUpForm({
             {dict.terms.read}{" "}
             <Link
               href={`/${lang}/terms-and-conditions`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-center text-xs font-normal text-[#9D83F9] underline"
             >
               {dict.terms.termsConditions}
