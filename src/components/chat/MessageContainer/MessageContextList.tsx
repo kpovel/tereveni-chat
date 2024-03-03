@@ -1,23 +1,12 @@
-import { useEffect, useRef } from "react";
 import { TrashIcon } from "./TrashIcon";
 
 export function MessageContextList({ openContext }: { openContext: boolean }) {
-  const refContextList = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    refContextList.current?.classList.toggle("hidden");
-  }, [openContext]);
-
-  useEffect(() => {
-    refContextList.current?.classList.add("hidden");
-  }, []);
-
   function deleteChat() {
     alert("Are you sure you want to delete this chat?");
   }
 
   return (
-    <div className="relative hidden" ref={refContextList}>
+    <div className={"relative " + (openContext ? "block" : "hidden")}>
       <button
         onClick={deleteChat}
         className="absolute right-0 top-1 z-10 flex w-[164px] gap-2 rounded-lg
