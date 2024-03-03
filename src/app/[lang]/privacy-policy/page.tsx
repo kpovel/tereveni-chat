@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import EnPrivacyPolicy from './en.mdx';
 import UkPrivacyPolicy from './uk.mdx';
 import InfoLayout from '../../util/infoLayout';

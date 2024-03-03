@@ -8,5 +8,8 @@
     "passwordNotMatch": "Password are not matching",
     "passwordConstraint": "Password must be 6 to 72 characters and contain at least 1 capital letter, 1 number and 1 special character"
   },
+  "hint": {
+    "password": "Password must be without spaces, 6 to 72 characters and contain at least 1 capital letter, 1 number and 1 special character"
+  },
   "continue": "Continue"
 }
