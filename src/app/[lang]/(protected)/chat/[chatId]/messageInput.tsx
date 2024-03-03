@@ -27,8 +27,8 @@ export default function MessageInput() {
       </button>
       <form className="flex w-full items-center" action="">
         <input
-          className={`w-full rounded-2xl bg-neutral-600 px-4 py-2 text-sm font-normal outline-none focus:bg-stone-300 focus:text-black ${
-            isSendBtnActive ? "bg-stone-300 text-black" : ""
+          className={`w-full rounded-2xl bg-[#545454] px-4 py-2 text-sm font-normal outline-none focus:bg-[#c2c2c2] focus:text-[#050404] ${
+            isSendBtnActive ? "bg-[#c2c2c2] text-[#050404]" : ""
           }`}
           type="text"
           placeholder="Enter message"

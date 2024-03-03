@@ -18,7 +18,7 @@ export default function ChatSearch({
 }) {
   return (
     <div className="flex w-full items-center justify-between px-6 py-3">
-      <div className="mr-4 flex w-full items-center justify-between rounded-3xl border border-neutral-700 bg-neutral-600 p-3">
+      <div className="mr-4 flex w-full items-center justify-between rounded-3xl border border-neutral-700 bg-[#545454] p-3">
         <button className="h-4 w-4">
           <Image src={searchIcon} alt="search" />
         </button>
@@ -26,7 +26,7 @@ export default function ChatSearch({
           <input
             value={searchValue}
             onChange={searchValueHandler}
-            className="border-transparent bg-transparent text-sm font-normal text-white outline-none"
+            className="border-transparent w-full bg-transparent text-sm font-normal text-white outline-none"
             placeholder="Сhat search"
             type="text"
           />

@@ -27,15 +27,15 @@ export default function RenderMessages({
       {messages.map((message) => (
         <div
           key={message.uuid}
-          className={`relative max-w-[80%] rounded-2xl px-3 py-2 text-sm font-normal ${
+          className={`relative max-w-[80%] rounded-2xl font-light px-3 py-2 text-sm font-normal ${
             message.uuid === message.user.uiid
-              ? "self-end bg-violet-700 text-white"
-              : "self-start bg-white text-black"
+              ? "self-end bg-[#7c03f6] text-[#FAFAFA]"
+              : "self-start bg-neutral-50 text-[#050404]"
           }`}
         >
           <p>{message.content}</p>
           <div
-            className={`absolute bottom-0 text-xs font-bold text-stone-300 ${
+            className={`absolute bottom-0 text-xs font-light font-bold text-[#C2C2C2] ${
               message.uuid === message.user.uiid
                 ? "right-full mr-1"
                 : "left-full ml-1"

@@ -4,7 +4,7 @@ import MessageInput from "./messageInput";
 
 export default async function ChatID({ params }: { params: { lang: Lang } }) {
   return (
-    <div className="mx-auto h-screen max-h-[600px] max-w-[390px] flex-col justify-between">
+    <div className="flex flex-col h-screen w-screen">
       <PrivateChatHeader />
       <MessagesField />
       <MessageInput />
