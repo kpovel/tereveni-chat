@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
 import { getDictionary } from "./dictionaries";
 import { ToggleLang } from "./ToggleLang";
 import tereveniLogo from "public/logo.svg";
+import { StyledLink } from "@/components/Link";
 
 export default async function Home({
   params,
@@ -21,17 +21,13 @@ export default async function Home({
         <h1 className="text-center text-[28px] font-medium text-neutral-50">
           {dict.mainPage.title}
         </h1>
-        <div className="mt-10 flex flex-col items-center">
-          <button className="main__btn mb-5">
-            <Link className="main__link" href={`/${params.lang}/login`}>
-              {dict.mainPage.btnLogin}
-            </Link>
-          </button>
-          <button className="main__btn">
-            <Link className="main__link" href={`/${params.lang}/signup`}>
-              {dict.mainPage.btnSignUp}
-            </Link>
-          </button>
+        <div className="mt-10 flex max-w-md flex-col items-center gap-5">
+          <StyledLink href={`/${params.lang}/login`}>
+            {dict.mainPage.btnLogin}
+          </StyledLink>
+          <StyledLink href={`/${params.lang}/signup`}>
+            {dict.mainPage.btnSignUp}
+          </StyledLink>
         </div>
       </div>
     </div>

@@ -2,7 +2,6 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import AvatarEditor from "react-avatar-editor";
 import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 import { avatarPost } from "./avatarPost";
@@ -10,6 +9,8 @@ import { defaultAvatarPut } from "./defaultAvataPut";
 import "./page.css";
 import { DefaultImages } from "./DefaultImages";
 import { ScaleImage } from "./ScaleImage";
+import { Button } from "@/components/Button";
+import { SkipLink } from "@/components/Link";
 
 export default function AvatarPicker({
   lang,
@@ -75,7 +76,7 @@ export default function AvatarPicker({
 
   return (
     <>
-      <div className="flex flex-col gap-10 grow">
+      <div className="flex grow flex-col gap-10">
         <input
           className="hidden"
           type="file"
@@ -158,22 +159,17 @@ export default function AvatarPicker({
           selectedDefaultAvatar={defaultAvatar}
         />
       </div>
-
-      <div>
-        <button
-          className={`main__btn main__link cursor-pointer ${
-            !isEnabledNext && "bg-opacity-10 text-zinc-500"
-          }`}
+      <div className="mt-10 flex flex-col items-center gap-5">
+        <Button
           onClick={handleSaveAvatar}
           disabled={!isEnabledNext}
+          aria-disabled={!isEnabledNext}
         >
           {dict.next}
-        </button>
-        <button className="mt-5 w-full border-none bg-transparent text-center text-sm font-normal leading-tight text-stone-300 outline-none">
-          <Link href={`/${lang}/onboarding/introduce-yourself`}>
-            {dict.skip}
-          </Link>
-        </button>
+        </Button>
+        <SkipLink href={`/${lang}/onboarding/introduce-yourself`}>
+          {dict.skip}
+        </SkipLink>
       </div>
     </>
   );

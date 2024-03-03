@@ -3,9 +3,10 @@
 import { useState, MouseEvent } from "react";
 import { Category } from "./category";
 import { Hashtag } from "./onboardingHashtags";
-import Link from "next/link";
 import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 import { submitCategories } from "./submitCategories";
+import { SkipLink } from "@/components/Link";
+import { Button } from "@/components/Button";
 
 export function ChooseCategories({
   hashtags,
@@ -56,7 +57,7 @@ export function ChooseCategories({
 
   return (
     <>
-      <div className="flex flex-col gap-10 grow">
+      <div className="flex grow flex-col gap-10">
         {categories.map((category, i) => {
           return (
             <Category
@@ -67,19 +68,9 @@ export function ChooseCategories({
             />
           );
         })}
-        <div className="flex flex-col gap-5 grow justify-end">
-          <button
-            className="main__link main__btn text-center"
-            onClick={handleSubmitCategories}
-          >
-            {dict.nextStep}
-          </button>
-          <Link
-            className="mx-auto px-5 text-center text-sm text-[#C2C2C2]"
-            href={`/${lang}/onboarding/final`}
-          >
-            {dict.skip}
-          </Link>
+        <div className="flex flex-col gap-5">
+          <Button onClick={handleSubmitCategories}>{dict.nextStep}</Button>
+          <SkipLink href={`/${lang}/onboarding/final`}>{dict.skip}</SkipLink>
         </div>
       </div>
     </>
