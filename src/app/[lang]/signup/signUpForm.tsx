@@ -62,7 +62,6 @@ export default function SignUpForm({
           errorMessage={[state.confirmPassword || state.general]}
         />
       </div>
-
       <div className="grid gap-5">
         <div>
           <AcceptTermsConditions dict={dict} lang={lang} />
@@ -120,6 +119,7 @@ function AcceptTermsConditions({
         <Link
           href={`/${lang}/terms-conditions`}
           className="text-[#9D83F9] underline"
+          rel="noopener noreferrer"
         >
           {dict.terms.termsConditions}
         </Link>
