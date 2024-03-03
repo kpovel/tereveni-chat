@@ -117,8 +117,9 @@ function AcceptTermsConditions({
       <span className="ml-2 text-xs text-neutral-50">
         {dict.terms.read}{" "}
         <Link
-          href={`/${lang}/terms-conditions`}
+          href={`/${lang}/terms-and-conditions`}
           className="text-[#9D83F9] underline"
+          target="_blank"
           rel="noopener noreferrer"
         >
           {dict.terms.termsConditions}
