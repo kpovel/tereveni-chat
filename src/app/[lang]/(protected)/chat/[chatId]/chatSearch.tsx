@@ -26,7 +26,7 @@ export default function ChatSearch({
           <input
             value={searchValue}
             onChange={searchValueHandler}
-            className="border-transparent w-full bg-transparent text-sm font-normal text-white outline-none"
+            className="w-full border-transparent bg-transparent text-sm font-normal text-white outline-none"
             placeholder="Сhat search"
             type="text"
           />

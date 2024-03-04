@@ -35,7 +35,7 @@ export default function RenderMessages({
         >
           <p>{message.content}</p>
           <div
-            className={`absolute bottom-0 text-xs font-light font-bold text-[#C2C2C2] ${
+            className={`absolute bottom-0 text-xs font-light text-[#C2C2C2] ${
               message.uuid === message.user.uiid
                 ? "right-full mr-1"
                 : "left-full ml-1"
