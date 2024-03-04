@@ -3,6 +3,7 @@
 import { useState, ChangeEvent } from "react";
 import ChatSubMenu from "./chatSubMenu";
 import ChatSearch from "./chatSearch";
+import OnlineStatus from "./onlineStatus";
 import avatar from "public/Avatar.svg";
 import Image from "next/image";
 
@@ -59,22 +60,7 @@ export default function PrivateChatHeader() {
           </div>
           <div className="ml-4">
             <p className="text-base font-medium text-white">Name</p>
-            <div className="flex items-center">
-              <div
-                className={`h-2 w-2 rounded-full border ${
-                  isOnline
-                    ? "border-green-900 bg-green-500"
-                    : "border-stone-900 bg-zinc-500"
-                }`}
-              ></div>
-              <span
-                className={`ml-[5px] text-center text-xs font-normal ${
-                  isOnline ? "text-green-500" : "text-zinc-500"
-                }`}
-              >
-                {isOnline ? "Online" : "Offline"}
-              </span>
-            </div>
+            <OnlineStatus isOnline={isOnline} />
           </div>
         </div>
         <ChatSubMenu
