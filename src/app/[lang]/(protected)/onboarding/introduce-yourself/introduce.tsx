@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 import { introducePost } from "./introducePost";
+import { Button } from "@/components/Button";
+import { SkipLink } from "@/components/Link";
 
 export default function Introduce({
   lang,
@@ -27,7 +28,7 @@ export default function Introduce({
   };
 
   return (
-    <form className="grow flex flex-col justify-between">
+    <form className="flex grow flex-col justify-between">
       <div>
         <textarea
           value={introduce}
@@ -44,24 +45,15 @@ export default function Introduce({
           </span>
         </div>
       </div>
-      <div className="grid gap-5">
-        <button
+      <div className="flex flex-col gap-5">
+        <Button
           disabled={introduce.trim() === ""}
+          aria-disabled={introduce.trim() === ""}
           onClick={handleSubmit}
-          className={`main__btn main__link mt-24 ${
-            introduce.trim() === "" && "bg-opacity-10 text-zinc-500"
-          }`}
         >
           {dict.nextStep}
-        </button>
-        <div className="flex w-full justify-center">
-          <Link
-            className="border-none bg-transparent text-center text-sm font-normal leading-tight text-stone-300 outline-none"
-            href={`/${lang}/onboarding/categories`}
-          >
-            {dict.skip}
-          </Link>
-        </div>
+        </Button>
+        <SkipLink href={`/${lang}/onboarding/categories`}>{dict.skip}</SkipLink>
       </div>
     </form>
   );
