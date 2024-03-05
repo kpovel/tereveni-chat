@@ -13,7 +13,7 @@ export function ChatAvatar({
       alt={`Image of ${chatName} chat`}
       width={52}
       height={52}
-      className="h-[52px] w-[52px] rounded-full object-cover my-auto"
+      className="my-auto h-[52px] w-[52px] rounded-full object-cover"
       unoptimized
     />
   );

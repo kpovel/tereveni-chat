@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { imageLoader } from "../pick-avatar/DefaultImages";
 
-export function UserImage({imageName}: {imageName: string}) {
+export function UserImage({ imageName }: { imageName: string }) {
   return (
     <Image
       loader={imageLoader}

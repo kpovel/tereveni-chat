@@ -23,8 +23,8 @@ export async function GET(
   if (params.path.endsWith(".svg")) {
     return new Response(await res.text(), {
       headers: {
-        "Content-Type": "image/svg+xml"
-      }
+        "Content-Type": "image/svg+xml",
+      },
     });
   }
 

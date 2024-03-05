@@ -1,4 +1,4 @@
-import { ChatRoom } from "@/app/[lang]/(protected)/chat/all/chatRooms";
+import { ChatRoom } from "@/app/[lang]/(protected)/chat/(filter)/all/chatRooms";
 
 export function ChatInfo({}: { lastMessage: ChatRoom["lastMessage"] }) {
   return (

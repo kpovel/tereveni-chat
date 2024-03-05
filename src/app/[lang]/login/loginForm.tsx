@@ -30,7 +30,7 @@ export default function LoginForm({
   const [state, formAction] = useFormState(loginPostData, initialState);
 
   return (
-    <form action={formAction} className="flex w-full flex-col gap-10">
+    <form action={formAction} className="flex w-full flex-col gap-10 h-full">
       <div className="grid gap-5">
         <EmailInput
           placeholder={dict.emailPlaceholder}

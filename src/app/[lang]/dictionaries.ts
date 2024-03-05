@@ -52,21 +52,37 @@ const dictionaries = {
       (module) => module.default,
     ),
   "/uk/onboarding/pick-avatar": () =>
-    import("./(protected)/onboarding/pick-avatar/uk.json").then((module) => module.default),
-    "/en/create-new-password": () =>
-    import("./(protected)/create-new-password/en.json").then((module) => module.default),
-    "/uk/create-new-password": () =>
-    import("./(protected)/create-new-password/uk.json").then((module) => module.default),
+    import("./(protected)/onboarding/pick-avatar/uk.json").then(
+      (module) => module.default,
+    ),
+  "/en/create-new-password": () =>
+    import("./(protected)/create-new-password/en.json").then(
+      (module) => module.default,
+    ),
+  "/uk/create-new-password": () =>
+    import("./(protected)/create-new-password/uk.json").then(
+      (module) => module.default,
+    ),
   "components/en/CookiePopup": () =>
-    import("../../components/CookiePopup/en.json").then((module) => module.default),
+    import("../../components/CookiePopup/en.json").then(
+      (module) => module.default,
+    ),
   "components/uk/CookiePopup": () =>
-    import("../../components/CookiePopup/uk.json").then((module) => module.default),
+    import("../../components/CookiePopup/uk.json").then(
+      (module) => module.default,
+    ),
   "components/en/ChatListHeader": () =>
-    import("../../components/chat/ChatListHeader/en.json").then((module) => module.default),
+    import("../../components/chat/ChatListHeader/en.json").then(
+      (module) => module.default,
+    ),
   "components/uk/ChatListHeader": () =>
-    import("../../components/chat/ChatListHeader/uk.json").then((module) => module.default),
+    import("../../components/chat/ChatListHeader/uk.json").then(
+      (module) => module.default,
+    ),
   "components/en/ChatNavigation": () =>
-    import("../../components/chat/ChatNavigation/en.json").then((module) => module.default),
+    import("../../components/chat/ChatNavigation/en.json").then(
+      (module) => module.default,
+    ),
   "components/uk/ChatNavigation": () =>
     import("../../components/chat/ChatNavigation/uk.json").then((module) => module.default),
   "components/en/ProgressStep": () =>

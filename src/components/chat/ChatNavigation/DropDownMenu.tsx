@@ -47,7 +47,9 @@ function DropdownContent({ routes }: { routes: Route[] }) {
         return (
           <DropdownMenu.Item
             key={c.href}
-            className={`flex items-center leading-none outline-none data-[highlighted]:bg-[#252525] ${isActivePath(c.href) ? "bg-[#252525]" : ""}`}
+            className={`flex items-center leading-none outline-none data-[highlighted]:bg-[#252525] ${
+              isActivePath(c.href) ? "bg-[#252525]" : ""
+            }`}
           >
             <Link href={c.href} className="w-full py-[7px] pl-4 pr-12">
               {c.title}

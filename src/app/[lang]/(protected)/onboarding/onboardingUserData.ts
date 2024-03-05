@@ -1,5 +1,8 @@
 import { env } from "@/env.mjs";
-import { getJwtAccessToken, redirectUnauthorized } from "../regenerateAccessToken";
+import {
+  getJwtAccessToken,
+  redirectUnauthorized,
+} from "../regenerateAccessToken";
 
 export type OnboardingUserData = {
   name: string;

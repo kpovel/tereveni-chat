@@ -5,9 +5,9 @@ import {
   SetStateAction,
   useEffect,
 } from "react";
-import { ChatRoom } from "@/app/[lang]/(protected)/chat/all/chatRooms";
 import { MessageContextList } from "./MessageContextList";
 import { useClickOutside } from "@/util/useClickOutside";
+import { ChatRoom } from "@/app/[lang]/(protected)/chat/(filter)/all/chatRooms";
 
 export function MessageContextMenu({
   children,

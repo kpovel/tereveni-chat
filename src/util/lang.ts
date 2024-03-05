@@ -1,5 +1,5 @@
 declare global {
-    type Lang = "en" | "uk";
+  type Lang = "en" | "uk";
 }
 
 export async function langUnwrapOrDefault(lang: string) {

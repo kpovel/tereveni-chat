@@ -28,7 +28,10 @@ export default function CreatePassForm({
   const [state, formAction] = useFormState(newPassPut, initialData);
 
   return (
-    <form action={formAction} className="flex w-full grow flex-col justify-between">
+    <form
+      action={formAction}
+      className="flex w-full grow flex-col justify-between"
+    >
       <div className="grid gap-5">
         <PasswordInput
           placeholder={dict.placeholder.password}
