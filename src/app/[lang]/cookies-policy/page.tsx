@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import EnCookiePolicy from "./en.mdx";
 import UkCookiePolicy from "./uk.mdx";
 import InfoLayout from "../../util/infoLayout";

@@ -1,6 +1,7 @@
 import { getDictionary } from "@/app/[lang]/dictionaries";
 import { ChooseCategories } from "./categories";
 import { onboardingHashtags } from "./onboardingHashtags";
+import { ProgressStep } from "@/components/progress/ProgressStep";
 
 export default async function OnboardingCategories({
   params,
@@ -11,16 +12,15 @@ export default async function OnboardingCategories({
   const hashtags = await onboardingHashtags(params.lang);
 
   return (
-    <main className="container mx-auto flex max-w-md flex-col gap-10 px-6 py-10">
-      <div>
-        <h2 className="text-center text-lg font-medium text-neutral-50">
-          {dict.title}
-        </h2>
-        <h3 className="mt-5 text-center text-sm font-normal leading-tight text-neutral-50">
-          {dict.subtitle}
-        </h3>
+    <>
+      <div className="flex flex-col gap-10">
+        <ProgressStep currentStep={4} totalSteps={4} lang={params.lang} />
+        <div className="grid gap-5 text-pretty text-center text-[#FAFAFA]">
+          <h2 className="text-lg font-medium">{dict.title}</h2>
+          <p className="leading-tight">{dict.subtitle}</p>
+        </div>
       </div>
       <ChooseCategories hashtags={hashtags} lang={params.lang} dict={dict} />
-    </main>
+    </>
   );
 }

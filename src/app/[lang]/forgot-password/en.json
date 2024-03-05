@@ -1,8 +1,8 @@
 {
-  "restoreYourPass": "Restore your password!",
-  "description": "Type your email for sending mail with link",
+  "restoreYourPass": "Reset password",
+  "description": "Enter your email and we will send you a link to get back into your account",
   "emailPlaceholder": "Email address",
-  "sendToMail": "Send to your mail",
+  "sendToMail": "Request a reset link",
   "errorStatus": {
     "invalidEmail": "Please enter a valid email address"
   }

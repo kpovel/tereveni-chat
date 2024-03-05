@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 import { introducePost } from "./introducePost";
+import { Button } from "@/components/Button";
+import { SkipLink } from "@/components/Link";
 
 export default function Introduce({
   lang,
@@ -27,13 +28,13 @@ export default function Introduce({
   };
 
   return (
-    <div className="mt-10">
-      <form>
+    <form className="flex grow flex-col justify-between">
+      <div>
         <textarea
           value={introduce}
           max-length={maxCharacters}
           onChange={handleText}
-          className="inline-flex h-[192px] w-full resize-none items-center justify-center rounded-3xl border border-neutral-700 bg-stone-900 px-5 py-3 text-sm font-normal leading-tight text-neutral-50 outline-none focus:border-violet-700"
+          className="h-[192px] w-full resize-none rounded-3xl border border-neutral-700 bg-stone-900 px-5 py-3 text-sm font-normal leading-tight text-neutral-50 outline-none focus:border-violet-700"
           name="introduce"
           id="introduce"
           placeholder={dict.typeHere}
@@ -43,24 +44,17 @@ export default function Introduce({
             {introduce.length} / {maxCharacters}
           </span>
         </div>
-        <button
+      </div>
+      <div className="flex flex-col gap-5">
+        <Button
           disabled={introduce.trim() === ""}
+          aria-disabled={introduce.trim() === ""}
           onClick={handleSubmit}
-          className={`main__btn main__link mt-24 ${
-            introduce.trim() === "" && "bg-opacity-10 text-zinc-500"
-          }`}
         >
           {dict.nextStep}
-        </button>
-      </form>
-      <div className="mt-5 flex w-full justify-center">
-        <Link
-          className="border-none bg-transparent text-center text-sm font-normal leading-tight text-stone-300 outline-none"
-          href={`/${lang}/onboarding/categories`}
-        >
-          {dict.skip}
-        </Link>
+        </Button>
+        <SkipLink href={`/${lang}/onboarding/categories`}>{dict.skip}</SkipLink>
       </div>
-    </div>
+    </form>
   );
 }

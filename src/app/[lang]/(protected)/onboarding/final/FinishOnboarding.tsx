@@ -1,8 +1,8 @@
 "use client";
 
 import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
-import Link from "next/link";
 import { endOnboarding } from "./endOnboarding";
+import { StyledLink } from "@/components/Link";
 
 export function FinishOnboarding({
   dict,
@@ -12,12 +12,8 @@ export function FinishOnboarding({
   lang: Lang;
 }) {
   return (
-    <Link
-      className="main__link main__btn text-center"
-      href={`/${lang}/discovery`}
-      onClick={() => endOnboarding()}
-    >
+    <StyledLink href={`/${lang}/discovery`} onClick={() => endOnboarding()}>
       {dict.start}
-    </Link>
+    </StyledLink>
   );
 }

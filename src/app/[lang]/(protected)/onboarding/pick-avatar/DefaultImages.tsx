@@ -14,7 +14,7 @@ export function DefaultImages({
   selectedDefaultAvatar: string;
 }) {
   return (
-    <div className="relative mt-10 grid grid-cols-4 justify-center gap-4 md:max-w-md md:grid-cols-6">
+    <div className="relative mx-auto grid grid-cols-4 justify-center gap-4 md:max-w-md md:grid-cols-6">
       {imagePaths.map((avatar) => {
         return (
           <div

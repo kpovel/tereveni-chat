@@ -2,7 +2,6 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import AvatarEditor from "react-avatar-editor";
 import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 import { avatarPost } from "./avatarPost";
@@ -10,6 +9,8 @@ import { defaultAvatarPut } from "./defaultAvataPut";
 import "./page.css";
 import { DefaultImages } from "./DefaultImages";
 import { ScaleImage } from "./ScaleImage";
+import { Button } from "@/components/Button";
+import { SkipLink } from "@/components/Link";
 
 export default function AvatarPicker({
   lang,
@@ -27,15 +28,16 @@ export default function AvatarPicker({
   const [avatarPostError, setAvatarPostError] = useState("");
   const editorRef = useRef<AvatarEditor | null>(null);
   const [uploadError, setUploadError] = useState(false);
-  const [customAvatarData, setCustomAvatarData] = useState("");
+  const [defaultAvatar, setDefaultAvatar] = useState("");
 
   const handlePredefinedAvatarClick = (avatar: string) => {
     setIsEnabledNext(false);
     const selectedCustomAvatar = avatar.replace("/api/user-image/", "");
     setCustomAvatar(null);
-    setCustomAvatarData(selectedCustomAvatar);
+    setDefaultAvatar(selectedCustomAvatar);
     setIsEnabledNext(true);
     setSelectedAvatar(avatar);
+    setUploadError(false);
   };
 
   const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,20 +45,21 @@ export default function AvatarPicker({
     const file = fileInput.files?.[0];
     const maxSizeInBytes = 3 * 1024 * 1024; // 3mb
 
-    if (file && file.size < maxSizeInBytes) {
-      setScale(1);
-      setCustomAvatarData("");
-      setCustomAvatar(file);
-      setIsEnabledNext(true);
-      setUploadError(false);
+    if (!file) {
       return;
     }
 
-    if (file && file.size > maxSizeInBytes) {
+    if (file.size > maxSizeInBytes) {
       fileInput.value = "";
       setUploadError(true);
       return;
     }
+
+    setScale(1);
+    setDefaultAvatar("");
+    setCustomAvatar(file);
+    setIsEnabledNext(true);
+    setUploadError(false);
   };
 
   const handleSaveAvatar = async () => {
@@ -65,114 +68,109 @@ export default function AvatarPicker({
       formData.append("image", customAvatar);
       const error = await avatarPost(formData, lang);
       setAvatarPostError(error);
-    } else if (customAvatarData) {
-      const customError = await defaultAvatarPut(customAvatarData, lang);
+    } else if (defaultAvatar) {
+      const customError = await defaultAvatarPut(defaultAvatar, lang);
       setAvatarPostError(customError);
     }
   };
 
   return (
-    <div className="mt-10">
-      <input
-        className="hidden"
-        type="file"
-        id="your_avatar"
-        accept="image/*"
-        onChange={handleAvatarChange}
-      />
-      <div className="flex justify-center">
-        <div className="relative h-[200px] w-[200px]">
-          <button className="absolute right-0 top-0 z-10 rounded-full">
-            <label htmlFor="your_avatar">
-              <Image
-                src="/plus-1.png"
-                width={45}
-                height={45}
-                alt="plus"
-                className="cursor-pointer"
-              />
-            </label>
-          </button>
+    <>
+      <div className="flex grow flex-col gap-10">
+        <input
+          className="hidden"
+          type="file"
+          id="your_avatar"
+          accept="image/jpeg, image/png, image/webp, image/jpg"
+          onChange={handleAvatarChange}
+        />
+        <div className="flex justify-center">
+          <div className="relative h-[200px] w-[200px]">
+            <button className="absolute right-0 top-0 z-10 rounded-full">
+              <label htmlFor="your_avatar">
+                <Image
+                  src="/plus-1.png"
+                  width={45}
+                  height={45}
+                  alt="plus"
+                  className="cursor-pointer"
+                />
+              </label>
+            </button>
 
-          <div
-            className={`h-[200px] w-[200px] overflow-hidden rounded-full ${
-              uploadError && "border border-red-500"
-            }`}
-          >
-            {customAvatar ? (
-              <AvatarEditor
-                className="-translate-x-7 -translate-y-7 object-cover"
-                ref={editorRef}
-                image={customAvatar}
-                width={205}
-                height={205}
-                scale={scale}
-                borderRadius={100}
-              />
-            ) : selectedAvatar ? (
-              <Image
-                src={`${selectedAvatar}`}
-                alt={`Selected Avatar ${selectedAvatar}`}
-                width={200}
-                height={200}
-                unoptimized
-              />
-            ) : (
-              <button>
-                <label htmlFor="your_avatar">
-                  <Image
-                    className="cursor-pointer"
-                    src="/Preview.svg"
-                    width={200}
-                    height={200}
-                    alt="preview"
-                  />
-                </label>
-              </button>
-            )}
+            <div
+              className={`h-[200px] w-[200px] overflow-hidden rounded-full ${
+                uploadError && "border border-red-500"
+              }`}
+            >
+              {customAvatar ? (
+                <AvatarEditor
+                  className="-translate-x-7 -translate-y-7 object-cover"
+                  ref={editorRef}
+                  image={customAvatar}
+                  width={205}
+                  height={205}
+                  scale={scale}
+                  borderRadius={100}
+                />
+              ) : selectedAvatar ? (
+                <Image
+                  src={`${selectedAvatar}`}
+                  alt={`Selected Avatar ${selectedAvatar}`}
+                  width={200}
+                  height={200}
+                  unoptimized
+                />
+              ) : (
+                <button>
+                  <label htmlFor="your_avatar">
+                    <Image
+                      className="cursor-pointer"
+                      src="/Preview.svg"
+                      width={200}
+                      height={200}
+                      alt="preview"
+                    />
+                  </label>
+                </button>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-      {uploadError && (
-        <div className="mt-4 text-center text-sm font-normal text-red-500">
-          <span>
-            Image size exceeds limit <br /> Please upload a photo under 3 MB
-          </span>
-        </div>
-      )}
-      {avatarPostError && (
-        <div className="mt-4 text-center text-sm font-normal text-red-500">
-          <span>{avatarPostError}</span>
-        </div>
-      )}
-      {customAvatar && <ScaleImage scale={scale} setScale={setScale} />}
-      <div className="mt-10 flex flex-col items-center">
+        {uploadError && (
+          <div className="mt-4 text-center text-sm font-normal text-red-500">
+            <span>
+              Image size exceeds limit <br /> Please upload a photo under 3 MB
+            </span>
+          </div>
+        )}
+        {avatarPostError && (
+          <div className="mt-4 text-center text-sm font-normal text-red-500">
+            <span>{avatarPostError}</span>
+          </div>
+        )}
+        {customAvatar && <ScaleImage scale={scale} setScale={setScale} />}
         <h3 className="text-center text-sm font-normal leading-tight text-neutral-50">
           {dict.pickAvatar}
         </h3>
         <DefaultImages
           imagePaths={defaultImages}
           predefinedAvatarClick={handlePredefinedAvatarClick}
-          selectedDefaultAvatar={customAvatarData}
+          selectedDefaultAvatar={defaultAvatar}
         />
       </div>
-
-      <div className="mt-10 flex flex-col items-center">
-        <button
-          className={`main__btn main__link mt-24 cursor-pointer ${
-            !isEnabledNext && "bg-opacity-10 text-zinc-500"
-          }`}
+      <div className="mt-10 flex flex-col items-center gap-5">
+        <Button
           onClick={handleSaveAvatar}
           disabled={!isEnabledNext}
+          aria-disabled={!isEnabledNext}
         >
           {dict.next}
-        </button>
-        <button className="mt-5 w-full border-none bg-transparent text-center text-sm font-normal leading-tight text-stone-300 outline-none">
-          <Link href={`/${lang}/onboarding/introduce-yourself`}>
-            {dict.skip}
-          </Link>
-        </button>
+        </Button>
+        <SkipLink href={`/${lang}/onboarding/introduce-yourself`}>
+          {dict.skip}
+        </SkipLink>
       </div>
-    </div>
+    </>
   );
 }

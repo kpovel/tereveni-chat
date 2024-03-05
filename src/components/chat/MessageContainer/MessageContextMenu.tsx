@@ -1,54 +1,57 @@
-"use client";
-
-import { ReactNode } from "react";
-import { TrashIcon } from "./TrashIcon";
+import {
+  ReactNode,
+  MouseEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+} from "react";
+import { MessageContextList } from "./MessageContextList";
 import { useClickOutside } from "@/util/useClickOutside";
+import { ChatRoom } from "@/app/[lang]/(protected)/chat/(filter)/all/chatRooms";
 
 export function MessageContextMenu({
   children,
-  chatId,
+  chatRoom,
+  setSelectedChat,
+  selectedChat,
 }: {
   children: ReactNode;
-  chatId: string;
+  setSelectedChat: Dispatch<SetStateAction<string | null>>;
+  selectedChat: string | null;
+  chatRoom: ChatRoom;
 }) {
-  const messageContextId = `context${chatId}`;
-  const ref = useClickOutside(hideContextMenu);
+  const ref = useClickOutside<HTMLDivElement>(hideContextMenu);
+  const openContext = selectedChat === chatRoom.chatRoom.uuid;
 
   function hideContextMenu() {
-    const contextMenu = document.getElementById(messageContextId);
-    if (contextMenu) {
-      contextMenu.classList.add("hidden");
-    }
+    ref.current?.classList.remove("blur-sm");
+    setSelectedChat(null);
   }
 
-  function openContextMenu(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+  function handleContextMenu(e: MouseEvent<HTMLDivElement>) {
     e.preventDefault();
+    setSelectedChat(chatRoom.chatRoom.uuid);
+  }
 
-    const contextMenu = document.getElementById(messageContextId);
-    if (contextMenu) {
-      contextMenu.classList.remove("hidden");
+  useEffect(() => {
+    if (selectedChat === null) {
+      ref.current?.classList.remove("blur-sm");
+      return;
     }
-  }
 
-  function deleteChat() {
-    alert("Are you sure you want to delete this chat?");
-  }
+    if (selectedChat === chatRoom.chatRoom.uuid) {
+      ref.current?.classList.remove("blur-sm");
+      return;
+    }
+
+    ref.current?.classList.add("blur-sm");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedChat]);
 
   return (
-    <div id={chatId} onContextMenu={openContextMenu} ref={ref}>
+    <div ref={ref} onContextMenu={handleContextMenu}>
       {children}
-      <div className="relative">
-        <button
-          id={messageContextId}
-          onClick={deleteChat}
-          className="absolute right-0 top-1 flex hidden w-[164px] gap-2
-          rounded-lg bg-[#1F1F1F] px-4 py-[15px]
-          shadow-[0px_8px_10px_1px_rgba(0,_0,_0,_0.12)]"
-        >
-          <TrashIcon />
-          Delete chat
-        </button>
-      </div>
+      <MessageContextList openContext={openContext} />
     </div>
   );
 }

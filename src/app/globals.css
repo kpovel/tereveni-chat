@@ -2,26 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .gradient__bg {
-    @apply absolute -z-10 h-96 w-96  -rotate-180 rounded-full bg-gradient-to-b from-violet-700 to-violet-700 opacity-20 blur-3xl;
-  }
-  .main__btn {
-    @apply w-full max-w-md rounded-full bg-violet-700 text-sm font-normal leading-tight text-neutral-50;
-  }
-  .main__input {
-    @apply inline-flex w-full items-center justify-center gap-3 rounded-3xl border border-neutral-700 bg-stone-900 py-3 pl-14 pr-5 text-sm font-normal leading-tight text-neutral-50 outline-none transition ease-in focus:border-violet-700;
-  }
-  .main__link {
-    @apply inline-block w-full px-6 py-3;
-  }
-  /* .message__style {
-    @apply max-w-[225px] px-3 py-2 rounded-2xl
-  }
-  .my__message { 
-    @apply text-black text-sm font-normal
-  }
-  .income__message { 
-    @apply bg-white text-white text-sm font-normal
-  } */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px transperent inset;
+  transition: background-color 5000s ease-in-out 0s;
 }

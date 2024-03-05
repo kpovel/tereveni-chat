@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import EnCommunityRules from "./en.mdx";
 import UkCommunityRules from "./uk.mdx";
 import InfoLayout from "../../util/infoLayout";

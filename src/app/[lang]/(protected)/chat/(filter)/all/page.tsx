@@ -1,4 +1,4 @@
-import { MessageContainer } from "@/components/chat/MessageContainer";
+import { ChatList } from "./chatList";
 import { getChatRooms } from "./chatRooms";
 
 export default async function AllChats({ params }: { params: { lang: Lang } }) {
@@ -10,15 +10,7 @@ export default async function AllChats({ params }: { params: { lang: Lang } }) {
 
   return (
     <div className="flex flex-col gap-5 px-6">
-      {chatRooms.ok?.map((chatRoom) => {
-        return (
-          <MessageContainer
-            key={chatRoom.chatRoom.uuid}
-            chatRoom={chatRoom}
-            lang={params.lang}
-          />
-        );
-      })}
+      <ChatList chatList={chatRooms.ok!} lang={params.lang} />
     </div>
   );
 }
