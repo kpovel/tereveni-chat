@@ -1,10 +1,12 @@
 import DotsMenu from "./dotsMenu";
 
 export default function ChatSubMenu({
+  openModal,
   isMenuActive,
   activeMenuHandler,
   searchActiveHandler,
 }: {
+  openModal: () => void
   isMenuActive: boolean;
   activeMenuHandler: () => void;
   searchActiveHandler: () => void;
@@ -23,7 +25,7 @@ export default function ChatSubMenu({
       </button>
       {isMenuActive && (
         <div className="absolute -left-[128px] top-9 z-10 inline-flex w-40 flex-col items-start justify-start gap-1 rounded-lg bg-stone-900 px-4 py-2 shadow">
-          <DotsMenu searchActiveHandler={searchActiveHandler} />
+          <DotsMenu openModal={openModal} searchActiveHandler={searchActiveHandler} />
         </div>
       )}
     </div>

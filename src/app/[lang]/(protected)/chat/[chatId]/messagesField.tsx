@@ -3,9 +3,10 @@
 import { useState, ReactNode } from "react";
 import RenderMessages from "./renderMessages";
 import { useClickOutside } from "@/util/useClickOutside";
+import InvitationLink from "@/components/chat/ModalContainer/ModalContent/InvitationLink.tsx";
 import ModalContainer from "../../../../../components/chat/ModalContainer/ModalContainer";
 
-export default function MessagesField() {
+export default function MessagesField({isModalOpen, hideModal}: {isModalOpen:boolean, hideModal:() => void}) {
   const [messages, setMessages] = useState([
     {
       uuid: "fsdf4ds65f4d5f6sd454f6s",
@@ -140,18 +141,12 @@ export default function MessagesField() {
     },
   ]);
 
-  const [ isModalOpen, setIsModalOpen ] = useState(true);
-
   const elemRef = useClickOutside<HTMLDivElement>(hideModal);
-
-  function hideModal() {
-    setIsModalOpen(false)
-  }
 
   return (
     <div className="relative h-full overflow-scroll px-6">
       {
-        isModalOpen && <ModalContainer isModalOpen={isModalOpen} elemRef={elemRef} />
+        isModalOpen && <ModalContainer children={<InvitationLink/>} elemRef={elemRef} />
       }
       {!messages.length && (
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">

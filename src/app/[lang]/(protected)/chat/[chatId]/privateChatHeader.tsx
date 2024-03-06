@@ -7,7 +7,7 @@ import OnlineStatus from "./onlineStatus";
 import avatar from "public/Avatar.svg";
 import Image from "next/image";
 
-export default function PrivateChatHeader() {
+export default function PrivateChatHeader({openModal}: {openModal:() => void}) {
   const [isOnline, setIsOnline] = useState(true);
   const [isMenuActive, setIsMenuActive] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
@@ -64,6 +64,7 @@ export default function PrivateChatHeader() {
           </div>
         </div>
         <ChatSubMenu
+          openModal={openModal}
           isMenuActive={isMenuActive}
           activeMenuHandler={activeMenuHandler}
           searchActiveHandler={searchActiveHandler}
