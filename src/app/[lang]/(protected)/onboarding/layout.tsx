@@ -1,17 +1,17 @@
-import { cookies } from "next/headers";
 import { onboardingUserData } from "./onboardingUserData";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 
 export default async function OnboardingLayout({
   children,
+  params,
 }: {
   children: ReactNode;
+  params: { lang: Lang };
 }) {
   const userData = await onboardingUserData();
   if (userData.onboardingEnd) {
-    const lang = cookies().get("lang")?.value ?? "en";
-    redirect(`/${lang}/chat/all`);
+    redirect(`/${params.lang}/chat/all`);
   }
 
   return (

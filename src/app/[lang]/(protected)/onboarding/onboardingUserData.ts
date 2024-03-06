@@ -3,6 +3,7 @@ import {
   getJwtAccessToken,
   redirectUnauthorized,
 } from "../regenerateAccessToken";
+import { retryAsync } from "@/util/retry";
 
 export type OnboardingUserData = {
   name: string;
@@ -12,31 +13,28 @@ export type OnboardingUserData = {
 };
 
 export async function onboardingUserData() {
-  const jwtAccessToken = await getJwtAccessToken();
-  const res = await fetchOnboardingData(jwtAccessToken);
+  const userData = await retryAsync(2)(getOnboardingUserData);
 
-  if (res.status === 401) {
-    const jwtAccessToken = await getJwtAccessToken();
-    const res = await fetchOnboardingData(jwtAccessToken);
+  if (!userData) {
+    throw await redirectUnauthorized();
+  }
+
+  return userData;
+}
+
+async function getOnboardingUserData() {
+  const jwtAccessToken = await getJwtAccessToken();
+  try {
+    const res = await fetch(`${env.SERVER_URL}/api/user/onboarding/get-user`, {
+      headers: {
+        Authorization: `Bearer ${jwtAccessToken}`,
+      },
+    });
 
     if (res.status === 200) {
       return (await res.json()) as OnboardingUserData;
     }
-
-    throw redirectUnauthorized();
+  } catch (e) {
+    console.log(e);
   }
-
-  if (res.status === 200) {
-    return (await res.json()) as OnboardingUserData;
-  }
-
-  throw redirectUnauthorized();
-}
-
-async function fetchOnboardingData(jwtAccessToken: string) {
-  return await fetch(`${env.SERVER_URL}/api/user/onboarding/get-user`, {
-    headers: {
-      Authorization: `Bearer ${jwtAccessToken}`,
-    },
-  });
 }
