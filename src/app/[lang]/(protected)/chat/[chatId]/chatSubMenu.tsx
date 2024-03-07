@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import DotsMenu from "./dotsMenu";
 
 export default function ChatSubMenu({
@@ -6,7 +7,7 @@ export default function ChatSubMenu({
   activeMenuHandler,
   searchActiveHandler,
 }: {
-  openModal: () => void
+  openModal: (content: ReactNode | null) => void,
   isMenuActive: boolean;
   activeMenuHandler: () => void;
   searchActiveHandler: () => void;

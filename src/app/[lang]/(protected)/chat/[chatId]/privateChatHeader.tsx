@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, ReactNode } from "react";
 import ChatSubMenu from "./chatSubMenu";
 import ChatSearch from "./chatSearch";
 import OnlineStatus from "./onlineStatus";
 import avatar from "public/Avatar.svg";
 import Image from "next/image";
 
-export default function PrivateChatHeader({openModal}: {openModal:() => void}) {
+export default function PrivateChatHeader({openModal}: {openModal: (content: ReactNode | null) => void}) {
   const [isOnline, setIsOnline] = useState(true);
   const [isMenuActive, setIsMenuActive] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);

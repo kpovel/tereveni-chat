@@ -1,6 +1,6 @@
 import { useEffect, useRef, MouseEvent, ReactNode } from 'react';
 
-export default function ModalContainer({children, elemRef}: {children: ReactNode, elemRef: any}) {
+export default function ModalContainer({children, elemRef}: {children: ReactNode | null, elemRef: any}) {
 
     return (
         <div className="absolute w-full h-full bg-cover bg-center bg-no-repeat bg-fixed bg-opacity-50 backdrop-filter backdrop-blur-sm z-10">

@@ -1,4 +1,8 @@
+import { ReactNode } from 'react';
 import Image from "next/image";
+
+import InvitationLink from "@/components/chat/ModalContainer/ModalContent/InvitationLink.tsx";
+import ConfirmationDeleting from "@/components/chat/ModalContainer/ModalContent/ConfirmationDeleting.tsx";
 
 import trashIcon from "public/trash_icon.svg";
 import copyIcon from "public/copy_icon.svg";
@@ -8,7 +12,7 @@ export default function DotsMenu({
   openModal,
   searchActiveHandler,
 }: {
-  openModal: () => void,
+  openModal: (content: ReactNode | null) => void,
   searchActiveHandler: () => void;
 }) {
   return (
@@ -20,11 +24,11 @@ export default function DotsMenu({
         <Image src={searchIcon} alt="search" />
         <p className="ml-2 text-sm font-normal text-white">Search</p>
       </button>
-      <button onClick={openModal} className="flex w-full justify-start bg-none py-[7px] transition-all delay-150 ease-in hover:bg-neutral-900">
+      <button onClick={() => openModal(<InvitationLink/>)} className="flex w-full justify-start bg-none py-[7px] transition-all delay-150 ease-in hover:bg-neutral-900">
         <Image src={copyIcon} alt="copy" />
         <p className="ml-2 text-sm font-normal text-white">Invitation link</p>
       </button>
-      <button className="flex w-full justify-start bg-none py-[7px] transition-all delay-150 ease-in hover:bg-neutral-900">
+      <button onClick={() => openModal(<ConfirmationDeleting/>)} className="flex w-full justify-start bg-none py-[7px] transition-all delay-150 ease-in hover:bg-neutral-900">
         <Image src={trashIcon} alt="trash" />
         <p className="ml-2 text-sm font-normal text-white">Delete chat</p>
       </button>
