@@ -1,29 +1,55 @@
-"use client"
+"use client";
 
-import { useState, ReactNode } from "react";
+import {
+  useState,
+  ReactNode,
+  createContext,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import MessagesField from "./messagesField";
 import PrivateChatHeader from "./privateChatHeader";
 import MessageInput from "./messageInput";
 
-export default function ChatWrapper(){
+type ModalContextValue = {
+  isModalOpen: boolean;
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
+};
 
-    const [ isModalOpen, setIsModalOpen ] = useState(false);
-    const [ modalContent, setModalContent ] = useState<ReactNode | null>(null)
+export const ModalContext = createContext<ModalContextValue>({
+  isModalOpen: false,
+  setIsModalOpen: () => {},
+});
 
-    function hideModal() {
-        setIsModalOpen(false)
-    }
+export default function ChatWrapper() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState<ReactNode | null>(null);
 
-    function openModal(content: ReactNode) {
-        setIsModalOpen(true)
-        setModalContent(content)
-    }
+  function hideModal() {
+    setIsModalOpen(false);
+  }
 
-    return (
-    <div className="flex h-dvh w-screen flex-col">
-      <PrivateChatHeader openModal={openModal} />
-      <MessagesField modalContent={modalContent} hideModal={hideModal} isModalOpen={isModalOpen}/>
-      <MessageInput />
-    </div>
-    )
+  function openModal(content: ReactNode) {
+    setIsModalOpen(true);
+    setModalContent(content);
+  }
+
+  const modalContextValue: ModalContextValue = {
+    isModalOpen,
+    setIsModalOpen,
+  };
+
+  return (
+    <ModalContext.Provider value={modalContextValue}>
+      <div className="flex h-dvh w-screen flex-col">
+        <PrivateChatHeader openModal={openModal} />
+        <MessagesField
+          modalContent={modalContent}
+          hideModal={hideModal}
+          isModalOpen={isModalOpen}
+        />
+        <MessageInput />
+      </div>
+    </ModalContext.Provider>
+  );
 }

@@ -1,12 +1,35 @@
-export default function ConfirmationDeleting() {
-    return (
-        <div>
-            <h4 className="mb-3 text-[#050404] text-base font-semibold">Are you sure you want to permanently delete this chat?</h4>
-            <p className="text-[#050404] text-xs font-normal">The chat will be deleted for you only</p>
-            <div className="flex w-full justify-end mt-6">
-                <button>yes</button>
-                <button>no</button>
-            </div>
-        </div>
-    )
+import { ReactNode } from "react";
+import CompleteDeleting from "./CompleteDeleting";
+
+export default function ConfirmationDeleting({
+  openModal,
+  setIsModalOpen,
+}: {
+  openModal: (content: ReactNode | null) => void;
+  setIsModalOpen: (value: boolean) => void;
+}) {
+  return (
+    <div>
+      <h4 className="mb-3 text-base font-semibold text-[#050404]">
+        Are you sure you want to permanently delete this chat?
+      </h4>
+      <p className="text-xs font-normal text-[#050404]">
+        The chat will be deleted for you only
+      </p>
+      <div className="mt-6 flex w-full justify-end">
+        <button
+          onClick={() => openModal(<CompleteDeleting />)}
+          className="mr-10 h-5 w-[26px] bg-none text-base font-semibold text-[#FF453A]"
+        >
+          yes
+        </button>
+        <button
+          onClick={() => setIsModalOpen(false)}
+          className="h-5 w-[26px] bg-none text-base font-semibold text-[#050404]"
+        >
+          no
+        </button>
+      </div>
+    </div>
+  );
 }

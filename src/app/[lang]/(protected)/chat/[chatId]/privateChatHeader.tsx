@@ -7,7 +7,11 @@ import OnlineStatus from "./onlineStatus";
 import avatar from "public/Avatar.svg";
 import Image from "next/image";
 
-export default function PrivateChatHeader({openModal}: {openModal: (content: ReactNode | null) => void}) {
+export default function PrivateChatHeader({
+  openModal,
+}: {
+  openModal: (content: ReactNode | null) => void;
+}) {
   const [isOnline, setIsOnline] = useState(true);
   const [isMenuActive, setIsMenuActive] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
@@ -16,6 +20,12 @@ export default function PrivateChatHeader({openModal}: {openModal: (content: Rea
 
   const activeMenuHandler = () => {
     setIsMenuActive(!isMenuActive);
+  };
+
+  const closeSubMenu = () => {
+    if (isMenuActive) {
+      setIsMenuActive(false);
+    }
   };
 
   const searchValueHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -64,6 +74,7 @@ export default function PrivateChatHeader({openModal}: {openModal: (content: Rea
           </div>
         </div>
         <ChatSubMenu
+          closeSubMenu={closeSubMenu}
           openModal={openModal}
           isMenuActive={isMenuActive}
           activeMenuHandler={activeMenuHandler}
