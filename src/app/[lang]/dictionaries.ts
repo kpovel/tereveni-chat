@@ -63,6 +63,14 @@ const dictionaries = {
     import("./(protected)/create-new-password/uk.json").then(
       (module) => module.default,
     ),
+  "/en/chat/create": () =>
+    import("./(protected)/chat/(create)/create/en.json").then(
+      (module) => module.default,
+    ),
+  "/uk/chat/create": () =>
+    import("./(protected)/chat/(create)/create/uk.json").then(
+      (module) => module.default,
+    ),
   "components/en/CookiePopup": () =>
     import("../../components/CookiePopup/en.json").then(
       (module) => module.default,
