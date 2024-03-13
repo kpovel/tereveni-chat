@@ -31,7 +31,7 @@ export function CreateChatForm({
     >
       <div className="flex flex-col gap-10">
         <SelectChatImage dict={dict} />
-        <Input placeholder={dict.chatName} errorMessage={[""]} />
+        <Input placeholder={dict.chatName} errorMessage={[state.input]} />
       </div>
       <SubmitButton buttonTitle={dict.nextStep} />
     </form>

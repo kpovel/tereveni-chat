@@ -7,7 +7,10 @@ import { langUnwrapOrDefault } from "@/util/lang";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export async function createChat(_prevState: FormState, formData: FormData) {
+export async function createChat(
+  _prevState: FormState,
+  formData: FormData,
+): Promise<FormState> {
   const jwtAccessToken = await getJwtAccessToken();
   const submitFormData = new FormData();
 
@@ -33,18 +36,30 @@ export async function createChat(_prevState: FormState, formData: FormData) {
   });
 
   if (res.status === 200) {
-    const json = await res.json() as SuccessResponse;
+    const json = (await res.json()) as SuccessResponse;
     const cookieLang = cookies().get("lang")?.value ?? "en";
     const lang = await langUnwrapOrDefault(cookieLang);
     redirect(`/${lang}/chat/create/${json.uuid}/hashtag`);
-  } else {
-    const json = await res.json();
-    console.log(json, res.status);
+  }
+
+  if (res.status === 400) {
+    const json = (await res.json()) as ErrorResponse;
+    if (json.general) {
+      return {
+        input: "",
+        image: json.general,
+      };
+    }
+
+    return {
+      input: json.chatRoomName!,
+      image: "",
+    };
   }
 
   return {
     image: "",
-    input: "",
+    input: "Internal server error",
   };
 }
 
@@ -54,4 +69,9 @@ type SuccessResponse = {
   description: string | null;
   image: { name: string };
   currentChatUserUUID: string | null;
+};
+
+type ErrorResponse = {
+  chatRoomName?: string;
+  general?: string;
 };
