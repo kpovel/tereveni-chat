@@ -10,7 +10,7 @@ import Image from "next/image";
 export default function PrivateChatHeader({
   openModal,
 }: {
-  openModal: (content: ReactNode | null) => void;
+  openModal: (content: null | "InvitationLink" | "ConfirmationDeleting") => void;
 }) {
   const [isOnline, setIsOnline] = useState(true);
   const [isMenuActive, setIsMenuActive] = useState(false);

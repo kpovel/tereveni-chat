@@ -3,14 +3,18 @@
 import { useState, ReactNode } from "react";
 import RenderMessages from "./renderMessages";
 import { useClickOutside } from "@/util/useClickOutside";
-import ModalContainer from "../../../../../components/chat/ModalContainer/ModalContainer";
+import ModalContainer from "@/components/chat/ModalContainer/ModalContainer"
+import InvitationLink from "@/components/chat/ModalContainer/ModalContent/InvitationLink";
+import ConfirmationDeleting from "@/components/chat/ModalContainer/ModalContent/ConfirmationDeleting";
 
 export default function MessagesField({
+  openModal,
   modalContent,
   isModalOpen,
   hideModal,
 }: {
-  modalContent: ReactNode | null;
+  openModal: (content: null | string) => void;
+  modalContent: null | string;
   isModalOpen: boolean;
   hideModal: () => void;
 }) {
@@ -153,9 +157,7 @@ export default function MessagesField({
   return (
     <div className="relative h-full overflow-scroll px-6">
       {isModalOpen && (
-        <ModalContainer elemRef={elemRef}>
-          {modalContent}
-          </ModalContainer>
+        <ModalContainer openModal={openModal} childrenElem={modalContent} elemRef={elemRef} />
       )}
       {!messages.length && (
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">

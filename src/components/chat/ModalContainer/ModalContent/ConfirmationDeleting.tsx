@@ -5,9 +5,12 @@ export default function ConfirmationDeleting({
   openModal,
   setIsModalOpen,
 }: {
-  openModal: (content: ReactNode | null) => void;
+  openModal: (content: null | string) => void;
   setIsModalOpen: (value: boolean) => void;
 }) {
+
+  const COMPLETE_DELETING = "CompleteDeleting"
+
   return (
     <div>
       <h4 className="mb-3 text-base font-semibold text-[#050404]">
@@ -18,7 +21,7 @@ export default function ConfirmationDeleting({
       </p>
       <div className="mt-6 flex w-full justify-end">
         <button
-          onClick={() => openModal(<CompleteDeleting />)}
+          onClick={() => openModal(COMPLETE_DELETING)}
           className="mr-10 h-5 w-[26px] bg-none text-base font-semibold text-[#FF453A]"
         >
           yes

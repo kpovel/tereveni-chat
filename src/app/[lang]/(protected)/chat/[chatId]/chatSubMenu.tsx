@@ -10,7 +10,7 @@ export default function ChatSubMenu({
   searchActiveHandler,
 }: {
   closeSubMenu: () => void;
-  openModal: (content: ReactNode | null) => void;
+  openModal: (content: null | "InvitationLink" | "ConfirmationDeleting") => void;
   isMenuActive: boolean;
   activeMenuHandler: () => void;
   searchActiveHandler: () => void;
