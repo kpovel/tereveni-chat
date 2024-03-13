@@ -7,7 +7,12 @@ import { useFormState } from "react-dom";
 import { createChat } from "./createChat";
 import { SelectChatImage } from "./SelectChatImage";
 
-const initialState = {
+export type FormState = {
+  image: string,
+  input: string,
+}
+
+const initialState: FormState = {
   image: "",
   input: "",
 };
