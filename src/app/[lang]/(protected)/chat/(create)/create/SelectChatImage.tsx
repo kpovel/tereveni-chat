@@ -6,6 +6,7 @@ import AvatarEditor from "react-avatar-editor";
 import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 import ImagePlaceholder from "public/chat/image_placeholder.jpeg";
 import { PlusSign } from "@/icons/PlusSign";
+import { ScaleImage } from "../../../onboarding/pick-avatar/ScaleImage";
 
 export function SelectChatImage({
   dict,
@@ -69,6 +70,7 @@ export function SelectChatImage({
           )}
         </div>
       </div>
+      {customAvatar && <ScaleImage scale={scale} setScale={setScale} />}
     </div>
   );
 }
@@ -81,7 +83,7 @@ function LoadImageIcon() {
           className="flex h-[45px] w-[45px] cursor-pointer items-center justify-center rounded-full"
           style={{
             background:
-              "linear-gradient(90deg, #BA35F2 0%, #B535F0 49.67%, #6135C6 100%);",
+              "linear-gradient(90deg, #BA35F2 0%, #B535F0 49.67%, #6135C6 100%)",
           }}
         >
           <PlusSign />
