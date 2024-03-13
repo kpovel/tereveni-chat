@@ -35,7 +35,7 @@ export async function createChat(_prevState: FormState, formData: FormData) {
   if (res.status === 200) {
     const json = await res.json() as SuccessResponse;
     const cookieLang = cookies().get("lang")?.value ?? "en";
-    const lang = langUnwrapOrDefault(cookieLang);
+    const lang = await langUnwrapOrDefault(cookieLang);
     redirect(`/${lang}/chat/create/${json.uuid}/hashtag`);
   } else {
     const json = await res.json();
