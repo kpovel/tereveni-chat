@@ -1,12 +1,11 @@
 "use client";
 
 import { useState, useRef, ChangeEvent } from "react";
-import Image from "next/image";
 import AvatarEditor from "react-avatar-editor";
 import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
-import ImagePlaceholder from "public/chat/image_placeholder.jpeg";
 import { PlusSign } from "@/icons/PlusSign";
 import { ScaleImage } from "../../../onboarding/pick-avatar/ScaleImage";
+import { DefaultImage } from "./DefaultImage";
 
 export function SelectChatImage({
   dict,
@@ -60,13 +59,7 @@ export function SelectChatImage({
               borderRadius={8}
             />
           ) : (
-            <label htmlFor="your_avatar">
-              <Image
-                className="h-[200px] w-[200px] cursor-pointer rounded-lg object-cover"
-                src={ImagePlaceholder}
-                alt="Default chat image"
-              />
-            </label>
+            <DefaultImage />
           )}
         </div>
       </div>
