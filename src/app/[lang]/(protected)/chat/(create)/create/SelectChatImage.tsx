@@ -36,35 +36,37 @@ export function SelectChatImage({
   }
 
   return (
-    <div className="mx-auto">
-      <input
-        className="hidden"
-        type="file"
-        id="your_avatar"
-        accept="image/jpeg, image/png, image/webp, image/jpg"
-        name="picture"
-        onChange={handleAvatarChange}
-      />
-      <div className="relative">
-        <LoadImageIcon />
-        <div className="h-[200px] w-[200px] overflow-hidden rounded-lg">
-          {customAvatar ? (
-            <AvatarEditor
-              className="-translate-x-7 -translate-y-7 object-cover"
-              ref={editorRef}
-              image={customAvatar}
-              width={205}
-              height={205}
-              scale={scale}
-              borderRadius={8}
-            />
-          ) : (
-            <DefaultImage />
-          )}
+    <>
+      <div className="mx-auto">
+        <input
+          className="hidden"
+          type="file"
+          id="your_avatar"
+          accept="image/jpeg, image/png, image/webp, image/jpg"
+          name="picture"
+          onChange={handleAvatarChange}
+        />
+        <div className="relative">
+          <LoadImageIcon />
+          <div className="h-[200px] w-[200px] overflow-hidden rounded-lg">
+            {customAvatar ? (
+              <AvatarEditor
+                className="-translate-x-7 -translate-y-7 object-cover"
+                ref={editorRef}
+                image={customAvatar}
+                width={205}
+                height={205}
+                scale={scale}
+                borderRadius={8}
+              />
+            ) : (
+              <DefaultImage />
+            )}
+          </div>
         </div>
       </div>
       {customAvatar && <ScaleImage scale={scale} setScale={setScale} />}
-    </div>
+    </>
   );
 }
 
