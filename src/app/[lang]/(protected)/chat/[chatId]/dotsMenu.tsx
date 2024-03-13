@@ -1,9 +1,6 @@
 "use client"
 
-import { ReactNode, useContext } from "react";
 import Image from "next/image";
-
-import { ModalContext } from "./chatWrapper";
 
 import trashIcon from "public/trash_icon.svg";
 import copyIcon from "public/copy_icon.svg";
@@ -16,7 +13,6 @@ export default function DotsMenu({
   openModal: (content: null | string) => void;
   searchActiveHandler: () => void;
 }) {
-  // const { isModalOpen, setIsModalOpen } = useContext(ModalContext);
 
   const INVITATION_LINK = "InvitationLink";
   const CONFIRMATION_DELETING = "ConfirmationDeleting";
@@ -39,13 +35,7 @@ export default function DotsMenu({
       </button>
       <button
         onClick={() =>
-          openModal(
-            CONFIRMATION_DELETING
-            // <ConfirmationDeleting
-            //   openModal={openModal}
-            //   setIsModalOpen={setIsModalOpen}
-            // />,
-          )
+          openModal(CONFIRMATION_DELETING)
         }
         className="flex w-full justify-start bg-none py-[7px] transition-all delay-150 ease-in hover:bg-neutral-900"
       >

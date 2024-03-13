@@ -1,4 +1,4 @@
-import { ReactNode, useContext } from "react";
+import { useContext } from "react";
 
 import InvitationLink from "./ModalContent/InvitationLink";
 import ConfirmationDeleting from "./ModalContent/ConfirmationDeleting";
@@ -12,23 +12,29 @@ export default function ModalContainer({
   elemRef,
 }: {
   openModal: (content: null | string) => void;
-  childrenElem: null | "InvitationLink" | "ConfirmationDeleting" | "CompleteDeleting";
+  childrenElem: null | string;
   elemRef: any;
 }) {
 
   const { isModalOpen, setIsModalOpen } = useContext(ModalContext);
 
   const modalChildren = () => {
-    if(childrenElem == "InvitationLink"){
-      return <InvitationLink />
-    } else if (childrenElem == "ConfirmationDeleting") {
-      return <ConfirmationDeleting openModal={openModal} setIsModalOpen={setIsModalOpen}/>
-    } else if (childrenElem == "CompleteDeleting") {
-      return <CompleteDeleting />
-    } else {
-      return null
+    switch (childrenElem) {
+      case "InvitationLink":
+        return <InvitationLink />;
+      case "ConfirmationDeleting":
+        return (
+          <ConfirmationDeleting
+            openModal={openModal}
+            setIsModalOpen={setIsModalOpen}
+          />
+        );
+      case "CompleteDeleting":
+        return <CompleteDeleting />;
+      default:
+        return null;
     }
-  }
+  };
 
   return (
     <div className="absolute z-10 h-full w-full bg-opacity-50 bg-cover bg-fixed bg-center bg-no-repeat backdrop-blur-sm backdrop-filter">

@@ -1,6 +1,3 @@
-import { ReactNode } from "react";
-import CompleteDeleting from "./CompleteDeleting";
-
 export default function ConfirmationDeleting({
   openModal,
   setIsModalOpen,
