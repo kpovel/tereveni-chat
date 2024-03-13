@@ -14,9 +14,9 @@ export default async function ChatHashtag({
   return (
     <>
       <ProgressStep currentStep={2} totalSteps={3} lang={params.lang} />
-      <h2 className="text-pretty text-center text-lg font-medium text-[#FAFAFA]">
+      <h1 className="text-pretty text-center text-lg font-medium text-[#FAFAFA]">
         {dict.title}
-      </h2>
+      </h1>
       <ChooseHashtag
         dict={dict}
         lang={params.lang}
