@@ -71,6 +71,14 @@ const dictionaries = {
     import("./(protected)/chat/(create)/create/uk.json").then(
       (module) => module.default,
     ),
+  "/en/chat/create/hashtag": () =>
+    import("./(protected)/chat/(create)/create/[chat_uuid]/hashtag/en.json").then(
+      (module) => module.default,
+    ),
+  "/uk/chat/create/hashtag": () =>
+    import("./(protected)/chat/(create)/create/[chat_uuid]/hashtag/uk.json").then(
+      (module) => module.default,
+    ),
   "components/en/CookiePopup": () =>
     import("../../components/CookiePopup/en.json").then(
       (module) => module.default,
