@@ -8,8 +8,6 @@ export default async function ChatHashtag({
 }: {
   params: { lang: Lang; chat_uuid: string };
 }) {
-  // todo: chat with such id may not exists
-
   const dict = await getDictionary(`/${params.lang}/chat/create/hashtag`);
   const hashtags = await onboardingHashtags(params.lang);
 
