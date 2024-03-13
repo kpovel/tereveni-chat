@@ -10,14 +10,14 @@ export default async function CreateChat({
   const dict = await getDictionary(`/${params.lang}/chat/create`);
 
   return (
-    <div className="flex flex-col gap-10">
+    <>
       <ProgressStep currentStep={1} totalSteps={3} lang={params.lang} />
-      <div className="space-y-[55px]">
+      <div className="flex grow flex-col space-y-[55px]">
         <h1 className="text-center text-lg font-medium text-neutral-50">
           {dict.createChat}
         </h1>
         <CreateChatForm dict={dict} />
       </div>
-    </div>
+    </>
   );
 }

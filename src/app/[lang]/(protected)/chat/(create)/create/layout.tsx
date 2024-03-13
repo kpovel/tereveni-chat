@@ -9,9 +9,11 @@ export default function Layout({
   children: ReactNode;
 }) {
   return (
-    <>
+    <div className="flex flex-col min-h-dvh">
       <ChatListHeader lang={params.lang} />
-      <main className="px-6 pb-10 pt-5">{children}</main>
-    </>
+      <main className="flex h-full flex-col gap-10 px-6 pb-10 pt-5 grow">
+        {children}
+      </main>
+    </div>
   );
 }

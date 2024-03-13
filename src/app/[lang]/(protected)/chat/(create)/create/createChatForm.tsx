@@ -20,9 +20,14 @@ export function CreateChatForm({
   const [state, formAction] = useFormState(createChat, initialState);
 
   return (
-    <form action={formAction} className="flex flex-col gap-10">
-      <SelectChatImage dict={dict} />
-      <Input placeholder={dict.chatName} errorMessage={[""]} />
+    <form
+      action={formAction}
+      className="flex grow flex-col justify-between gap-10"
+    >
+      <div className="flex flex-col gap-10">
+        <SelectChatImage dict={dict} />
+        <Input placeholder={dict.chatName} errorMessage={[""]} />
+      </div>
       <SubmitButton buttonTitle={dict.nextStep} />
     </form>
   );
