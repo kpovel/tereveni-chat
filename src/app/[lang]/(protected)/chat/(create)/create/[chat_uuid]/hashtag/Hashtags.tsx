@@ -4,10 +4,10 @@ import { useState, MouseEvent } from "react";
 import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 import { SkipLink } from "@/components/Link";
 import { Button } from "@/components/Button";
-import { Hashtag } from "@/app/[lang]/(protected)/onboarding/categories/onboardingHashtags";
-import { Category } from "@/app/[lang]/(protected)/onboarding/categories/category";
+import { HashtagCategory } from "@/app/[lang]/(protected)/onboarding/categories/onboardingHashtags";
 import { submitHashtag } from "./submitHashtag";
 import { redirect } from "next/navigation";
+import { Category } from "./Category";
 
 export function ChooseHashtag({
   hashtags,
@@ -15,14 +15,14 @@ export function ChooseHashtag({
   chatUUID,
   dict,
 }: {
-  hashtags: Hashtag[];
+  hashtags: HashtagCategory[];
   lang: Lang;
   chatUUID: string;
   dict: Awaited<DictionaryReturnTypes["/en/chat/create/hashtag"]>;
 }) {
   const [checkedHashtag, setCheckedHashtag] = useState<number | null>(null);
 
-  function toggleHashtag(hashtagId: number) {
+  function checkHashtag(hashtagId: number) {
     setCheckedHashtag(hashtagId);
   }
 
@@ -42,14 +42,9 @@ export function ChooseHashtag({
           return (
             <Category
               key={i}
-              categoryName={category.name}
-              hashtags={category.hashtags.map((h) => {
-                return {
-                  ...h,
-                  checked: checkedHashtag === h.id,
-                };
-              })}
-              toggleHashtag={toggleHashtag}
+              category={category}
+              checkHashtag={checkHashtag}
+              checkedHashtagId={checkedHashtag}
             />
           );
         })}
