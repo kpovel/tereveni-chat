@@ -14,20 +14,10 @@ export default function PrivateChatHeader({
   openModal: (content: ModalContentType) => void;
 }) {
   const [isOnline, setIsOnline] = useState(true);
-  const [isMenuActive, setIsMenuActive] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isClearBtnActive, setIsClearBtnActive] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
-  const activeMenuHandler = () => {
-    setIsMenuActive(!isMenuActive);
-  };
-
-  const closeSubMenu = () => {
-    if (isMenuActive) {
-      setIsMenuActive(false);
-    }
-  };
 
   const searchValueHandler = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value.trim().length > 0) {
@@ -75,10 +65,7 @@ export default function PrivateChatHeader({
           </div>
         </div>
         <ChatSubMenu
-          closeSubMenu={closeSubMenu}
           openModal={openModal}
-          isMenuActive={isMenuActive}
-          activeMenuHandler={activeMenuHandler}
           searchActiveHandler={searchActiveHandler}
         />
       </div>

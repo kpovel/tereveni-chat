@@ -1,14 +1,10 @@
 import { ModalContentType } from "../ModalContainer";
-import { COMPLETE_DELETING } from "../ModalChildren";
 
 export default function ConfirmationDeleting({
   openModal,
-  setIsModalOpen,
 }: {
   openModal: (content: ModalContentType) => void;
-  setIsModalOpen: (value: boolean) => void;
 }) {
-
   return (
     <div>
       <h4 className="mb-3 text-base font-semibold text-[#050404]">
@@ -19,13 +15,13 @@ export default function ConfirmationDeleting({
       </p>
       <div className="mt-6 flex w-full justify-end">
         <button
-          onClick={() => openModal(COMPLETE_DELETING)}
+          onClick={() => openModal("CompleteDeleting")}
           className="mr-10 h-5 w-[26px] bg-none text-base font-semibold text-[#FF453A]"
         >
           yes
         </button>
         <button
-          onClick={() => setIsModalOpen(false)}
+          onClick={() => openModal(null)}
           className="h-5 w-[26px] bg-none text-base font-semibold text-[#050404]"
         >
           no

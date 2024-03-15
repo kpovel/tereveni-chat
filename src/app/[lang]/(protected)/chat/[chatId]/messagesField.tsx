@@ -8,12 +8,10 @@ import ModalContainer, { ModalContentType } from "@/components/chat/ModalContain
 export default function MessagesField({
   openModal,
   modalContent,
-  isModalOpen,
   hideModal,
 }: {
   openModal: (content: ModalContentType) => void;
   modalContent: ModalContentType;
-  isModalOpen: boolean;
   hideModal: () => void;
 }) {
   const [messages, setMessages] = useState([
@@ -284,10 +282,8 @@ export default function MessagesField({
   const elemRef = useClickOutside<HTMLDivElement>(hideModal);
 
   return (
-    <div className={`relative h-full ${isModalOpen ? 'overflow-hidden' : 'overflow-scroll'} px-6`}>
-      {isModalOpen && (
+    <div className={`relative h-full ${modalContent ? 'overflow-hidden' : 'overflow-scroll'} px-6`}>
         <ModalContainer openModal={openModal} childrenElem={modalContent} elemRef={elemRef} />
-      )}
       {!messages.length && (
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
           <p className="text-center text-sm font-normal text-white text-opacity-50">

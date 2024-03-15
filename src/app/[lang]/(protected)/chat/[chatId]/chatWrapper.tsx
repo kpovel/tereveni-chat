@@ -22,35 +22,27 @@ export const ModalContext = createContext<ModalContextValue>({
 });
 
 export default function ChatWrapper() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState<ModalContentType>(null);
 
   function hideModal() {
-    setIsModalOpen(false);
+    setModalContent(null);
   }
 
   function openModal(content: ModalContentType) {
-    setIsModalOpen(true);
+    console.log(content);
     setModalContent(content);
   }
 
-  const modalContextValue: ModalContextValue = {
-    isModalOpen,
-    setIsModalOpen,
-  };
-
   return (
-    <ModalContext.Provider value={modalContextValue}>
       <div className="flex h-dvh w-screen flex-col">
         <PrivateChatHeader openModal={openModal} />
         <MessagesField
           openModal={openModal}
           modalContent={modalContent}
           hideModal={hideModal}
-          isModalOpen={isModalOpen}
         />
         <MessageInput />
       </div>
-    </ModalContext.Provider>
   );
 }

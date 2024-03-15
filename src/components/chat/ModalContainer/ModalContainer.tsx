@@ -11,6 +11,9 @@ export default function ModalContainer({
   childrenElem: ModalContentType;
   elemRef: any;
 }) {
+  if (!childrenElem) {
+    return;
+  }
 
   return (
     <div className="absolute z-10 h-full w-full bg-opacity-50 bg-cover bg-fixed bg-center bg-no-repeat backdrop-blur-sm backdrop-filter">

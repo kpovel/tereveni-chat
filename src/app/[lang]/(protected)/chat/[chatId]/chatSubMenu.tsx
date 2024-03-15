@@ -1,21 +1,27 @@
 import DotsMenu from "./dotsMenu";
 import { useClickOutside } from "@/util/useClickOutside";
 import { ModalContentType } from "@/components/chat/ModalContainer/ModalContainer";
+import { useState } from "react";
 // import ModalContentType from "@/components/chat/ModalContainer/ModalChildren";
 
 export default function ChatSubMenu({
-  closeSubMenu,
   openModal,
-  isMenuActive,
-  activeMenuHandler,
   searchActiveHandler,
 }: {
-  closeSubMenu: () => void;
   openModal: (content: ModalContentType) => void;
-  isMenuActive: boolean;
-  activeMenuHandler: () => void;
   searchActiveHandler: () => void;
 }) {
+  const [isMenuActive, setIsMenuActive] = useState(false);
+  const activeMenuHandler = () => {
+    setIsMenuActive(!isMenuActive);
+  };
+
+  const closeSubMenu = () => {
+    if (isMenuActive) {
+      setIsMenuActive(false);
+    }
+  };
+
   const elemRef = useClickOutside<HTMLDivElement>(closeSubMenu);
 
   return (
