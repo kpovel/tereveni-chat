@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, ChangeEvent, ReactNode } from "react";
+import { useState, ChangeEvent } from "react";
+import { ModalContentType } from "@/components/chat/ModalContainer/ModalContainer";
 import ChatSubMenu from "./chatSubMenu";
 import ChatSearch from "./chatSearch";
 import OnlineStatus from "./onlineStatus";
@@ -10,7 +11,7 @@ import Image from "next/image";
 export default function PrivateChatHeader({
   openModal,
 }: {
-  openModal: (content: null | string) => void;
+  openModal: (content: ModalContentType) => void;
 }) {
   const [isOnline, setIsOnline] = useState(true);
   const [isMenuActive, setIsMenuActive] = useState(false);

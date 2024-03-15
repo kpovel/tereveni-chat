@@ -3,7 +3,7 @@
 import { useState } from "react";
 import RenderMessages from "./renderMessages";
 import { useClickOutside } from "@/util/useClickOutside";
-import ModalContainer from "@/components/chat/ModalContainer/ModalContainer";
+import ModalContainer, { ModalContentType } from "@/components/chat/ModalContainer/ModalContainer";
 
 export default function MessagesField({
   openModal,
@@ -11,8 +11,8 @@ export default function MessagesField({
   isModalOpen,
   hideModal,
 }: {
-  openModal: (content: null | string) => void;
-  modalContent: null | string;
+  openModal: (content: ModalContentType) => void;
+  modalContent: ModalContentType;
   isModalOpen: boolean;
   hideModal: () => void;
 }) {

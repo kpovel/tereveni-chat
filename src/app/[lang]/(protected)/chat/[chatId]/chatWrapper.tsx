@@ -9,6 +9,7 @@ import {
 import MessagesField from "./messagesField";
 import PrivateChatHeader from "./privateChatHeader";
 import MessageInput from "./messageInput";
+import { ModalContentType } from "@/components/chat/ModalContainer/ModalContainer";
 
 type ModalContextValue = {
   isModalOpen: boolean;
@@ -22,13 +23,13 @@ export const ModalContext = createContext<ModalContextValue>({
 
 export default function ChatWrapper() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<null | string>(null);
+  const [modalContent, setModalContent] = useState<ModalContentType>(null);
 
   function hideModal() {
     setIsModalOpen(false);
   }
 
-  function openModal(content: null | string) {
+  function openModal(content: ModalContentType) {
     setIsModalOpen(true);
     setModalContent(content);
   }

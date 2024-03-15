@@ -1,24 +1,24 @@
 "use client"
 
 import Image from "next/image";
-
+import { ModalContentType } from "@/components/chat/ModalContainer/ModalContainer";
+import { INVITATION_LINK, CONFIRMATION_DELETING } from "@/components/chat/ModalContainer/ModalChildren";
 import trashIcon from "public/trash_icon.svg";
 import copyIcon from "public/copy_icon.svg";
 import searchIcon from "public/search_icon.svg";
 
 export default function DotsMenu({
+  closeSubMenu,
   openModal,
   searchActiveHandler,
 }: {
-  openModal: (content: null | string) => void;
+  closeSubMenu: () => void;
+  openModal: (content: ModalContentType) => void;
   searchActiveHandler: () => void;
 }) {
 
-  const INVITATION_LINK = "InvitationLink";
-  const CONFIRMATION_DELETING = "ConfirmationDeleting";
-
   return (
-    <div className="dotsMenu flex flex-col items-start justify-start gap-1">
+    <div onClick={closeSubMenu} className="dotsMenu flex flex-col items-start justify-start gap-1">
       <button
         onClick={searchActiveHandler}
         className="flex w-full justify-start bg-none py-[7px] transition-all delay-150 ease-in hover:bg-neutral-900"

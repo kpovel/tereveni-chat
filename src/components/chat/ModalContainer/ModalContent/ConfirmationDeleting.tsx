@@ -1,12 +1,13 @@
+import { ModalContentType } from "../ModalContainer";
+import { COMPLETE_DELETING } from "../ModalChildren";
+
 export default function ConfirmationDeleting({
   openModal,
   setIsModalOpen,
 }: {
-  openModal: (content: null | string) => void;
+  openModal: (content: ModalContentType) => void;
   setIsModalOpen: (value: boolean) => void;
 }) {
-
-  const COMPLETE_DELETING = "CompleteDeleting"
 
   return (
     <div>

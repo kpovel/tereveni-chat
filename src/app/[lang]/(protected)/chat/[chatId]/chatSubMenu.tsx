@@ -1,6 +1,7 @@
-import { ReactNode } from "react";
 import DotsMenu from "./dotsMenu";
 import { useClickOutside } from "@/util/useClickOutside";
+import { ModalContentType } from "@/components/chat/ModalContainer/ModalContainer";
+// import ModalContentType from "@/components/chat/ModalContainer/ModalChildren";
 
 export default function ChatSubMenu({
   closeSubMenu,
@@ -10,7 +11,7 @@ export default function ChatSubMenu({
   searchActiveHandler,
 }: {
   closeSubMenu: () => void;
-  openModal: (content: null | string) => void;
+  openModal: (content: ModalContentType) => void;
   isMenuActive: boolean;
   activeMenuHandler: () => void;
   searchActiveHandler: () => void;
@@ -35,6 +36,7 @@ export default function ChatSubMenu({
           className="absolute -left-[128px] top-9 z-10 inline-flex w-40 flex-col items-start justify-start gap-1 rounded-lg bg-stone-900 px-4 py-2 shadow"
         >
           <DotsMenu
+            closeSubMenu={closeSubMenu}
             openModal={openModal}
             searchActiveHandler={searchActiveHandler}
           />
