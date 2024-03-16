@@ -1,6 +1,13 @@
 "use client";
 
-import { useState, useRef, ChangeEvent } from "react";
+import {
+  useState,
+  useRef,
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  MouseEvent,
+} from "react";
 import AvatarEditor from "react-avatar-editor";
 import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 import { PlusSign } from "@/icons/PlusSign";
@@ -33,6 +40,8 @@ export function SelectChatImage({
 
     setScale(1);
     setCustomAvatar(file);
+
+    fileInput.value = "";
   }
 
   return (
@@ -47,7 +56,10 @@ export function SelectChatImage({
           onChange={handleAvatarChange}
         />
         <div className="relative">
-          <LoadImageIcon />
+          <LoadImageIcon
+            uploadedImage={!!customAvatar}
+            setCustomAvatar={setCustomAvatar}
+          />
           <div className="h-[200px] w-[200px] overflow-hidden rounded-lg">
             {customAvatar ? (
               <AvatarEditor
@@ -70,18 +82,40 @@ export function SelectChatImage({
   );
 }
 
-function LoadImageIcon() {
+function LoadImageIcon({
+  uploadedImage,
+  setCustomAvatar,
+}: {
+  uploadedImage: boolean;
+  setCustomAvatar: Dispatch<SetStateAction<File | null>>;
+}) {
+  function removeImage(e: MouseEvent<HTMLInputElement>) {
+    e.preventDefault();
+    setCustomAvatar(null);
+  }
+
   return (
     <div className="absolute right-[-23px] top-[-23px] z-10">
-      <label htmlFor="your_avatar">
+      <div
+        className={
+          "absolute h-[45px] w-[45px] cursor-pointer rounded-full " +
+          (uploadedImage && "z-20")
+        }
+        onClick={removeImage}
+      ></div>
+      <label htmlFor="your_avatar" className="relative z-10">
         <div
-          className="flex h-[45px] w-[45px] cursor-pointer items-center justify-center rounded-full"
-          style={{
-            background:
-              "linear-gradient(90deg, #BA35F2 0%, #B535F0 49.67%, #6135C6 100%)",
-          }}
+          className={
+            "flex h-[45px] w-[45px] cursor-pointer items-center justify-center rounded-full " +
+            "bg-gradient-to-r transition duration-300 " +
+            (uploadedImage
+              ? "from-[#E700B9_0%] via-[#CB0085_51.5%] to-[#B10057_100%]"
+              : "from-[#BA35F2_0%] via-[#B535F0_49.67%] to-[#6135C6_100%]")
+          }
         >
-          <PlusSign />
+          <div className={"transition " + (uploadedImage && "rotate-45")}>
+            <PlusSign />
+          </div>
         </div>
       </label>
     </div>
