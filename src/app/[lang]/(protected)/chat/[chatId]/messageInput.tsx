@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, ChangeEvent } from "react";
 import Image from "next/image";
 import addToMessage from "../../../../../../public/add-to-message.svg";

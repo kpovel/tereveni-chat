@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, ChangeEvent } from "react";
 import { ModalContentType } from "@/components/chat/ModalContainer/ModalContainer";
 import ChatSubMenu from "./chatSubMenu";

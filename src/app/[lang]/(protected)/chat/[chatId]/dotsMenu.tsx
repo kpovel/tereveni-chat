@@ -1,5 +1,3 @@
-"use client"
-
 import Image from "next/image";
 import { ModalContentType } from "@/components/chat/ModalContainer/ModalContainer";
 import trashIcon from "public/trash_icon.svg";

@@ -2,7 +2,6 @@ import DotsMenu from "./dotsMenu";
 import { useClickOutside } from "@/util/useClickOutside";
 import { ModalContentType } from "@/components/chat/ModalContainer/ModalContainer";
 import { useState } from "react";
-// import ModalContentType from "@/components/chat/ModalContainer/ModalChildren";
 
 export default function ChatSubMenu({
   openModal,

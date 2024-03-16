@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import RenderMessages from "./renderMessages";
 import { useClickOutside } from "@/util/useClickOutside";
