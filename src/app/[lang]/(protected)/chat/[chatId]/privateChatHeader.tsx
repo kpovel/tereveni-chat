@@ -16,7 +16,6 @@ export default function PrivateChatHeader({
   const [isClearBtnActive, setIsClearBtnActive] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
-
   const searchValueHandler = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value.trim().length > 0) {
       setIsClearBtnActive(true);

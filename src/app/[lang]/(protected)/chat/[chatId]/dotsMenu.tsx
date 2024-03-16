@@ -13,9 +13,11 @@ export default function DotsMenu({
   openModal: (content: ModalContentType) => void;
   searchActiveHandler: () => void;
 }) {
-
   return (
-    <div onClick={closeSubMenu} className="dotsMenu flex flex-col items-start justify-start gap-1">
+    <div
+      onClick={closeSubMenu}
+      className="dotsMenu flex flex-col items-start justify-start gap-1"
+    >
       <button
         onClick={searchActiveHandler}
         className="flex w-full justify-start bg-none py-[7px] transition-all delay-150 ease-in hover:bg-neutral-900"
@@ -31,9 +33,7 @@ export default function DotsMenu({
         <p className="ml-2 text-sm font-normal text-white">Invitation link</p>
       </button>
       <button
-        onClick={() =>
-          openModal("ConfirmationDeleting")
-        }
+        onClick={() => openModal("ConfirmationDeleting")}
         className="flex w-full justify-start bg-none py-[7px] transition-all delay-150 ease-in hover:bg-neutral-900"
       >
         <Image src={trashIcon} alt="trash" />

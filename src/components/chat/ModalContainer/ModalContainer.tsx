@@ -1,6 +1,10 @@
 import ModalChilden from "./ModalChildren";
 
-export type ModalContentType = "InvitationLink" | "ConfirmationDeleting" | "CompleteDeleting" | null;
+export type ModalContentType =
+  | "InvitationLink"
+  | "ConfirmationDeleting"
+  | "CompleteDeleting"
+  | null;
 
 export default function ModalContainer({
   openModal,
@@ -20,9 +24,9 @@ export default function ModalContainer({
       <div className="relative h-full">
         <div
           ref={elemRef}
-          className="absolute rounded-lg left-2/4 top-2/4 h-[159px] w-[280px] -translate-x-[50%] -translate-y-[50%] bg-[#FAFAFA] p-6"
+          className="absolute left-2/4 top-2/4 h-[159px] w-[280px] -translate-x-[50%] -translate-y-[50%] rounded-lg bg-[#FAFAFA] p-6"
         >
-          <ModalChilden childrenElem={childrenElem} openModal={openModal}/>
+          <ModalChilden childrenElem={childrenElem} openModal={openModal} />
         </div>
       </div>
     </div>

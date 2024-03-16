@@ -1,7 +1,9 @@
 import { useState } from "react";
 import RenderMessages from "./renderMessages";
 import { useClickOutside } from "@/util/useClickOutside";
-import ModalContainer, { ModalContentType } from "@/components/chat/ModalContainer/ModalContainer";
+import ModalContainer, {
+  ModalContentType,
+} from "@/components/chat/ModalContainer/ModalContainer";
 
 export default function MessagesField({
   openModal,
@@ -280,8 +282,16 @@ export default function MessagesField({
   const elemRef = useClickOutside<HTMLDivElement>(hideModal);
 
   return (
-    <div className={`relative h-full ${modalContent ? 'overflow-hidden' : 'overflow-scroll'} px-6`}>
-        <ModalContainer openModal={openModal} childrenElem={modalContent} elemRef={elemRef} />
+    <div
+      className={`relative h-full ${
+        modalContent ? "overflow-hidden" : "overflow-scroll"
+      } px-6`}
+    >
+      <ModalContainer
+        openModal={openModal}
+        childrenElem={modalContent}
+        elemRef={elemRef}
+      />
       {!messages.length && (
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
           <p className="text-center text-sm font-normal text-white text-opacity-50">
@@ -293,4 +303,3 @@ export default function MessagesField({
     </div>
   );
 }
-

@@ -14,11 +14,7 @@ export default function ModalChilden({
     case "InvitationLink":
       return <InvitationLink />;
     case "ConfirmationDeleting":
-      return (
-        <ConfirmationDeleting
-          openModal={openModal}
-        />
-      );
+      return <ConfirmationDeleting openModal={openModal} />;
     case "CompleteDeleting":
       return <CompleteDeleting />;
     default:
