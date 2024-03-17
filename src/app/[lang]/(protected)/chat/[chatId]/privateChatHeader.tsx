@@ -1,22 +1,20 @@
-"use client";
-
 import { useState, ChangeEvent } from "react";
+import { ModalContentType } from "@/components/chat/ModalContainer/ModalContainer";
 import ChatSubMenu from "./chatSubMenu";
 import ChatSearch from "./chatSearch";
 import OnlineStatus from "./onlineStatus";
 import avatar from "public/Avatar.svg";
 import Image from "next/image";
 
-export default function PrivateChatHeader() {
+export default function PrivateChatHeader({
+  openModal,
+}: {
+  openModal: (content: ModalContentType) => void;
+}) {
   const [isOnline, setIsOnline] = useState(true);
-  const [isMenuActive, setIsMenuActive] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isClearBtnActive, setIsClearBtnActive] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-
-  const activeMenuHandler = () => {
-    setIsMenuActive(!isMenuActive);
-  };
 
   const searchValueHandler = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value.trim().length > 0) {
@@ -64,8 +62,7 @@ export default function PrivateChatHeader() {
           </div>
         </div>
         <ChatSubMenu
-          isMenuActive={isMenuActive}
-          activeMenuHandler={activeMenuHandler}
+          openModal={openModal}
           searchActiveHandler={searchActiveHandler}
         />
       </div>
