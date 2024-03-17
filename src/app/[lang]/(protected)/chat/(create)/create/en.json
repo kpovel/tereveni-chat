@@ -1,0 +1,9 @@
+{
+  "createChat": "Create your chat",
+  "chatName": "Chat name",
+  "nextStep": "Next step",
+  "error": {
+    "imageSizeLimit": "Image size exceeds limit\n Please upload a photo under 3 MB",
+    "chatName": "Chat name must contain between 1 and 60 characters"
+  }
+}

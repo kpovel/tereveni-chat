@@ -2,7 +2,7 @@
 
 import { useState, MouseEvent } from "react";
 import { Category } from "./category";
-import { Hashtag } from "./onboardingHashtags";
+import { HashtagCategory } from "./onboardingHashtags";
 import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 import { submitCategories } from "./submitCategories";
 import { SkipLink } from "@/components/Link";
@@ -13,7 +13,7 @@ export function ChooseCategories({
   lang,
   dict,
 }: {
-  hashtags: Hashtag[];
+  hashtags: HashtagCategory[];
   lang: Lang;
   dict: Awaited<DictionaryReturnTypes["/en/onboarding/categories"]>;
 }) {

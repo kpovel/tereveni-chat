@@ -2,12 +2,12 @@ import { env } from "@/env.mjs";
 import { redirect } from "next/navigation";
 import { getJwtAccessToken } from "../../regenerateAccessToken";
 
-export type Hashtag = {
+export type HashtagCategory = {
   name: string | undefined;
   hashtags: { id: number; name: string }[];
 };
 
-export async function onboardingHashtags(lang: Lang): Promise<Hashtag[]> {
+export async function onboardingHashtags(lang: Lang): Promise<HashtagCategory[]> {
   const jwtAccessToken = await getJwtAccessToken();
 
   const res = await fetch(
@@ -22,7 +22,7 @@ export async function onboardingHashtags(lang: Lang): Promise<Hashtag[]> {
   if (!res.ok) {
     redirect(`/${lang}`);
   }
-  const json = (await res.json()) as Hashtag[];
+  const json = (await res.json()) as HashtagCategory[];
 
   const sortedHashtags = json.map((h) => {
     return {

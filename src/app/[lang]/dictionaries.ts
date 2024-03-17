@@ -63,6 +63,30 @@ const dictionaries = {
     import("./(protected)/create-new-password/uk.json").then(
       (module) => module.default,
     ),
+  "/en/chat/create": () =>
+    import("./(protected)/chat/(create)/create/en.json").then(
+      (module) => module.default,
+    ),
+  "/uk/chat/create": () =>
+    import("./(protected)/chat/(create)/create/uk.json").then(
+      (module) => module.default,
+    ),
+  "/en/chat/create/hashtag": () =>
+    import("./(protected)/chat/(create)/create/[chat_uuid]/hashtag/en.json").then(
+      (module) => module.default,
+    ),
+  "/uk/chat/create/hashtag": () =>
+    import("./(protected)/chat/(create)/create/[chat_uuid]/hashtag/uk.json").then(
+      (module) => module.default,
+    ),
+  "/en/chat/create/description": () =>
+    import("./(protected)/chat/(create)/create/[chat_uuid]/description/en.json").then(
+      (module) => module.default,
+    ),
+  "/uk/chat/create/description": () =>
+    import("./(protected)/chat/(create)/create/[chat_uuid]/description/uk.json").then(
+      (module) => module.default,
+    ),
   "components/en/CookiePopup": () =>
     import("../../components/CookiePopup/en.json").then(
       (module) => module.default,
