@@ -2,7 +2,8 @@ import { ChatListHeader } from "@/components/chat/ChatListHeader";
 import UserProfile from "public/account/user-profile-02.svg";
 import AccountSettings from "public/account/settings.svg";
 import File from "public/account/file-05.svg";
-import { MenuItem } from "./MenuItem";
+import LogOut from "public/account/Group 810.svg";
+import { MenuItem, MenuItemLogOut } from "./MenuItem";
 import { getDictionary } from "../../dictionaries";
 
 export default async function Account({ params }: { params: { lang: Lang } }) {
@@ -56,6 +57,9 @@ export default async function Account({ params }: { params: { lang: Lang } }) {
           >
             {dict.communityRules}
           </MenuItem>
+          <MenuItemLogOut img={{ src: LogOut, alt: dict.logOut }}>
+            {dict.logOut}
+          </MenuItemLogOut>
         </div>
       </main>
     </>
