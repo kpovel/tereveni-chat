@@ -72,21 +72,25 @@ const dictionaries = {
       (module) => module.default,
     ),
   "/en/chat/create/hashtag": () =>
-    import("./(protected)/chat/(create)/create/[chat_uuid]/hashtag/en.json").then(
-      (module) => module.default,
-    ),
+    import(
+      "./(protected)/chat/(create)/create/[chat_uuid]/hashtag/en.json"
+    ).then((module) => module.default),
   "/uk/chat/create/hashtag": () =>
-    import("./(protected)/chat/(create)/create/[chat_uuid]/hashtag/uk.json").then(
-      (module) => module.default,
-    ),
+    import(
+      "./(protected)/chat/(create)/create/[chat_uuid]/hashtag/uk.json"
+    ).then((module) => module.default),
   "/en/chat/create/description": () =>
-    import("./(protected)/chat/(create)/create/[chat_uuid]/description/en.json").then(
-      (module) => module.default,
-    ),
+    import(
+      "./(protected)/chat/(create)/create/[chat_uuid]/description/en.json"
+    ).then((module) => module.default),
   "/uk/chat/create/description": () =>
-    import("./(protected)/chat/(create)/create/[chat_uuid]/description/uk.json").then(
-      (module) => module.default,
-    ),
+    import(
+      "./(protected)/chat/(create)/create/[chat_uuid]/description/uk.json"
+    ).then((module) => module.default),
+  "/en/account": () =>
+    import("./(protected)/account/en.json").then((module) => module.default),
+  "/uk/account": () =>
+    import("./(protected)/account/uk.json").then((module) => module.default),
   "components/en/CookiePopup": () =>
     import("../../components/CookiePopup/en.json").then(
       (module) => module.default,
@@ -108,11 +112,17 @@ const dictionaries = {
       (module) => module.default,
     ),
   "components/uk/ChatNavigation": () =>
-    import("../../components/chat/ChatNavigation/uk.json").then((module) => module.default),
+    import("../../components/chat/ChatNavigation/uk.json").then(
+      (module) => module.default,
+    ),
   "components/en/ProgressStep": () =>
-    import("../../components/progress/en.json").then((module) => module.default),
+    import("../../components/progress/en.json").then(
+      (module) => module.default,
+    ),
   "components/uk/ProgressStep": () =>
-    import("../../components/progress/uk.json").then((module) => module.default),
+    import("../../components/progress/uk.json").then(
+      (module) => module.default,
+    ),
 };
 
 export type DictionaryReturnTypes = {
