@@ -1,27 +1,62 @@
+import {useState} from "react";
 import Link from "next/link";
 import { ChatAvatar } from "./ChatAvatar";
 import { ChatInfo } from "./ChatInfo";
 import { ChatRoom } from "@/app/[lang]/(protected)/chat/(filter)/all/chatRooms";
 import { Dispatch, ReactNode, SetStateAction } from "react";
 import { MessageContextMenu } from "./MessageContextMenu";
+import { ModalContentType } from "../ModalContainer/ModalContainer";
+// import { useClickOutside } from "@/util/useClickOutside";
 
 export function MessageContainer({
+  deleteChat,
   chatRoom,
   lang,
   setSelectedChat,
   selectedChat,
+
+  // openModal,
+  // modalContent,
+  // hideModal
 }: {
+  deleteChat: (chatRoomUuid: string | null) => void
   chatRoom: ChatRoom;
   lang: Lang;
   setSelectedChat: Dispatch<SetStateAction<string | null>>;
   selectedChat: string | null;
+
+  // openModal: (content: ModalContentType) => void;
+  // modalContent: ModalContentType;
+  // hideModal: () => void;
 }) {
+// console.log(`MessageContainer - ${selectedChat}`)
+  //   const [modalContent, setModalContent] = useState<ModalContentType>(null);
+  // const elemRef = useClickOutside<HTMLDivElement>(hideModal);
+
+  // function hideModal() {
+  //   setModalContent(null);
+  // }
+
+  // function openModal(content: ModalContentType) {
+  //   setModalContent(content);
+  // }
+
   return (
     <MessageContextMenu
+      deleteChat={deleteChat}
       setSelectedChat={setSelectedChat}
       selectedChat={selectedChat}
       chatRoom={chatRoom}
+      
+      // openModal={openModal}
+      // modalContent={modalContent}
+      // hideModal={hideModal}
     >
+
+{/* <ModalContainer openModal={openModal}
+        childrenElem={modalContent}
+        elemRef={elemRef}/> */}
+
       <RemoveLinkOnBlur
         chatRoom={chatRoom}
         lang={lang}
