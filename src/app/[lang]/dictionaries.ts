@@ -109,6 +109,14 @@ const dictionaries = {
     ),
   "components/uk/ChatNavigation": () =>
     import("../../components/chat/ChatNavigation/uk.json").then((module) => module.default),
+  "/components/en/EmptyChatListMessage": () =>
+    import("../../components/chat/EmptyChatListMessage/en.json").then(
+      (module) => module.default,
+    ),
+  "/components/uk/EmptyChatListMessage": () =>
+    import("../../components/chat/EmptyChatListMessage/uk.json").then(
+      (module) => module.default,
+    ),
   "components/en/ProgressStep": () =>
     import("../../components/progress/en.json").then((module) => module.default),
   "components/uk/ProgressStep": () =>
