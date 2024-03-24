@@ -10,9 +10,8 @@ export default async function AllChats({ params }: { params: { lang: Lang } }) {
   }
 
   if (chatRooms.ok?.length === 0) {
-    // Here I calculate the height of a chat list to center the message vertically
     return (
-      <div className="flex h-[calc(100dvh-75px-92px-40px)] flex-col justify-center px-6">
+      <div className="flex grow flex-col justify-center px-6">
         <EmptyChatListMessage lang={params.lang} />
       </div>
     );
