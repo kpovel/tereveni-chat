@@ -25,7 +25,10 @@ export default function Layout({
   return (
     <html lang={params.lang}>
       <body
-        className={`${poppins.className} min-h-dvh bg-black text-sm text-white`}
+        className={
+          poppins.className +
+          " flex min-h-dvh flex-col items-center justify-items-stretch bg-black text-sm text-white"
+        }
         style={{
           backgroundImage:
             "linear-gradient(180deg, #050404 0%, #1C0039 100%)",
