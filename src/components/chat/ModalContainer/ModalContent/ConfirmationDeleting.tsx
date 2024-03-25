@@ -1,14 +1,19 @@
 import { useRouter } from "next/navigation";
+import { getDictionary } from "@/app/[lang]/dictionaries";
 import { ModalContentType } from "../ModalContainer";
 import { deleteChat } from "@/app/[lang]/(protected)/chat/delete/deleteChat";
 
 export default function ConfirmationDeleting({
   openModal,
   chatRoomUuid,
+  lang
 }: {
   openModal: (content: ModalContentType) => void;
   chatRoomUuid?: string | null;
+  lang?: string
 }) {
+
+  console.log(`ConfirmationDeleting - ${chatRoomUuid}, ${lang}`)
   const router = useRouter();
 
   const handleDelete = async () => {
@@ -18,7 +23,8 @@ export default function ConfirmationDeleting({
         openModal("CompleteDeleting");
         setTimeout(() => {
           openModal(null);
-          router.refresh();
+          router.push(`/${lang}/chat/all`);
+          router.refresh()
         }, 2000);
       } else {
         openModal(null);

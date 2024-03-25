@@ -1,13 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from 'next/navigation';
 import MessagesField from "./messagesField";
 import PrivateChatHeader from "./privateChatHeader";
 import MessageInput from "./messageInput";
 import { ModalContentType } from "@/components/chat/ModalContainer/ModalContainer";
 
 export default function ChatWrapper() {
-  const [modalContent, setModalContent] = useState<ModalContentType>(null);
+  const [ modalContent, setModalContent ] = useState<ModalContentType>(null);
+  const [ chatUuid, setChatUuid ] = useState<null | string>(null);
+
+  // const params = useParams<{ tag: string; item: string }>()
+
+  // useEffect(() => {
+  //   setChatUuid(params.chatId);
+  // }, [params.chatId])
+
+  // console.log(`ChatWrapper - ${params.lang}`)
 
   function hideModal() {
     setModalContent(null);
@@ -24,6 +34,8 @@ export default function ChatWrapper() {
         openModal={openModal}
         modalContent={modalContent}
         hideModal={hideModal}
+        // chatRoomUuid={params.chatId}
+        // lang={params.lang}
       />
       <MessageInput />
     </div>

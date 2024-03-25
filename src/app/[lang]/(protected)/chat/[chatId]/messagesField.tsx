@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useParams } from 'next/navigation';
 import RenderMessages from "./renderMessages";
 import { useClickOutside } from "@/util/useClickOutside";
 import ModalContainer, {
@@ -9,10 +10,14 @@ export default function MessagesField({
   openModal,
   modalContent,
   hideModal,
+  // chatRoomUuid,
+  // lang
 }: {
   openModal: (content: ModalContentType) => void;
   modalContent: ModalContentType;
   hideModal: () => void;
+  // chatRoomUuid: string;
+  // lang: string;
 }) {
   const [messages, setMessages] = useState([
     {
@@ -278,8 +283,11 @@ export default function MessagesField({
       dateOfCreated: "2024-02-23T14:51:11.1892951",
     },
   ]);
-
+  // console.log(`MessagesField - ${lang}`)
   const elemRef = useClickOutside<HTMLDivElement>(hideModal);
+  const params = useParams<{ tag: string; item: string }>()
+
+  console.log(params);
 
   return (
     <div
@@ -287,11 +295,15 @@ export default function MessagesField({
         modalContent ? "overflow-hidden" : "overflow-scroll"
       } px-6`}
     >
-      <ModalContainer
+      {
+        params && <ModalContainer
         openModal={openModal}
         childrenElem={modalContent}
         elemRef={elemRef}
+        chatRoomUuid={params.chatId}
+        lang={params.lang}
       />
+      }
       {!messages.length && (
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
           <p className="text-center text-sm font-normal text-white text-opacity-50">

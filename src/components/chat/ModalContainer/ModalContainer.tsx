@@ -1,4 +1,5 @@
 import ModalChilden from "./ModalChildren";
+import { useParams } from 'next/navigation';
 
 export type ModalContentType =
   | "InvitationLink"
@@ -11,12 +12,19 @@ export default function ModalContainer({
   childrenElem,
   elemRef,
   chatRoomUuid,
+  lang
 }: {
   openModal: (content: ModalContentType) => void;
   childrenElem: ModalContentType;
   elemRef: any;
   chatRoomUuid?: string | null;
+  lang?: string
 }) {
+
+  // const params = useParams<{ tag: string; item: string }>()
+  console.log(`ModalContainer - ${chatRoomUuid}`)
+  console.log(`ModalContainer - ${lang}`)
+
   if (!childrenElem) {
     return null;
   }
@@ -32,6 +40,7 @@ export default function ModalContainer({
             chatRoomUuid={chatRoomUuid}
             childrenElem={childrenElem}
             openModal={openModal}
+            lang={lang}
           />
         </div>
       </div>

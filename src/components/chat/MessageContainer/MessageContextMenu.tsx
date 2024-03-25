@@ -19,11 +19,13 @@ export function MessageContextMenu({
   chatRoom,
   setSelectedChat,
   selectedChat,
+  lang
 }: {
   children: ReactNode;
   setSelectedChat: Dispatch<SetStateAction<string | null>>;
   selectedChat: string | null;
   chatRoom: ChatRoom;
+  lang: string
 }) {
   const ref = useClickOutside<HTMLDivElement>(hideContextMenu);
   const openContext = selectedChat === chatRoom.chatRoom.uuid;
@@ -72,6 +74,7 @@ export function MessageContextMenu({
         childrenElem={modalContent}
         elemRef={elemRef}
         chatRoomUuid={chatRoom.chatRoom.uuid}
+        lang={lang}
       />
       <MessageContextList
         chatRoomUuid={selectedChat}

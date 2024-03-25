@@ -21,6 +21,7 @@ export function MessageContainer({
       setSelectedChat={setSelectedChat}
       selectedChat={selectedChat}
       chatRoom={chatRoom}
+      lang={lang}
     >
       <RemoveLinkOnBlur
         chatRoom={chatRoom}
