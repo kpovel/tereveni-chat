@@ -7,11 +7,16 @@ export default function ModalChilden({
   childrenElem,
   openModal,
   chatRoomUuid,
+  lang
 }: {
   childrenElem: ModalContentType;
   openModal: (content: ModalContentType) => void;
   chatRoomUuid?: string | null;
+  lang?: string
 }) {
+
+  console.log(`ModalChilden - ${chatRoomUuid}, ${lang}`)
+
   switch (childrenElem) {
     case "InvitationLink":
       return <InvitationLink />;
@@ -20,6 +25,7 @@ export default function ModalChilden({
         <ConfirmationDeleting
           chatRoomUuid={chatRoomUuid}
           openModal={openModal}
+          lang={lang}
         />
       );
     case "CompleteDeleting":

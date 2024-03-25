@@ -15,12 +15,5 @@ export default async function Template({ children }: { children: ReactNode }) {
         <main className="pb-10">{children}</main>
       </div>
     </div>
-    // <div className="flex w-full grow flex-col">
-    //   <div className="w-full">
-    //     <ChatListHeader lang={lang} />
-    //     <ChatNavigation lang={lang} />
-    //   </div>
-    //   <main className="flex grow flex-col pb-10 relative">{children}</main>
-    // </div>
   );
 }
