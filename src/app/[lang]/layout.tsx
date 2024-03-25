@@ -31,7 +31,7 @@ export default function Layout({
         }
         style={{
           backgroundImage:
-            "linear-gradient(to top, rgba(124, 1, 246, 0.15), rgba(124, 1, 246, 0))",
+            "linear-gradient(180deg, #050404 0%, #1C0039 100%)",
           backgroundAttachment: "fixed",
         }}
       >

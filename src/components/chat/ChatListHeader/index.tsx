@@ -42,7 +42,7 @@ export async function ChatListHeader({ lang }: { lang: "en" | "uk" }) {
   );
 
   return (
-    <header>
+    <header className="bg-[#08040A]">
       <nav className="flex items-center justify-center pt-[26px] text-base font-medium">
         <NavLinks routes={computedRoutes} />
       </nav>
