@@ -1,23 +1,22 @@
 import { TrashIcon } from "./TrashIcon";
 import { ModalContentType } from "../ModalContainer/ModalContainer";
 
-export function MessageContextList({ 
-  // deleteChat, 
-  openContext, 
+export function MessageContextList({
+  // deleteChat,
+  openContext,
   chatRoomUuid,
 
   openModal,
   modalContent,
-  hideModal
-}: { 
-  // deleteChat: (selectedChat: string | null) => void; 
+  hideModal,
+}: {
+  // deleteChat: (selectedChat: string | null) => void;
   openContext: boolean;
   chatRoomUuid: string | null;
 
   openModal: (content: ModalContentType) => void;
   modalContent: ModalContentType;
   hideModal: () => void;
-
 }) {
   // function deleteChat() {
   //   alert("Are you sure you want to delete this chat?");
