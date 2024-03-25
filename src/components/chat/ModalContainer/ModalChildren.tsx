@@ -11,8 +11,8 @@ export default function ModalChilden({
 }: {
   childrenElem: ModalContentType;
   openModal: (content: ModalContentType) => void;
-  chatRoomUuid?: string | null;
-  lang?: string
+  chatRoomUuid: string;
+  lang: string
 }) {
 
   console.log(`ModalChilden - ${chatRoomUuid}, ${lang}`)

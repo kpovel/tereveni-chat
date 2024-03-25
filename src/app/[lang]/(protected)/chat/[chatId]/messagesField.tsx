@@ -9,15 +9,11 @@ import ModalContainer, {
 export default function MessagesField({
   openModal,
   modalContent,
-  hideModal,
-  // chatRoomUuid,
-  // lang
+  hideModal
 }: {
   openModal: (content: ModalContentType) => void;
   modalContent: ModalContentType;
   hideModal: () => void;
-  // chatRoomUuid: string;
-  // lang: string;
 }) {
   const [messages, setMessages] = useState([
     {
@@ -283,11 +279,8 @@ export default function MessagesField({
       dateOfCreated: "2024-02-23T14:51:11.1892951",
     },
   ]);
-  // console.log(`MessagesField - ${lang}`)
   const elemRef = useClickOutside<HTMLDivElement>(hideModal);
   const params = useParams<{ tag: string; item: string }>()
-
-  console.log(params);
 
   return (
     <div
