@@ -7,7 +7,7 @@ export default async function AllChats({ params }: { params: { lang: Lang } }) {
   if (chatRooms.err) {
     return <div>{chatRooms.err}</div>;
   }
-  
+
   return (
     <div className="flex flex-col gap-5 px-6">
       <ChatList chatList={chatRooms.ok!} lang={params.lang} />
