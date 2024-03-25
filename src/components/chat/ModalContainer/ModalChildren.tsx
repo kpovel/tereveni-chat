@@ -15,8 +15,6 @@ export default function ModalChilden({
   lang: string
 }) {
 
-  console.log(`ModalChilden - ${chatRoomUuid}, ${lang}`)
-
   switch (childrenElem) {
     case "InvitationLink":
       return <InvitationLink />;
