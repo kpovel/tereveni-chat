@@ -9,8 +9,8 @@ export default function ConfirmationDeleting({
   lang
 }: {
   openModal: (content: ModalContentType) => void;
-  chatRoomUuid?: string | null;
-  lang?: string
+  chatRoomUuid: string;
+  lang: string
 }) {
 
   console.log(`ConfirmationDeleting - ${chatRoomUuid}, ${lang}`)

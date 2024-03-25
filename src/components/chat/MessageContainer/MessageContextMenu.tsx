@@ -77,11 +77,8 @@ export function MessageContextMenu({
         lang={lang}
       />
       <MessageContextList
-        chatRoomUuid={selectedChat}
         openContext={openContext}
         openModal={openModal}
-        modalContent={modalContent}
-        hideModal={hideModal}
       />
     </div>
   );
