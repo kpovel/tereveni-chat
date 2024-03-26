@@ -1,0 +1,9 @@
+{
+  "title": "Account settings",
+  "menu": {
+    "password": "Password",
+    "language": "Language",
+    "hastags": "Hastags",
+    "deleteAccount": "Delete account"
+  }
+}
