@@ -91,6 +91,14 @@ const dictionaries = {
     import("./(protected)/account/en.json").then((module) => module.default),
   "/uk/account": () =>
     import("./(protected)/account/uk.json").then((module) => module.default),
+  "/en/account/settings": () =>
+    import("./(protected)/account/settings/en.json").then(
+      (module) => module.default,
+    ),
+  "/uk/account/settings": () =>
+    import("./(protected)/account/settings/uk.json").then(
+      (module) => module.default,
+    ),
   "components/en/CookiePopup": () =>
     import("../../components/CookiePopup/en.json").then(
       (module) => module.default,
@@ -112,7 +120,9 @@ const dictionaries = {
       (module) => module.default,
     ),
   "components/uk/ChatNavigation": () =>
-    import("../../components/chat/ChatNavigation/uk.json").then((module) => module.default),
+    import("../../components/chat/ChatNavigation/uk.json").then(
+      (module) => module.default,
+    ),
   "/components/en/EmptyChatListMessage": () =>
     import("../../components/chat/EmptyChatListMessage/en.json").then(
       (module) => module.default,

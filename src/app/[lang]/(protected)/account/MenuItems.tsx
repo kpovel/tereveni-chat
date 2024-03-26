@@ -34,7 +34,7 @@ export function MenuItems({
             {dict.myProfile}
           </MenuItem>
           <MenuItem
-            href={`/${lang}/account/account-settings`}
+            href={`/${lang}/account/settings`}
             img={{ src: AccountSettings, alt: dict.accountSettings }}
           >
             {dict.accountSettings}
