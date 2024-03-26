@@ -28,21 +28,3 @@ type MenuItemProps = {
     alt: string;
   };
 };
-
-export function MenuItemLogOut({
-  children,
-  img,
-}: {
-  children: ReactNode;
-  img: {
-    src: any;
-    alt: string;
-  };
-}) {
-  return (
-    <div className="flex items-center gap-3 rounded-[32px] border border-[#3E205D] p-4">
-      <Image src={img.src} alt={img.alt} />
-      <span className="grow">{children}</span>
-    </div>
-  );
-}
