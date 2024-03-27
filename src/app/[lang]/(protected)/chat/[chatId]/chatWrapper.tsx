@@ -7,7 +7,7 @@ import MessageInput from "./messageInput";
 import { ModalContentType } from "@/components/chat/ModalContainer/ModalContainer";
 
 export default function ChatWrapper() {
-  const [modalContent, setModalContent] = useState<ModalContentType>(null);
+  const [ modalContent, setModalContent ] = useState<ModalContentType>(null);
 
   function hideModal() {
     setModalContent(null);

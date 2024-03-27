@@ -8,9 +8,9 @@ import { createChat } from "./createChat";
 import { SelectChatImage } from "./SelectChatImage";
 
 export type FormState = {
-  image: string,
-  input: string,
-}
+  image: string;
+  input: string;
+};
 
 const initialState: FormState = {
   image: "",

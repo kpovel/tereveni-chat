@@ -4,24 +4,43 @@ import {
   Dispatch,
   SetStateAction,
   useEffect,
+  useState,
+  RefObject,
 } from "react";
 import { MessageContextList } from "./MessageContextList";
 import { useClickOutside } from "@/util/useClickOutside";
 import { ChatRoom } from "@/app/[lang]/(protected)/chat/(filter)/all/chatRooms";
+import ModalContainer, {
+  ModalContentType,
+} from "../ModalContainer/ModalContainer";
 
 export function MessageContextMenu({
   children,
   chatRoom,
   setSelectedChat,
   selectedChat,
+  lang
 }: {
   children: ReactNode;
   setSelectedChat: Dispatch<SetStateAction<string | null>>;
   selectedChat: string | null;
   chatRoom: ChatRoom;
+  lang: string
 }) {
   const ref = useClickOutside<HTMLDivElement>(hideContextMenu);
   const openContext = selectedChat === chatRoom.chatRoom.uuid;
+
+  const [modalContent, setModalContent] = useState<ModalContentType>(null);
+  const elemRef: RefObject<HTMLDivElement> =
+    useClickOutside<HTMLDivElement>(hideModal);
+
+  function hideModal() {
+    setModalContent(null);
+  }
+
+  function openModal(content: ModalContentType) {
+    setModalContent(content);
+  }
 
   function hideContextMenu() {
     ref.current?.classList.remove("blur-sm");
@@ -32,6 +51,18 @@ export function MessageContextMenu({
     e.preventDefault();
     setSelectedChat(chatRoom.chatRoom.uuid);
   }
+
+  useEffect(() => {
+      if (modalContent) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'auto';
+      }
+  
+      return () => {
+        document.body.style.overflow = 'auto'; 
+      };
+  }, [modalContent])
 
   useEffect(() => {
     if (selectedChat === null) {
@@ -45,13 +76,22 @@ export function MessageContextMenu({
     }
 
     ref.current?.classList.add("blur-sm");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedChat]);
 
   return (
     <div ref={ref} onContextMenu={handleContextMenu}>
       {children}
-      <MessageContextList openContext={openContext} />
+      <ModalContainer
+        openModal={openModal}
+        childrenElem={modalContent}
+        elemRef={elemRef}
+        chatRoomUuid={chatRoom.chatRoom.uuid}
+        lang={lang}
+      />
+      <MessageContextList
+        openContext={openContext}
+        openModal={openModal}
+      />
     </div>
   );
 }
