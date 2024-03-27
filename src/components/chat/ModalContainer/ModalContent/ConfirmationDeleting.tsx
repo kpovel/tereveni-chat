@@ -14,7 +14,6 @@ export default function ConfirmationDeleting({
   const router = useRouter();
 
   const handleDelete = async () => {
-    if (chatRoomUuid) {
       const deleted = await deleteChat(chatRoomUuid);
       if (deleted) {
         openModal("CompleteDeleting");
@@ -26,7 +25,6 @@ export default function ConfirmationDeleting({
       } else {
         openModal(null);
       }
-    }
   };
 
   return (

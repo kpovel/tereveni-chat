@@ -3,7 +3,7 @@
 import { env } from "@/env.mjs";
 import { getJwtAccessToken } from "../../regenerateAccessToken";
 
-export async function deleteChat(chatRoomUuid: string | null) {
+export async function deleteChat(chatRoomUuid: string) {
   const jwtAccessToken = await getJwtAccessToken();
 
   const res = await fetch(

@@ -294,15 +294,13 @@ export default function MessagesField({
         modalContent ? "overflow-hidden" : "overflow-scroll"
       } px-6`}
     >
-      {
-        params && typeof params.chatId === 'string' && ( <ModalContainer
+        <ModalContainer
         openModal={openModal}
         childrenElem={modalContent}
         elemRef={elemRef}
         chatRoomUuid={params.chatId}
         lang={params.lang}
       />
-        )}
       {!messages.length && (
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
           <p className="text-center text-sm font-normal text-white text-opacity-50">
