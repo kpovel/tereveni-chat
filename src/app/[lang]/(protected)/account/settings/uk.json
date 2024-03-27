@@ -5,5 +5,12 @@
     "language": "Мова",
     "hastags": "Хештеги",
     "deleteAccount": "Видалити акаунт"
+  },
+  "popup": {
+    "deleteAccount": "Видалити акаунт",
+    "deleteAccountDescription": "Видалення акаунта остаточне, твої повідомлення та дані неможливо буде відновити",
+    "delete": "Видалити",
+    "cancel": "Відмінити",
+    "accountDeleted": "Акаунт успішно видалено"
   }
 }
