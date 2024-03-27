@@ -66,6 +66,8 @@ export function AccountSettings({
       <DeleteAccountPopup
         setDeleteAccountStage={setDeleteAccountStage}
         deleteAccountStage={deleteAccountStage}
+        dict={dict}
+        lang={lang}
       />
     </>
   );
