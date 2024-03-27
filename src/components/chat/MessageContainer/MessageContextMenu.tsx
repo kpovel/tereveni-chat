@@ -53,6 +53,18 @@ export function MessageContextMenu({
   }
 
   useEffect(() => {
+      if (modalContent) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'auto';
+      }
+  
+      return () => {
+        document.body.style.overflow = 'auto'; 
+      };
+  }, [modalContent])
+
+  useEffect(() => {
     if (selectedChat === null) {
       ref.current?.classList.remove("blur-sm");
       return;
