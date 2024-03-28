@@ -1,0 +1,16 @@
+{
+  "title": "Account settings",
+  "menu": {
+    "password": "Password",
+    "language": "Language",
+    "hastags": "Hastags",
+    "deleteAccount": "Delete account"
+  },
+  "popup": {
+    "deleteAccount": "Delete your account",
+    "deleteAccountDescription": "Account deletion is final, there will be no way to recover your messages and data",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "accountDeleted": "Account successfully deleted"
+  }
+}

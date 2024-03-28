@@ -1,0 +1,14 @@
+{
+  "myProfile": "My profile",
+  "accountSettings": "Account settings",
+  "termsConditions": "Terms & Conditions",
+  "privacyPolicy": "Privacy Policy",
+  "cookiesPolicy": "Cookies Policy",
+  "communityRules": "Community Rules",
+  "logOut": "Log out",
+  "dialog": {
+    "confirmLogout": "Are you sure you want to log out from your account?",
+    "yes": "Yes",
+    "no": "No"
+  }
+}
