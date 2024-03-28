@@ -1,8 +1,6 @@
 "use server";
 
 import { env } from "@/env.mjs";
-import { JWT_ACCESS_TOKEN, JWT_REFRESH_TOKEN } from "@/util/cookiesName";
-import { cookies } from "next/headers";
 import { getJwtAccessToken } from "../../regenerateAccessToken";
 
 export async function deleteUserAccount() {
@@ -16,8 +14,6 @@ export async function deleteUserAccount() {
   });
 
   if (res.status === 200) {
-    cookies().delete(JWT_ACCESS_TOKEN);
-    cookies().delete(JWT_REFRESH_TOKEN);
     return true;
   }
 

@@ -4,7 +4,7 @@ import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 import { deleteUserAccount } from "./deleteUserAccount";
 import Done from "public/done_icon.svg";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { removeCookies } from "../removeCookies";
 
 export function DeleteAccountPopup({
   deleteAccountStage,
@@ -46,8 +46,6 @@ function ConfirmDeletionStage({
   dict: Awaited<DictionaryReturnTypes["/en/account/settings"]>;
   lang: Lang;
 }) {
-  const router = useRouter();
-
   function closeModal() {
     setDeleteAccountStage(null);
   }
@@ -59,7 +57,7 @@ function ConfirmDeletionStage({
       setDeleteAccountStage("AccountDeleted");
 
       setTimeout(() => {
-        router.push(`/${lang}`);
+        removeCookies(lang);
       }, 2000);
 
       return;
