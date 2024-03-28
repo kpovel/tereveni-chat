@@ -10,6 +10,7 @@ import { DeleteAccount } from "./DeleteAccount";
 import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 import { useState } from "react";
 import { DeleteAccountPopup } from "./DeleteAccountPopup";
+import Link from "next/link";
 
 export function AccountSettings({
   dict,
@@ -30,11 +31,13 @@ export function AccountSettings({
         }
       >
         <div className="flex flex-row justify-between">
-          <Image
-            src={ChevronRight}
-            alt="Chevron right"
-            className="rotate-180"
-          />
+          <Link href={`/${lang}/account`}>
+            <Image
+              src={ChevronRight}
+              alt="Chevron left"
+              className="rotate-180"
+            />
+          </Link>
           <h1 className="text-lg font-medium">{dict.title}</h1>
           <div></div>
         </div>
