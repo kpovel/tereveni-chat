@@ -53,12 +53,15 @@ function ConfirmDeletionStage({
   }
 
   async function deleteAccount() {
-    if (await deleteUserAccount()) {
+    const isDeletedAccount = await deleteUserAccount();
+
+    if (isDeletedAccount) {
       setDeleteAccountStage("AccountDeleted");
 
       setTimeout(() => {
         router.push(`/${lang}`);
       }, 2000);
+
       return;
     }
 
