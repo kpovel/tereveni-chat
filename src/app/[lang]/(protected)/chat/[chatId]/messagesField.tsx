@@ -6,10 +6,9 @@ import ModalContainer, {
   ModalContentType,
 } from "@/components/chat/ModalContainer/ModalContainer";
 
-interface RouteParams {
+type RouteParams = {
   lang: string
   chatId: string;
-  [key: string]: string; 
 }
 
 export default function MessagesField({
@@ -286,7 +285,7 @@ export default function MessagesField({
     },
   ]);
   const elemRef = useClickOutside<HTMLDivElement>(hideModal);
-  const params = useParams<RouteParams>()
+  const params = useParams<RouteParams>();
 
   return (
     <div

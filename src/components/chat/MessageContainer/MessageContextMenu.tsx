@@ -76,6 +76,8 @@ export function MessageContextMenu({
     }
 
     ref.current?.classList.add("blur-sm");
+    document.body.style.overflow = 'hidden';
+    
   }, [selectedChat]);
 
   return (
