@@ -40,6 +40,7 @@ export function MessageContextMenu({
 
   function openModal(content: ModalContentType) {
     setModalContent(content);
+    document.body.style.overflow = 'hidden';
   }
 
   function hideContextMenu() {
@@ -53,32 +54,34 @@ export function MessageContextMenu({
   }
 
   useEffect(() => {
-      if (modalContent) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = 'auto';
-      }
-  
-      return () => {
-        document.body.style.overflow = 'auto'; 
-      };
-  }, [modalContent])
-
-  useEffect(() => {
     if (selectedChat === null) {
       ref.current?.classList.remove("blur-sm");
+      // document.body.style.overflow = 'auto'; 
       return;
     }
 
     if (selectedChat === chatRoom.chatRoom.uuid) {
       ref.current?.classList.remove("blur-sm");
+      // document.body.style.overflow = 'auto'; 
       return;
     }
 
     ref.current?.classList.add("blur-sm");
     document.body.style.overflow = 'hidden';
-    
+
   }, [selectedChat]);
+
+  useEffect(() => {
+    if (modalContent) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto'; 
+    };
+}, [modalContent])
 
   return (
     <div ref={ref} onContextMenu={handleContextMenu}>
