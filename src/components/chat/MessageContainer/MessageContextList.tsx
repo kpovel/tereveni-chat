@@ -8,7 +8,6 @@ export function MessageContextList({
   openContext: boolean;
   openModal: (content: ModalContentType) => void;
 }) {
-
   return (
     <div className={"relative " + (openContext ? "block" : "hidden")}>
       <button

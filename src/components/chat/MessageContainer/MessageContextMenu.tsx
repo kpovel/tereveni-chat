@@ -4,8 +4,6 @@ import {
   Dispatch,
   SetStateAction,
   useEffect,
-  useState,
-  RefObject,
 } from "react";
 import { MessageContextList } from "./MessageContextList";
 import { useClickOutside } from "@/util/useClickOutside";
@@ -17,86 +15,77 @@ import ModalContainer, {
 export function MessageContextMenu({
   children,
   chatRoom,
+  lang,
+  modalContent,
   setSelectedChat,
   selectedChat,
-  lang
+  setModalContent,
+  setDisableScroll,
 }: {
   children: ReactNode;
-  setSelectedChat: Dispatch<SetStateAction<string | null>>;
-  selectedChat: string | null;
+  lang: string;
   chatRoom: ChatRoom;
-  lang: string
+  selectedChat: string | null;
+  setSelectedChat: Dispatch<SetStateAction<string | null>>;
+  modalContent: ModalContentType;
+  setModalContent: Dispatch<SetStateAction<ModalContentType>>;
+  setDisableScroll: Dispatch<SetStateAction<boolean>>;
 }) {
-  const ref = useClickOutside<HTMLDivElement>(hideContextMenu);
+  const chatContextMenuRef =
+    useClickOutside<HTMLDivElement>(hideChatContextMenu);
+  const modalCotainerRef = useClickOutside<HTMLDivElement>(hideModal);
   const openContext = selectedChat === chatRoom.chatRoom.uuid;
-
-  const [modalContent, setModalContent] = useState<ModalContentType>(null);
-  const elemRef: RefObject<HTMLDivElement> =
-    useClickOutside<HTMLDivElement>(hideModal);
 
   function hideModal() {
     setModalContent(null);
+    setDisableScroll(false);
   }
 
   function openModal(content: ModalContentType) {
     setModalContent(content);
-    document.body.style.overflow = 'hidden';
+    setSelectedChat(null);
   }
 
-  function hideContextMenu() {
-    ref.current?.classList.remove("blur-sm");
-    setSelectedChat(null);
+  function hideChatContextMenu() {
+    if (openContext) {
+      setSelectedChat(null);
+      chatContextMenuRef.current?.classList.remove("blur-sm");
+      setDisableScroll(false);
+    }
   }
 
   function handleContextMenu(e: MouseEvent<HTMLDivElement>) {
     e.preventDefault();
     setSelectedChat(chatRoom.chatRoom.uuid);
+    setDisableScroll(true);
   }
 
   useEffect(() => {
     if (selectedChat === null) {
-      ref.current?.classList.remove("blur-sm");
-      // document.body.style.overflow = 'auto'; 
+      chatContextMenuRef.current?.classList.remove("blur-sm");
       return;
     }
 
-    if (selectedChat === chatRoom.chatRoom.uuid) {
-      ref.current?.classList.remove("blur-sm");
-      // document.body.style.overflow = 'auto'; 
+    if (openContext) {
+      chatContextMenuRef.current?.classList.remove("blur-sm");
       return;
     }
 
-    ref.current?.classList.add("blur-sm");
-    document.body.style.overflow = 'hidden';
-
-  }, [selectedChat]);
-
-  useEffect(() => {
-    if (modalContent) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-
-    return () => {
-      document.body.style.overflow = 'auto'; 
-    };
-}, [modalContent])
+    chatContextMenuRef.current?.classList.add("blur-sm");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openContext, selectedChat]);
 
   return (
-    <div ref={ref} onContextMenu={handleContextMenu}>
+    <div ref={chatContextMenuRef} onContextMenu={handleContextMenu}>
       {children}
       <ModalContainer
         openModal={openModal}
         childrenElem={modalContent}
-        elemRef={elemRef}
+        elemRef={modalCotainerRef}
         chatRoomUuid={chatRoom.chatRoom.uuid}
         lang={lang}
       />
-      <MessageContextList
-        openContext={openContext}
-        openModal={openModal}
-      />
+      <MessageContextList openContext={openContext} openModal={openModal} />
     </div>
   );
 }
