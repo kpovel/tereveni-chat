@@ -12,7 +12,7 @@ export default async function Template({ children }: { children: ReactNode }) {
       <div className="w-full">
         <ChatListHeader lang={lang} />
       </div>
-      <div className="flex grow flex-col pb-20 relative">
+      <div className="flex grow flex-col pb-20 relative w-full">
         <ChatNavigation lang={lang} />
         <main className="flex grow flex-col">{children}</main>
       </div>
