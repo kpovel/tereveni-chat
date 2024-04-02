@@ -39,6 +39,7 @@ export default function LoginForm({
         <PasswordInput
           placeholder={dict.passwordPlaceholder}
           errorMessage={[state.password || state.general]}
+          name="password"
         />
         <input name="lang" value={lang} className="hidden" readOnly />
         <Link

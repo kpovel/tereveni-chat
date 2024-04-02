@@ -16,10 +16,12 @@ import { ErrorMessage } from "../internal/errorMessage";
 export function PasswordInput({
   placeholder,
   errorMessage,
+  name,
   hint,
 }: {
   placeholder: string;
   errorMessage: string[];
+  name: string;
   hint?: string;
 }) {
   const ref = useRef<HTMLInputElement>(null);
@@ -57,7 +59,7 @@ export function PasswordInput({
           pl-14 pr-5 leading-normal outline-none transition ease-in
           autofill:filter-none invalid:border-[#FF453A] focus:border-[#7C01F6]"
           type={`${isHidden ? "password" : "text"}`}
-          name="password"
+          name={name}
           placeholder={placeholder}
         />
         <TogglePassword isHidden={isHidden} setIsHidden={setIsHidden} />
