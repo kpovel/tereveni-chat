@@ -10,7 +10,7 @@ export default async function ChangePassword({ params }: { params: { lang: Lang 
   return (
     <main className="flex w-full grow flex-col gap-10 px-6 py-10">
       <div className="flex flex-row justify-between">
-        <Link href={`/${params.lang}/account`}>
+        <Link href={`/${params.lang}/account/settings`}>
           <Image src={ChevronRight} alt="Chevron left" className="rotate-180" />
         </Link>
         <h1 className="text-lg font-medium">{dict.title}</h1>
