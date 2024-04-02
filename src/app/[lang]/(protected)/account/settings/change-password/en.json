@@ -1,0 +1,9 @@
+{
+  "title": "Change password",
+  "placeholder": {
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmNewPassword": "Confirm new password"
+  },
+  "saveChanges": "Save changes"
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Зміна паролю",
+  "placeholder": {
+    "currentPassword": "Поточний пароль",
+    "newPassword": "Новий пароль",
+    "confirmNewPassword": "Підтверди новий пароль"
+  },
+  "saveChanges": "Зберегти зміни"
+}
