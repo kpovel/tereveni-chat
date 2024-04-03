@@ -107,6 +107,14 @@ const dictionaries = {
     import("./(protected)/account/settings/change-password/uk.json").then(
       (module) => module.default,
     ),
+  "/en/account/settings/language": () =>
+    import("./(protected)/account/settings/language/en.json").then(
+      (module) => module.default,
+    ),
+  "/uk/account/settings/language": () =>
+    import("./(protected)/account/settings/language/uk.json").then(
+      (module) => module.default,
+    ),
   "components/en/CookiePopup": () =>
     import("../../components/CookiePopup/en.json").then(
       (module) => module.default,

@@ -1,0 +1,9 @@
+{
+  "title": "Language settings",
+  "subtitle": "Set your preferred web app language",
+  "lang": {
+    "en": "English",
+    "uk": "Ukrainian"
+  },
+  "saveChanges": "Save changes"
+}
