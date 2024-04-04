@@ -3,6 +3,9 @@
 import { z } from "zod";
 import { FormState } from "./ChangePasswordForm";
 import { env } from "@/env.mjs";
+import { cookies } from "next/headers";
+import { langUnwrapOrDefault } from "@/util/lang";
+import { getJwtAccessToken } from "../../../regenerateAccessToken";
 
 export async function changePasswordAction(
   _prevState: FormState,
@@ -31,11 +34,59 @@ export async function changePasswordAction(
     };
   }
 
-  const res = await fetch(`/${env.SERVER_URL}/`);
+  const data = parse.data;
+
+  if (data.newPassword !== data.confirmNewPassword) {
+    // todo: update error messages
+    return {
+      currentPasswordError: "",
+      newPasswordError: "",
+      confirmNewPasswordError: "passwords doesn't match",
+    };
+  }
+
+  const lang = await langUnwrapOrDefault(cookies().get("lang")?.value ?? "en");
+  const jwtAccessToken = await getJwtAccessToken();
+  const res = await fetch(
+    `${env.SERVER_URL}/api/user/edit-password?lang=${lang}`,
+    {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${jwtAccessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        oldPassword: data.currentPassword,
+        newPassword: data.newPassword,
+      }),
+    },
+  );
+
+  if (res.status === 200) {
+    // todo: update success state
+    return {
+      currentPasswordError: "",
+      newPasswordError: "",
+      confirmNewPasswordError: "",
+    };
+  }
+
+  if (res.status === 400) {
+    const json = (await res.json()) as {
+      oldPassword?: string;
+      newPassword?: string;
+    };
+
+    return {
+      currentPasswordError: json.oldPassword ?? "",
+      newPasswordError: json.newPassword ?? "",
+      confirmNewPasswordError: "",
+    };
+  }
 
   return {
-    newPasswordError: "adsf",
-    currentPasswordError: "",
+    currentPasswordError: "internal server error",
+    newPasswordError: "",
     confirmNewPasswordError: "",
   };
 }
