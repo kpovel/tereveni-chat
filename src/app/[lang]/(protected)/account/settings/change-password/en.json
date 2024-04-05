@@ -5,5 +5,8 @@
     "newPassword": "New password",
     "confirmNewPassword": "Confirm new password"
   },
-  "saveChanges": "Save changes"
+  "saveChanges": "Save changes",
+  "popup": {
+    "changedPassword": "Password has been successfully changed"
+  }
 }

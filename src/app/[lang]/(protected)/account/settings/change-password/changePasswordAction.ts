@@ -31,6 +31,7 @@ export async function changePasswordAction(
       currentPasswordError: fieldErrors.currentPassword?.[0] ?? "",
       newPasswordError: fieldErrors.newPassword?.[0] ?? "",
       confirmNewPasswordError: fieldErrors.confirmNewPassword?.[0] ?? "",
+      changedPassword: false,
     };
   }
 
@@ -42,6 +43,7 @@ export async function changePasswordAction(
       currentPasswordError: "",
       newPasswordError: "",
       confirmNewPasswordError: "passwords doesn't match",
+      changedPassword: false,
     };
   }
 
@@ -68,6 +70,7 @@ export async function changePasswordAction(
       currentPasswordError: "",
       newPasswordError: "",
       confirmNewPasswordError: "",
+      changedPassword: true,
     };
   }
 
@@ -81,6 +84,7 @@ export async function changePasswordAction(
       currentPasswordError: json.oldPassword ?? "",
       newPasswordError: json.newPassword ?? "",
       confirmNewPasswordError: "",
+      changedPassword: false,
     };
   }
 
@@ -88,5 +92,6 @@ export async function changePasswordAction(
     currentPasswordError: "internal server error",
     newPasswordError: "",
     confirmNewPasswordError: "",
+    changedPassword: false,
   };
 }

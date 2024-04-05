@@ -5,5 +5,8 @@
     "newPassword": "Новий пароль",
     "confirmNewPassword": "Підтверди новий пароль"
   },
-  "saveChanges": "Зберегти зміни"
+  "saveChanges": "Зберегти зміни",
+  "popup": {
+    "changedPassword": "Пароль успішно змінено"
+  }
 }
