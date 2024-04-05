@@ -6,11 +6,16 @@ import { env } from "@/env.mjs";
 import { cookies } from "next/headers";
 import { langUnwrapOrDefault } from "@/util/lang";
 import { getJwtAccessToken } from "../../../regenerateAccessToken";
+import { getDictionary } from "@/app/[lang]/dictionaries";
 
 export async function changePasswordAction(
   _prevState: FormState,
   formData: FormData,
 ): Promise<FormState> {
+  const lang = await langUnwrapOrDefault(cookies().get("lang")?.value ?? "en");
+  const jwtAccessToken = await getJwtAccessToken();
+  const dict = await getDictionary(`/${lang}/account/settings/change-password`);
+
   const schema = z.object({
     currentPassword: z.string().min(1),
     newPassword: z.string().min(1),
@@ -26,29 +31,28 @@ export async function changePasswordAction(
   if (!parse.success) {
     const fieldErrors = parse.error.formErrors.fieldErrors;
 
-    // todo: update error messages
     return {
-      currentPasswordError: fieldErrors.currentPassword?.[0] ?? "",
-      newPasswordError: fieldErrors.newPassword?.[0] ?? "",
-      confirmNewPasswordError: fieldErrors.confirmNewPassword?.[0] ?? "",
+      currentPasswordError: fieldErrors.currentPassword?.[0]
+        ? dict.error.incorectPassword
+        : "",
+      newPasswordError: fieldErrors.newPassword?.[0]
+        ? dict.error.passwordConstraint
+        : "",
+      confirmNewPasswordError: "",
       changedPassword: false,
     };
   }
 
   const data = parse.data;
-
   if (data.newPassword !== data.confirmNewPassword) {
-    // todo: update error messages
     return {
       currentPasswordError: "",
       newPasswordError: "",
-      confirmNewPasswordError: "passwords doesn't match",
+      confirmNewPasswordError: dict.error.passwordsDoNotMatch,
       changedPassword: false,
     };
   }
 
-  const lang = await langUnwrapOrDefault(cookies().get("lang")?.value ?? "en");
-  const jwtAccessToken = await getJwtAccessToken();
   const res = await fetch(
     `${env.SERVER_URL}/api/user/edit-password?lang=${lang}`,
     {
@@ -65,7 +69,6 @@ export async function changePasswordAction(
   );
 
   if (res.status === 200) {
-    // todo: update success state
     return {
       currentPasswordError: "",
       newPasswordError: "",

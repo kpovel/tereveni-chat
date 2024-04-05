@@ -33,6 +33,7 @@ export function ChangePasswordForm({
       <PasswordInput
         placeholder={dict.placeholder.newPassword}
         errorMessage={[state.newPasswordError]}
+        hint={dict.hint.password}
         name="newPassword"
       />
       <PasswordInput
