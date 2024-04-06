@@ -107,6 +107,14 @@ const dictionaries = {
     import("./(protected)/account/settings/change-password/uk.json").then(
       (module) => module.default,
     ),
+  "/en/account/settings/hashtags": () =>
+    import("./(protected)/account/settings/hashtags/en.json").then(
+      (module) => module.default,
+    ),
+  "/uk/account/settings/hashtags": () =>
+    import("./(protected)/account/settings/hashtags/uk.json").then(
+      (module) => module.default,
+    ),
   "/en/account/settings/language": () =>
     import("./(protected)/account/settings/language/en.json").then(
       (module) => module.default,
