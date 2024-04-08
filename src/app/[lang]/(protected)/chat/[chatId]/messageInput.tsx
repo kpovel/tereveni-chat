@@ -3,8 +3,13 @@ import Image from "next/image";
 import addToMessage from "../../../../../../public/add-to-message.svg";
 import sendBtn from "../../../../../../public/send-btn.svg";
 
-export default function MessageInput() {
+export default function MessageInput({ 
+  sendMessage
+}: {
+  sendMessage:(msg:string) => void
+}) {
   const [isSendBtnActive, setIsSendBtnActive] = useState(false);
+  const [ messageToSend, setMessageToSend ] = useState<string>('')
 
   const handleInputFocus = () => {
     setIsSendBtnActive(true);
@@ -18,12 +23,22 @@ export default function MessageInput() {
     }
   };
 
+  function handleMessage(event: ChangeEvent<HTMLInputElement>) {
+    setMessageToSend(event.currentTarget.value)
+  }
+
+  function handleSubmitMessage(e:any) {
+    e.preventDefault()
+    sendMessage(messageToSend)
+    setMessageToSend('')
+  }
+
   return (
     <div className="flex w-full items-center justify-start gap-2 bg-stone-900 py-2 pl-3 pr-5">
       <button className="h-[34px] w-[34px] bg-none">
         <Image src={addToMessage} alt="addToMessage" />
       </button>
-      <form className="flex w-full items-center" action="">
+      <form onSubmit={handleSubmitMessage} className="flex w-full items-center" action="">
         <input
           className={`w-full rounded-2xl bg-[#545454] px-4 py-2 text-sm font-normal outline-none focus:bg-[#c2c2c2] focus:text-[#050404] ${
             isSendBtnActive ? "bg-[#c2c2c2] text-[#050404]" : ""
@@ -32,6 +47,7 @@ export default function MessageInput() {
           placeholder="Enter message"
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
+          onChange={handleMessage}
         />
         {isSendBtnActive && (
           <button type="submit" className="ml-2 h-[34px] w-[34px]">

@@ -2,8 +2,15 @@ import Link from "next/link";
 import { ChatAvatar } from "./ChatAvatar";
 import { ChatInfo } from "./ChatInfo";
 import { ChatRoom } from "@/app/[lang]/(protected)/chat/(filter)/all/chatRooms";
-import { Dispatch, ReactNode, SetStateAction } from "react";
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { MessageContextMenu } from "./MessageContextMenu";
+import { ModalContentType } from "../ModalContainer/ModalContainer";
 
 export function MessageContainer({
   chatRoom,
@@ -16,11 +23,34 @@ export function MessageContainer({
   setSelectedChat: Dispatch<SetStateAction<string | null>>;
   selectedChat: string | null;
 }) {
+  const [modalContent, setModalContent] = useState<ModalContentType>(null);
+  const [disableScroll, setDisableScroll] = useState(false);
+
+  useEffect(() => {
+    if (modalContent) {
+      setDisableScroll(true);
+    } else {
+      setDisableScroll(false);
+    }
+  }, [modalContent]);
+
+  useEffect(() => {
+    if (disableScroll) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [disableScroll]);
+
   return (
     <MessageContextMenu
       setSelectedChat={setSelectedChat}
       selectedChat={selectedChat}
+      setModalContent={setModalContent}
+      setDisableScroll={setDisableScroll}
+      modalContent={modalContent}
       chatRoom={chatRoom}
+      lang={lang}
     >
       <RemoveLinkOnBlur
         chatRoom={chatRoom}

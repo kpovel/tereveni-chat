@@ -1,10 +1,32 @@
+import { useRouter } from "next/navigation";
 import { ModalContentType } from "../ModalContainer";
+import { deleteChat } from "@/app/[lang]/(protected)/chat/delete/deleteChat";
 
 export default function ConfirmationDeleting({
   openModal,
+  chatRoomUuid,
+  lang
 }: {
   openModal: (content: ModalContentType) => void;
+  chatRoomUuid: string;
+  lang: string
 }) {
+  const router = useRouter();
+
+  const handleDelete = async () => {
+      const deleted = await deleteChat(chatRoomUuid);
+      if (deleted) {
+        openModal("CompleteDeleting");
+        setTimeout(() => {
+          openModal(null);
+          router.push(`/${lang}/chat/all`);
+          router.refresh()
+        }, 2000);
+      } else {
+        openModal(null);
+      }
+  };
+
   return (
     <div>
       <h4 className="mb-3 text-base font-semibold text-[#050404]">
@@ -15,7 +37,7 @@ export default function ConfirmationDeleting({
       </p>
       <div className="mt-6 flex w-full justify-end">
         <button
-          onClick={() => openModal("CompleteDeleting")}
+          onClick={handleDelete}
           className="mr-10 h-5 w-[26px] bg-none text-base font-semibold text-[#FF453A]"
         >
           yes

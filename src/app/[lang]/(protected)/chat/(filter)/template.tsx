@@ -8,12 +8,14 @@ export default async function Template({ children }: { children: ReactNode }) {
   const lang = await langUnwrapOrDefault(cookies().get("lang")?.value ?? "en");
 
   return (
-    <div className="flex w-full grow flex-col">
+    <div className="flex w-full grow flex-col ">
       <div className="w-full">
         <ChatListHeader lang={lang} />
-        <ChatNavigation lang={lang} />
       </div>
-      <main className="flex grow flex-col pb-10">{children}</main>
-    </div>
+      <div className="flex grow flex-col pb-20 relative w-full">
+        <ChatNavigation lang={lang} />
+        <main className="flex grow flex-col">{children}</main>
+      </div>
+    </div> 
   );
 }

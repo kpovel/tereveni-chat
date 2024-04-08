@@ -1,21 +1,23 @@
-export interface MessageInterface {
-  uuid: string;
-  content: string;
-  user: {
-    uiid: string;
-    name: string;
-    image: {
-      name: string;
-    };
-    dateOfCreated: string;
-  };
-  dateOfCreated: string;
-}
+import { Message } from "./page";
+
+// export interface MessageInterface {
+//   uuid: string;
+//   content: string;
+//   user: {
+//     uiid: string;
+//     name: string;
+//     image: {
+//       name: string;
+//     };
+//     dateOfCreated: string;
+//   };
+//   dateOfCreated: string;
+// }
 
 export default function RenderMessages({
   messages,
 }: {
-  messages: MessageInterface[];
+  messages: Message[];
 }) {
   const formatTime = (dateTimeString: string) => {
     const date = new Date(dateTimeString);
@@ -23,7 +25,7 @@ export default function RenderMessages({
   };
 
   return (
-    <div className="flex flex-col space-y-5">
+    <div className="flex flex-col align-end space-y-5">
       {messages.map((message) => (
         <div
           key={message.uuid}
