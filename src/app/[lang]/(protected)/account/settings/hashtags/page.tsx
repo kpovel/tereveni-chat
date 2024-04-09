@@ -42,7 +42,10 @@ async function userHashtags() {
     },
   });
 
-  return (await res.json()) as UserHashtags[];
+  const json = (await res.json()) as UserHashtags[];
+  json[json.length - 1].name = undefined;
+
+  return json;
 }
 
 export type UserHashtags = {
