@@ -1,11 +1,14 @@
 import { getDictionary } from "@/app/[lang]/dictionaries";
+import { env } from "@/env.mjs";
 import Image from "next/image";
 import Link from "next/link";
 import ChevronRight from "public/account/chevron-right.svg";
+import { getJwtAccessToken } from "../../../regenerateAccessToken";
+import { UserCategories } from "./UserCategories";
 
 export default async function Page({ params }: { params: { lang: Lang } }) {
   const dict = await getDictionary(`/${params.lang}/account/settings/hashtags`);
-  // todo: fetch data
+  const hashtags = await userHashtags();
 
   return (
     <main className="flex w-full grow flex-col gap-10 px-6 py-10">
@@ -25,7 +28,24 @@ export default async function Page({ params }: { params: { lang: Lang } }) {
         </div>
         <h2 className="text-balance text-center">{dict.subtitle}</h2>
       </div>
-      <section>Hashtags</section>
+      <UserCategories hashtags={hashtags} lang={params.lang} dict={dict} />
     </main>
   );
 }
+
+async function userHashtags() {
+  const jwtAccessToken = await getJwtAccessToken();
+
+  const res = await fetch(`${env.SERVER_URL}/api/user/hashtags`, {
+    headers: {
+      Authorization: `Bearer ${jwtAccessToken}`,
+    },
+  });
+
+  return (await res.json()) as UserHashtags[];
+}
+
+export type UserHashtags = {
+  name: string | undefined;
+  hashtags: { id: number; name: string; selected: boolean }[];
+};
