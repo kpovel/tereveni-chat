@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Client } from "@stomp/stompjs";
-import { useParams } from 'next/navigation';
+import { useParams } from "next/navigation";
 import RenderMessages from "./renderMessages";
 import { useClickOutside } from "@/util/useClickOutside";
 import ModalContainer, {
@@ -11,34 +11,31 @@ import { Message } from "./page";
 // import { ReceiveMessages } from './ReceiveMessages';
 
 type RouteParams = {
-  lang: string
+  lang: string;
   chatId: string;
-}
+};
 
 export default function MessagesField({
-  chatId,
   openModal,
   modalContent,
   hideModal,
-  receiveMessages
+  receiveMessages,
 }: {
-  chatId: string;
   openModal: (content: ModalContentType) => void;
   modalContent: ModalContentType;
   hideModal: () => void;
-  receiveMessages: Message[]
+  receiveMessages: Message[];
 }) {
-
   const elemRef = useClickOutside<HTMLDivElement>(hideModal);
   const params = useParams<RouteParams>();
 
   return (
     <div
-      className={`relative h-full ${
-        modalContent ? "overflow-hidden" : "overflow-scroll"
+      className={`h-full ${
+        modalContent ? "overflow-hidden" : "overflow-y-scroll"
       } px-6`}
     >
-        <ModalContainer
+      <ModalContainer
         openModal={openModal}
         childrenElem={modalContent}
         elemRef={elemRef}

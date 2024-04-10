@@ -24,7 +24,7 @@ export default function ModalContainer({
   }
 
   return (
-    <div className="absolute left-0 top-[50vh] z-50 h-dvh w-full -translate-y-1/2 transform bg-opacity-50 bg-cover bg-fixed bg-center bg-no-repeat backdrop-blur-sm backdrop-filter">
+    <div className="absolute left-0 top-0 z-50 h-dvh w-full  bg-opacity-50 bg-cover bg-fixed bg-center bg-no-repeat backdrop-blur-sm backdrop-filter">
       <div className="relative h-full">
         <div
           ref={elemRef}

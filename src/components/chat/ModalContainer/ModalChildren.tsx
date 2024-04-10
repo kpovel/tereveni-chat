@@ -7,14 +7,13 @@ export default function ModalChilden({
   childrenElem,
   openModal,
   chatRoomUuid,
-  lang
+  lang,
 }: {
   childrenElem: ModalContentType;
   openModal: (content: ModalContentType) => void;
   chatRoomUuid: string;
-  lang: string
+  lang: string;
 }) {
-
   switch (childrenElem) {
     case "InvitationLink":
       return <InvitationLink />;

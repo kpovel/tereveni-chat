@@ -5,26 +5,26 @@ import { deleteChat } from "@/app/[lang]/(protected)/chat/delete/deleteChat";
 export default function ConfirmationDeleting({
   openModal,
   chatRoomUuid,
-  lang
+  lang,
 }: {
   openModal: (content: ModalContentType) => void;
   chatRoomUuid: string;
-  lang: string
+  lang: string;
 }) {
   const router = useRouter();
 
   const handleDelete = async () => {
-      const deleted = await deleteChat(chatRoomUuid);
-      if (deleted) {
-        openModal("CompleteDeleting");
-        setTimeout(() => {
-          openModal(null);
-          router.push(`/${lang}/chat/all`);
-          router.refresh()
-        }, 2000);
-      } else {
+    const deleted = await deleteChat(chatRoomUuid);
+    if (deleted) {
+      openModal("CompleteDeleting");
+      setTimeout(() => {
         openModal(null);
-      }
+        router.push(`/${lang}/chat/all`);
+        router.refresh();
+      }, 2000);
+    } else {
+      openModal(null);
+    }
   };
 
   return (

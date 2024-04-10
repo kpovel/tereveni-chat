@@ -24,27 +24,30 @@ export type ChatRoom = {
   currentChatUserUUID: string;
 };
 
-export default async function ChatID({ params }: { params: { lang: Lang; chatId: string } }) {
-
+export default async function ChatID({
+  params,
+}: {
+  params: { lang: Lang; chatId: string };
+}) {
   const jwtAccessToken = await getJwtAccessToken();
 
-  const res = await fetch(`${env.SERVER_URL}/api/get-chat-room/${params.chatId}`, {
-    headers: {
-      Authorization: `Bearer ${jwtAccessToken}`,
+  const res = await fetch(
+    `${env.SERVER_URL}/api/get-chat-room/${params.chatId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${jwtAccessToken}`,
+      },
     },
-  });
+  );
 
   const json = (await res.json()) as ChatRoom;
-  
 
-  if(res.status === 200) {
-    // console.log(json)
-    return <ChatWrapper 
-    chatId={params.chatId}
-    messagesInit={json.messages}
-    currentChatUserUUID={json.currentChatUserUUID}
-    jwtAccessToken={jwtAccessToken}
-  />;
-  }
-
+  return (
+    <ChatWrapper
+      chatId={params.chatId}
+      messagesInit={json.messages}
+      currentChatUserUUID={json.currentChatUserUUID}
+      jwtAccessToken={jwtAccessToken}
+    />
+  );
 }

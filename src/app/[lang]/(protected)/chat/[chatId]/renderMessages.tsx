@@ -1,36 +1,31 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import { Message } from "./page";
 
-// export interface MessageInterface {
-//   uuid: string;
-//   content: string;
-//   user: {
-//     uiid: string;
-//     name: string;
-//     image: {
-//       name: string;
-//     };
-//     dateOfCreated: string;
-//   };
-//   dateOfCreated: string;
-// }
+export default function RenderMessages({ messages }: { messages: Message[] }) {
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-export default function RenderMessages({
-  messages,
-}: {
-  messages: Message[];
-}) {
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   const formatTime = (dateTimeString: string) => {
     const date = new Date(dateTimeString);
     return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   };
 
   return (
-    <div className="flex flex-col align-end space-y-5">
+    <div className="align-end flex flex-col justify-end space-y-5 overflow-y-scroll">
       {messages.map((message) => (
         <div
           key={message.uuid}
           className={`relative max-w-[80%] rounded-2xl px-3 py-2 text-sm font-normal ${
-            message.uuid === message.user.uiid
+            message.uuid !== message.user.uiid
               ? "self-end bg-[#7c03f6] text-[#FAFAFA]"
               : "self-start bg-neutral-50 text-[#050404]"
           }`}
@@ -38,7 +33,7 @@ export default function RenderMessages({
           <p>{message.content}</p>
           <div
             className={`absolute bottom-0 text-xs font-light text-[#C2C2C2] ${
-              message.uuid === message.user.uiid
+              message.uuid !== message.user.uiid
                 ? "right-full mr-1"
                 : "left-full ml-1"
             }`}
@@ -47,6 +42,7 @@ export default function RenderMessages({
           </div>
         </div>
       ))}
+      <div ref={messagesEndRef} />
     </div>
   );
 }
