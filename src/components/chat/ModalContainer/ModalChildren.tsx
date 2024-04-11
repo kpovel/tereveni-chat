@@ -14,6 +14,7 @@ export default function ModalChilden({
   chatRoomUuid: string;
   lang: string;
 }) {
+
   switch (childrenElem) {
     case "InvitationLink":
       return <InvitationLink />;

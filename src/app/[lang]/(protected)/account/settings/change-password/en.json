@@ -1,0 +1,20 @@
+{
+  "title": "Change password",
+  "placeholder": {
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmNewPassword": "Confirm new password"
+  },
+  "saveChanges": "Save changes",
+  "popup": {
+    "changedPassword": "Password has been successfully changed"
+  },
+  "error": {
+    "incorectPassword": "Try again, the current password is incorrect",
+    "passwordConstraint": "Please use ABC \n Password must be without spaces, 6 to 72 characters  and contain at least 1 capital letter, 1 number and  1 special character",
+    "passwordsDoNotMatch": "Passwords do not match"
+  },
+  "hint": {
+    "password": "Password must be without spaces, 6 to 72 characters  and contain at least 1 capital letter, 1 number and  1 special character"
+  }
+}

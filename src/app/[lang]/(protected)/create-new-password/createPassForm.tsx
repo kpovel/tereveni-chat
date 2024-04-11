@@ -4,7 +4,6 @@ import { DictionaryReturnTypes } from "../../dictionaries";
 import { newPassPut } from "./newPassPut";
 import { PasswordInput } from "@/components/input/PasswordInput";
 import { useFormState } from "react-dom";
-import { ConfigmPasswordInput } from "@/components/input/ConfirmPasswordInput";
 import { SubmitButton } from "@/components/form/SubmitButton";
 
 export type FormState = {
@@ -37,10 +36,12 @@ export default function CreatePassForm({
           placeholder={dict.placeholder.password}
           errorMessage={[state.password]}
           hint={dict.hint.password}
+          name="password"
         />
-        <ConfigmPasswordInput
+        <PasswordInput
           placeholder={dict.placeholder.confirmPassword}
           errorMessage={[state.confirmPassword || state.general]}
+          name="confirmPassword"
         />
       </div>
 

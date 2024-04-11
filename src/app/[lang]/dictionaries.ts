@@ -99,6 +99,30 @@ const dictionaries = {
     import("./(protected)/account/settings/uk.json").then(
       (module) => module.default,
     ),
+  "/en/account/settings/change-password": () =>
+    import("./(protected)/account/settings/change-password/en.json").then(
+      (module) => module.default,
+    ),
+  "/uk/account/settings/change-password": () =>
+    import("./(protected)/account/settings/change-password/uk.json").then(
+      (module) => module.default,
+    ),
+  "/en/account/settings/hashtags": () =>
+    import("./(protected)/account/settings/hashtags/en.json").then(
+      (module) => module.default,
+    ),
+  "/uk/account/settings/hashtags": () =>
+    import("./(protected)/account/settings/hashtags/uk.json").then(
+      (module) => module.default,
+    ),
+  "/en/account/settings/language": () =>
+    import("./(protected)/account/settings/language/en.json").then(
+      (module) => module.default,
+    ),
+  "/uk/account/settings/language": () =>
+    import("./(protected)/account/settings/language/uk.json").then(
+      (module) => module.default,
+    ),
   "components/en/CookiePopup": () =>
     import("../../components/CookiePopup/en.json").then(
       (module) => module.default,

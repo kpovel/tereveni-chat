@@ -43,7 +43,7 @@ export function AccountSettings({
         </div>
         <div className="flex flex-col gap-3">
           <MenuItem
-            href={`/${lang}/account/settings/password`}
+            href={`/${lang}/account/settings/change-password`}
             img={{ src: Lock, alt: dict.menu.password }}
           >
             {dict.menu.password}

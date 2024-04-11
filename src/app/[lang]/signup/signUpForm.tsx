@@ -7,7 +7,6 @@ import { EmailInput } from "@/components/input/EmailInput";
 import { LoginInput } from "@/components/input/LoginInput";
 import { PasswordInput } from "@/components/input/PasswordInput";
 import { SubmitButton } from "@/components/form/SubmitButton";
-import { ConfigmPasswordInput } from "@/components/input/ConfirmPasswordInput";
 import { useFormState } from "react-dom";
 
 export type FormState = {
@@ -55,11 +54,13 @@ export default function SignUpForm({
         <PasswordInput
           placeholder={dict.placeholder.password}
           errorMessage={[state.password]}
+          name="password"
           hint={dict.hint.password}
         />
-        <ConfigmPasswordInput
+        <PasswordInput
           placeholder={dict.placeholder.confirmPassword}
           errorMessage={[state.confirmPassword || state.general]}
+          name="confirmPassword"
         />
       </div>
       <div className="grid gap-5">

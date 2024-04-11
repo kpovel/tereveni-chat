@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-import { Client } from "@stomp/stompjs";
 import { useParams } from "next/navigation";
 import RenderMessages from "./renderMessages";
 import { useClickOutside } from "@/util/useClickOutside";
@@ -7,8 +5,6 @@ import ModalContainer, {
   ModalContentType,
 } from "@/components/chat/ModalContainer/ModalContainer";
 import { Message } from "./page";
-// import { client } from "./messageService";
-// import { ReceiveMessages } from './ReceiveMessages';
 
 type RouteParams = {
   lang: string;
@@ -35,7 +31,7 @@ export default function MessagesField({
         modalContent ? "overflow-hidden" : "overflow-y-scroll"
       } px-6`}
     >
-      <ModalContainer
+        <ModalContainer
         openModal={openModal}
         childrenElem={modalContent}
         elemRef={elemRef}
