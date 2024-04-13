@@ -7,6 +7,7 @@ import MessageInput from "./messageInput";
 import { Message } from "./page";
 import { Client, StompSubscription } from "@stomp/stompjs";
 import { ModalContentType } from "@/components/chat/ModalContainer/ModalContainer";
+import { env } from "@/env.mjs";
 
 export default function ChatWrapper({
   chatId,
@@ -27,7 +28,7 @@ export default function ChatWrapper({
   const [client, setClient] = useState<Client | null>(null);
 
   const newClient = new Client({
-    brokerURL: `ws://138.68.69.149:8080/ws`,
+    brokerURL: env.NEXT_PUBLIC_SERVER_WS_URL + "/ws",
   });
 
   useEffect(() => {
