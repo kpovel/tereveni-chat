@@ -36,7 +36,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       );
     },
     ul: ({ children }) => {
-      return <ul className="my-3 *:pl-0">{children}</ul>;
+      return <ul className="my-3 *:pl-0 pl-5">{children}</ul>;
     },
     li: ({ children }) => {
       return <li className="m-0 text-sm leading-normal *:my-3">{children}</li>;
