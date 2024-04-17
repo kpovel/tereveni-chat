@@ -16,11 +16,13 @@ export default function MessagesField({
   modalContent,
   hideModal,
   receiveMessages,
+  currentChatUserUUID
 }: {
   openModal: (content: ModalContentType) => void;
   modalContent: ModalContentType;
   hideModal: () => void;
   receiveMessages: Message[];
+  currentChatUserUUID: string;
 }) {
   const elemRef = useClickOutside<HTMLDivElement>(hideModal);
   const params = useParams<RouteParams>();
@@ -45,7 +47,7 @@ export default function MessagesField({
           </p>
         </div>
       )}
-      <RenderMessages messages={receiveMessages} />
+      <RenderMessages messages={receiveMessages} currentChatUserUUID={currentChatUserUUID} />
     </div>
   );
 }

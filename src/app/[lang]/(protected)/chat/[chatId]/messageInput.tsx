@@ -28,9 +28,14 @@ export default function MessageInput({
   }
 
   function handleSubmitMessage(e: any) {
+
     e.preventDefault();
     sendMessage(messageToSend);
     setMessageToSend("");
+    const inputElement = e.currentTarget.querySelector('input');
+    if (inputElement) {
+      inputElement.blur();
+    }
     setIsSendBtnActive(false);
   }
 

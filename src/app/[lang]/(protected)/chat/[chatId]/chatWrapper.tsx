@@ -22,11 +22,9 @@ export default function ChatWrapper({
 }) {
   const [modalContent, setModalContent] = useState<ModalContentType>(null);
   const [receiveMessages, setReceiveMessages] = useState<Message[]>([]);
-  const [clientSubscription, setClientSubscription] =
-    useState<StompSubscription | null>(null);
 
   const [client, setClient] = useState<Client | null>(null);
-
+  
   const newClient = new Client({
     brokerURL: env.NEXT_PUBLIC_SERVER_WS_URL + "/ws",
   });
@@ -46,9 +44,6 @@ export default function ChatWrapper({
     setClient(newClient);
 
     return () => {
-      if (clientSubscription) {
-        clientSubscription.unsubscribe();
-      }
       if (newClient && newClient.connected) {
         newClient.deactivate();
       }
@@ -87,6 +82,7 @@ export default function ChatWrapper({
         modalContent={modalContent}
         hideModal={hideModal}
         receiveMessages={receiveMessages}
+        currentChatUserUUID={currentChatUserUUID}
       />
       <MessageInput sendMessage={sendMessage} />
     </div>
