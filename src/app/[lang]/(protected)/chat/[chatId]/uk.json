@@ -1,0 +1,18 @@
+{
+    "headerMenu": {
+        "search": "Пошук",
+        "invitationLink": "Посилання",
+        "delete": "Видалити чат",
+        "leaveChat": "Покинути чат"
+    },
+    "placeholder": {
+      "enterMessage": "Написати повідомлення",
+      "chatSearch": "Пошук по чату"
+    },
+    "messages": {
+        "noMessages": "Тут ще немає повідомлень"
+    },
+    "buttons": {
+        "cancel": "Скасувати"
+    }
+}

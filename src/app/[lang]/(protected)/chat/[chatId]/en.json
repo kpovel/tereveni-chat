@@ -1,0 +1,18 @@
+{
+    "headerMenu": {
+        "search": "Search",
+        "invitationLink": "Invitation link",
+        "delete": "Delete chat",
+        "leaveChat": "Leave chat"
+    },
+    "placeholder": {
+      "enterMessage": "Enter Message",
+      "chatSearch": "Chat search"
+    },
+    "messages": {
+        "noMessages": "No messages here yet"
+    },
+    "buttons": {
+        "cancel": "Cancel"
+    }
+}

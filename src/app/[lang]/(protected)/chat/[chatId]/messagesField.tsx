@@ -1,6 +1,7 @@
 import { useParams } from "next/navigation";
 import RenderMessages from "./renderMessages";
 import { useClickOutside } from "@/util/useClickOutside";
+import { DictionaryReturnTypes } from "../../../dictionaries";
 import ModalContainer, {
   ModalContentType,
 } from "@/components/chat/ModalContainer/ModalContainer";
@@ -16,13 +17,15 @@ export default function MessagesField({
   modalContent,
   hideModal,
   receiveMessages,
-  currentChatUserUUID
+  currentChatUserUUID,
+  dict
 }: {
   openModal: (content: ModalContentType) => void;
   modalContent: ModalContentType;
   hideModal: () => void;
   receiveMessages: Message[];
   currentChatUserUUID: string;
+  dict: DictionaryReturnTypes
 }) {
   const elemRef = useClickOutside<HTMLDivElement>(hideModal);
   const params = useParams<RouteParams>();
@@ -43,7 +46,7 @@ export default function MessagesField({
       {!receiveMessages.length && (
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
           <p className="text-center text-sm font-normal text-white text-opacity-50">
-            No messages here yet
+            {dict.messages.noMessages}
           </p>
         </div>
       )}

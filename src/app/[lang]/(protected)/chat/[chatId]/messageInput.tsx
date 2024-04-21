@@ -1,12 +1,15 @@
 import { useState, ChangeEvent } from "react";
 import Image from "next/image";
+import { DictionaryReturnTypes } from "../../../dictionaries";
 import addToMessage from "../../../../../../public/add-to-message.svg";
 import sendBtn from "../../../../../../public/send-btn.svg";
 
 export default function MessageInput({
   sendMessage,
+  dict
 }: {
   sendMessage: (msg: string) => void;
+  dict: DictionaryReturnTypes
 }) {
   const [isSendBtnActive, setIsSendBtnActive] = useState(false);
   const [messageToSend, setMessageToSend] = useState<string>("");
@@ -54,7 +57,7 @@ export default function MessageInput({
             isSendBtnActive ? "bg-[#c2c2c2] text-[#050404]" : ""
           }`}
           type="text"
-          placeholder="Enter message"
+          placeholder={dict.placeholder.enterMessage}
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
           onChange={handleMessage}

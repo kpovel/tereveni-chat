@@ -1,5 +1,6 @@
 import { useState, ChangeEvent } from "react";
 import { ModalContentType } from "@/components/chat/ModalContainer/ModalContainer";
+import { DictionaryReturnTypes } from "../../../dictionaries";
 import ChatSubMenu from "./chatSubMenu";
 import ChatSearch from "./chatSearch";
 import OnlineStatus from "./onlineStatus";
@@ -8,8 +9,10 @@ import Image from "next/image";
 
 export default function PrivateChatHeader({
   openModal,
+  dict
 }: {
   openModal: (content: ModalContentType) => void;
+  dict: DictionaryReturnTypes
 }) {
   const [isOnline, setIsOnline] = useState(true);
   const [isSearchActive, setIsSearchActive] = useState(false);
@@ -45,6 +48,7 @@ export default function PrivateChatHeader({
         isClearBtnActive={isClearBtnActive}
         clearSearch={clearSearch}
         searchDisableHandler={searchDisableHandler}
+        dict={dict}
       />
     );
   }
@@ -64,6 +68,7 @@ export default function PrivateChatHeader({
         <ChatSubMenu
           openModal={openModal}
           searchActiveHandler={searchActiveHandler}
+          dict={dict}
         />
       </div>
     </div>

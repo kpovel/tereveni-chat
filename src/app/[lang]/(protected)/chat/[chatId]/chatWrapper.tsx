@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import MessagesField from "./messagesField";
 import PrivateChatHeader from "./privateChatHeader";
 import MessageInput from "./messageInput";
+import { DictionaryReturnTypes } from "../../../dictionaries";
 import { Message } from "./page";
 import { Client, StompSubscription } from "@stomp/stompjs";
 import { ModalContentType } from "@/components/chat/ModalContainer/ModalContainer";
@@ -14,11 +15,13 @@ export default function ChatWrapper({
   messagesInit,
   currentChatUserUUID,
   jwtAccessToken,
+  dict
 }: {
   chatId: string;
   messagesInit: any;
   currentChatUserUUID: string;
   jwtAccessToken: string;
+  dict: DictionaryReturnTypes
 }) {
   const [modalContent, setModalContent] = useState<ModalContentType>(null);
   const [receiveMessages, setReceiveMessages] = useState<Message[]>([]);
@@ -76,15 +79,22 @@ export default function ChatWrapper({
 
   return (
     <div className="relative flex h-dvh w-screen flex-col">
-      <PrivateChatHeader openModal={openModal} />
+      <PrivateChatHeader 
+        openModal={openModal} 
+        dict={dict}
+      />
       <MessagesField
         openModal={openModal}
         modalContent={modalContent}
         hideModal={hideModal}
         receiveMessages={receiveMessages}
         currentChatUserUUID={currentChatUserUUID}
+        dict={dict}
       />
-      <MessageInput sendMessage={sendMessage} />
+      <MessageInput 
+        sendMessage={sendMessage} 
+        dict={dict}
+      />
     </div>
   );
 }

@@ -40,13 +40,13 @@ export default function ConfirmationDeleting({
           onClick={handleDelete}
           className="mr-10 h-5 w-[26px] bg-none text-base font-semibold text-[#FF453A]"
         >
-          yes
+          Yes
         </button>
         <button
           onClick={() => openModal(null)}
           className="h-5 w-[26px] bg-none text-base font-semibold text-[#050404]"
         >
-          no
+          No
         </button>
       </div>
     </div>

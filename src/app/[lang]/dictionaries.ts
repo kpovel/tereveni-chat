@@ -87,6 +87,17 @@ const dictionaries = {
     import(
       "./(protected)/chat/(create)/create/[chat_uuid]/description/uk.json"
     ).then((module) => module.default),
+
+    "/en/chat": () => 
+    import(
+      "./(protected)/chat/[chatId]/en.json"
+    ).then((module) => module.default),
+    "/uk/chat": () =>
+    import(
+      "./(protected)/chat/[chatId]/uk.json"
+    ).then((module) => module.default),
+
+
   "/en/account": () =>
     import("./(protected)/account/en.json").then((module) => module.default),
   "/uk/account": () =>

@@ -1,4 +1,5 @@
 import ChatWrapper from "./chatWrapper";
+import { getDictionary } from "../../../dictionaries";
 import { getJwtAccessToken } from "../../regenerateAccessToken";
 import { env } from "@/env.mjs";
 
@@ -6,7 +7,7 @@ export type Message = {
   uuid: string;
   content: string;
   user: {
-    uiid: string;
+    uuid: string;
     name: string;
     image: {
       name: string;
@@ -29,6 +30,7 @@ export default async function ChatID({
 }: {
   params: { lang: Lang; chatId: string };
 }) {
+  const dict = await getDictionary(`/${params.lang}/chat`);
   const jwtAccessToken = await getJwtAccessToken();
 
   const res = await fetch(
@@ -48,6 +50,7 @@ export default async function ChatID({
       messagesInit={json.messages}
       currentChatUserUUID={json.currentChatUserUUID}
       jwtAccessToken={jwtAccessToken}
+      dict={dict}
     />
   );
 }

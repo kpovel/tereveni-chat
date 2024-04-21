@@ -1,14 +1,17 @@
 import DotsMenu from "./dotsMenu";
 import { useClickOutside } from "@/util/useClickOutside";
+import { DictionaryReturnTypes } from "../../../dictionaries";
 import { ModalContentType } from "@/components/chat/ModalContainer/ModalContainer";
 import { useState } from "react";
 
 export default function ChatSubMenu({
   openModal,
   searchActiveHandler,
+  dict
 }: {
   openModal: (content: ModalContentType) => void;
   searchActiveHandler: () => void;
+  dict: DictionaryReturnTypes
 }) {
   const [isMenuActive, setIsMenuActive] = useState(false);
   const activeMenuHandler = () => {
@@ -21,8 +24,8 @@ export default function ChatSubMenu({
     }
   };
 
-  const elemRef = useClickOutside<HTMLDivElement>(closeSubMenu);
 
+  const elemRef = useClickOutside<HTMLDivElement>(closeSubMenu);
   return (
     <div className="relative">
       <button
@@ -44,6 +47,7 @@ export default function ChatSubMenu({
             closeSubMenu={closeSubMenu}
             openModal={openModal}
             searchActiveHandler={searchActiveHandler}
+            dict={dict}
           />
         </div>
       )}

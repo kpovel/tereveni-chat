@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import { DictionaryReturnTypes } from "../../../dictionaries";
 import Image from "next/image";
 import searchIcon from "public/search_icon.svg";
 import cancelIcon from "public/cancel_icon.svg";
@@ -9,12 +10,14 @@ export default function ChatSearch({
   isClearBtnActive,
   clearSearch,
   searchDisableHandler,
+  dict
 }: {
   searchValue: string;
   searchValueHandler: (event: ChangeEvent<HTMLInputElement>) => void;
   isClearBtnActive: boolean;
   clearSearch: () => void;
   searchDisableHandler: () => void;
+  dict: DictionaryReturnTypes
 }) {
   return (
     <div className="flex w-full items-center justify-between px-6 py-3">
@@ -27,7 +30,7 @@ export default function ChatSearch({
             value={searchValue}
             onChange={searchValueHandler}
             className="w-full border-transparent bg-transparent text-sm font-normal text-white outline-none"
-            placeholder="Сhat search"
+            placeholder={dict.placeholder.chatSearch}
             type="text"
           />
         </form>
@@ -37,7 +40,7 @@ export default function ChatSearch({
           </button>
         )}
       </div>
-      <button onClick={searchDisableHandler}>Cancel</button>
+        <button onClick={searchDisableHandler}>{dict.buttons.cancel}</button>
     </div>
   );
 }
