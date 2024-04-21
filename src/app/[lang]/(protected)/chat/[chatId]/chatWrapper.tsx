@@ -21,7 +21,7 @@ export default function ChatWrapper({
   messagesInit: any;
   currentChatUserUUID: string;
   jwtAccessToken: string;
-  dict: DictionaryReturnTypes
+  dict: Awaited<DictionaryReturnTypes["/en/chat"]>;
 }) {
   const [modalContent, setModalContent] = useState<ModalContentType>(null);
   const [receiveMessages, setReceiveMessages] = useState<Message[]>([]);

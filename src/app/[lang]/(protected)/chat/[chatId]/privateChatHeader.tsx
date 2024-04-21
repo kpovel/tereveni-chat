@@ -12,7 +12,7 @@ export default function PrivateChatHeader({
   dict
 }: {
   openModal: (content: ModalContentType) => void;
-  dict: DictionaryReturnTypes
+  dict: Awaited<DictionaryReturnTypes["/en/chat"]>;
 }) {
   const [isOnline, setIsOnline] = useState(true);
   const [isSearchActive, setIsSearchActive] = useState(false);

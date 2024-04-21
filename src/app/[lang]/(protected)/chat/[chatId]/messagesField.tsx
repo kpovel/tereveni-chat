@@ -25,7 +25,7 @@ export default function MessagesField({
   hideModal: () => void;
   receiveMessages: Message[];
   currentChatUserUUID: string;
-  dict: DictionaryReturnTypes
+  dict: Awaited<DictionaryReturnTypes["/en/chat"]>;
 }) {
   const elemRef = useClickOutside<HTMLDivElement>(hideModal);
   const params = useParams<RouteParams>();

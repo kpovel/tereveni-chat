@@ -17,7 +17,7 @@ export default function ChatSearch({
   isClearBtnActive: boolean;
   clearSearch: () => void;
   searchDisableHandler: () => void;
-  dict: DictionaryReturnTypes
+  dict: Awaited<DictionaryReturnTypes["/en/chat"]>;
 }) {
   return (
     <div className="flex w-full items-center justify-between px-6 py-3">

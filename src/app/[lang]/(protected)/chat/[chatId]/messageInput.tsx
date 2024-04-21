@@ -9,7 +9,7 @@ export default function MessageInput({
   dict
 }: {
   sendMessage: (msg: string) => void;
-  dict: DictionaryReturnTypes
+  dict: Awaited<DictionaryReturnTypes["/en/chat"]>;
 }) {
   const [isSendBtnActive, setIsSendBtnActive] = useState(false);
   const [messageToSend, setMessageToSend] = useState<string>("");

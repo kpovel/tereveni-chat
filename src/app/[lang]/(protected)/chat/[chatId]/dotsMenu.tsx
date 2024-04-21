@@ -14,7 +14,7 @@ export default function DotsMenu({
   closeSubMenu: () => void;
   openModal: (content: ModalContentType) => void;
   searchActiveHandler: () => void;
-  dict: DictionaryReturnTypes
+  dict: Awaited<DictionaryReturnTypes["/en/chat"]>;
 }) {
   return (
     <div

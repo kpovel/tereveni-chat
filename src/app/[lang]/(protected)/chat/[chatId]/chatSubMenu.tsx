@@ -11,7 +11,7 @@ export default function ChatSubMenu({
 }: {
   openModal: (content: ModalContentType) => void;
   searchActiveHandler: () => void;
-  dict: DictionaryReturnTypes
+  dict: Awaited<DictionaryReturnTypes["/en/chat"]>;
 }) {
   const [isMenuActive, setIsMenuActive] = useState(false);
   const activeMenuHandler = () => {
