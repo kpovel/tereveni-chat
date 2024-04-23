@@ -25,15 +25,15 @@ export default function RenderMessages({ messages, currentChatUserUUID }: { mess
         <div
           key={message.uuid}
           className={`relative max-w-[80%] rounded-2xl px-3 py-2 text-sm font-normal ${
-            message.uuid === currentChatUserUUID
-              ? "self-start bg-neutral-50 text-[#050404]"
-              : "self-end bg-[#7c03f6] text-[#FAFAFA]"
+            message.user.uuid === currentChatUserUUID
+              ? "self-end bg-[#7c03f6] text-[#FAFAFA]" 
+              : "self-start bg-neutral-50 text-[#050404]"
           }`}
         >
           <p>{message.content}</p>
           <div
             className={`absolute bottom-0 text-xs font-light text-[#C2C2C2] ${
-              message.uuid === currentChatUserUUID
+              message.user.uuid === currentChatUserUUID
                 ? "right-full mr-1"
                 : "left-full ml-1"
             }`}

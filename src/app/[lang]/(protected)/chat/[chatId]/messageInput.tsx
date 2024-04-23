@@ -30,17 +30,30 @@ export default function MessageInput({
     setMessageToSend(event.currentTarget.value);
   }
 
-  function handleSubmitMessage(e: any) {
+  // function handleSubmitMessage(e: any) {
 
+  //   e.preventDefault();
+  //   sendMessage(messageToSend);
+  //   setMessageToSend("");
+  //   const inputElement = e.currentTarget.querySelector('input');
+  //   if (inputElement) {
+  //     inputElement.blur();
+  //   }
+  //   setIsSendBtnActive(false);
+  // }
+
+  function handleSubmitMessage(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     sendMessage(messageToSend);
     setMessageToSend("");
     const inputElement = e.currentTarget.querySelector('input');
     if (inputElement) {
-      inputElement.blur();
+        inputElement.focus();
+        inputElement.setSelectionRange(messageToSend.length / 2, messageToSend.length / 2); 
     }
-    setIsSendBtnActive(false);
-  }
+    // setIsSendBtnActive(false);
+}
+
 
   return (
     <div className="flex w-full items-center justify-start gap-2 bg-stone-900 py-2 pl-3 pr-5">
