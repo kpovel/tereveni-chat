@@ -102,6 +102,10 @@ const dictionaries = {
     import("./(protected)/account/en.json").then((module) => module.default),
   "/uk/account": () =>
     import("./(protected)/account/uk.json").then((module) => module.default),
+  "/en/account/profile": () =>
+    import("./(protected)/account/profile/en.json").then((module) => module.default),
+  "/uk/account/profile": () =>
+    import("./(protected)/account/profile/uk.json").then((module) => module.default),
   "/en/account/settings": () =>
     import("./(protected)/account/settings/en.json").then(
       (module) => module.default,
