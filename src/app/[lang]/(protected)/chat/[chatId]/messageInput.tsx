@@ -30,20 +30,11 @@ export default function MessageInput({
     setMessageToSend(event.currentTarget.value);
   }
 
-  // function handleSubmitMessage(e: any) {
-
-  //   e.preventDefault();
-  //   sendMessage(messageToSend);
-  //   setMessageToSend("");
-  //   const inputElement = e.currentTarget.querySelector('input');
-  //   if (inputElement) {
-  //     inputElement.blur();
-  //   }
-  //   setIsSendBtnActive(false);
-  // }
-
   function handleSubmitMessage(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (!messageToSend.trim()) {
+      return; 
+  }
     sendMessage(messageToSend);
     setMessageToSend("");
     const inputElement = e.currentTarget.querySelector('input');
@@ -51,7 +42,6 @@ export default function MessageInput({
         inputElement.focus();
         inputElement.setSelectionRange(messageToSend.length / 2, messageToSend.length / 2); 
     }
-    // setIsSendBtnActive(false);
 }
 
 
