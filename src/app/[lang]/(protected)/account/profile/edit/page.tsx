@@ -21,15 +21,25 @@ export default async function EditProfile(props: { params: { lang: Lang } }) {
 export async function fetchUserData() {
   const jwtAccessToken = await getJwtAccessToken();
 
-  const res = await fetch(`${env.SERVER_URL}/user/to-edit`, {
+  const res = await fetch(`${env.SERVER_URL}/api/user/to-edit`, {
     headers: {
       Authorization: `Bearer ${jwtAccessToken}`,
     },
   });
 
-  // todo: check status code,
-  // update types
-  const json = await res.json();
-
-  return json;
+  return (await res.json()) as UserToEdit;
 }
+
+type UserToEdit = {
+  user: {
+    uuid: string;
+    name: string;
+    userLogin: string;
+    about: string;
+    email: string;
+    image: { name: string };
+    dateLastVisit: null;
+    dateOfCreated: string;
+  };
+  avatars: string[];
+};
