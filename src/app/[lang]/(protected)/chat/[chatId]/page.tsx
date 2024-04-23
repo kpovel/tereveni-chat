@@ -47,7 +47,7 @@ export default async function ChatID({
   return (
     <ChatWrapper
       chatId={params.chatId}
-      messagesInit={json.messages}
+      messagesInit={json.messages.reverse()}
       currentChatUserUUID={json.currentChatUserUUID}
       jwtAccessToken={jwtAccessToken}
       dict={dict}
