@@ -92,9 +92,21 @@ const dictionaries = {
   "/uk/account": () =>
     import("./(protected)/account/uk.json").then((module) => module.default),
   "/en/account/profile": () =>
-    import("./(protected)/account/profile/en.json").then((module) => module.default),
+    import("./(protected)/account/profile/en.json").then(
+      (module) => module.default,
+    ),
   "/uk/account/profile": () =>
-    import("./(protected)/account/profile/uk.json").then((module) => module.default),
+    import("./(protected)/account/profile/uk.json").then(
+      (module) => module.default,
+    ),
+  "/en/account/profile/edit": () =>
+    import("./(protected)/account/profile/edit/en.json").then(
+      (module) => module.default,
+    ),
+  "/uk/account/profile/edit": () =>
+    import("./(protected)/account/profile/edit/uk.json").then(
+      (module) => module.default,
+    ),
   "/en/account/settings": () =>
     import("./(protected)/account/settings/en.json").then(
       (module) => module.default,
