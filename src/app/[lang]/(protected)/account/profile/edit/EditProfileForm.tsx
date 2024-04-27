@@ -8,6 +8,8 @@ import { PlusSign } from "@/icons/PlusSign";
 import { DefaultImage } from "../../../chat/(create)/create/DefaultImage";
 import { ScaleImage } from "../../../onboarding/pick-avatar/ScaleImage";
 import { Input } from "@/components/input/Input";
+import UserProfile from "public/account/user-profile-02.svg";
+import Image from "next/image";
 
 export function EditProfileForm(props: {
   dict: Awaited<DictionaryReturnTypes["/en/account/profile/edit"]>;
@@ -16,7 +18,20 @@ export function EditProfileForm(props: {
   return (
     <form className="flex flex-col gap-10">
       <SelectProfileAvatar userData={props.userData} />
-      <Input placeholder={props.dict.placeholder.nickname} errorMessage={[""]} />
+      <Input
+        placeholder={props.dict.placeholder.nickname}
+        errorMessage={[""]}
+        defaultValue={props.userData.user.name}
+        inputIcon={
+          <Image
+            src={UserProfile}
+            alt="User profile icon"
+            height={20}
+            width={20}
+          />
+        }
+        hint={props.dict.hint.nickname}
+      />
     </form>
   );
 }
