@@ -10,6 +10,7 @@ import { ScaleImage } from "../../../onboarding/pick-avatar/ScaleImage";
 import { Input } from "@/components/input/Input";
 import UserProfile from "public/account/user-profile-02.svg";
 import Image from "next/image";
+import { ProfileDescription } from "./ProfileDescription";
 
 export function EditProfileForm(props: {
   dict: Awaited<DictionaryReturnTypes["/en/account/profile/edit"]>;
@@ -32,6 +33,7 @@ export function EditProfileForm(props: {
         }
         hint={props.dict.hint.nickname}
       />
+      <ProfileDescription dict={props.dict} userData={props.userData} />
     </form>
   );
 }
