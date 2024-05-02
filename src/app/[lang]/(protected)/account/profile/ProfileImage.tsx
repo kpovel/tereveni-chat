@@ -9,7 +9,7 @@ export function ProfileImage(props: { userData: UserData }) {
       width={200}
       height={200}
       priority={true}
-      className="mx-auto"
+      className="mx-auto rounded-full"
     />
   );
 }
