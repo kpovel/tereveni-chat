@@ -29,7 +29,6 @@ export function SelectProfileAvatar(props: { userData: UserToEdit }) {
     if (!file) {
       return;
     }
-    console.log(file);
 
     if (file.size > maxSizeInBytes) {
       fileInput.value = "";
@@ -39,8 +38,6 @@ export function SelectProfileAvatar(props: { userData: UserToEdit }) {
     setScale(1);
     setCustomAvatar(file);
     setDefaultAvatarName(null);
-
-    // fileInput.value = "";
   }
 
   function resetAvatar() {
