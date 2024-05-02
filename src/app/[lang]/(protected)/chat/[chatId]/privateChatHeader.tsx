@@ -6,10 +6,11 @@ import ChatSearch from "./chatSearch";
 import OnlineStatus from "./onlineStatus";
 import avatar from "public/Avatar.svg";
 import Image from "next/image";
+import { ExitChatButton } from "./ExitChatButton";
 
 export default function PrivateChatHeader({
   openModal,
-  dict
+  dict,
 }: {
   openModal: (content: ModalContentType) => void;
   dict: Awaited<DictionaryReturnTypes["/en/chat"]>;
@@ -55,8 +56,9 @@ export default function PrivateChatHeader({
 
   return (
     <div>
-      <div className="flex items-center justify-between px-6 py-3">
-        <div className="flex">
+      <div className="flex items-center justify-between gap-4 px-6 py-3">
+        <ExitChatButton />
+        <div className="flex grow">
           <div className="h-[46px] w-[46px]">
             <Image src={avatar} alt={`chatAvatar`} width={46} height={46} />
           </div>
