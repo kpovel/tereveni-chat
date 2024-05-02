@@ -9,7 +9,7 @@ export function ProfileHeader(props: {
 }) {
   return (
     <div className="flex flex-row items-center justify-between">
-      <Link href={`/${props.lang}/account`}>
+      <Link href={`/${props.lang}/account/profile`}>
         <Image src={ChevronRight} alt="Chevron left" className="rotate-180" />
       </Link>
       <h1 className="text-lg font-medium">{props.dict.title}</h1>
