@@ -1,0 +1,10 @@
+{
+  "title": "Profile editing",
+  "placeholder": {
+    "nickname": "Nickname"
+  },
+  "hint": {
+    "nickname": "You can create a nickname that is different from your login, which will be displayed in chats for other users"
+  },
+  "saveChanges": "Save changes"
+}
