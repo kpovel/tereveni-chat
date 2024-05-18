@@ -7,11 +7,13 @@ import { useState } from "react";
 export default function ChatSubMenu({
   openModal,
   searchActiveHandler,
-  dict
+  dict,
+  isAdmin
 }: {
   openModal: (content: ModalContentType) => void;
   searchActiveHandler: () => void;
   dict: Awaited<DictionaryReturnTypes["/en/chat"]>;
+  isAdmin: boolean
 }) {
   const [isMenuActive, setIsMenuActive] = useState(false);
   const activeMenuHandler = () => {
@@ -23,7 +25,7 @@ export default function ChatSubMenu({
       setIsMenuActive(false);
     }
   };
-
+  // console.log(isAdmin)
 
   const elemRef = useClickOutside<HTMLDivElement>(closeSubMenu);
   return (
@@ -48,6 +50,7 @@ export default function ChatSubMenu({
             openModal={openModal}
             searchActiveHandler={searchActiveHandler}
             dict={dict}
+            isAdmin={isAdmin}
           />
         </div>
       )}

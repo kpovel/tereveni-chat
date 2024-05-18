@@ -23,6 +23,7 @@ export type ChatRoom = {
   messages: Message[];
   image: { name: string };
   currentChatUserUUID: string;
+  isAdmin: boolean
 };
 
 export default async function ChatID({
@@ -51,6 +52,8 @@ export default async function ChatID({
       currentChatUserUUID={json.currentChatUserUUID}
       jwtAccessToken={jwtAccessToken}
       dict={dict}
+      lang={params.lang}
+      isAdmin={json.isAdmin}
     />
   );
 }

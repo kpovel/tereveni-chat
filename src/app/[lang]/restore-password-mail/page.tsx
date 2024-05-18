@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getDictionary } from "../dictionaries";
-import SendEmail from "public/send-email.svg";
+import SendEmail from "public/sendMail.svg";
+import MailNum from "public/mailNum.svg";
 
 export default async function RestorePassword({
   params,
@@ -20,13 +21,24 @@ export default async function RestorePassword({
         </p>
       </div>
       <div className="mt-20 flex justify-center">
-        <Image
-          src={SendEmail}
-          width={233}
-          height={170}
-          alt="mail"
-          className="h-[170px]"
-        />
+          <div className="max-w-[198px] relative">
+            <Image
+              src={SendEmail}
+              width={198}
+              height={150}
+              alt="mail"
+              className="h-[150px]"
+            />
+          <div className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 w-[46px] h-[46px] rounded-full">
+            <Image
+              src={MailNum}
+              width={46}
+              height={46}
+              alt="mailNum"
+              className="h-[46px]"
+            />
+          </div>
+        </div>
       </div>
       <div className="mx-auto my-0 max-w-xs md:max-w-md">
         <p className="font-main mt-20 text-center text-sm font-normal leading-tight text-neutral-50">

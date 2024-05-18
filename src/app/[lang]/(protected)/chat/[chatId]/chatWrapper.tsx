@@ -15,13 +15,17 @@ export default function ChatWrapper({
   messagesInit,
   currentChatUserUUID,
   jwtAccessToken,
-  dict
+  dict,
+  isAdmin,
+  lang
 }: {
   chatId: string;
   messagesInit: any;
   currentChatUserUUID: string;
   jwtAccessToken: string;
   dict: Awaited<DictionaryReturnTypes["/en/chat"]>;
+  lang: string
+  isAdmin: boolean;
 }) {
   const [modalContent, setModalContent] = useState<ModalContentType>(null);
   const [receiveMessages, setReceiveMessages] = useState<Message[]>([]);
@@ -82,6 +86,8 @@ export default function ChatWrapper({
       <PrivateChatHeader 
         openModal={openModal} 
         dict={dict}
+        isAdmin={isAdmin}
+        lang={lang}
       />
       <MessagesField
         openModal={openModal}

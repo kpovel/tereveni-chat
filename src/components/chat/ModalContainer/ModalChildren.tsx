@@ -1,5 +1,6 @@
 import InvitationLink from "./ModalContent/InvitationLink";
 import ConfirmationDeleting from "./ModalContent/ConfirmationDeleting";
+import ConfirmationLeaving from "./ModalContent/ConfirmationLeaving";
 import CompleteDeleting from "./ModalContent/CompleteDeleting";
 import { ModalContentType } from "./ModalContainer";
 
@@ -21,6 +22,14 @@ export default function ModalChilden({
     case "ConfirmationDeleting":
       return (
         <ConfirmationDeleting
+          chatRoomUuid={chatRoomUuid}
+          openModal={openModal}
+          lang={lang}
+        />
+      );
+    case "ConfirmationLeaving":
+      return (
+        <ConfirmationLeaving
           chatRoomUuid={chatRoomUuid}
           openModal={openModal}
           lang={lang}
