@@ -9,9 +9,6 @@ import avatar from "public/Avatar.svg";
 import Image from "next/image";
 import arrowLeft from "public/arrow-left.svg";
 
-// router.push(`/${lang}/chat/all`);
-//         router.refresh();
-
 export default function PrivateChatHeader({
   openModal,
   dict,
@@ -68,8 +65,6 @@ export default function PrivateChatHeader({
       />
     );
   }
-
-  // console.log(isAdmin)
 
   return (
     <div>

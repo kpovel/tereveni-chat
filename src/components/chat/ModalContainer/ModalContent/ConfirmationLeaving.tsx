@@ -16,7 +16,6 @@ export default function ConfirmationLeaving({
   const handleLeave = async () => {
     const leave = await leaveChat(chatRoomUuid);
     if (leave) {
-    //   openModal("CompleteLeave");
       setTimeout(() => {
         openModal(null);
         router.push(`/${lang}/chat/all`);

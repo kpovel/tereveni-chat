@@ -16,8 +16,6 @@ export async function leaveChat(chatRoomUuid: string) {
     },
   );
 
-  console.log(res)
-
   if (res.status === 200) {
     return true;
   } else {

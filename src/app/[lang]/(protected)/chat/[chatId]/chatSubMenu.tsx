@@ -25,8 +25,7 @@ export default function ChatSubMenu({
       setIsMenuActive(false);
     }
   };
-  // console.log(isAdmin)
-
+  
   const elemRef = useClickOutside<HTMLDivElement>(closeSubMenu);
   return (
     <div className="relative">
