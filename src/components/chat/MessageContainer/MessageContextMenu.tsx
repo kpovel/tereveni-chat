@@ -81,7 +81,6 @@ export function MessageContextMenu({
       <ModalContainer
         openModal={openModal}
         childrenElem={modalContent}
-        elemRef={modalCotainerRef}
         chatRoomUuid={chatRoom.chatRoom.uuid}
         lang={lang}
       />

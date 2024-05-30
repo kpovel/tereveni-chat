@@ -66,8 +66,9 @@ export function MessageContainer({
             {chatRoom.chatName}
           </h3>
           <h4 className="line-clamp-2 overflow-hidden">
-            {chatRoom.lastMessage?.content ??
-              "Hey! What's up? I will be waiting for you after my math classes. Just phone me."}
+            {chatRoom.lastMessage?.content ?
+              chatRoom.lastMessage.content : 
+              <span className="text-white opacity-50 text-xs">No messages here yet</span>}
           </h4>
         </div>
         <ChatInfo lastMessage={chatRoom.lastMessage} />
