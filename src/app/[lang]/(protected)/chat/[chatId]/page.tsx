@@ -1,20 +1,18 @@
-import ChatWrapper from "./chatWrapper";
 import { getDictionary } from "../../../dictionaries";
 import { getJwtAccessToken } from "../../regenerateAccessToken";
 import { env } from "@/env.mjs";
+import { PrivateChatHeader } from "./privateChatHeader";
+import { Chat } from "./Chat";
+import { ChatInput } from "./ChatInput";
 
 export type Message = {
+  id: number;
   uuid: string;
   content: string;
-  user: {
-    uuid: string;
-    name: string;
-    image: {
-      name: string;
-    };
-    dateOfCreated: string;
-  };
+  edited: boolean;
   dateOfCreated: string;
+  user: { uuid: string };
+  chatRoom: { uuid: string };
 };
 
 export type ChatRoom = {
@@ -41,16 +39,17 @@ export default async function ChatID({
       },
     },
   );
-
-  const json = (await res.json()) as ChatRoom;
+  const chatRoom = (await res.json()) as ChatRoom;
 
   return (
-    <ChatWrapper
-      chatId={params.chatId}
-      messagesInit={json.messages.reverse()}
-      currentChatUserUUID={json.currentChatUserUUID}
-      jwtAccessToken={jwtAccessToken}
-      dict={dict}
-    />
+    <div className="relative flex h-dvh w-full flex-col">
+      <PrivateChatHeader dict={dict} />
+      <Chat chatRoom={chatRoom} />
+      <ChatInput
+        dict={dict}
+        jwtAccessToken={jwtAccessToken}
+        chatRoom={chatRoom}
+      />
+    </div>
   );
 }

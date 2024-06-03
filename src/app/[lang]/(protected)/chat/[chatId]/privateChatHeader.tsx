@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, ChangeEvent } from "react";
 import { ModalContentType } from "@/components/chat/ModalContainer/ModalContainer";
 import { DictionaryReturnTypes } from "../../../dictionaries";
@@ -8,17 +10,16 @@ import avatar from "public/Avatar.svg";
 import Image from "next/image";
 import { ExitChatButton } from "./ExitChatButton";
 
-export default function PrivateChatHeader({
-  openModal,
+export function PrivateChatHeader({
   dict,
 }: {
-  openModal: (content: ModalContentType) => void;
   dict: Awaited<DictionaryReturnTypes["/en/chat"]>;
 }) {
   const [isOnline, setIsOnline] = useState(true);
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isClearBtnActive, setIsClearBtnActive] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [modalContent, setModalContent] = useState<ModalContentType>(null);
 
   const searchValueHandler = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value.trim().length > 0) {
@@ -68,7 +69,7 @@ export default function PrivateChatHeader({
           </div>
         </div>
         <ChatSubMenu
-          openModal={openModal}
+          openModal={setModalContent}
           searchActiveHandler={searchActiveHandler}
           dict={dict}
         />
