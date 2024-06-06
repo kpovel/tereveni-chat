@@ -48,7 +48,10 @@ export function Chat(props: { chatRoom: ChatRoom; pagination: boolean }) {
       return;
     }
 
-    current.addEventListener("scroll", async () => {
+    async function scrollListener() {
+      if (!current) {
+        return;
+      }
       if (isScrolledToTop(current) && !messagesEnd) {
         const lastId = lastMessageId(current);
         let json = await loadPreviousMessages(
@@ -63,9 +66,15 @@ export function Chat(props: { chatRoom: ChatRoom; pagination: boolean }) {
         );
         current.insertAdjacentHTML("beforeend", messages);
       }
-    });
+    }
+
+    current.addEventListener("scroll", scrollListener);
+
+    return () => {
+      current.removeEventListener("scroll", scrollListener);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [props.pagination]);
 
   return (
     <section

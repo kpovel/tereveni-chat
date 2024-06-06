@@ -4,7 +4,6 @@ import { env } from "@/env.mjs";
 import { PrivateChatHeader } from "./privateChatHeader";
 import { Chat } from "./Chat";
 import { ChatInput } from "./ChatInput";
-import { Button } from "@/components/Button";
 import { JoinChatButton } from "./JoinChatButton";
 
 export type Message = {
