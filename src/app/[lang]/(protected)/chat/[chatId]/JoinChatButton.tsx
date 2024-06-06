@@ -1,25 +1,35 @@
 "use client";
+
 import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
-import { Button } from "@/components/Button";
 import { joinChatReq } from "./joinChatReq";
 import { useRouter } from "next/navigation";
+import { SubmitButton } from "@/components/form/SubmitButton";
+import { useFormState } from "react-dom";
+import { useEffect } from "react";
 
 export function JoinChatButton(props: {
   dict: Awaited<DictionaryReturnTypes["/en/chat"]>;
   chatUUID: string;
 }) {
   const router = useRouter();
+  const [state, formAction] = useFormState(joinChatReq, { joined: false });
 
-  async function joinChat() {
-    const joined = await joinChatReq(props.chatUUID);
-    if (joined) {
+  useEffect(() => {
+    if (state.joined) {
       router.refresh();
     }
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.joined]);
 
   return (
-    <div className="px-6 py-10">
-      <Button onClick={joinChat}>{props.dict.buttons.join}</Button>
-    </div>
+    <form className="px-6 py-10" action={formAction}>
+      <input
+        className="hidden"
+        name="chatUUID"
+        value={props.chatUUID}
+        readOnly
+      />
+      <SubmitButton buttonTitle={props.dict.buttons.join} />
+    </form>
   );
 }
