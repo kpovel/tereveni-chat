@@ -36,15 +36,22 @@ async function messagesToString(
 }
 
 let messagesEnd = false;
-export function Chat(props: { chatRoom: ChatRoom }) {
+export function Chat(props: { chatRoom: ChatRoom; pagination: boolean }) {
   const chatRef = useRef<HTMLElement>(null);
   useEffect(() => {
+    if (!props.pagination) {
+      return;
+    }
+
     const current = chatRef.current;
     if (!current) {
       return;
     }
 
-    current.addEventListener("scroll", async () => {
+    async function scrollListener() {
+      if (!current) {
+        return;
+      }
       if (isScrolledToTop(current) && !messagesEnd) {
         const lastId = lastMessageId(current);
         let json = await loadPreviousMessages(
@@ -59,15 +66,21 @@ export function Chat(props: { chatRoom: ChatRoom }) {
         );
         current.insertAdjacentHTML("beforeend", messages);
       }
-    });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    }
+
+    current.addEventListener("scroll", scrollListener);
+
+    return () => {
+      current.removeEventListener("scroll", scrollListener);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.pagination]);
 
   return (
     <section
       id="chat"
       ref={chatRef}
-      className="flex grow flex-col-reverse gap-5 overflow-scroll"
+      className="flex grow flex-col-reverse gap-5 overflow-scroll px-6"
     >
       {props.chatRoom.messages.map((m) => {
         return (
