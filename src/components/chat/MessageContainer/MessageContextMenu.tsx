@@ -80,7 +80,7 @@ export function MessageContextMenu({
       {children}
       <ModalContainer
         openModal={openModal}
-        childrenElem={modalContent}
+        modalType={modalContent}
         chatRoomUuid={chatRoom.chatRoom.uuid}
         lang={lang}
       />
