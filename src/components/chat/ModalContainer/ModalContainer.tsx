@@ -36,7 +36,7 @@ export default function ModalContainer({
         >
           <ModalChilden
             chatRoomUuid={chatRoomUuid}
-            childrenElem={childrenElem}
+            modalType={childrenElem}
             openModal={openModal}
             lang={lang}
           />

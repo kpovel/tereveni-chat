@@ -4,18 +4,17 @@ import CompleteDeleting from "./ModalContent/CompleteDeleting";
 import { ModalContentType } from "./ModalContainer";
 
 export default function ModalChilden({
-  childrenElem,
+  modalType,
   openModal,
   chatRoomUuid,
   lang,
 }: {
-  childrenElem: ModalContentType;
+  modalType: ModalContentType;
   openModal: (content: ModalContentType) => void;
   chatRoomUuid: string;
   lang: string;
 }) {
-
-  switch (childrenElem) {
+  switch (modalType) {
     case "InvitationLink":
       return <InvitationLink />;
     case "ConfirmationDeleting":

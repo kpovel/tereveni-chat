@@ -15,5 +15,8 @@
   "buttons": {
     "cancel": "Cancel",
     "join": "Join"
+  },
+  "modal": {
+    "invitationLink": "Invitation link has been copied"
   }
 }

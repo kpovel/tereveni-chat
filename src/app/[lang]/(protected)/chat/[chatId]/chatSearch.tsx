@@ -1,24 +1,29 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import { DictionaryReturnTypes } from "../../../dictionaries";
 import Image from "next/image";
 import searchIcon from "public/search_icon.svg";
 import cancelIcon from "public/cancel_icon.svg";
 
 export default function ChatSearch({
-  searchValue,
-  searchValueHandler,
-  isClearBtnActive,
-  clearSearch,
-  searchDisableHandler,
-  dict
+  dict,
+  disableSearch,
 }: {
-  searchValue: string;
-  searchValueHandler: (event: ChangeEvent<HTMLInputElement>) => void;
-  isClearBtnActive: boolean;
-  clearSearch: () => void;
-  searchDisableHandler: () => void;
   dict: Awaited<DictionaryReturnTypes["/en/chat"]>;
+  disableSearch: () => void;
 }) {
+  const [isClearBtnActive, setIsClearBtnActive] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+
+  const searchValueHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+    setIsClearBtnActive(event.target.value.trim().length > 0);
+  };
+
+  const clearSearch = () => {
+    setSearchValue("");
+    setIsClearBtnActive(false);
+  };
+
   return (
     <div className="flex w-full items-center justify-between px-6 py-3">
       <div className="mr-4 flex w-full items-center justify-between rounded-3xl border border-neutral-700 bg-[#545454] p-3">
@@ -40,7 +45,7 @@ export default function ChatSearch({
           </button>
         )}
       </div>
-        <button onClick={searchDisableHandler}>{dict.buttons.cancel}</button>
+      <button onClick={disableSearch}>{dict.buttons.cancel}</button>
     </div>
   );
 }
