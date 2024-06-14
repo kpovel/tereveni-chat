@@ -80,7 +80,7 @@ export function Chat(props: { chatRoom: ChatRoom; pagination: boolean }) {
     <section
       id="chat"
       ref={chatRef}
-      className="flex grow flex-col-reverse gap-5 overflow-scroll px-6"
+      className="flex grow flex-col-reverse gap-5 overflow-scroll px-6 pb-5"
     >
       {props.chatRoom.messages.map((m) => {
         return (
@@ -101,8 +101,20 @@ export function Message(props: {
 }) {
   const messageByCurrentUser =
     props.currentChatUserUUID === props.message.user.uuid;
+  const messageSent = new Date(props.message.dateOfCreated);
+  const localHours =
+    messageSent.getUTCHours() + messageSent.getTimezoneOffset() / -30;
+  const hours = localHours > 24 ? localHours - 24 : localHours;
+
   return (
-    <div className="flex justify-end" id={props.message.id.toString()}>
+    <div
+      className={
+        "flex items-center justify-end gap-1 " +
+        (messageByCurrentUser ? "" : "flex-row-reverse")
+      }
+      id={props.message.id.toString()}
+    >
+      {hours}:{String(messageSent.getUTCMinutes()).padStart(2, "0")}
       <div
         id={props.message.id.toString()}
         className="rounded-2xl bg-[#7C01F6] px-3 py-2"
