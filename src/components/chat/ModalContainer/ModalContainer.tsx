@@ -1,5 +1,6 @@
 import { useClickOutside } from "@/util/useClickOutside";
-import ModalChilden from "./ModalChildren";
+import ConfirmationDeleting from "./ModalContent/ConfirmationDeleting";
+import CompleteDeleting from "./ModalContent/CompleteDeleting";
 
 export type ModalContentType =
   | "InvitationLink"
@@ -9,12 +10,12 @@ export type ModalContentType =
 
 export default function ModalContainer({
   openModal,
-  childrenElem,
+  modalType,
   chatRoomUuid,
   lang,
 }: {
   openModal: (content: ModalContentType) => void;
-  childrenElem: ModalContentType;
+  modalType: ModalContentType;
   chatRoomUuid: string;
   lang: string;
 }) {
@@ -23,7 +24,7 @@ export default function ModalContainer({
     openModal(null);
   }
 
-  if (!childrenElem) {
+  if (!modalType) {
     return null;
   }
 
@@ -34,12 +35,14 @@ export default function ModalContainer({
           ref={ref}
           className="absolute left-2/4 top-2/4 h-[159px] w-[280px] -translate-x-1/2 -translate-y-[150px] transform rounded-lg bg-[#FAFAFA] p-6"
         >
-          <ModalChilden
-            chatRoomUuid={chatRoomUuid}
-            childrenElem={childrenElem}
-            openModal={openModal}
-            lang={lang}
-          />
+          {modalType === "ConfirmationDeleting" && (
+            <ConfirmationDeleting
+              chatRoomUuid={chatRoomUuid}
+              openModal={openModal}
+              lang={lang}
+            />
+          )}
+          {modalType === "CompleteDeleting" && <CompleteDeleting />}
         </div>
       </div>
     </div>
