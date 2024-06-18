@@ -48,7 +48,7 @@ export default async function ChatID({
   if (!chatRoom.join) {
     return (
       <div className="relative flex h-dvh w-full flex-col">
-        <PrivateChatHeader dict={dict} />
+        <PrivateChatHeader dict={dict} admin={chatRoom.admin} />
         <Chat chatRoom={chatRoom} pagination={false} />
         <JoinChatButton dict={dict} chatUUID={params.chatId} />
       </div>
@@ -57,7 +57,7 @@ export default async function ChatID({
 
   return (
     <div className="relative flex h-dvh w-full flex-col">
-      <PrivateChatHeader dict={dict} />
+      <PrivateChatHeader dict={dict} admin={chatRoom.admin} />
       <Chat chatRoom={chatRoom} pagination={true} />
       <ChatInput
         dict={dict}

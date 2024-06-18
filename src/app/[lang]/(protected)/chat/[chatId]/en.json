@@ -17,6 +17,13 @@
     "join": "Join"
   },
   "modal": {
-    "invitationLink": "Invitation link has been copied"
+    "invitationLink": "Invitation link has been copied",
+    "confirmationDeleting": {
+      "deletePermanently": "Are you sure you want to permanently delete this chat?",
+      "deleteForAll": "This chat will be deleted for all members",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "completeDeleting": "Chat successfully deleted"
   }
 }
