@@ -13,6 +13,7 @@ import InvitationLink from "@/components/chat/ModalContainer/ModalContent/Invita
 import ConfirmationDeleting from "@/components/chat/ModalContainer/ModalContent/ConfirmationDeleting";
 import { useParams } from "next/navigation";
 import CompleteDeleting from "@/components/chat/ModalContainer/ModalContent/CompleteDeleting";
+import { LeaveChat } from "@/components/chat/ModalContainer/ModalContent/LeaveChat";
 
 export const ModalContext = createContext<{
   modalContent: ModalContentType;
@@ -68,6 +69,7 @@ export function PrivateChatHeader({
           dict={dict}
           openSubMenu={openSubMenu}
           setOpenSubMenu={setOpenSubMenu}
+          admin={admin}
         />
       </ModalContext.Provider>
       <Modal
@@ -116,6 +118,19 @@ function Modal({
     return (
       <div className="absolute left-0 top-0 flex h-dvh w-dvw flex-col items-center justify-center backdrop-blur-[3px]">
         <CompleteDeleting>{dict.modal.completeDeleting}</CompleteDeleting>
+      </div>
+    );
+  }
+
+  if (modalContent === "LeaveChat") {
+    return (
+      <div className="absolute left-0 top-0 flex h-dvh w-dvw flex-col items-center justify-center backdrop-blur-[3px]">
+        <LeaveChat
+          dict={dict.modal.leaveChat}
+          lang={params.lang}
+          openModal={setModalContent}
+          chatRoomUuid={params.chatId}
+        />
       </div>
     );
   }
