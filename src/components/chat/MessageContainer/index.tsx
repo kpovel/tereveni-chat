@@ -54,6 +54,7 @@ export function MessageContainer({
       modalContent={modalContent}
       chatRoom={chatRoom}
       lang={lang}
+      dict={dict}
     >
       <RemoveLinkOnBlur
         chatRoom={chatRoom}

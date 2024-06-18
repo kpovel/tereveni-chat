@@ -1,6 +1,7 @@
 import { useClickOutside } from "@/util/useClickOutside";
 import ConfirmationDeleting from "./ModalContent/ConfirmationDeleting";
 import CompleteDeleting from "./ModalContent/CompleteDeleting";
+import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 
 export type ModalContentType =
   | "InvitationLink"
@@ -13,11 +14,13 @@ export default function ModalContainer({
   modalType,
   chatRoomUuid,
   lang,
+  dict,
 }: {
   openModal: (content: ModalContentType) => void;
   modalType: ModalContentType;
   chatRoomUuid: string;
   lang: string;
+  dict: Awaited<DictionaryReturnTypes["/en/chat/all"]>;
 }) {
   const ref = useClickOutside<HTMLDivElement>(hideModal);
   function hideModal() {
@@ -40,9 +43,12 @@ export default function ModalContainer({
               chatRoomUuid={chatRoomUuid}
               openModal={openModal}
               lang={lang}
+              dict={dict.modal.confirmationDeleting}
             />
           )}
-          {modalType === "CompleteDeleting" && <CompleteDeleting />}
+          {modalType === "CompleteDeleting" && (
+            <CompleteDeleting>{dict.modal.completeDeleting}</CompleteDeleting>
+          )}
         </div>
       </div>
     </div>
