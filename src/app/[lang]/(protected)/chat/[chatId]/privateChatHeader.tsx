@@ -10,6 +10,9 @@ import Image from "next/image";
 import { ExitChatButton } from "./ExitChatButton";
 import { ModalContentType } from "@/components/chat/ModalContainer/ModalContainer";
 import InvitationLink from "@/components/chat/ModalContainer/ModalContent/InvitationLink";
+import ConfirmationDeleting from "@/components/chat/ModalContainer/ModalContent/ConfirmationDeleting";
+import { useParams } from "next/navigation";
+import CompleteDeleting from "@/components/chat/ModalContainer/ModalContent/CompleteDeleting";
 
 export const ModalContext = createContext<{
   modalContent: ModalContentType;
@@ -21,8 +24,10 @@ export const ModalContext = createContext<{
 
 export function PrivateChatHeader({
   dict,
+  admin,
 }: {
   dict: Awaited<DictionaryReturnTypes["/en/chat"]>;
+  admin: boolean;
 }) {
   const [isOnline, setIsOnline] = useState(true);
   const [activeSearch, setActiveSearch] = useState(false);
@@ -83,6 +88,8 @@ function Modal({
   setModalContent: (content: ModalContentType) => void;
   dict: Awaited<DictionaryReturnTypes["/en/chat"]>;
 }) {
+  const params = useParams<{ lang: Lang; chatId: string }>();
+
   if (modalContent === "InvitationLink") {
     navigator.clipboard.writeText(window.location.href);
 
@@ -90,6 +97,25 @@ function Modal({
     return (
       <div className="absolute left-0 top-0 flex h-dvh w-dvw flex-col items-center justify-center backdrop-blur-[3px]">
         <InvitationLink>{dict.modal.invitationLink}</InvitationLink>
+      </div>
+    );
+  }
+  if (modalContent === "ConfirmationDeleting") {
+    return (
+      <div className="absolute left-0 top-0 flex h-dvh w-dvw flex-col items-center justify-center backdrop-blur-[3px]">
+        <ConfirmationDeleting
+          chatRoomUuid={params.chatId}
+          lang={params.lang}
+          openModal={setModalContent}
+          dict={dict.modal.confirmationDeleting}
+        />
+      </div>
+    );
+  }
+  if (modalContent === "CompleteDeleting") {
+    return (
+      <div className="absolute left-0 top-0 flex h-dvh w-dvw flex-col items-center justify-center backdrop-blur-[3px]">
+        <CompleteDeleting>{dict.modal.completeDeleting}</CompleteDeleting>
       </div>
     );
   }

@@ -1,5 +1,14 @@
 {
   "chat": {
     "haveNoMessages": "Тут ще немає повідомлень"
+  },
+  "modal": {
+    "confirmationDeleting": {
+      "deletePermanently": "Ти впевнений/на, що хочеш остаточно видалити цей чат?",
+      "deleteForAll": "Чат буде видалено для всіх учасників",
+      "yes": "Так",
+      "no": "Ні"
+    },
+    "completeDeleting": "Чат успішно видалено"
   }
 }

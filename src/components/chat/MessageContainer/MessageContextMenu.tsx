@@ -11,6 +11,7 @@ import { ChatRoom } from "@/app/[lang]/(protected)/chat/(filter)/all/chatRooms";
 import ModalContainer, {
   ModalContentType,
 } from "../ModalContainer/ModalContainer";
+import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 
 export function MessageContextMenu({
   children,
@@ -21,6 +22,7 @@ export function MessageContextMenu({
   selectedChat,
   setModalContent,
   setDisableScroll,
+  dict
 }: {
   children: ReactNode;
   lang: string;
@@ -30,16 +32,11 @@ export function MessageContextMenu({
   modalContent: ModalContentType;
   setModalContent: Dispatch<SetStateAction<ModalContentType>>;
   setDisableScroll: Dispatch<SetStateAction<boolean>>;
+  dict: Awaited<DictionaryReturnTypes["/en/chat/all"]>;
 }) {
   const chatContextMenuRef =
     useClickOutside<HTMLDivElement>(hideChatContextMenu);
-  const modalCotainerRef = useClickOutside<HTMLDivElement>(hideModal);
   const openContext = selectedChat === chatRoom.chatRoom.uuid;
-
-  function hideModal() {
-    setModalContent(null);
-    setDisableScroll(false);
-  }
 
   function openModal(content: ModalContentType) {
     setModalContent(content);
@@ -83,6 +80,7 @@ export function MessageContextMenu({
         modalType={modalContent}
         chatRoomUuid={chatRoom.chatRoom.uuid}
         lang={lang}
+        dict={dict}
       />
       <MessageContextList openContext={openContext} openModal={openModal} />
     </div>

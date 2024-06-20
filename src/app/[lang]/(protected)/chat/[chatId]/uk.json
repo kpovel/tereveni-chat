@@ -17,6 +17,13 @@
     "join": "Приєднатись"
   },
   "modal": {
-    "invitationLink": "Посилання скопійовано"
+    "invitationLink": "Посилання скопійовано",
+    "confirmationDeleting": {
+      "deletePermanently": "Ти впевнений/на, що хочеш остаточно видалити цей чат?",
+      "deleteForAll": "Чат буде видалено для всіх учасників",
+      "yes": "Так",
+      "no": "Ні"
+    },
+    "completeDeleting": "Чат успішно видалено"
   }
 }
