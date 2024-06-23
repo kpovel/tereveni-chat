@@ -7,6 +7,7 @@ export type ModalContentType =
   | "InvitationLink"
   | "ConfirmationDeleting"
   | "CompleteDeleting"
+  | "LeaveChat"
   | null;
 
 export default function ModalContainer({

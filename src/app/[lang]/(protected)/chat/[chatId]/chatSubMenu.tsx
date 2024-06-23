@@ -7,11 +7,13 @@ export function ChatSubMenu({
   dict,
   openSubMenu,
   setOpenSubMenu,
+  admin,
 }: {
   searchActiveHandler: () => void;
   dict: Awaited<DictionaryReturnTypes["/en/chat"]>;
   openSubMenu: boolean;
   setOpenSubMenu: (open: boolean) => void;
+  admin: boolean;
 }) {
   const ref = useClickOutside<HTMLButtonElement>(() => setOpenSubMenu(false));
   function toggleMenu() {
@@ -30,7 +32,11 @@ export function ChatSubMenu({
         <div className="mx-auto mb-[3px] h-[3px] w-[3px] rounded-full bg-white"></div>
       </button>
       {openSubMenu && (
-        <DotsMenu searchActiveHandler={searchActiveHandler} dict={dict} />
+        <DotsMenu
+          searchActiveHandler={searchActiveHandler}
+          dict={dict}
+          admin={admin}
+        />
       )}
     </div>
   );

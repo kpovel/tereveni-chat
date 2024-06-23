@@ -3,15 +3,18 @@ import { DictionaryReturnTypes } from "../../../dictionaries";
 import trashIcon from "public/trash_icon.svg";
 import copyIcon from "public/copy_icon.svg";
 import searchIcon from "public/search_icon.svg";
+import leaveChat from "public/chat/leave_chat.svg";
 import { useContext } from "react";
 import { ModalContext } from "./privateChatHeader";
 
 export function DotsMenu({
   searchActiveHandler,
   dict,
+  admin,
 }: {
   searchActiveHandler: () => void;
   dict: Awaited<DictionaryReturnTypes["/en/chat"]>;
+  admin: boolean;
 }) {
   const { setModalContent } = useContext(ModalContext);
 
@@ -38,15 +41,27 @@ export function DotsMenu({
             {dict.headerMenu.invitationLink}
           </p>
         </button>
-        <button
-          onClick={() => setModalContent("ConfirmationDeleting")}
-          className="flex w-full justify-start bg-none py-[7px]"
-        >
-          <Image src={trashIcon} alt="trash" />
-          <p className="ml-2 text-sm font-normal text-white">
-            {dict.headerMenu.delete}
-          </p>
-        </button>
+        {admin ? (
+          <button
+            onClick={() => setModalContent("ConfirmationDeleting")}
+            className="flex w-full justify-start bg-none py-[7px]"
+          >
+            <Image src={trashIcon} alt="trash" />
+            <p className="ml-2 text-sm font-normal text-white">
+              {dict.headerMenu.delete}
+            </p>
+          </button>
+        ) : (
+          <button
+            onClick={() => setModalContent("LeaveChat")}
+            className="flex w-full justify-start bg-none py-[7px]"
+          >
+            <Image src={leaveChat} alt="Leave chat" />
+            <p className="ml-2 text-sm font-normal text-white">
+              {dict.headerMenu.leaveChat}
+            </p>
+          </button>
+        )}
       </div>
     </div>
   );
