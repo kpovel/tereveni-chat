@@ -11,13 +11,16 @@ import {
 } from "react";
 import { MessageContextMenu } from "./MessageContextMenu";
 import { ModalContentType } from "../ModalContainer/ModalContainer";
+import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 
 export function MessageContainer({
   chatRoom,
   lang,
   setSelectedChat,
   selectedChat,
+  dict,
 }: {
+  dict: Awaited<DictionaryReturnTypes["/en/chat/all"]>;
   chatRoom: ChatRoom;
   lang: Lang;
   setSelectedChat: Dispatch<SetStateAction<string | null>>;
@@ -51,6 +54,7 @@ export function MessageContainer({
       modalContent={modalContent}
       chatRoom={chatRoom}
       lang={lang}
+      dict={dict}
     >
       <RemoveLinkOnBlur
         chatRoom={chatRoom}
@@ -65,11 +69,11 @@ export function MessageContainer({
           <h3 className="line-clamp-1 overflow-hidden text-base">
             {chatRoom.chatName}
           </h3>
-          <h4 className="line-clamp-2 overflow-hidden">
-            {chatRoom.lastMessage?.content ?
-              chatRoom.lastMessage.content : 
-              <span className="text-white opacity-50 text-xs">No messages here yet</span>}
-          </h4>
+          <span className="line-clamp-2 overflow-hidden text-xs text-[#79767A]">
+            {chatRoom.lastMessage?.content
+              ? chatRoom.lastMessage.content
+              : dict.chat.haveNoMessages}
+          </span>
         </div>
         <ChatInfo lastMessage={chatRoom.lastMessage} />
       </RemoveLinkOnBlur>

@@ -49,7 +49,11 @@ export function ChatInput(props: {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const data = new FormData(e.target as any);
-      const message = data.get("message")!;
+      const message = data.get("message")?.toString();
+
+      if (!message || message.trim() === "") {
+        return;
+      }
 
       stopmClient.publish({
         destination: `/app/hello/${props.chatRoom.uuid}`,

@@ -4,6 +4,7 @@ import { env } from "@/env.mjs";
 import { PrivateChatHeader } from "./privateChatHeader";
 import { Chat } from "./Chat";
 import { ChatInput } from "./ChatInput";
+import { JoinChatButton } from "./JoinChatButton";
 
 export type Message = {
   id: number;
@@ -21,6 +22,9 @@ export type ChatRoom = {
   messages: Message[];
   image: { name: string };
   currentChatUserUUID: string;
+  dateOfCreated: string;
+  admin: boolean;
+  join: boolean;
 };
 
 export default async function ChatID({
@@ -41,10 +45,20 @@ export default async function ChatID({
   );
   const chatRoom = (await res.json()) as ChatRoom;
 
+  if (!chatRoom.join) {
+    return (
+      <div className="relative flex h-dvh w-full flex-col">
+        <PrivateChatHeader dict={dict} admin={chatRoom.admin} />
+        <Chat chatRoom={chatRoom} pagination={false} />
+        <JoinChatButton dict={dict} chatUUID={params.chatId} />
+      </div>
+    );
+  }
+
   return (
     <div className="relative flex h-dvh w-full flex-col">
-      <PrivateChatHeader dict={dict} />
-      <Chat chatRoom={chatRoom} />
+      <PrivateChatHeader dict={dict} admin={chatRoom.admin} />
+      <Chat chatRoom={chatRoom} pagination={true} />
       <ChatInput
         dict={dict}
         jwtAccessToken={jwtAccessToken}

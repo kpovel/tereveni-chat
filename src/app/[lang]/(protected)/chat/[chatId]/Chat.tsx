@@ -36,15 +36,22 @@ async function messagesToString(
 }
 
 let messagesEnd = false;
-export function Chat(props: { chatRoom: ChatRoom }) {
+export function Chat(props: { chatRoom: ChatRoom; pagination: boolean }) {
   const chatRef = useRef<HTMLElement>(null);
   useEffect(() => {
+    if (!props.pagination) {
+      return;
+    }
+
     const current = chatRef.current;
     if (!current) {
       return;
     }
 
-    current.addEventListener("scroll", async () => {
+    async function scrollListener() {
+      if (!current) {
+        return;
+      }
       if (isScrolledToTop(current) && !messagesEnd) {
         const lastId = lastMessageId(current);
         let json = await loadPreviousMessages(
@@ -59,15 +66,21 @@ export function Chat(props: { chatRoom: ChatRoom }) {
         );
         current.insertAdjacentHTML("beforeend", messages);
       }
-    });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    }
+
+    current.addEventListener("scroll", scrollListener);
+
+    return () => {
+      current.removeEventListener("scroll", scrollListener);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.pagination]);
 
   return (
     <section
       id="chat"
       ref={chatRef}
-      className="flex grow flex-col-reverse gap-5 overflow-scroll"
+      className="flex grow flex-col-reverse gap-5 overflow-scroll px-6 pb-5"
     >
       {props.chatRoom.messages.map((m) => {
         return (
@@ -88,8 +101,20 @@ export function Message(props: {
 }) {
   const messageByCurrentUser =
     props.currentChatUserUUID === props.message.user.uuid;
+  const messageSent = new Date(props.message.dateOfCreated);
+  const localHours =
+    messageSent.getUTCHours() + messageSent.getTimezoneOffset() / -30;
+  const hours = localHours > 24 ? localHours - 24 : localHours;
+
   return (
-    <div className="flex justify-end" id={props.message.id.toString()}>
+    <div
+      className={
+        "flex items-center justify-end gap-1 " +
+        (messageByCurrentUser ? "" : "flex-row-reverse")
+      }
+      id={props.message.id.toString()}
+    >
+      {hours}:{String(messageSent.getUTCMinutes()).padStart(2, "0")}
       <div
         id={props.message.id.toString()}
         className="rounded-2xl bg-[#7C01F6] px-3 py-2"

@@ -6,10 +6,17 @@ export default function ConfirmationDeleting({
   openModal,
   chatRoomUuid,
   lang,
+  dict,
 }: {
   openModal: (content: ModalContentType) => void;
   chatRoomUuid: string;
   lang: string;
+  dict: {
+    deletePermanently: string;
+    deleteForAll: string;
+    yes: string;
+    no: string;
+  };
 }) {
   const router = useRouter();
 
@@ -28,25 +35,20 @@ export default function ConfirmationDeleting({
   };
 
   return (
-    <div>
-      <h4 className="mb-3 text-base font-semibold text-[#050404]">
-        Are you sure you want to permanently delete this chat?
-      </h4>
-      <p className="text-xs font-normal text-[#050404]">
-        The chat will be deleted for you only
-      </p>
-      <div className="mt-6 flex w-full justify-end">
-        <button
-          onClick={handleDelete}
-          className="mr-10 h-5 w-[26px] bg-none text-base font-semibold text-[#FF453A]"
-        >
-          Yes
+    <div className="flex w-[280px] flex-col items-center gap-5 rounded-lg bg-white p-6">
+      <div className="flex flex-col gap-3 text-[#050404]">
+        <h4 className="text-base font-semibold">{dict.deletePermanently}</h4>
+        <p className="text-xs">{dict.deleteForAll}</p>
+      </div>
+      <div className="flex w-full justify-end gap-[40px] font-semibold">
+        <button onClick={handleDelete} className="text-base text-[#FF453A]">
+          {dict.yes}
         </button>
         <button
           onClick={() => openModal(null)}
-          className="h-5 w-[26px] bg-none text-base font-semibold text-[#050404]"
+          className="text-base text-[#050404]"
         >
-          No
+          {dict.no}
         </button>
       </div>
     </div>

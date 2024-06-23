@@ -63,6 +63,14 @@ const dictionaries = {
     import("./(protected)/create-new-password/uk.json").then(
       (module) => module.default,
     ),
+  "/en/chat/all": () =>
+    import("./(protected)/chat/(filter)/all/en.json").then(
+      (module) => module.default,
+    ),
+  "/uk/chat/all": () =>
+    import("./(protected)/chat/(filter)/all/uk.json").then(
+      (module) => module.default,
+    ),
   "/en/chat/create": () =>
     import("./(protected)/chat/(create)/create/en.json").then(
       (module) => module.default,
@@ -88,16 +96,14 @@ const dictionaries = {
       "./(protected)/chat/(create)/create/[chat_uuid]/description/uk.json"
     ).then((module) => module.default),
 
-    "/en/chat": () => 
-    import(
-      "./(protected)/chat/[chatId]/en.json"
-    ).then((module) => module.default),
-    "/uk/chat": () =>
-    import(
-      "./(protected)/chat/[chatId]/uk.json"
-    ).then((module) => module.default),
-
-
+  "/en/chat": () =>
+    import("./(protected)/chat/[chatId]/en.json").then(
+      (module) => module.default,
+    ),
+  "/uk/chat": () =>
+    import("./(protected)/chat/[chatId]/uk.json").then(
+      (module) => module.default,
+    ),
   "/en/account": () =>
     import("./(protected)/account/en.json").then((module) => module.default),
   "/uk/account": () =>
