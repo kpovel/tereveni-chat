@@ -2,6 +2,7 @@ import { useClickOutside } from "@/util/useClickOutside";
 import ConfirmationDeleting from "./ModalContent/ConfirmationDeleting";
 import CompleteDeleting from "./ModalContent/CompleteDeleting";
 import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
+import { LeaveChat } from "./ModalContent/LeaveChat";
 
 export type ModalContentType =
   | "InvitationLink"
@@ -46,6 +47,16 @@ export default function ModalContainer({
           )}
           {modalType === "CompleteDeleting" && (
             <CompleteDeleting>{dict.modal.completeDeleting}</CompleteDeleting>
+          )}
+          {modalType === "LeaveChat" && (
+            <div className="absolute left-0 top-0 flex h-dvh w-dvw flex-col items-center justify-center backdrop-blur-[3px]">
+              <LeaveChat
+                dict={dict.modal.leaveChat}
+                lang={lang}
+                openModal={openModal}
+                chatRoomUuid={chatRoomUuid}
+              />
+            </div>
           )}
         </div>
       </div>

@@ -7,8 +7,13 @@ export type ChatRoom = {
     uuid: string;
     description: string;
     image: null | { name: string };
+    isJoin: boolean;
+    dateOfCreated: string;
+    currentChatUserUUID: string | null;
+    chatRoomType: ["PUBLIC"];
   };
   lastMessage: null | { uuid: string; content: string; dateOfCreated: string };
+  isAdmin: boolean;
 };
 
 type ChatRoomResult = {
