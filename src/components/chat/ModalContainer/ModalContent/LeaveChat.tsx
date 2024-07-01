@@ -11,7 +11,7 @@ export function LeaveChat({
   dict: { areYouSure: string; yes: string; no: string };
   openModal: (content: ModalContentType) => void;
   chatRoomUuid: string;
-  lang: Lang;
+  lang: string;
 }) {
   const router = useRouter();
 

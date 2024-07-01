@@ -9,6 +9,13 @@
       "yes": "Yes",
       "no": "No"
     },
-    "completeDeleting": "Chat successfully deleted"
+    "completeDeleting": "Chat successfully deleted",
+    "deleteChat": "Delete chat",
+    "leaveChat": {
+      "leave": "Leave chat",
+      "areYouSure": "Are you sure you want to leave this chat?",
+      "yes": "Yes",
+      "no": "No"
+    }
   }
 }
