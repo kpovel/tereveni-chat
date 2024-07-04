@@ -22,7 +22,7 @@ export function MessageContextMenu({
   selectedChat,
   setModalContent,
   setDisableScroll,
-  dict
+  dict,
 }: {
   children: ReactNode;
   lang: string;
@@ -82,7 +82,15 @@ export function MessageContextMenu({
         lang={lang}
         dict={dict}
       />
-      <MessageContextList openContext={openContext} openModal={openModal} />
+      <MessageContextList
+        openContext={openContext}
+        openModal={openModal}
+        dict={{
+          deleteChat: dict.modal.deleteChat,
+          leaveChat: dict.modal.leaveChat.leave,
+        }}
+        isAdmin={chatRoom.isAdmin}
+      />
     </div>
   );
 }
