@@ -104,6 +104,18 @@ const dictionaries = {
     import("./(protected)/chat/[chatId]/uk.json").then(
       (module) => module.default,
     ),
+    "/en/chat/menu": () => import("./(protected)/chat/[chatId]/menu/en.json").then((module) => module.default),
+    "/uk/chat/menu": () => import("./(protected)/chat/[chatId]/menu/uk.json").then((module) => module.default),
+
+    "/en/chat/menu/members": () => import("./(protected)/chat/[chatId]/menu/members/en.json").then((module) => module.default),
+    "/uk/chat/menu/members": () => import("./(protected)/chat/[chatId]/menu/members/uk.json").then((module) => module.default),
+
+    "/en/chat/menu/invite-members": () => import("./(protected)/chat/[chatId]/menu/invite-members/en.json").then((module) => module.default),
+    "/uk/chat/menu/invite-members": () => import("./(protected)/chat/[chatId]/menu/invite-members/uk.json").then((module) => module.default),
+
+    "/en/chat/menu/blocked-members": () => import("./(protected)/chat/[chatId]/menu/blocked-members/en.json").then((module) => module.default),
+    "/uk/chat/menu/blocked-members": () => import("./(protected)/chat/[chatId]/menu/blocked-members/uk.json").then((module) => module.default),
+    
   "/en/account": () =>
     import("./(protected)/account/en.json").then((module) => module.default),
   "/uk/account": () =>

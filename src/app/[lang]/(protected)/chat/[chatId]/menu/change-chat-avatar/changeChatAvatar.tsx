@@ -14,10 +14,9 @@ import { PlusSign } from "@/icons/PlusSign";
 import { ScaleImage } from "../../../../onboarding/pick-avatar/ScaleImage";
 import { DefaultImage } from "../../../(create)/create/DefaultImage";
 
-export default function ChangeChatAvatar({
-//   dict,
-}: {
-//   dict: Awaited<DictionaryReturnTypes["/en/chat/create"]>;
+export default function ChangeChatAvatar({} //   dict,
+: {
+  //   dict: Awaited<DictionaryReturnTypes["/en/chat/create"]>;
 }) {
   const [customAvatar, setCustomAvatar] = useState<File | null>(null);
   const [scale, setScale] = useState(1);
@@ -55,12 +54,12 @@ export default function ChangeChatAvatar({
           name="picture"
           onChange={handleAvatarChange}
         />
-        <div className="relative h-[200px] w-[200px] mx-auto ">
+        <div className="relative mx-auto h-[200px] w-[200px] ">
           <LoadImageIcon
             uploadedImage={!!customAvatar}
             setCustomAvatar={setCustomAvatar}
           />
-          <div className="h-[200px] w-[200px] mx-auto relative overflow-hidden rounded-lg">
+          <div className="relative mx-auto h-[200px] w-[200px] overflow-hidden rounded-lg">
             {customAvatar ? (
               <AvatarEditor
                 className="-translate-x-7 -translate-y-7 object-cover"
@@ -77,7 +76,11 @@ export default function ChangeChatAvatar({
           </div>
         </div>
       </div>
-      {customAvatar && <div className="mt-8"><ScaleImage scale={scale} setScale={setScale} /></div>}
+      {customAvatar && (
+        <div className="mt-8">
+          <ScaleImage scale={scale} setScale={setScale} />
+        </div>
+      )}
     </>
   );
 }

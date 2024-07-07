@@ -1,36 +1,78 @@
-"use client"
+"use client";
 
 import { useState } from "react";
+import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 import ViewChatMenuInfo from "./viewChatMenuInfo";
 import EditChatMenuInfo from "./editChatMenuInfo";
 
-export default function ChatMenuWrapper({chatRoom, chatId}: any) {
+export interface ChatMessage {
+  chatRoom: {
+    uuid: string;
+  };
+  content: string;
+  dateOfCreated: string;
+  edited: boolean;
+  id: number;
+  user: {
+    uuid: string;
+  };
+  uuid: string;
+}
 
-    const { isAdmin, image, description, currentChatUserUUID } = chatRoom;
+interface Image {
+  name: string;
+}
 
-    const [ isEditActive, setIsEditActive ] = useState<boolean>(false);
+export interface ChatRoom {
+  admin: boolean;
+  currentChatUserUUID: string;
+  dateOfCreated: string;
+  description: string;
+  image: Image;
+  isAdmin: boolean;
+  isJoin: boolean;
+  join: boolean;
+  messages: ChatMessage[];
+  uuid: string;
+}
 
-    function setEditModeActive(){
-        setIsEditActive(true);
-    }
-    function disableEditMode(){
-        setIsEditActive(false);
-    }
+export default function ChatMenuWrapper({
+  dict,
+  chatRoom,
+  chatId,
+}: {
+  dict: Awaited<DictionaryReturnTypes["/en/chat/menu"]>;
+  chatRoom: ChatRoom;
+  chatId: string;
+}) {
+  const { isAdmin, image, description, currentChatUserUUID } = chatRoom;
 
-    return(
-        <div className="w-full px-6 min[]">
-            {
-                isEditActive ? 
-                <EditChatMenuInfo 
-                    description={description} 
-                    name={currentChatUserUUID} 
-                    disableEditMode={disableEditMode}/> 
-                    : 
-                    <ViewChatMenuInfo 
-                        description={description} 
-                        chatId={chatId} 
-                        setEditModeActive={setEditModeActive} />
-            }
-        </div>
-    )
+  const [isEditActive, setIsEditActive] = useState<boolean>(false);
+
+  function setEditModeActive() {
+    setIsEditActive(true);
+  }
+  function disableEditMode() {
+    setIsEditActive(false);
+  }
+
+  return (
+    <div className="min[] w-full px-6">
+      {isEditActive ? (
+        <EditChatMenuInfo
+          dict={dict}
+          description={description}
+          name={currentChatUserUUID}
+          disableEditMode={disableEditMode}
+        />
+      ) : (
+        <ViewChatMenuInfo
+          dict={dict}
+          description={description}
+          chatId={chatId}
+          setEditModeActive={setEditModeActive}
+        />
+      )}
+    </div>
+  );
 }

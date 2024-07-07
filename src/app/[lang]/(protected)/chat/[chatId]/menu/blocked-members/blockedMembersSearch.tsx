@@ -3,12 +3,12 @@ import Search from "public/search_icon.svg";
 import Close from "public/chat/x-close.svg";
 import { DictionaryReturnTypes } from "@/app/[lang]/dictionaries";
 
-export default function MembersSearch({
+export default function BlockedMembersSearch({
   dict,
   searchMember,
   searchQuery,
 }: {
-  dict: Awaited<DictionaryReturnTypes["/en/chat/menu/members"]>;
+  dict: Awaited<DictionaryReturnTypes["/en/chat/menu/blocked-members"]>;
   searchMember: (val: string) => void;
   searchQuery: string;
 }) {

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import ChevronRight from "public/account/chevron-right.svg";
 
 export function ExitMenuButton() {
-  const params = useParams<{ lang: Lang }>();
+  const params = useParams<{ lang: Lang; chatId: string }>();
 
   return (
     <Link href={`/${params.lang}/chat/${params.chatId}`}>
