@@ -8,11 +8,11 @@
   },
   "hint": {
     "login": "Login must be without spaces, 3 to 50 characters and contain only ABC and numbers",
-    "password": "Password must be without spaces, 6 to 72 characters and contain at least 1 capital letter, 1 number and 1 special character"
+    "password": "Password must be without spaces, 6 to 72 characters and contain at least 1 capital letter"
   },
   "errorStatus": {
     "passwordNotMatch": "Passwords do not match",
-    "passwordConstraint": "Password must be 6 to 72 characters and contain at least 1 capital letter, 1 number and 1 special character",
+    "passwordConstraint": "Password must be 6 to 72 characters and contain at least 1 capital letter",
     "invalidEmail": "Please enter a valid email address",
     "loginCharacters": "Login must be 3 to 50 characters and contain only ABC and numbers",
     "acceptTermsConditions": "Accepting the Terms and Conditions is required"
