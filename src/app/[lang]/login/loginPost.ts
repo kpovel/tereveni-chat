@@ -61,7 +61,7 @@ export async function loginPostData(
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ login: email, password }),
+    body: JSON.stringify({ email, password }),
     cache: "no-store",
   });
 
