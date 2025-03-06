@@ -81,7 +81,7 @@ export function PrivateChatHeader({
   );
 }
 
-function Modal({
+export function Modal({
   modalContent,
   setModalContent,
   dict,

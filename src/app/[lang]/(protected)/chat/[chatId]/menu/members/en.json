@@ -1,0 +1,7 @@
+{
+  "members": "members",
+  "buttons": {
+    "cancel": "cancel",
+    "block": "block"
+  }
+}
